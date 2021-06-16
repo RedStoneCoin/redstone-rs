@@ -5,17 +5,20 @@ pub trait Hashable {
     fn hash_item(&self) -> String {
         // First we calculate the bytes of the object being passed to us
         let bytes = self.bytes();
-
-        let mut hasher = Blake2b::new();
-
-        // write input message
-        hasher.update(bytes);
-
-        // read hash digest and consume hasher
-        let res: Vec<u8> = hasher.finalize().into_iter().collect();
-
-        // Finally we base 58 encode the result
-        let hash: String = hex::encode(res);
-        hash
+        hash(bytes)
     }
+}
+
+pub fn hash(bytes: Vec<u8>) -> String {
+    let mut hasher = Blake2b::new();
+
+    // write input message
+    hasher.update(bytes);
+
+    // read hash digest and consume hasher
+    let res: Vec<u8> = hasher.finalize().into_iter().collect();
+
+    // Finally we base 58 encode the result
+    let hash: String = hex::encode(res);
+    hash
 }

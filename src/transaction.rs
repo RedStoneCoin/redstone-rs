@@ -8,6 +8,7 @@ pub enum TxType{
     DelegateTx = 4, // Used to delegate staking power to another node (or undelegate)
     CallContract = 5, // Used to call a contract's assosiated functions
     CreateChain = 6, // Used to create a new chain (when authorised)
+    Coinbase = 7, // The first txn in any block, creates coins to send to the validators and proposer
 }
 pub struct Transaction {
     pub hash: String,
