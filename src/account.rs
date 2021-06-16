@@ -1,0 +1,44 @@
+use std::fmt::format;
+
+use crate::database::Database;
+#[derive(Clone, Default, Debug, PartialEq)]
+pub struct Account {
+    address: String,
+    balance: u64,
+    smart_contract: bool,
+}
+
+impl Account {
+    pub fn get(address: String) -> Result<Account, Box<dyn std::error::Error>> {
+        let mut database_handle = Database::new();
+        database_handle.open(&"accounts".into())?;
+        let encoded = database_handle.get(&"accounts".into(), &address);
+        if encoded.len() == 0 {
+            return Err("Poor formating".into());
+        } else {
+            return Account::from_string(String::from_utf8(hex::decode(encoded)?)?);
+        }
+    }
+    pub fn save(&self) -> Result<(), Box<dyn std::error::Error>> {
+        let encoded = self.to_string();
+        let mut database_handle = Database::new();
+        database_handle.open(&"accounts".into())?;
+        database_handle.set(&"accounts".into(), &self.address, &encoded)
+    }
+    pub fn from_string(encoded: String) -> Result<Account, Box<dyn std::error::Error>> {
+        let split_string = encoded.split('.').collect::<Vec<&str>>();
+        if split_string.len() != 3 {
+            return Err("Poor formating".into());
+        } else {
+            Ok(Account {
+                address: split_string[0].to_string(),
+                balance: split_string[1].parse()?,
+                smart_contract: split_string[2].parse()?,
+            })
+        }
+    }
+    pub fn to_string(&self) -> String {
+        let raw = format!("{}.{}.{}", self.address, self.balance, self.smart_contract);
+        hex::encode(raw)
+    }
+}
