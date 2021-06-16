@@ -1,4 +1,4 @@
-# redstone-rs
+# Redstone Rs
 
 ## Implementation of Redstone protocol
 This is the offical implemention of the redstone protocol. It is written in rust. Protocol is subject to frequent change and as such no documention exists (however it is in the works) It is currently not ready for usage.
