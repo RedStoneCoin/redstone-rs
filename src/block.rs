@@ -4,6 +4,9 @@ pub struct Header {
     height: u64,
     timestamp: u64,
     chain: u64,
+    parent_hash: String,
+    state_hash: String,
+    uncle_root: String,
     proposer: String, // the publickey of the proposer
     transactions_merkle_root: String,
     header_payload: u8,
