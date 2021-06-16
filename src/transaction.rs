@@ -1,6 +1,6 @@
 use crate::{crypto::Hashable, executable::Executable};
 
-pub enum TxType {
+pub enum TxType{
     Send = 0, // used to send funds
     Burn =  1, // used to destroy funds
     ToggleOnline = 2, // used for a validator to go offline
@@ -15,7 +15,7 @@ pub struct Transaction {
     pub reciver: String,
     pub amount: u64,
     pub nonce: u64,
-    pub type_flag: TxType,
+    pub type_flag: u8,
     pub payload: String, // Hex encoded payload
     pub pow: String,     // Spam protection PoW
     pub signature: String,
@@ -28,7 +28,7 @@ impl Hashable for Transaction {
         out.extend(self.reciver.bytes());
         out.extend(self.amount.to_string().bytes());
         out.extend(self.nonce.to_string().bytes());
-        out.extend(self.type_flag.to_string().bytes());
+        out.push(self.type_flag);
         out.extend(self.payload.bytes());
 
         out

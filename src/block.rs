@@ -1,23 +1,28 @@
-use crate::{blockchain::Blockchain, crypto::Hashable, executable::Executable, state::GlobalState, transaction::Transaction};
+use crate::{
+    blockchain::Blockchain, crypto::Hashable, executable::Executable, state::GlobalState,
+    transaction::Transaction,
+};
 
+#[derive(Clone, Default, Debug)]
 pub struct Header {
-    height: u64,
-    timestamp: u64,
-    chain: u64,
-    parent_hash: String,
-    state_hash: String,
-    uncle_root: String,
-    proposer: String, // the publickey of the proposer
-    transactions_merkle_root: String,
-    header_payload: u8,
-    proof: String, // The vrf proof of the proposer as hex
-    proposer_signature: String, // proposers signature
-    validator_signatures: Vec<String>
+    pub height: u64,
+    pub timestamp: u64,
+    pub chain: u64,
+    pub parent_hash: String,
+    pub state_hash: String,
+    pub uncle_root: String,
+    pub proposer: String, // the publickey of the proposer
+    pub transactions_merkle_root: String,
+    pub header_payload: u8,
+    pub proof: String,              // The vrf proof of the proposer as hex
+    pub proposer_signature: String, // proposers signature
+    pub validator_signatures: Vec<String>,
 }
+#[derive(Clone, Default, Debug)]
 pub struct Block {
-    hash: String,
-    header: Header,
-    transactions: Vec<String>,
+    pub hash: String,
+    pub header: Header,
+    pub transactions: Vec<String>,
 }
 impl Hashable for Header {
     fn bytes(&self) -> Vec<u8> {
@@ -43,6 +48,9 @@ impl Block {
     }
     pub fn add_txn(&mut self, txn: &Transaction) {
         self.transactions.push(txn.hash.to_owned());
+    }
+    pub fn get(hash: String) -> Result<Block, Box<dyn std::error::Error>> {
+        Ok(Block::default())
     }
 }
 
@@ -73,8 +81,8 @@ impl Executable for Block {
                             return Err("Height missmatch".into());
                         } else {
                             // check the state hash
-                            if self.header.state_hash != GlobalState::current() {
-                                return Err("Invalid state hash".into())
+                            if self.header.state_hash != GlobalState::current()? {
+                                return Err("Invalid state hash".into());
                             }
                             // TODO: Check uncle root (the merkle root of all the tips of the other chains)
                             // TODO: Check the proposer

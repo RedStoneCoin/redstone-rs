@@ -3,9 +3,9 @@ use std::fmt::format;
 use crate::database::Database;
 #[derive(Clone, Default, Debug, PartialEq)]
 pub struct Account {
-    address: String,
-    balance: u64,
-    smart_contract: bool,
+    pub address: String,
+    pub balance: u64,
+    pub smart_contract: bool,
 }
 
 impl Account {

@@ -11,17 +11,17 @@ pub struct GlobalState {
 impl Hashable for GlobalState {
     fn bytes(&self) -> Vec<u8> {
         let mut out = vec![];
-        for acc in self.accounts {
+        for acc in &self.accounts {
             if acc.smart_contract {
                 // TODO: include the state hash of the smart contract
             } else {
                 out.extend(format!("{}{}.", acc.address, acc.balance).bytes())
             }
         }
-        for tip in self.tips {
-            out.extend(hex::decode(tip.hash).unwrap());
+        for tip in &self.tips {
+            out.extend(hex::decode(&tip.hash).unwrap());
         }
-        for chain in self.chains {
+        for chain in &self.chains {
             out.extend(chain.index().to_string().bytes());
         }
         out
