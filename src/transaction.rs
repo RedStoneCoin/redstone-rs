@@ -1,12 +1,21 @@
 use crate::{crypto::Hashable, executable::Executable};
 
+pub enum TxType {
+    Send = 0, // used to send funds
+    Burn =  1, // used to destroy funds
+    ToggleOnline = 2, // used for a validator to go offline
+    EvidenceTxn = 3, // Used to report voting on multiple chains
+    DelegateTx = 4, // Used to delegate staking power to another node (or undelegate)
+    CallContract = 5, // Used to call a contract's assosiated functions
+    CreateChain = 6, // Used to create a new chain (when authorised)
+}
 pub struct Transaction {
     pub hash: String,
     pub sender: String,
     pub reciver: String,
     pub amount: u64,
     pub nonce: u64,
-    pub type_flag: u8,
+    pub type_flag: TxType,
     pub payload: String, // Hex encoded payload
     pub pow: String,     // Spam protection PoW
     pub signature: String,
@@ -78,7 +87,7 @@ impl Executable for Transaction {
 
     /// # Evalulate
     /// Checks if a txn is valid
-    fn evalute(&self) -> String {
+    fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
         todo!()
     }
 
@@ -87,4 +96,4 @@ impl Executable for Transaction {
     fn cost(&self, context: &String) -> u64 {
         todo!()
     }
-} 
+}
