@@ -8,3 +8,4 @@ pub mod contract;
 pub mod executable;
 pub mod state;
 pub mod validators;
+pub mod keypair;
