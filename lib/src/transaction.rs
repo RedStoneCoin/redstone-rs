@@ -10,6 +10,7 @@ pub enum TxType{
     CreateChain = 6, // Used to create a new chain (when authorised)
     Coinbase = 7, // The first txn in any block, creates coins to send to the validators and proposer
 }
+#[derive(Clone, Debug, Default)]
 pub struct Transaction {
     pub hash: String,
     pub sender: String,

@@ -1,8 +1,13 @@
 use crate::{
-    blockchain::Blockchain, crypto::Hashable, executable::Executable, state::GlobalState,
+    blockchain::Blockchain,
+    crypto::{Hashable, Vrf},
+    executable::Executable,
+    keypair::Keypair,
+    mempool,
+    state::{GlobalState, Round},
     transaction::Transaction,
 };
-
+use log::*;
 #[derive(Clone, Default, Debug)]
 pub struct Header {
     pub height: u64,
@@ -17,6 +22,7 @@ pub struct Header {
     pub proof: String,              // The vrf proof of the proposer as hex
     pub proposer_signature: String, // proposers signature
     pub validator_signatures: Vec<String>,
+    pub vrf: String, // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
 }
 #[derive(Clone, Default, Debug)]
 pub struct Block {
@@ -52,6 +58,28 @@ impl Block {
     pub fn get(hash: String) -> Result<Block, Box<dyn std::error::Error>> {
         Ok(Block::default())
     }
+    pub fn form_vrf_tag(&mut self, keypair: &Keypair) -> Result<(), Box<dyn std::error::Error>> {
+        if self.hash.len() == 0 {
+            return Err("Hash must be set".into());
+        } else if keypair.private_key.len() == 0 {
+            return Err("Private key must be set".into());
+        }
+        let vrf = Vrf::generate(&keypair, self.hash.clone())?;
+        self.header.vrf = vrf.proof;
+        Ok(())
+    }
+
+    pub fn validate_vrf(&self, proposer: Keypair) -> Result<bool, Box<dyn std::error::Error>> {
+        if self.header.vrf.len() == 0 {
+            return Err("Vrf must be set".into());
+        } else if self.hash.len() == 0 {
+            return Err("Hash must be set".into());
+        } else if proposer.public_key.len() == 0 {
+            return Err("Proposer publickey must be set".into());
+        }
+        let vrf = Vrf::from_proof(&self.header.vrf)?;
+        vrf.valid(proposer, &self.hash)
+    }
 }
 
 impl Executable for Block {
@@ -85,7 +113,101 @@ impl Executable for Block {
                                 return Err("Invalid state hash".into());
                             }
                             // TODO: Check uncle root (the merkle root of all the tips of the other chains)
-                            // TODO: Check the proposer
+                            // get the proposer by his address
+                            let last_round = Round::get(self.header.height - 1, self.header.chain)?;
+                            if self.header.proposer != last_round.proposer {
+                                return Err(format!(
+                                    "Invalid proposer, expected {}, got {}",
+                                    last_round.proposer, self.header.proposer
+                                )
+                                .into());
+                            }
+                            // check the proposer signatuer is valid
+                            let proposer = Keypair {
+                                public_key: last_round.proposer,
+                                private_key: String::default(),
+                            };
+                            match proposer.verify(&self.hash, &self.header.proposer_signature) {
+                                Ok(valid) => {
+                                    if !valid {
+                                        return Err("Invalid proposer signature (signature)".into());
+                                    }
+                                }
+                                Err(_) => {
+                                    return Err("Invalid proposer signature (encoding)".into())
+                                }
+                            }
+                            // now we check the VRF is valid
+                            let vrf = Vrf::from_proof(&self.header.vrf)?;
+                            match vrf.valid(proposer, &self.hash) {
+                                Ok(valid) => {
+                                    if !valid {
+                                        return Err("Invalid proposer VRF (VRF)".into());
+                                    }
+                                }
+                                Err(_) => return Err("Invalid proposer VRF (encoding)".into()),
+                            }
+                            if self.header.validator_signatures.len()
+                                != last_round.validating_committee.len()
+                            {
+                                return Err("Not all validators accounted".into());
+                            }
+                            // now we check each validator signature
+                            let mut valid_signers: Vec<String> = vec![];
+                            for (index, v_sig) in
+                                self.header.validator_signatures.iter().enumerate()
+                            {
+                                if v_sig.len() != 0 {
+                                    // get the corrosponding publickey
+                                    let validator = Keypair {
+                                        public_key: last_round.validating_committee[index].clone(),
+                                        private_key: String::default(),
+                                    };
+                                    if let Ok(valid) = validator.verify(&self.hash, v_sig) {
+                                        if valid {
+                                            valid_signers.push(validator.public_key)
+                                        }
+                                    }
+                                }
+                            }
+                            // we have validated all the signatures, now check there is enough
+                            if valid_signers.len()
+                                < (1 / 3) * self.header.validator_signatures.len()
+                            {
+                                return Err(format!(
+                                    "Not enough signatures, need {} got {}",
+                                    (1 / 3) * self.header.validator_signatures.len(),
+                                    valid_signers.len()
+                                )
+                                .into());
+                            }
+                            // check the transactions, start by getting them from mempool
+                            for txn in &self.transactions {
+                                match mempool::get_transaction(txn.clone()) {
+                                    Ok(tx) => {
+                                        // validate the txn
+                                        match tx.evalute() {
+                                            Ok(_) => {
+                                                debug!("Tx {} valid", txn);
+                                            }
+                                            Err(error) => {
+                                                // invalid transaction
+                                                error!("Tx {} contained in block {} invalid, reason {}", txn, self.hash, error);
+                                                return Err(format!("Transaction {} included in block invalid, reason {}", txn, error).into());
+                                            }
+                                        }
+                                    }
+                                    Err(e) => {
+                                        // TODO: ask peers for txn and look else where
+                                        return Err(format!(
+                                            "Failed to get txn {} from mempool, gave error {}",
+                                            txn, e
+                                        )
+                                        .into());
+                                    }
+                                }
+                            }
+                            return Ok(())
                         }
                     }
                 }

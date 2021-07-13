@@ -36,8 +36,8 @@ impl Keypair {
 
     pub fn verify(
         &self,
-        message: String,
-        signature: String,
+        message: &String,
+        signature: &String,
     ) -> Result<bool, Box<dyn std::error::Error>> {
         let sig_bytes = hex::decode(signature)?;
         let signature: Signature = Signature::from_der(&sig_bytes)?;
