@@ -34,7 +34,7 @@ pub fn read(
     let incoming = is_incoming(addr);
     let mut stream = get_lock(addr, incoming)?;
     loop {
-        let buffer = [0u8; LEN_BYTES];
+        let mut buffer = [0u8; LEN_BYTES];
         // try and read LEN_BYTES bytes from stream
 
         if let Ok(_) = stream.read_exact(&mut buffer) {
@@ -42,9 +42,8 @@ pub fn read(
             let len_string = String::from_utf8(buffer.to_vec())?;
             let len_string_trimmed = len_string.trim_start_matches("0").to_string();
             let len: usize = len_string_trimmed.parse()?;
-            let buffer = [0u8; len];
+            let buffer = vec![0u8; len];
             // read exacly len bytes
-
         }
         break; //TODO
     }
