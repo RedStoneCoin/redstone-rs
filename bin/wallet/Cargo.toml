@@ -1,5 +1,5 @@
 [package]
-name = "wallet"
+name = "Redstone-wallet"
 version = "0.1.0"
 authors = ["LeoCornelius <leocornelius019@gmail.com>"]
 edition = "2018"
