@@ -2,6 +2,7 @@ use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
 use std::collections::HashMap;
+
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     let mut base_config = fern::Dispatch::new();
     base_config = match verbosity {
@@ -82,11 +83,15 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     }));
     Ok(())
 }
-
+fn startnnode() {
+}
 fn main() {
     setup_logging(4).unwrap();
     info!("Starting redstone node");
     
     // init mempool
     mempool::Mempool::init(HashMap::new()).unwrap();
+    // init p2p
+    mempool::Mempool::init(HashMap::new()).unwrap();
+
 }
