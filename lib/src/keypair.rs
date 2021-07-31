@@ -15,6 +15,7 @@ impl Keypair {
             hash(hex::decode(&self.public_key).unwrap())[..40].to_string()
         )
     }
+
     pub fn generate() -> Self {
         let secp = Secp256k1::new();
         let mut rng = rand::OsRng::new().unwrap();
@@ -47,24 +48,21 @@ impl Keypair {
         let msg = Message::from_hashed_data::<sha256::Hash>(message.as_bytes());
         return Ok(secp.verify(&msg, &signature, &publickey).is_ok());
     }
-
-    pub fn from_private_key1(pk: String) -> Keypair {
-        //didnt implement this i get an invalid private key 
-        //TODO!: Fix string to priv key stuff
-        unimplemented!();
-/*
-        let secretkey1 = pk.as_bytes();
-        let secretkey = secp256k1::key::SecretKey::from_slice(&secretkey1);
-        print!("{:#?}", secretkey);
-        let secp = &Secp256k1::new();
-        let pki = secp256k1::key::PublicKey::from_secret_key(secp,&secretkey.unwrap());
-        Keypair {
-            private_key: pk,
-            public_key: pki.to_string(),
-        }
-  */
-    }
+   
     pub fn from_private_key(pk: String) -> Keypair {
+        let pk11 = pk.clone();
+        let mut bytes = [0u8; 4];
+        let hex_bytes = hex::encode(pk);
+        println!("{:?}", hex_bytes);
+
+        Keypair {
+            private_key: pk11.to_string(),
+            public_key: "pki".to_string(),
+        }
+  
+    }
+ 
+    pub fn from_private_key1(pk: String) -> Keypair {
         let secp = &Secp256k1::new();
         let sk_bytes = pk.as_bytes();
         let secretkey = SecretKey::from_slice(&sk_bytes);

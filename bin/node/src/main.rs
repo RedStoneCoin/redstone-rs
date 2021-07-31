@@ -87,11 +87,21 @@ fn startnnode() {
 }
 fn main() {
     setup_logging(4).unwrap();
+    let art = " 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    ";
+    println!("{}",art);
     info!("Starting redstone node");
-    
+    warn!("Warning, this software is not stable");
+    warn!("Run at your own risk!");
+
     // init mempool
     mempool::Mempool::init(HashMap::new()).unwrap();
     // init p2p
-    mempool::Mempool::init(HashMap::new()).unwrap();
 
 }

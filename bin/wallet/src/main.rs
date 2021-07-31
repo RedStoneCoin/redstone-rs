@@ -16,8 +16,8 @@ fn commands(){
     println!("Command: 1 Generate a new wallet");
     println!("Usage: redstone_rs keygen");
     println!("Command: 2 Import wallet");
-   /*
     println!("Usage: redstone_rs import <private key>");
+    /*
     println!("Command: 3 Show wallet balance");
     println!("Usage: redstone_rs balance");
     println!("Command: 4 Send Redstone");
@@ -38,7 +38,7 @@ fn wallet_control(command: i32) {
         io::stdin().read_line(&mut private_key)
             .expect("Failed to read input.");
             
-        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key);
+        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key.to_string());
         println!("Your wallet address:{}", wallet.address());
         println!("Private key:{}", &wallet.private_key.to_string());
     }
@@ -100,7 +100,18 @@ pub fn get_input_wallet() {
 }
 
 fn main() {
+    let art = " 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    ";
+    println!("{}",art);
+    
     println!("Welcome Redstone Wallet!");
+
     commands();
     get_input_int();
 }
