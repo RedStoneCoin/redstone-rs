@@ -30,4 +30,4 @@ This is the offical implemention of the redstone protocol. It is written in rust
 ## Reporting a Vulnerability
 
 If you the vulnerability is already publicy known or not explotable then please open an issue. (eg you can crash local nodes using x)
-If it is a critical vulnerability that must be not kown please contact us on redstonecrypto@gmail.com
+If it is a critical vulnerability that must be not known please contact us on redstonecrypto@gmail.com
