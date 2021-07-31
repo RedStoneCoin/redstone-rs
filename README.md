@@ -5,7 +5,8 @@ This is the offical implemention of the redstone protocol. It is written in rust
 
 ## To-Do List
 - [ ] Finish p2p code. 
-- [ ] Handeler functions for the p2p code (eg when you recieve a block from a peer what do you do with it. - [ ] Block enacting 
+- [ ] Handeler functions for the p2p code (eg when you recieve a block from a peer what do you do with it. 
+- [ ] Block enacting 
 - [ ] Txn validation 
 - [ ] Mempool (stores unvalidated txns) needs implmenting.
 - [ ] Validtor code (regarding the DpoS) 
