@@ -4,4 +4,5 @@ pub struct Config {
     decimal_places: u8,
     starting_chains: u64,
     rpc_port: u16,
+    seed_nodes: Vec<String>,
 }

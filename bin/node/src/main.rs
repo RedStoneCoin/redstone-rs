@@ -28,6 +28,7 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
 
         3 => base_config
             .level(log::LevelFilter::Warn)
+            .level(log::LevelFilter::Info)
             .level_for("redstone_rs", log::LevelFilter::Debug)
             .level_for("node", log::LevelFilter::Debug),
 
@@ -86,7 +87,7 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
 fn startnnode() {
 }
 fn main() {
-    setup_logging(4).unwrap();
+    setup_logging(3).unwrap();
     let art = " 
     ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
     ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
