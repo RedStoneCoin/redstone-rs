@@ -5,4 +5,5 @@ pub struct Config {
     starting_chains: u64,
     rpc_port: u16,
     seed_nodes: Vec<String>,
+
 }

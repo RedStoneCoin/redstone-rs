@@ -28,6 +28,17 @@ fn commands(){
     println!("Usage: redstone_rs details <txid>");
    */
 }
+fn commands_logged(){
+    println!("Command: 3 Show wallet balance");
+    println!("Usage: redstone_rs balance");
+    println!("Command: 4 Send Redstone");
+    println!("Usage: redstone_rs send <address> <amount>");
+    println!("Command: 5 Show transaction history");
+    println!("Usage: redstone_rs history");
+    println!("Command: 6 Show transaction details");
+    println!("Usage: redstone_rs details <txid>");
+}
+
 fn wallet_control(command: i32) {
     if command == 1 {
         gen_keypair();
@@ -37,14 +48,11 @@ fn wallet_control(command: i32) {
         let mut private_key = String::new();
         io::stdin().read_line(&mut private_key)
             .expect("Failed to read input.");
-            
-        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key.to_string());
-        println!("Your wallet address:{}", wallet.address());
-        println!("Private key:{}", &wallet.private_key.to_string());
-    }
-    
+        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key.trim_end().to_string());
+        println!("{}", wallet);
+         //save to the file
 
-   
+    }
  }
  
 fn command_control(command: i32) {

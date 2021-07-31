@@ -1,6 +1,7 @@
 use crate::crypto::hash;
 use secp256k1::bitcoin_hashes::sha256;
 use secp256k1::{Message, PublicKey, Secp256k1, SecretKey, Signature};
+extern crate bs58;
 
 #[derive(Debug)]
 pub struct Keypair {
@@ -49,28 +50,23 @@ impl Keypair {
         return Ok(secp.verify(&msg, &signature, &publickey).is_ok());
     }
    
-    pub fn from_private_key(pk: String) -> Keypair {
-        let pk11 = pk.clone();
-        let mut bytes = [0u8; 4];
-        let hex_bytes = hex::encode(pk);
-        println!("{:?}", hex_bytes);
 
+ 
+    pub fn from_private_key(pk: String) -> Keypair {
+         
+
+        let pk11 = pk.clone();
+        let a = hex::decode(&pk).unwrap();
+        println!("{:?}", a);
+        let secretkey = secp256k1::key::SecretKey::from_slice(&a);
+        println!("{:?}", secretkey);
+        let secp = &Secp256k1::new();
+        let pki = secp256k1::key::PublicKey::from_secret_key(secp,&secretkey.unwrap());
         Keypair {
             private_key: pk11.to_string(),
-            public_key: "pki".to_string(),
+            public_key: pki.to_string(),
         }
   
-    }
- 
-    pub fn from_private_key1(pk: String) -> Keypair {
-        let secp = &Secp256k1::new();
-        let sk_bytes = pk.as_bytes();
-        let secretkey = SecretKey::from_slice(&sk_bytes);
-        let pk_bytes = secp256k1::key::PublicKey::from_secret_key(secp,&secretkey.unwrap());
-        Keypair {
-            private_key: pk,
-            public_key: pk_bytes.to_string(),
-        }
     }
 
     
