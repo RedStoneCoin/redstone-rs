@@ -4,23 +4,42 @@ use log::*;
 use redstone_rs::*;
 use std::collections::HashMap;
 use std::io;
+use std::fs::File;
+use std::io::prelude::*;
+use std::io::Read;
+use std::fs;
 
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
     println!("Your wallet address:{}", wallet.address());
     println!("Private key:{}", wallet.private_key);
-    println!("Key pair:{:#?}", wallet);
+    //save to the file
+    println!("Enter wallet filename: ");
+
+    let mut filename = String::new();
+    io::stdin().read_line(&mut filename)
+        .expect("Failed to read input.");
+    println!("{}", filename);
+
+    fs::write(&filename.trim_end(), private_key.trim_end().to_string());
+           
+    main();
 
 }
+
+
+
 fn commands(){
     println!("Command: 1 Generate a new wallet");
     println!("Usage: redstone_rs keygen");
-    println!("Command: 2 Import wallet");
+    println!("Command: 2 Import private key");
     println!("Usage: redstone_rs import <private key>");
+    
+    println!("Command: 3 Import wallet file");
+    println!("Usage: redstone_rs import <wallet file>");
     /*
-    println!("Command: 3 Show wallet balance");
-    println!("Usage: redstone_rs balance");
     println!("Command: 4 Send Redstone");
+
     println!("Usage: redstone_rs send <address> <amount>");
     println!("Command: 5 Show transaction history");
     println!("Usage: redstone_rs history");
@@ -42,6 +61,8 @@ fn commands_logged(){
 fn wallet_control(command: i32) {
     if command == 1 {
         gen_keypair();
+        main();
+
     }
     else if command == 2 {
         println!("Enter private key: ");
@@ -49,8 +70,19 @@ fn wallet_control(command: i32) {
         io::stdin().read_line(&mut private_key)
             .expect("Failed to read input.");
         let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key.trim_end().to_string());
-        println!("{}", wallet);
-         //save to the file
+        println!("{:?}", wallet);
+        //save to the file
+        println!("Enter wallet filename: ");
+
+        let mut filename = String::new();
+        io::stdin().read_line(&mut filename)
+            .expect("Failed to read input.");
+        println!("{}", filename);
+        fs::write(&filename.trim_end(), private_key.trim_end().to_string());
+        main();
+
+
+
 
     }
  }
