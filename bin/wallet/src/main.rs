@@ -14,19 +14,24 @@ fn gen_keypair() {
     println!("Your wallet address:{}", wallet.address());
     println!("Private key:{}", wallet.private_key);
     //save to the file
-    println!("Enter wallet filename: ");
+    println!("Enter wallet password: ");
+
+    let mut pass = String::new();
+    io::stdin().read_line(&mut pass)
+        .expect("Failed to read input.");
+    
+        println!("Enter wallet filename: ");
 
     let mut filename = String::new();
     io::stdin().read_line(&mut filename)
         .expect("Failed to read input.");
     println!("{}", filename);
 
-    fs::write(&filename.trim_end(), private_key.trim_end().to_string());
+    fs::write(&filename.trim_end(), wallet.private_key.to_string());
            
     main();
 
 }
-
 
 
 fn commands(){
@@ -34,18 +39,9 @@ fn commands(){
     println!("Usage: redstone_rs keygen");
     println!("Command: 2 Import private key");
     println!("Usage: redstone_rs import <private key>");
-    
     println!("Command: 3 Import wallet file");
     println!("Usage: redstone_rs import <wallet file>");
-    /*
-    println!("Command: 4 Send Redstone");
 
-    println!("Usage: redstone_rs send <address> <amount>");
-    println!("Command: 5 Show transaction history");
-    println!("Usage: redstone_rs history");
-    println!("Command: 6 Show transaction details");
-    println!("Usage: redstone_rs details <txid>");
-   */
 }
 fn commands_logged(){
     println!("Command: 3 Show wallet balance");
@@ -57,7 +53,10 @@ fn commands_logged(){
     println!("Command: 6 Show transaction details");
     println!("Usage: redstone_rs details <txid>");
 }
-
+fn main_login(pik: String,pbk: String){
+    println!("Your wallet address:{}", pbk);
+    println!("Private key:{}", pik);
+}
 fn wallet_control(command: i32) {
     if command == 1 {
         gen_keypair();
@@ -80,9 +79,23 @@ fn wallet_control(command: i32) {
         println!("{}", filename);
         fs::write(&filename.trim_end(), private_key.trim_end().to_string());
         main();
+    }
+    else if command == 3 {
+        let mut filename = String::new();
+        io::stdin().read_line(&mut filename)
+            .expect("Failed to read input.");
+        println!("{}", filename);
+        let private_key = fs::read_to_string(filename.trim_end())
+            .expect("Something went wrong reading the file");
+        println!("Enter wallet password: ");
 
+        let mut pass = String::new();
+        io::stdin().read_line(&mut pass)
+            .expect("Failed to read input.");
 
-
+        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key.to_string());
+        print!("Wallet Imported!\n");
+        main_login(wallet.private_key.to_string(),wallet.address());
 
     }
  }
@@ -98,17 +111,9 @@ fn command_control(command: i32) {
            wallet_control(2);
        }
        3 => {
-           println!("Show wallet balance");
-       }
-       4 => {
-           println!("Send money");
-           println!("Usage: redstone_rs send <address> <amount>");
-       }
-       5 => {
-           println!("Show transaction history");
-       }
-       6 => {
-           println!("Show transaction details");
+           println!("Import wallet file");
+           wallet_control(3);
+
        }
        _ => {
            println!("Unknown command");

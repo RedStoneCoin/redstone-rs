@@ -53,13 +53,9 @@ impl Keypair {
 
  
     pub fn from_private_key(pk: String) -> Keypair {
-         
-
         let pk11 = pk.clone();
         let a = hex::decode(&pk).unwrap();
-        println!("{:?}", a);
         let secretkey = secp256k1::key::SecretKey::from_slice(&a);
-        println!("{:?}", secretkey);
         let secp = &Secp256k1::new();
         let pki = secp256k1::key::PublicKey::from_secret_key(secp,&secretkey.unwrap());
         Keypair {
