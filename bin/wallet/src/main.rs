@@ -8,6 +8,9 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::io::Read;
 use std::fs;
+use std::io::{Write};
+use secrecy::Secret;
+use encryptfile as ef;
 
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
@@ -19,17 +22,33 @@ fn gen_keypair() {
     let mut pass = String::new();
     io::stdin().read_line(&mut pass)
         .expect("Failed to read input.");
-    
-        println!("Enter wallet filename: ");
-
+   
+    println!("Enter wallet location: ");
     let mut filename = String::new();
     io::stdin().read_line(&mut filename)
         .expect("Failed to read input.");
     println!("{}", filename);
 
-    fs::write(&filename.trim_end(), wallet.private_key.to_string());
-           
-    main();
+    let encrypted = {
+        let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
+    
+        let mut encrypted = vec![];
+        let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
+
+        writer.write_all(wallet.private_key.as_bytes()).unwrap();
+
+        writer.finish().unwrap();
+
+    
+        encrypted
+    };
+    
+    fs::write(&filename.trim_end(), encrypted);
+    println!("Crated file");
+    println!("{}", filename.trim_end());
+    //encrypt the file
+    print!("encrypted");
+
 
 }
 
@@ -58,12 +77,12 @@ fn main_login(pik: String,pbk: String){
     println!("Private key:{}", pik);
 }
 fn wallet_control(command: i32) {
-    if command == 1 {
-        gen_keypair();
-        main();
-
-    }
-    else if command == 2 {
+    match command {
+    1 => {
+            gen_keypair();
+            main();
+    },
+    2 => {
         println!("Enter private key: ");
         let mut private_key = String::new();
         io::stdin().read_line(&mut private_key)
@@ -76,28 +95,73 @@ fn wallet_control(command: i32) {
         let mut filename = String::new();
         io::stdin().read_line(&mut filename)
             .expect("Failed to read input.");
+        let mut pass = String::new();
+        io::stdin().read_line(&mut pass)
+            .expect("Failed to read input.");
+    
         println!("{}", filename);
-        fs::write(&filename.trim_end(), private_key.trim_end().to_string());
+        let plaintext = private_key;
+
+        let encrypted = {
+            let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
+        
+            let mut encrypted = vec![];
+            let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
+
+            writer.write_all(plaintext.as_bytes()).unwrap();
+
+            writer.finish().unwrap();
+
+        
+            encrypted
+        };
+        
+        fs::write(&filename.trim_end(), encrypted);
+        //encrypt the file
+        print!("encrypted");
         main();
-    }
-    else if command == 3 {
+    },
+    3 => {
         let mut filename = String::new();
         io::stdin().read_line(&mut filename)
             .expect("Failed to read input.");
         println!("{}", filename);
-        let private_key = fs::read_to_string(filename.trim_end())
-            .expect("Something went wrong reading the file");
         println!("Enter wallet password: ");
-
         let mut pass = String::new();
         io::stdin().read_line(&mut pass)
             .expect("Failed to read input.");
+        //decryptit
+        //then read it
+        let private_key = std::fs::read(filename.trim_end())
+    
+            .expect("Something went wrong reading the file");
 
-        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key.to_string());
+        let decrypted = {
+                let decryptor = match age::Decryptor::new(&private_key[..]).unwrap() {
+                    age::Decryptor::Passphrase(d) => d,
+                    _ => unreachable!(),
+                };
+            
+                let mut decrypted = vec![];
+                let mut reader = decryptor.decrypt(&Secret::new(pass.to_owned()), None).unwrap();
+                reader.read_to_end(&mut decrypted);
+            
+                decrypted
+        };
+        println!("{:?}", decrypted);
+        let decrypted1 = String::from_utf8(decrypted);
+        let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
+        println!("{:?}", wallet);
+
         print!("Wallet Imported!\n");
         main_login(wallet.private_key.to_string(),wallet.address());
 
+    } 
+    _ => {
+        println!("Unknown command");
     }
+    }
+
  }
  
 fn command_control(command: i32) {

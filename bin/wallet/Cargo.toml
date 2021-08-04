@@ -1,12 +1,14 @@
 [package]
 name = "Redstone-wallet"
 version = "0.1.0"
-authors = ["LeoCornelius <leocornelius019@gmail.com>"]
+authors = ["LeoCornelius <leocornelius019@gmail.com>, Redstone Developers"]
 edition = "2018"
-
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
 redstone_rs = { path = "../../lib"} 
 fern = { version = "0.6", features = ["colored"] }
 log = "0.4.14"
 chrono = "0.4.19"
+age = "0.6.0"
+secrecy = "0.7.0"
+encryptfile = "0.1.3"
