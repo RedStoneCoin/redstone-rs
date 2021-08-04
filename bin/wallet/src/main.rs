@@ -44,10 +44,9 @@ fn gen_keypair() {
     };
     
     fs::write(&filename.trim_end(), encrypted);
-    println!("Crated file");
+    println!("WALLET SAVED AT: {}", filename);
     println!("{}", filename.trim_end());
-    //encrypt the file
-    print!("encrypted");
+
 
 
 }
@@ -60,7 +59,8 @@ fn commands(){
     println!("Usage: redstone_rs import <private key>");
     println!("Command: 3 Import wallet file");
     println!("Usage: redstone_rs import <wallet file>");
-
+    println!("Command: 4 exit");
+    println!("Usage: exit");
 }
 fn commands_logged(){
     println!("Command: 3 Show wallet balance");
@@ -75,6 +75,28 @@ fn commands_logged(){
 fn main_login(pik: String,pbk: String){
     println!("Your wallet address:{}", pbk);
     println!("Private key:{}", pik);
+    commands_logged();
+    
+    let mut input = String::new();
+    // Reads the input from STDIN and places it in the String named input.
+    println!("Enter a value:");
+    io::stdin().read_line(&mut input)
+        .expect("Failed to read input.");
+    // Convert to an i32.
+    let input: i32 = input.trim().parse().unwrap();
+    match input {
+        1 => {
+            println!("Commint soon!");
+        },
+        _ => {
+            main_login(pik,pbk);
+            println!("Unknown command");
+
+            //dont exit loop back in here
+        }
+    }
+    
+
 }
 fn wallet_control(command: i32) {
     match command {
@@ -117,8 +139,6 @@ fn wallet_control(command: i32) {
         };
         
         fs::write(&filename.trim_end(), encrypted);
-        //encrypt the file
-        print!("encrypted");
         main();
     },
     3 => {
@@ -148,17 +168,18 @@ fn wallet_control(command: i32) {
             
                 decrypted
         };
-        println!("{:?}", decrypted);
         let decrypted1 = String::from_utf8(decrypted);
         let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
-        println!("{:?}", wallet);
+ 
 
-        print!("Wallet Imported!\n");
+        print!("Wallet imported successfully!\n");
         main_login(wallet.private_key.to_string(),wallet.address());
 
     } 
     _ => {
+        main();
         println!("Unknown command");
+
     }
     }
 
@@ -167,9 +188,8 @@ fn wallet_control(command: i32) {
 fn command_control(command: i32) {
    match command {
        1 => {
-           println!("Generate a new wallet");
-           gen_keypair();
-       }
+            wallet_control(1);
+         }
        2 => {
            println!("Import wallet");
            wallet_control(2);
@@ -179,11 +199,19 @@ fn command_control(command: i32) {
            wallet_control(3);
 
        }
+       4 => {
+        println!("Exited");
+        //save enverything
+
+       }
        _ => {
+           main();
            println!("Unknown command");
+
        }
    }
 }
+
 
 pub fn get_input_int() {
     let mut input = String::new();
@@ -208,6 +236,7 @@ pub fn get_input_wallet() {
     
 }
 
+
 fn main() {
     let art = " 
     ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
@@ -218,9 +247,7 @@ fn main() {
     ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
     ";
     println!("{}",art);
-    
     println!("Welcome Redstone Wallet!");
-
     commands();
     get_input_int();
 }
