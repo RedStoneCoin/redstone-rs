@@ -11,41 +11,68 @@ use std::fs;
 use std::io::{Write};
 use secrecy::Secret;
 use encryptfile as ef;
+mod api;
+fn save_wallet(wallet: String,pass: String,filename: String) {
+       //save to the file
 
+   
+       let encrypted = {
+           let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
+       
+           let mut encrypted = vec![];
+           let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
+   
+           writer.write_all(wallet.as_bytes()).unwrap();
+   
+           writer.finish().unwrap();
+   
+       
+           encrypted
+       };
+       
+       fs::write(&filename, encrypted);
+       println!("WALLET SAVED AT: {}", filename);
+}
+fn open_wallet(pass: String, filename: String) {
+    //decryptit
+    //then read it
+    let private_key = std::fs::read(filename.trim_end())
+
+        .expect("Something went wrong reading the file");
+
+    let decrypted = {
+            let decryptor = match age::Decryptor::new(&private_key[..]).unwrap() {
+                age::Decryptor::Passphrase(d) => d,
+                _ => unreachable!(),
+            };
+        
+            let mut decrypted = vec![];
+            let mut reader = decryptor.decrypt(&Secret::new(pass.to_owned()), None).unwrap();
+            reader.read_to_end(&mut decrypted);
+        
+            decrypted
+    };
+    let decrypted1 = String::from_utf8(decrypted);
+    let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
+    print!("Wallet imported successfully!\n");
+    main_login(wallet.private_key.to_string(),wallet.address());
+}
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
     println!("Your wallet address:{}", wallet.address());
     println!("Private key:{}", wallet.private_key);
-    //save to the file
-    println!("Enter wallet password: ");
+    println!("Enter Filename: ");
+
+    let mut filename = String::new();
+    io::stdin().read_line(&mut filename)
+        .expect("Failed to read input.");
+    println!("Enter Password: ");
 
     let mut pass = String::new();
     io::stdin().read_line(&mut pass)
         .expect("Failed to read input.");
-   
-    println!("Enter wallet location: ");
-    let mut filename = String::new();
-    io::stdin().read_line(&mut filename)
-        .expect("Failed to read input.");
-    println!("{}", filename);
-
-    let encrypted = {
-        let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
-    
-        let mut encrypted = vec![];
-        let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
-
-        writer.write_all(wallet.private_key.as_bytes()).unwrap();
-
-        writer.finish().unwrap();
-
-    
-        encrypted
-    };
-    
-    fs::write(&filename.trim_end(), encrypted);
-    println!("WALLET SAVED AT: {}", filename);
-    println!("{}", filename.trim_end());
+    save_wallet(wallet.private_key,pass,filename.trim_end().to_string());
+    main();
 
 
 
@@ -71,6 +98,8 @@ fn commands_logged(){
     println!("Usage: redstone_rs history");
     println!("Command: 6 Show transaction details");
     println!("Usage: redstone_rs details <txid>");
+    println!("Command: 7 exit");
+    println!("Usage: exit");
 }
 fn main_login(pik: String,pbk: String){
     println!("Your wallet address:{}", pbk);
@@ -88,10 +117,12 @@ fn main_login(pik: String,pbk: String){
         1 => {
             println!("Commint soon!");
         },
+        7 => {
+            println!("Bye!");
+        }
         _ => {
             main_login(pik,pbk);
             println!("Unknown command");
-
             //dont exit loop back in here
         }
     }
@@ -117,29 +148,13 @@ fn wallet_control(command: i32) {
         let mut filename = String::new();
         io::stdin().read_line(&mut filename)
             .expect("Failed to read input.");
+        println!("Enter Password: ");
+
         let mut pass = String::new();
         io::stdin().read_line(&mut pass)
             .expect("Failed to read input.");
     
-        println!("{}", filename);
-        let plaintext = private_key;
-
-        let encrypted = {
-            let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
-        
-            let mut encrypted = vec![];
-            let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
-
-            writer.write_all(plaintext.as_bytes()).unwrap();
-
-            writer.finish().unwrap();
-
-        
-            encrypted
-        };
-        
-        fs::write(&filename.trim_end(), encrypted);
-        main();
+        save_wallet(wallet.private_key.to_string(),pass,filename.trim_end().to_string());
     },
     3 => {
         let mut filename = String::new();
@@ -151,29 +166,7 @@ fn wallet_control(command: i32) {
         io::stdin().read_line(&mut pass)
             .expect("Failed to read input.");
         //decryptit
-        //then read it
-        let private_key = std::fs::read(filename.trim_end())
-    
-            .expect("Something went wrong reading the file");
-
-        let decrypted = {
-                let decryptor = match age::Decryptor::new(&private_key[..]).unwrap() {
-                    age::Decryptor::Passphrase(d) => d,
-                    _ => unreachable!(),
-                };
-            
-                let mut decrypted = vec![];
-                let mut reader = decryptor.decrypt(&Secret::new(pass.to_owned()), None).unwrap();
-                reader.read_to_end(&mut decrypted);
-            
-                decrypted
-        };
-        let decrypted1 = String::from_utf8(decrypted);
-        let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
- 
-
-        print!("Wallet imported successfully!\n");
-        main_login(wallet.private_key.to_string(),wallet.address());
+        open_wallet(pass,filename);
 
     } 
     _ => {
