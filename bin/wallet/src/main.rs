@@ -1,3 +1,5 @@
+#![feature(proc_macro_hygiene, decl_macro)]
+
 use redstone_rs::*;
 use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
@@ -11,25 +13,18 @@ use std::fs;
 use std::io::{Write};
 use secrecy::Secret;
 use encryptfile as ef;
-mod api;
-fn save_wallet(wallet: String,pass: String,filename: String) {
-       //save to the file
 
-   
+mod api;
+
+fn save_wallet(wallet: String,pass: String,filename: String) {
        let encrypted = {
            let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
-       
            let mut encrypted = vec![];
            let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
-   
            writer.write_all(wallet.as_bytes()).unwrap();
-   
            writer.finish().unwrap();
-   
-       
            encrypted
        };
-       
        fs::write(&filename, encrypted);
        println!("WALLET SAVED AT: {}", filename);
 }
@@ -37,19 +32,15 @@ fn open_wallet(pass: String, filename: String) {
     //decryptit
     //then read it
     let private_key = std::fs::read(filename.trim_end())
-
         .expect("Something went wrong reading the file");
-
     let decrypted = {
             let decryptor = match age::Decryptor::new(&private_key[..]).unwrap() {
                 age::Decryptor::Passphrase(d) => d,
                 _ => unreachable!(),
             };
-        
             let mut decrypted = vec![];
             let mut reader = decryptor.decrypt(&Secret::new(pass.to_owned()), None).unwrap();
             reader.read_to_end(&mut decrypted);
-        
             decrypted
     };
     let decrypted1 = String::from_utf8(decrypted);
@@ -62,50 +53,36 @@ fn gen_keypair() {
     println!("Your wallet address:{}", wallet.address());
     println!("Private key:{}", wallet.private_key);
     println!("Enter Filename: ");
-
     let mut filename = String::new();
     io::stdin().read_line(&mut filename)
         .expect("Failed to read input.");
     println!("Enter Password: ");
-
     let mut pass = String::new();
     io::stdin().read_line(&mut pass)
         .expect("Failed to read input.");
     save_wallet(wallet.private_key,pass,filename.trim_end().to_string());
     main();
-
-
-
 }
-
 
 fn commands(){
     println!("Command: 1 Generate a new wallet");
-    println!("Usage: redstone_rs keygen");
     println!("Command: 2 Import private key");
-    println!("Usage: redstone_rs import <private key>");
     println!("Command: 3 Import wallet file");
-    println!("Usage: redstone_rs import <wallet file>");
     println!("Command: 4 exit");
-    println!("Usage: exit");
 }
+
 fn commands_logged(){
     println!("Command: 3 Show wallet balance");
-    println!("Usage: redstone_rs balance");
     println!("Command: 4 Send Redstone");
-    println!("Usage: redstone_rs send <address> <amount>");
     println!("Command: 5 Show transaction history");
-    println!("Usage: redstone_rs history");
     println!("Command: 6 Show transaction details");
-    println!("Usage: redstone_rs details <txid>");
     println!("Command: 7 exit");
-    println!("Usage: exit");
 }
+
 fn main_login(pik: String,pbk: String){
     println!("Your wallet address:{}", pbk);
     println!("Private key:{}", pik);
     commands_logged();
-    
     let mut input = String::new();
     // Reads the input from STDIN and places it in the String named input.
     println!("Enter a value:");
@@ -126,8 +103,6 @@ fn main_login(pik: String,pbk: String){
             //dont exit loop back in here
         }
     }
-    
-
 }
 fn wallet_control(command: i32) {
     match command {
@@ -174,9 +149,8 @@ fn wallet_control(command: i32) {
         println!("Unknown command");
 
     }
-    }
-
- }
+  }
+}
  
 fn command_control(command: i32) {
    match command {
@@ -205,7 +179,6 @@ fn command_control(command: i32) {
    }
 }
 
-
 pub fn get_input_int() {
     let mut input = String::new();
     // Reads the input from STDIN and places it in the String named input.
@@ -215,7 +188,6 @@ pub fn get_input_int() {
     // Convert to an i32.
     let input: i32 = input.trim().parse().unwrap();
     command_control(input);
-    
 }
 pub fn get_input_wallet() {
     let mut input = String::new();
@@ -226,7 +198,6 @@ pub fn get_input_wallet() {
     // Convert to an i32.
     let input: i32 = input.trim().parse().unwrap();
     wallet_control(input);
-    
 }
 
 
@@ -241,6 +212,9 @@ fn main() {
     ";
     println!("{}",art);
     println!("Welcome Redstone Wallet!");
+    println!("ALPHA 0.1!");
+    println!("Until testnet wallet can only create wallets!");
+
     commands();
     get_input_int();
 }
