@@ -13,6 +13,7 @@ use std::fs;
 use std::io::{Write};
 use secrecy::Secret;
 use encryptfile as ef;
+use std::thread;
 
 mod api;
 
@@ -65,18 +66,18 @@ fn gen_keypair() {
 }
 
 fn commands(){
-    println!("Command: 1 Generate a new wallet");
-    println!("Command: 2 Import private key");
-    println!("Command: 3 Import wallet file");
-    println!("Command: 4 exit");
+    println!("[1] Generate a new wallet");
+    println!("[2] Import private key");
+    println!("[3] Import wallet file");
+    println!("[4] exit");
 }
 
 fn commands_logged(){
-    println!("Command: 3 Show wallet balance");
-    println!("Command: 4 Send Redstone");
-    println!("Command: 5 Show transaction history");
-    println!("Command: 6 Show transaction details");
-    println!("Command: 7 exit");
+    println!("[1] Show wallet balance");
+    println!("[2] Send Redstone");
+    println!("[3] Show transaction history");
+    println!("[4] Show transaction details");
+    println!("[5] exit");
 }
 
 fn main_login(pik: String,pbk: String){
@@ -94,7 +95,7 @@ fn main_login(pik: String,pbk: String){
         1 => {
             println!("Commint soon!");
         },
-        7 => {
+        5 => {
             println!("Bye!");
         }
         _ => {
@@ -202,6 +203,9 @@ pub fn get_input_wallet() {
 
 
 fn main() {
+    thread::spawn(|| {
+        let start = api::start_api();
+    });
     let art = " 
     ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
     ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
@@ -217,4 +221,5 @@ fn main() {
 
     commands();
     get_input_int();
+
 }

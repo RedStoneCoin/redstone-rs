@@ -12,8 +12,7 @@ use std::time::{UNIX_EPOCH, SystemTime};
 use std::error::Error;
 use rocket::get;
 use rocket::post;
-use redstone_rs::config;
-
+use rocket::config;
 lazy_static! {
     static ref WALLET_DETAILS: Mutex<Vec<String>> = Mutex::new(Vec::new());
 }
@@ -43,12 +42,20 @@ struct Transactioncount {
     success: bool,
     transaction_count: u64,
 }
-
-#[post("/test", format = "application/json", data = "<test>")]
-fn test(test: String) { /* ... */
-
-
+#[get("/")]
+fn must_provide_method() -> &'static str {
+    "{ \"success\": false, \"error\": \"METHOD_MISSING\" }"
 }
-fn main() {
-    rocket::ignite().mount("/", routes![test]).launch();
+#[post("/test", format = "application/json", data = "<test>")]
+fn test(test: String) { /* ... */}
+#[post("/test1", format = "application/json", data = "<test1>")]
+fn test1(test1: String) { /* ... */}
+
+pub fn get_middleware() -> Vec<Route> {
+    routes![must_provide_method]
+}
+pub fn start_api() {
+
+    rocket::ignite().mount("/json_rpc/", get_middleware()).launch();
+
 }
