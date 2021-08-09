@@ -14,9 +14,93 @@ use std::io::{Write};
 use secrecy::Secret;
 use encryptfile as ef;
 use std::thread;
-
 mod api;
 
+
+
+
+fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
+    let mut base_config = fern::Dispatch::new();
+    base_config = match verbosity {
+        0 => {
+            // Let's say we depend on something which whose "info" level messages are too
+            // verbose to include in end-user output. If we don't need them,
+            // let's not include them.
+            base_config
+                .level(log::LevelFilter::Error)
+                .level_for("redstone_rs", log::LevelFilter::Error)
+                .level_for("wallet", log::LevelFilter::Error)
+        }
+        1 => base_config
+            .level(log::LevelFilter::Warn)
+            .level(log::LevelFilter::Error)
+            .level_for("redstone_rs", log::LevelFilter::Warn)
+            .level_for("wallet", log::LevelFilter::Warn),
+
+        2 => base_config
+            .level(log::LevelFilter::Warn)
+            .level_for("redstone_rs", log::LevelFilter::Info)
+            .level_for("wallet", log::LevelFilter::Info),
+
+        3 => base_config
+            .level(log::LevelFilter::Warn)
+            .level(log::LevelFilter::Info)
+
+            .level_for("redstone_rs", log::LevelFilter::Debug)
+            .level_for("wallet", log::LevelFilter::Debug),
+
+        _ => base_config
+            .level(log::LevelFilter::Warn)
+            .level_for("redstone_rs", log::LevelFilter::Trace)
+            .level_for("wallet", log::LevelFilter::Trace),
+    };
+
+    // Separate file config so we can include year, month and day in file logs
+    let file_config = fern::Dispatch::new()
+        .format(|out, message, record| {
+            out.finish(format_args!(
+                "{}[{}][{}] {}",
+                chrono::Local::now().format("[%Y-%m-%d][%H:%M:%S]"),
+                record.target(),
+                record.level(),
+                message
+            ))
+        })
+        .chain(fern::log_file("redstone-wallet.log")?);
+
+    let stdout_config = fern::Dispatch::new()
+        .format(|out, message, record| {
+            let colors = ColoredLevelConfig::default()
+                .info(Color::Green)
+                .debug(Color::Magenta);
+            // special format for debug messages coming from our own crate.
+            if record.level() > log::LevelFilter::Info && record.target() == "cmd_program" {
+                out.finish(format_args!(
+                    "---\nDEBUG: {}: {}\n---",
+                    chrono::Local::now().format("%H:%M:%S"),
+                    message
+                ))
+            } else {
+                out.finish(format_args!(
+                    "{}[{}][{}] {}",
+                    chrono::Local::now().format("[%Y-%m-%d][%H:%M:%S]"),
+                    record.target(),
+                    colors.color(record.level()),
+                    message
+                ))
+            }
+        })
+        .chain(std::io::stdout());
+
+    base_config
+        .chain(file_config)
+        .chain(stdout_config)
+        .apply()?;
+    std::panic::set_hook(Box::new(|pan| {
+        error!("FATAL: {}", pan);
+    }));
+    Ok(())
+}
 fn save_wallet(wallet: String,pass: String,filename: String) {
        let encrypted = {
            let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
@@ -27,7 +111,7 @@ fn save_wallet(wallet: String,pass: String,filename: String) {
            encrypted
        };
        fs::write(&filename, encrypted);
-       println!("WALLET SAVED AT: {}", filename);
+       info!("WALLET SAVED AT: {}", filename);
 }
 fn open_wallet(pass: String, filename: String) {
     //decryptit
@@ -51,56 +135,57 @@ fn open_wallet(pass: String, filename: String) {
 }
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
-    println!("Your wallet address:{}", wallet.address());
-    println!("Private key:{}", wallet.private_key);
-    println!("Enter Filename: ");
+    info!("Your wallet address:{}", wallet.address());
+    info!("Private key:{}", wallet.private_key);
+    info!("Enter Filename: ");
     let mut filename = String::new();
     io::stdin().read_line(&mut filename)
         .expect("Failed to read input.");
-    println!("Enter Password: ");
+    info!("Enter Password: ");
     let mut pass = String::new();
     io::stdin().read_line(&mut pass)
         .expect("Failed to read input.");
     save_wallet(wallet.private_key,pass,filename.trim_end().to_string());
-    main();
+    main_not_logged();
+
 }
 
 fn commands(){
-    println!("[1] Generate a new wallet");
-    println!("[2] Import private key");
-    println!("[3] Import wallet file");
-    println!("[4] exit");
+    info!("[1] Generate a new wallet");
+    info!("[2] Import private key");
+    info!("[3] Import wallet file");
+    info!("[4] exit");
 }
 
 fn commands_logged(){
-    println!("[1] Show wallet balance");
-    println!("[2] Send Redstone");
-    println!("[3] Show transaction history");
-    println!("[4] Show transaction details");
-    println!("[5] exit");
+    info!("[1] Show wallet balance");
+    info!("[2] Send Redstone");
+    info!("[3] Show transaction history");
+    info!("[4] Show transaction details");
+    info!("[5] exit");
 }
 
 fn main_login(pik: String,pbk: String){
-    println!("Your wallet address:{}", pbk);
-    println!("Private key:{}", pik);
+    info!("Your wallet address:{}", pbk);
+    info!("Private key:{}", pik);
     commands_logged();
     let mut input = String::new();
     // Reads the input from STDIN and places it in the String named input.
-    println!("Enter a value:");
+    info!("Enter a value:");
     io::stdin().read_line(&mut input)
         .expect("Failed to read input.");
     // Convert to an i32.
     let input: i32 = input.trim().parse().unwrap();
     match input {
         1 => {
-            println!("Commint soon!");
+            info!("Commint soon!");
         },
         5 => {
-            println!("Bye!");
+            info!("Bye!");
         }
         _ => {
             main_login(pik,pbk);
-            println!("Unknown command");
+            info!("Unknown command");
             //dont exit loop back in here
         }
     }
@@ -109,22 +194,21 @@ fn wallet_control(command: i32) {
     match command {
     1 => {
             gen_keypair();
-            main();
     },
     2 => {
-        println!("Enter private key: ");
+        info!("Enter private key: ");
         let mut private_key = String::new();
         io::stdin().read_line(&mut private_key)
             .expect("Failed to read input.");
         let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key.trim_end().to_string());
-        println!("{:?}", wallet);
+        info!("{:?}", wallet);
         //save to the file
-        println!("Enter wallet filename: ");
+        info!("Enter wallet filename: ");
 
         let mut filename = String::new();
         io::stdin().read_line(&mut filename)
             .expect("Failed to read input.");
-        println!("Enter Password: ");
+        info!("Enter Password: ");
 
         let mut pass = String::new();
         io::stdin().read_line(&mut pass)
@@ -136,8 +220,8 @@ fn wallet_control(command: i32) {
         let mut filename = String::new();
         io::stdin().read_line(&mut filename)
             .expect("Failed to read input.");
-        println!("{}", filename);
-        println!("Enter wallet password: ");
+        info!("{}", filename);
+        info!("Enter wallet password: ");
         let mut pass = String::new();
         io::stdin().read_line(&mut pass)
             .expect("Failed to read input.");
@@ -146,8 +230,8 @@ fn wallet_control(command: i32) {
 
     } 
     _ => {
-        main();
-        println!("Unknown command");
+        main_not_logged();
+        info!("Unknown command");
 
     }
   }
@@ -159,22 +243,22 @@ fn command_control(command: i32) {
             wallet_control(1);
          }
        2 => {
-           println!("Import wallet");
+           info!("Import wallet");
            wallet_control(2);
        }
        3 => {
-           println!("Import wallet file");
+           info!("Import wallet file");
            wallet_control(3);
 
        }
        4 => {
-        println!("Exited");
+        info!("Exited");
         //save enverything
 
        }
        _ => {
-           main();
-           println!("Unknown command");
+           main_not_logged();
+           info!("Unknown command");
 
        }
    }
@@ -183,7 +267,7 @@ fn command_control(command: i32) {
 pub fn get_input_int() {
     let mut input = String::new();
     // Reads the input from STDIN and places it in the String named input.
-    println!("Enter a value:");
+    info!("Enter a value:");
     io::stdin().read_line(&mut input)
         .expect("Failed to read input.");
     // Convert to an i32.
@@ -193,7 +277,7 @@ pub fn get_input_int() {
 pub fn get_input_wallet() {
     let mut input = String::new();
     // Reads the input from STDIN and places it in the String named input.
-    println!("Enter a value:");
+    info!("Enter a value:");
     io::stdin().read_line(&mut input)
         .expect("Failed to read input.");
     // Convert to an i32.
@@ -201,11 +285,24 @@ pub fn get_input_wallet() {
     wallet_control(input);
 }
 
+fn main_not_logged() {
 
+    info!("Welcome Redstone Wallet!");
+    info!("ALPHA 0.1!");
+    info!("Until testnet wallet can only create wallets!");
+
+    commands();
+    get_input_int();
+}
 fn main() {
-    thread::spawn(|| {
-        let start = api::start_api();
-    });
+    setup_logging(3).unwrap();
+
+    // hread::spawn(|| {
+    //     api::start_api();
+    // });
+    //start logging
+
+
     let art = " 
     ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
     ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
@@ -214,12 +311,8 @@ fn main() {
     ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
     ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
     ";
-    println!("{}",art);
-    println!("Welcome Redstone Wallet!");
-    println!("ALPHA 0.1!");
-    println!("Until testnet wallet can only create wallets!");
+    println!("{}", art);
 
-    commands();
-    get_input_int();
+    main_not_logged()
 
 }

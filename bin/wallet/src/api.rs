@@ -12,7 +12,8 @@ use std::time::{UNIX_EPOCH, SystemTime};
 use std::error::Error;
 use rocket::get;
 use rocket::post;
-use rocket::config;
+
+use rocket::config::{Config, Environment, LoggingLevel};
 lazy_static! {
     static ref WALLET_DETAILS: Mutex<Vec<String>> = Mutex::new(Vec::new());
 }
@@ -55,7 +56,13 @@ pub fn get_middleware() -> Vec<Route> {
     routes![must_provide_method]
 }
 pub fn start_api() {
+    let config = Config::build(Environment::Staging)
+        .log_level(LoggingLevel::Off) // disables logging
+        .finalize()
+        .unwrap();
 
-    rocket::ignite().mount("/json_rpc/", get_middleware()).launch();
+    rocket::custom(config)
+        .mount("/json_rpc/", get_middleware())
+        .launch();
 
 }

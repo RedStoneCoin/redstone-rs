@@ -96,7 +96,7 @@ fn main() {
     ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
     ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
     ";
-    println!("{}",art);
+    info!("{}",art);
     info!("Starting redstone node");
     warn!("Warning, this software is not stable");
     warn!("Run at your own risk!");
