@@ -288,8 +288,8 @@ pub fn get_input_wallet() {
 fn main_not_logged() {
 
     info!("Welcome Redstone Wallet!");
-    info!("ALPHA 0.1!");
-    info!("Until testnet wallet can only create wallets!");
+    info!("ALPHA 0.1-a1!");
+    info!("TEST NET WALLET!");
 
     commands();
     get_input_int();

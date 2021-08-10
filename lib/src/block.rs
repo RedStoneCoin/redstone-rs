@@ -8,7 +8,9 @@ use crate::{
     transaction::Transaction,
 };
 use log::*;
-#[derive(Clone, Default, Debug)]
+use serde::{Serialize};
+
+#[derive(Serialize,Clone, Default, Debug)]
 pub struct Header {
     pub height: u64,
     pub timestamp: u64,
@@ -24,11 +26,25 @@ pub struct Header {
     pub validator_signatures: Vec<String>,
     pub vrf: String, // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
 }
-#[derive(Clone, Default, Debug)]
+#[derive(Serialize,PartialEq, Eq,Clone, Debug)]
+
+pub enum BlockType {
+    Send,
+    Recieve,
+}
+#[derive(Serialize,Clone, Default, Debug)]
 pub struct Block {
     pub hash: String,
     pub header: Header,
+    pub send_block: Option<String>, // the send block this recieve block is in refrence to
+    pub block_type: BlockType,
+
     pub transactions: Vec<String>,
+}
+impl Default for BlockType {
+    fn default() -> Self {
+        BlockType::Send
+    }
 }
 impl Hashable for Header {
     fn bytes(&self) -> Vec<u8> {

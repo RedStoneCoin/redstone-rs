@@ -14,3 +14,4 @@ pub mod keypair;
 pub mod mempool;
 pub mod p2p;
 pub mod config;
+pub mod rpc;
