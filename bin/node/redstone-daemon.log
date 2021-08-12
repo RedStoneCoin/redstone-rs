@@ -1,0 +1,28 @@
+[2021-08-10][16:05:52][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-10][16:05:52][Redstone_daemon][INFO] Starting redstone node
+[2021-08-10][16:05:52][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-10][16:05:52][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-10][16:05:52][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-10][16:05:52][Redstone_daemon][INFO] Launching RPC server
+[2021-08-10][16:05:52][Redstone_daemon][INFO] Launched RPC server on port=44403
+[2021-08-11][17:57:06][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-11][17:57:06][Redstone_daemon][INFO] Starting redstone node
+[2021-08-11][17:57:06][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-11][17:57:06][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-11][17:57:06][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-11][17:57:06][Redstone_daemon][INFO] Launching RPC server
+[2021-08-11][17:57:06][Redstone_daemon][INFO] Launched RPC server on port=44405

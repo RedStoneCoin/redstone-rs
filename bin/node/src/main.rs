@@ -88,6 +88,9 @@ fn startnnode() {
 }
 fn main() {
     setup_logging(3).unwrap();
+    let p2p_port = 44404;
+    let rpc_port = p2p_port + 1;
+
     let art = " 
     ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
     ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
@@ -104,5 +107,18 @@ fn main() {
     // init mempool
     mempool::Mempool::init(HashMap::new()).unwrap();
     // init p2p
+    // let _ = std::thread::spawn(move || {
+    //    redstone_rs::p2p::start_server(p2p_port);
+    // });
+
+
+    // init rpc
+    info!("Launching RPC server");
+    let _ = std::thread::spawn(move || {
+        redstone_rs::rpc::launch(rpc_port);
+    });
+    info!("Launched RPC server on port={}",rpc_port);
+    // init p2p
+
 
 }

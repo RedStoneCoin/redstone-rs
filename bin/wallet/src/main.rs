@@ -110,7 +110,7 @@ fn save_wallet(wallet: String,pass: String,filename: String) {
            writer.finish().unwrap();
            encrypted
        };
-       fs::write(&filename, encrypted);
+       fs::write(&filename, encrypted).unwrap();
        info!("WALLET SAVED AT: {}", filename);
 }
 fn open_wallet(pass: String, filename: String) {
@@ -125,7 +125,7 @@ fn open_wallet(pass: String, filename: String) {
             };
             let mut decrypted = vec![];
             let mut reader = decryptor.decrypt(&Secret::new(pass.to_owned()), None).unwrap();
-            reader.read_to_end(&mut decrypted);
+            reader.read_to_end(&mut decrypted).unwrap();
             decrypted
     };
     let decrypted1 = String::from_utf8(decrypted);
@@ -136,7 +136,7 @@ fn open_wallet(pass: String, filename: String) {
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
     info!("Your wallet address:{}", wallet.address());
-    info!("Private key:{}", wallet.private_key);
+    println!("Private key:{}", wallet.private_key);
     info!("Enter Filename: ");
     let mut filename = String::new();
     io::stdin().read_line(&mut filename)
@@ -167,7 +167,7 @@ fn commands_logged(){
 
 fn main_login(pik: String,pbk: String){
     info!("Your wallet address:{}", pbk);
-    info!("Private key:{}", pik);
+    println!("Private key:{}", pik);
     commands_logged();
     let mut input = String::new();
     // Reads the input from STDIN and places it in the String named input.
@@ -181,7 +181,8 @@ fn main_login(pik: String,pbk: String){
             info!("Commint soon!");
         },
         5 => {
-            info!("Bye!");
+            info!("Bye....");
+
         }
         _ => {
             main_login(pik,pbk);
@@ -252,7 +253,7 @@ fn command_control(command: i32) {
 
        }
        4 => {
-        info!("Exited");
+        info!("Bye....");
         //save enverything
 
        }
