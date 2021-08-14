@@ -31,12 +31,12 @@ impl Caller<'_> {
 pub fn block_announce(blk: Block) -> Result<(), Box<dyn std::error::Error>> {
     if blk.block_type == BlockType::Send {
         info!(
-            "New block! Hash={}, Sender={}, Type=Send",
+            "New block! Hash={}, Chain={}, Type=Send",
             blk.hash, blk.header.chain
         );
     } else {
         info!(
-            "New block! Hash={}, Sender={}, Type=Recieve, Send block hash={}",
+            "New block! Hash={}, Chain={}, Type=Recieve, Send block hash={}",
             blk.hash,
             blk.header.chain,
             blk.send_block
@@ -110,24 +110,24 @@ pub fn launch_client(
     );
     if let Ok(mut stream) = TcpStream::connect(format!("{}:{}", server_ip, server_port)) {
         if let Ok(_) = stream.write(b"init") {
-            debug!("Sent init message to server");
+            info!("Sent init message to server");
             let mut buf = [0u8; 1024];
             if services.is_empty() {
                 // use all services we can discard the read bytes
                 if let Ok(_) = stream.read(&mut buf) {
                     drop(buf);
                     if let Ok(_) = stream.write(b"*") {
-                        debug!("Sent services register command (*=all)");
+                        info!("Sent services register command (*=all)");
                         info!("Connected to RPC server at 127.0.0.1:{}", server_port);
                         let _loop_thread_handle = std::thread::spawn(move || loop {
                             let mut buf = [0u8; 2048];
                             if let Ok(size_of_msg) = stream.peek(&mut buf) {
-                                debug!("Peeked {} bytes into buffer, reading", size_of_msg);
+                                info!("Peeked {} bytes into buffer, reading", size_of_msg);
                                 let mut new_buf = vec![0u8; size_of_msg];
                                 if let Ok(read_bytes) = stream.read(&mut new_buf) {
                                     if read_bytes == 0 {
                                         // TODO: Ping the client and if they don't respond then disconect the stream like so
-                                        debug!("Read 0 bytes, assuming peer disconect");
+                                        info!("Read 0 bytes, assuming peer disconect");
                                         return;
                                     }
                                     trace!(
@@ -140,7 +140,7 @@ pub fn launch_client(
                                         if let Ok(announcement) =
                                             serde_json::from_str::<Announcement>(&message_string)
                                         {
-                                            debug!("Recieved new announcement from server, announcement={:#?}", announcement);
+                                            info!("Recieved new announcement from server, announcement={:#?}", announcement);
                                             caller.call(announcement);
                                             trace!(
                                                 "Called the caller's callback with announcement"
@@ -184,7 +184,7 @@ pub fn launch_client(
                     let _loop_thread_handle = std::thread::spawn(move || loop {
                         let mut buf = [0u8; 2048];
                         if let Ok(size_of_msg) = stream.peek(&mut buf) {
-                            debug!("Peeked {} bytes into buffer, reading", size_of_msg);
+                            info!("Peeked {} bytes into buffer, reading", size_of_msg);
                             let mut new_buf = vec![0u8; size_of_msg];
                             if let Ok(read_bytes) = stream.read(&mut new_buf) {
                                 trace!(
@@ -197,7 +197,7 @@ pub fn launch_client(
                                     if let Ok(announcement) =
                                         serde_json::from_str::<Announcement>(&message_string)
                                     {
-                                        debug!("Recieved new announcement from server, announcement={:#?}", announcement);
+                                        info!("Recieved new announcement from server, announcement={:#?}", announcement);
                                         caller.call(announcement);
                                         trace!("Called the caller's callback with announcement");
                                     }

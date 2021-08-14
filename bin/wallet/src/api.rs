@@ -57,7 +57,7 @@ pub fn get_middleware() -> Vec<Route> {
 }
 pub fn start_api() {
     let config = Config::build(Environment::Staging)
-        .log_level(LoggingLevel::Off) // disables logging
+        .log_level(LoggingLevel::Critical) // disables logging
         .finalize()
         .unwrap();
 

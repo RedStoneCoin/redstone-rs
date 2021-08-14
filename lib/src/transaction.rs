@@ -38,13 +38,7 @@ impl Hashable for Transaction {
 }
 
 impl Transaction {
-    pub fn new(
-        sender: String,
-        reciver: String,
-        amount: u64,
-        type_flag: u8,
-        payload: String,
-    ) -> Self {
+    pub fn new(sender: String,reciver: String,amount: u64,type_flag: u8,payload: String,) -> Self {
         let mut txn = Transaction {
             sender,
             reciver,

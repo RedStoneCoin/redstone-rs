@@ -4,6 +4,7 @@ use redstone_rs::*;
 use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
+use redstone_rs::rpc::Caller;
 use std::collections::HashMap;
 use std::io;
 use std::fs::File;
@@ -45,6 +46,10 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
         3 => base_config
             .level(log::LevelFilter::Warn)
             .level(log::LevelFilter::Info)
+            .level_for("launch_", log::LevelFilter::Off)
+            .level_for("launch", log::LevelFilter::Off)
+            .level_for("rocket::rocket", log::LevelFilter::Off)
+            .level_for("_", log::LevelFilter::Off)
 
             .level_for("redstone_rs", log::LevelFilter::Debug)
             .level_for("wallet", log::LevelFilter::Debug),
@@ -180,6 +185,34 @@ fn main_login(pik: String,pbk: String){
         1 => {
             info!("Commint soon!");
         },
+        2 => {
+            /*
+            info!("Enter Redstone address: ");
+            let mut address = String::new();
+            io::stdin().read_line(&mut address)
+                .expect("Failed to read input.");
+            info!("Enter Redstone amount: ");
+            let mut amount = String::new();
+            io::stdin().read_line(&mut amount)
+                .expect("Failed to read input.");
+            info!("Enter Redstone password: ");
+            let mut pass = String::new();
+            io::stdin().read_line(&mut pass)
+                .expect("Failed to read input.");
+            */
+            let sender = "";
+            let receiver = "";
+            let amount = 0;
+            let typetx = 1;
+            let payload = "";
+
+            let send = redstone_rs::transaction::Transaction::new(sender.to_string(),receiver.to_string(),amount,typetx,payload.to_string());     
+            println!("{:?}", send);
+            info!("Sending...");
+            main_login(pik,pbk);
+
+        },
+            
         5 => {
             info!("Bye....");
 
@@ -296,14 +329,15 @@ fn main_not_logged() {
     get_input_int();
 }
 fn main() {
+    let rpc_port = 44405;
+    
+    thread::spawn(|| {
+        api::start_api();
+    });
+    println!("{}", "Starting RPC client...");
     setup_logging(3).unwrap();
 
-    // hread::spawn(|| {
-    //     api::start_api();
-    // });
     //start logging
-
-
     let art = " 
     ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
     ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
