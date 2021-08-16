@@ -4,7 +4,8 @@ use redstone_rs::*;
 use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
-use redstone_rs::rpc::Caller;
+use redstone_rs::block::{Block, Header};
+
 use std::collections::HashMap;
 use std::io;
 use std::fs::File;
@@ -15,9 +16,53 @@ use std::io::{Write};
 use secrecy::Secret;
 use encryptfile as ef;
 use std::thread;
-mod api;
+use redstone_rs::rpc::{launch_client, Announcement, Caller};
+use redstone_rs::keypair::Keypair;
+use serde::{Deserialize, Serialize};
+use lazy_static::*;
+use std::{default::Default, sync::Mutex};
 
+#[derive(Default)]
+struct WalletDetails {
+    wallet: Option<Keypair>,
+    balance: u64,
+    locked: u64,
+    uncle_root: String,
+}
+lazy_static! {
+    static ref WALLET_DETAILS: Mutex<WalletDetails> = Mutex::new(WalletDetails::default());
+    static ref SERVER_ADDR: Mutex<String> = Mutex::new(String::from("http://127.0.0.1:8000"));
+}
+#[derive(Clone, Deserialize, Debug)]
+struct Blockcount {
+    success: bool,
+    blockcount: u64,
+}
+#[derive(Clone, Deserialize, Debug)]
+struct Transactioncount {
+    success: bool,
+    transaction_count: u64,
+}
 
+#[derive(Clone, Deserialize, Debug)]
+struct HashAtHeight {
+    success: bool,
+    hash: String,
+}
+
+#[derive(Clone, Deserialize, Debug)]
+struct PublickeyForUsername {
+    success: bool,
+    publickey: String,
+}
+
+#[derive(Clone, Deserialize, Debug)]
+struct Balances {
+    success: bool,
+    chainkey: String,
+    balance: u64,
+    locked: u64,
+}
 
 
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
@@ -49,6 +94,7 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
             .level_for("launch_", log::LevelFilter::Off)
             .level_for("launch", log::LevelFilter::Off)
             .level_for("rocket::rocket", log::LevelFilter::Off)
+            .level_for("api::start_api", log::LevelFilter::Info)
             .level_for("_", log::LevelFilter::Off)
 
             .level_for("redstone_rs", log::LevelFilter::Debug)
@@ -151,8 +197,7 @@ fn gen_keypair() {
     io::stdin().read_line(&mut pass)
         .expect("Failed to read input.");
     save_wallet(wallet.private_key,pass,filename.trim_end().to_string());
-    main_not_logged();
-
+    info!("Wallet saved at: {}", filename);
 }
 
 fn commands(){
@@ -167,10 +212,100 @@ fn commands_logged(){
     info!("[2] Send Redstone");
     info!("[3] Show transaction history");
     info!("[4] Show transaction details");
+    info!("[8] Relogin");
     info!("[5] exit");
 }
 
+
+pub fn new_ann(ann: Announcement) {
+    if let Ok(mut locked) = WALLET_DETAILS.lock() {
+        debug!("Gained lock on WALLET_DETAILS");
+        if ann.m_type == "block".to_string() {
+            // ann.msg contains a block in json format
+            if let Ok(blk) = serde_json::from_str::<Block>(&ann.content) {
+                if  true {
+                    let balance_before = locked.balance;
+                    let locked_balance_before = locked.locked;
+                    for txn in blk.transactions {
+                        trace!("Txn: {:#?}", txn);
+                        if txn.sender  == locked.wallet.as_ref().unwrap().public_key {
+                            match txn.type_flag {
+                                // 0 sended some rs to someone out balance - how much we sended
+                                0 => {
+                                    locked.balance -= txn.amount;
+                                }
+                                // 1 got some rs from someone else our balance + how much we got
+                                1 => {
+                                    locked.balance += txn.amount;
+                                }
+                                // 2 locked ballance for dpos?
+                                2 => {
+                                    locked.balance -= txn.amount;
+                                    locked.locked += txn.amount;
+                                    info!("Locked funds, commitment: {}", txn.hash);
+                                }
+                                _ => {
+                                    error!(
+                                        "Involved in unsupported transaction type, flag={}",
+                                        txn.type_flag
+                                    );
+                                    debug!("Txn dump: {:#?}", txn);
+                                }
+                            }
+                        }
+                    }
+                
+                    if balance_before != locked.balance {
+                        // Put it to the chain tx it on eg chain 1 top uncle roots push 1 
+                        locked.uncle_root = blk.header.uncle_root.clone();
+                        info!(
+                            "New block {}, old balance: {}, new balance: {}",
+                            blk.hash,
+                            balance_before,
+                            locked.balance
+                        );
+                        if locked_balance_before != locked.locked {
+                            info!(
+                                "Locked funds changed: old={} RS, new={} RS",
+                                locked_balance_before, locked.locked
+                            );
+                        }
+                    } else {
+                        debug!("Block contained no transactions affecting us");
+                    }
+                } else {
+                    debug!("Unkown");
+                }
+            }
+        }
+    }
+}
+
 fn main_login(pik: String,pbk: String){
+    let wall = Keypair {
+        private_key: pik.to_string(),
+        public_key: pbk.to_string(),
+    };
+    if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+        *locked_ls = WalletDetails {
+            wallet: Some(wall.clone()),
+            balance: 0,
+            locked: 0,
+            uncle_root: "".to_string(),
+        };
+    }
+    info!("Using wallet with publickey={}", pbk);
+    debug!("Creating caller struct");
+    let caller = Caller {
+        callback: Box::new(new_ann),
+    };
+    thread::spawn(|| {
+        launch_client("127.0.0.1".to_string(),44405,vec![],caller);
+    });
+    println!("Starting RPC client... at port:{}",44405);
+
+
+
     info!("Your wallet address:{}", pbk);
     println!("Private key:{}", pik);
     commands_logged();
@@ -216,6 +351,11 @@ fn main_login(pik: String,pbk: String){
         5 => {
             info!("Bye....");
 
+        }
+        8 => { 
+         main_login(pik,pbk);
+            info!("relog");
+            //dont exit loop back in here
         }
         _ => {
             main_login(pik,pbk);
@@ -292,7 +432,7 @@ fn command_control(command: i32) {
        }
        _ => {
            main_not_logged();
-           info!("Unknown command");
+           println!("Unknown command");
 
        }
    }
@@ -324,17 +464,11 @@ fn main_not_logged() {
     info!("Welcome Redstone Wallet!");
     info!("ALPHA 0.1-a1!");
     info!("TEST NET WALLET!");
-
     commands();
     get_input_int();
 }
 fn main() {
-    let rpc_port = 44405;
-    
-    thread::spawn(|| {
-        api::start_api();
-    });
-    println!("{}", "Starting RPC client...");
+
     setup_logging(3).unwrap();
 
     //start logging

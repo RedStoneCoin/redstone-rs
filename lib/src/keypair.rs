@@ -3,7 +3,7 @@ use secp256k1::bitcoin_hashes::sha256;
 use secp256k1::{Message, PublicKey, Secp256k1, SecretKey, Signature};
 extern crate bs58;
 
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct Keypair {
     pub public_key: String,
     pub private_key: String,

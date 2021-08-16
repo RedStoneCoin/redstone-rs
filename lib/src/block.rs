@@ -8,9 +8,8 @@ use crate::{
     transaction::Transaction,
 };
 use log::*;
-use serde::{Serialize};
-
-#[derive(Serialize,Clone, Default, Debug)]
+use serde::{Deserialize, Serialize};
+#[derive(Deserialize,Serialize,Clone, Default, Debug)]
 pub struct Header {
     pub height: u64,
     pub timestamp: u64,
@@ -26,26 +25,15 @@ pub struct Header {
     pub validator_signatures: Vec<String>,
     pub vrf: String, // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
 }
-#[derive(Serialize,PartialEq, Eq,Clone, Debug)]
 
-pub enum BlockType {
-    Send,
-    Recieve,
-}
-#[derive(Serialize,Clone, Default, Debug)]
+
+#[derive(Serialize,Clone, Default, Debug,Deserialize)]
 pub struct Block {
     pub hash: String,
     pub header: Header,
-    pub send_block: Option<String>, // the send block this recieve block is in refrence to
-    pub block_type: BlockType,
+    pub transactions: Vec<Transaction>,
+}
 
-    pub transactions: Vec<String>,
-}
-impl Default for BlockType {
-    fn default() -> Self {
-        BlockType::Send
-    }
-}
 impl Hashable for Header {
     fn bytes(&self) -> Vec<u8> {
         let mut bytes = vec![];
@@ -68,8 +56,8 @@ impl Block {
     pub fn hash_mut(&mut self) {
         self.hash = self.hash_item()
     }
-    pub fn add_txn(&mut self, txn: &Transaction) {
-        self.transactions.push(txn.hash.to_owned());
+    pub fn add_txn(&mut self, txn: Transaction) {
+        self.transactions.push(txn);
     }
     pub fn get(hash: String) -> Result<Block, Box<dyn std::error::Error>> {
         Ok(Block::default())
@@ -199,17 +187,17 @@ impl Executable for Block {
                             }
                             // check the transactions, start by getting them from mempool
                             for txn in &self.transactions {
-                                match mempool::get_transaction(txn.clone()) {
+                                match mempool::get_transaction(txn.hash.clone()) {
                                     Ok(tx) => {
                                         // validate the txn
                                         match tx.evalute() {
                                             Ok(_) => {
-                                                debug!("Tx {} valid", txn);
+                                                debug!("Tx {} valid", txn.hash);
                                             }
                                             Err(error) => {
                                                 // invalid transaction
-                                                error!("Tx {} contained in block {} invalid, reason {}", txn, self.hash, error);
-                                                return Err(format!("Transaction {} included in block invalid, reason {}", txn, error).into());
+                                                error!("Tx {} contained in block {} invalid, reason {}", txn.hash, self.hash, error);
+                                                return Err(format!("Transaction {} included in block invalid, reason {}", txn.hash, error).into());
                                             }
                                         }
                                     }
@@ -217,7 +205,7 @@ impl Executable for Block {
                                         // TODO: ask peers for txn and look else where
                                         return Err(format!(
                                             "Failed to get txn {} from mempool, gave error {}",
-                                            txn, e
+                                            txn.hash, e
                                         )
                                         .into());
                                     }

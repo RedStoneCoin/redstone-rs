@@ -1,5 +1,5 @@
 
-use crate::block::{Block, BlockType};
+use crate::block::{Block};
 use lazy_static::*;
 use log::*;
 use std::error::Error;
@@ -11,6 +11,7 @@ use serde::{Deserialize, Serialize};
 lazy_static! {
     static ref CONNECTIONS: Mutex<Vec<(TcpStream, Vec<String>)>> = Mutex::new(vec![]);
     pub static ref LOCAL_CALLBACKS: Mutex<Vec<Caller<'static>>> = Mutex::new(vec![]);
+
 }
 #[derive(Debug, Default, Clone,Serialize, Deserialize)]
 
@@ -28,22 +29,15 @@ impl Caller<'_> {
         (self.callback)(ann)
     }
 }
+
 pub fn block_announce(blk: Block) -> Result<(), Box<dyn std::error::Error>> {
-    if blk.block_type == BlockType::Send {
         info!(
-            "New block! Hash={}, Chain={}, Type=Send",
-            blk.hash, blk.header.chain
-        );
-    } else {
-        info!(
-            "New block! Hash={}, Chain={}, Type=Recieve, Send block hash={}",
+            "New block! Hash={}, chain={},",
             blk.hash,
             blk.header.chain,
-            blk.send_block
-                .as_ref()
-                .unwrap_or(&"(Error unwrapping)".to_string())
+       
         );
-    }
+    
     let connections = &mut CONNECTIONS.lock().unwrap();
     for (stream, subscriptions) in connections.iter_mut() {
         if subscriptions.contains(&"block".to_string()) {
@@ -73,8 +67,6 @@ pub fn block_announce(blk: Block) -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-
-
 pub fn peer_announce(peer: String) -> Result<(), Box<dyn std::error::Error>> {
     let connections = &mut CONNECTIONS.lock().unwrap();
     for (stream, subscriptions) in connections.iter_mut() {
@@ -103,6 +95,7 @@ pub fn launch_client(
     server_port: u64,
     services: Vec<String>,
     mut caller: Caller<'static>,
+
 ) -> Result<(), Box<dyn Error>> {
     info!(
         "Launching RPC server client, connecting to server on port={}",
@@ -142,6 +135,7 @@ pub fn launch_client(
                                         {
                                             info!("Recieved new announcement from server, announcement={:#?}", announcement);
                                             caller.call(announcement);
+
                                             trace!(
                                                 "Called the caller's callback with announcement"
                                             );
@@ -199,6 +193,7 @@ pub fn launch_client(
                                     {
                                         info!("Recieved new announcement from server, announcement={:#?}", announcement);
                                         caller.call(announcement);
+
                                         trace!("Called the caller's callback with announcement");
                                     }
                                 }
@@ -224,7 +219,7 @@ pub fn launch(port: u64) {
     info!("Launching RPC server on TCP port: {}", port);
     let bind_res = std::net::TcpListener::bind(format!("127.0.0.1:{}", port));
     if let Ok(listener) = bind_res {
-        log::info!("RPC Server bound to 127.0.0.1:{}", port);
+        info!("RPC Server bound to 127.0.0.1:{}", port);
         for stream in listener.incoming() {
             match stream {
                 Ok(mut stream) => {

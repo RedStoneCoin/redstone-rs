@@ -1,6 +1,9 @@
+#![feature(proc_macro_hygiene, decl_macro)]
+
 use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
+mod api;
 use std::collections::HashMap;
 
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
@@ -30,7 +33,12 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
             .level(log::LevelFilter::Warn)
             .level(log::LevelFilter::Info)
             .level_for("redstone_rs", log::LevelFilter::Debug)
-            .level_for("node", log::LevelFilter::Debug),
+            .level_for("node", log::LevelFilter::Debug)
+            .level_for("launch_", log::LevelFilter::Off)
+            .level_for("launch", log::LevelFilter::Off)
+            .level_for("rocket::rocket", log::LevelFilter::Off)
+            .level_for("api::start_api", log::LevelFilter::Info)
+            .level_for("_", log::LevelFilter::Off),
 
         _ => base_config
             .level(log::LevelFilter::Warn)
@@ -113,11 +121,16 @@ fn main() {
 
 
     // init rpc
-    info!("Launching RPC server");
+    info!("Launching API server at 0.0.0.0:8000");
+
     let _ = std::thread::spawn(move || {
-        redstone_rs::rpc::launch(rpc_port);
+        api::start_api();
     });
-    info!("Launched RPC server on port={}",rpc_port);
+    info!("API server launched");
+    redstone_rs::rpc::launch(rpc_port);
+
+
+
     // init p2p
 
 

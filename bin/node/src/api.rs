@@ -47,13 +47,22 @@ struct Transactioncount {
 fn must_provide_method() -> &'static str {
     "{ \"success\": false, \"error\": \"METHOD_MISSING\" }"
 }
-#[post("/test", format = "application/json", data = "<test>")]
-fn test(test: String) { /* ... */}
-#[post("/test1", format = "application/json", data = "<test1>")]
-fn test1(test1: String) { /* ... */}
 
+#[get("/test")]
+fn hello() -> &'static str {
+    //output everyting
+    "{ \"success\": true, \"response\": \"Redstone_Node\" }"
+}
+#[get("/ping")]
+fn ping() -> &'static str {
+    //output everyting
+    "{ \"success\": true, \"response\": \"Pong!\" }"
+}
 pub fn get_middleware() -> Vec<Route> {
-    routes![must_provide_method]
+    routes![must_provide_method,
+            hello,
+            ping
+    ]
 }
 pub fn start_api() {
     let config = Config::build(Environment::Staging)
@@ -62,7 +71,7 @@ pub fn start_api() {
         .unwrap();
 
     rocket::custom(config)
-        .mount("/json_rpc/", get_middleware())
+        .mount("/json_api/", get_middleware())
         .launch();
 
 }
