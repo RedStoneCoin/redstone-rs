@@ -5,7 +5,6 @@ use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
 use redstone_rs::block::{Block, Header};
-
 use std::collections::HashMap;
 use std::io;
 use std::fs::File;
@@ -50,16 +49,11 @@ struct HashAtHeight {
     hash: String,
 }
 
-#[derive(Clone, Deserialize, Debug)]
-struct PublickeyForUsername {
-    success: bool,
-    publickey: String,
-}
+
 
 #[derive(Clone, Deserialize, Debug)]
 struct Balances {
     success: bool,
-    chainkey: String,
     balance: u64,
     locked: u64,
 }
@@ -211,7 +205,7 @@ fn commands_logged(){
     info!("[1] Show wallet balance");
     info!("[2] Send Redstone");
     info!("[3] Show transaction history");
-    info!("[4] Show transaction details");
+    info!("[4] Show balance");
     info!("[8] Relogin");
     info!("[5] exit");
 }
@@ -228,21 +222,25 @@ pub fn new_ann(ann: Announcement) {
                     let locked_balance_before = locked.locked;
                     for txn in blk.transactions {
                         trace!("Txn: {:#?}", txn);
-                        if txn.sender  == locked.wallet.as_ref().unwrap().public_key {
+                        if txn.reciver == locked.wallet.as_ref().unwrap().public_key {
+                            locked.balance += txn.amount;
+                        }
+                        if txn.sender == locked.wallet.as_ref().unwrap().public_key {
                             match txn.type_flag {
                                 // 0 sended some rs to someone out balance - how much we sended
                                 0 => {
                                     locked.balance -= txn.amount;
                                 }
-                                // 1 got some rs from someone else our balance + how much we got
-                                1 => {
-                                    locked.balance += txn.amount;
-                                }
                                 // 2 locked ballance for dpos?
-                                2 => {
+                                8 => {
+                                    if locked.balance > 64{
                                     locked.balance -= txn.amount;
                                     locked.locked += txn.amount;
                                     info!("Locked funds, commitment: {}", txn.hash);
+                                    }else {
+                                        info!("You need atleast {} to be validator. Your balance {}", 64 - locked.balance, locked.balance)
+                                    
+                                    }
                                 }
                                 _ => {
                                     error!(
@@ -340,7 +338,6 @@ fn main_login(pik: String,pbk: String){
             let amount = 0;
             let typetx = 1;
             let payload = "";
-
             let send = redstone_rs::transaction::Transaction::new(sender.to_string(),receiver.to_string(),amount,typetx,payload.to_string());     
             println!("{:?}", send);
             info!("Sending...");
@@ -350,6 +347,14 @@ fn main_login(pik: String,pbk: String){
             
         5 => {
             info!("Bye....");
+
+        }
+        4 => {
+            if let Ok(mut locked) = WALLET_DETAILS.lock() {
+                debug!("Gained lock on WALLET_DETAILS");
+                info!("RS balance: {}",locked.balance);
+            }
+            main_login(pik,pbk);
 
         }
         8 => { 
