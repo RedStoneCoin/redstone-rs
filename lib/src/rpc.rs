@@ -219,11 +219,13 @@ pub fn launch(port: u64) {
     info!("Launching RPC server on TCP port: {}", port);
     let bind_res = std::net::TcpListener::bind(format!("127.0.0.1:{}", port));
     if let Ok(listener) = bind_res {
-        info!("RPC Server bound to 127.0.0.1:{}", port);
+        log::info!("RPC Server bound to 127.0.0.1:{}", port);
         for stream in listener.incoming() {
             match stream {
                 Ok(mut stream) => {
                     log::trace!("New incoming stream");
+                    info!("New incoming stream: {:?}",&stream);
+
                     let mut hi_buffer = [0u8; 128];
                     if let Ok(read_bytes) = stream.read(&mut hi_buffer) {
                         // turn the buf into a string
