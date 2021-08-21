@@ -20,6 +20,7 @@ use redstone_rs::keypair::Keypair;
 use serde::{Deserialize, Serialize};
 use lazy_static::*;
 use std::{default::Default, sync::Mutex};
+use redstone_rs::transaction::Transaction;
 
 #[derive(Default)]
 struct WalletDetails {
@@ -176,7 +177,7 @@ fn open_wallet(pass: String, filename: String) {
     let decrypted1 = String::from_utf8(decrypted);
     let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
     print!("Wallet imported successfully!\n");
-    main_login(wallet.private_key.to_string(),wallet.address());
+    main_login(wallet.private_key.to_string(),wallet.address(),false);
 }
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
@@ -210,20 +211,40 @@ fn commands_logged(){
     info!("[5] exit");
 }
 
-
 pub fn new_ann(ann: Announcement) {
     if let Ok(mut locked) = WALLET_DETAILS.lock() {
-        debug!("Gained lock on WALLET_DETAILS");
+        info!("Gained lock on WALLET_DETAILS");
         if ann.m_type == "block".to_string() {
+            info!("Its a block");
             // ann.msg contains a block in json format
             if let Ok(blk) = serde_json::from_str::<Block>(&ann.content) {
                 if  true {
                     let balance_before = locked.balance;
                     let locked_balance_before = locked.locked;
                     for txn in blk.transactions {
-                        trace!("Txn: {:#?}", txn);
+                        info!("Txn: {:#?}", txn);
                         if txn.reciver == locked.wallet.as_ref().unwrap().public_key {
-                            locked.balance += txn.amount;
+                            info!("test1");
+
+                            match txn.type_flag {
+                                // 0 u got some rs
+                                0 => {
+                                    info!("You got RS: {}", txn.amount);
+
+                                    locked.balance += txn.amount;
+                                }
+                                // someone deleagated funds to you
+                                4 => {
+                                    locked.locked += txn.amount;
+                                    info!("Locked funds, commitment: {}", txn.hash);
+                                }_ => {
+                                    error!(
+                                        "Involved in unsupported transaction type, flag={}",
+                                        txn.type_flag
+                                    );
+                                    debug!("Txn dump: {:#?}", txn);
+                                }
+                            }
                         }
                         if txn.sender == locked.wallet.as_ref().unwrap().public_key {
                             match txn.type_flag {
@@ -232,14 +253,13 @@ pub fn new_ann(ann: Announcement) {
                                     locked.balance -= txn.amount;
                                 }
                                 // 2 locked ballance for dpos?
-                                8 => {
+                                4 => {
                                     if locked.balance > 64{
                                     locked.balance -= txn.amount;
                                     locked.locked += txn.amount;
                                     info!("Locked funds, commitment: {}", txn.hash);
                                     }else {
                                         info!("You need atleast {} to be validator. Your balance {}", 64 - locked.balance, locked.balance)
-                                    
                                     }
                                 }
                                 _ => {
@@ -252,7 +272,6 @@ pub fn new_ann(ann: Announcement) {
                             }
                         }
                     }
-                
                     if balance_before != locked.balance {
                         // Put it to the chain tx it on eg chain 1 top uncle roots push 1 
                         locked.uncle_root = blk.header.uncle_root.clone();
@@ -268,6 +287,8 @@ pub fn new_ann(ann: Announcement) {
                                 locked_balance_before, locked.locked
                             );
                         }
+                        drop(locked);
+
                     } else {
                         debug!("Block contained no transactions affecting us");
                     }
@@ -279,7 +300,8 @@ pub fn new_ann(ann: Announcement) {
     }
 }
 
-fn main_login(pik: String,pbk: String){
+fn main_login(pik: String,pbk: String,launched: bool){
+    
     let wall = Keypair {
         private_key: pik.to_string(),
         public_key: pbk.to_string(),
@@ -292,21 +314,25 @@ fn main_login(pik: String,pbk: String){
             uncle_root: "".to_string(),
         };
     }
+    if let Ok(mut locked) = WALLET_DETAILS.lock() {
+        info!("Gained lock on WALLET_DETAILS");
     info!("Using wallet with publickey={}", pbk);
-    debug!("Creating caller struct");
+    info!("Creating caller struct");
     let caller = Caller {
         callback: Box::new(new_ann),
     };
     thread::spawn(|| {
         launch_client("127.0.0.1".to_string(),44405,vec![],caller);
     });
-    println!("Starting RPC client... at port:{}",44405);
 
 
 
+    drop(locked);
     info!("Your wallet address:{}", pbk);
     println!("Private key:{}", pik);
     commands_logged();
+    while true {
+
     let mut input = String::new();
     // Reads the input from STDIN and places it in the String named input.
     info!("Enter a value:");
@@ -316,59 +342,33 @@ fn main_login(pik: String,pbk: String){
     let input: i32 = input.trim().parse().unwrap();
     match input {
         1 => {
-            info!("Commint soon!");
-        },
-        2 => {
-            /*
-            info!("Enter Redstone address: ");
-            let mut address = String::new();
-            io::stdin().read_line(&mut address)
-                .expect("Failed to read input.");
-            info!("Enter Redstone amount: ");
-            let mut amount = String::new();
-            io::stdin().read_line(&mut amount)
-                .expect("Failed to read input.");
-            info!("Enter Redstone password: ");
-            let mut pass = String::new();
-            io::stdin().read_line(&mut pass)
-                .expect("Failed to read input.");
-            */
-            let sender = "";
-            let receiver = "";
-            let amount = 0;
-            let typetx = 1;
-            let payload = "";
-            let send = redstone_rs::transaction::Transaction::new(sender.to_string(),receiver.to_string(),amount,typetx,payload.to_string());     
-            println!("{:?}", send);
-            info!("Sending...");
-            main_login(pik,pbk);
 
+            if let Ok(walletdetails) = WALLET_DETAILS.lock() {
+                info!("Our balance: {}",walletdetails.balance);
+                drop(walletdetails);
+
+            }
         },
-            
+
         5 => {
             info!("Bye....");
-
         }
-        4 => {
-            if let Ok(mut locked) = WALLET_DETAILS.lock() {
-                debug!("Gained lock on WALLET_DETAILS");
-                info!("RS balance: {}",locked.balance);
-            }
-            main_login(pik,pbk);
 
-        }
         8 => { 
-         main_login(pik,pbk);
             info!("relog");
-            //dont exit loop back in here
+            break;
         }
         _ => {
-            main_login(pik,pbk);
             info!("Unknown command");
             //dont exit loop back in here
         }
     }
 }
+  
+}
+}
+
+
 fn wallet_control(command: i32) {
     match command {
     1 => {
