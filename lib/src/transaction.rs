@@ -10,7 +10,6 @@ pub enum TxType{
     CallContract = 5, // Used to call a contract's assosiated functions
     CreateChain = 6, // Used to create a new chain (when authorised)
     Coinbase = 7, // The first txn in any block, creates coins to send to the validators and proposer
-    DelegateStake = 8, // Delegate stake to be validatior miniumum 64
 
 }
 #[derive(Deserialize,Serialize,Clone, Debug, Default)]
