@@ -96,6 +96,7 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     }));
     Ok(())
 }
+
 fn startnnode() {
 }
 fn main() {
@@ -131,9 +132,7 @@ fn main() {
         api::start_api();
     });
     info!("API server launched");
-
     let _ = std::thread::spawn(move || {
-
         let mut txn = Transaction {
             hash: "".to_owned(),
             sender: "coinbase".to_owned(),
@@ -164,14 +163,13 @@ fn main() {
             },
             transactions: vec![txn],
         };
-        info!("wait 5 sec");
-        thread::sleep(time::Duration::from_secs(5));
-        info!("announe block test");
-        block_announce(blk).unwrap();
+        //info!("wait 5 sec");
+        //thread::sleep(time::Duration::from_secs(5));
+        //info!("announe block test");
+        //block_announce(blk).unwrap();
     });
 
     redstone_rs::rpc::launch(rpc_port);
-
     // init p2p
 
 

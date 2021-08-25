@@ -22,8 +22,10 @@ impl Mempool {
 }
 
 pub fn add_transaction(tx: Transaction) -> Result<(), Box<dyn std::error::Error>> {
+    let org_tx = tx.clone();
     let mut lock = MEMPOOL.lock()?;
     lock.transactions.insert(tx.hash.clone(), tx);
+    info!("Transaction added to the mempool: {:#?}", org_tx);
     Ok(())
 }
 

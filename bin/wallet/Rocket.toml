@@ -1,7 +1,0 @@
-[global]
-log = "off"
-[development]
-log = "off"
-
-[production]
-log = "off"

@@ -21,6 +21,9 @@ use serde::{Deserialize, Serialize};
 use lazy_static::*;
 use std::{default::Default, sync::Mutex};
 use redstone_rs::transaction::Transaction;
+use reqwest::Client;
+use tokio::runtime::Runtime;
+use tokio;
 
 #[derive(Default)]
 struct WalletDetails {
@@ -145,6 +148,28 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     std::panic::set_hook(Box::new(|pan| {
         error!("FATAL: {}", pan);
     }));
+    Ok(())
+}
+async fn send_transaction(txn: Transaction) -> Result<(), Box<dyn std::error::Error>> {
+    let txn_json = serde_json::to_string(&txn).unwrap();
+    let request_url = SERVER_ADDR.lock().unwrap().to_owned() + "/json_api/submit_txn";
+
+    if let Ok(response) = Client::new()
+        .post(request_url)
+        .json(&txn_json)
+        .send()
+        .await
+    {
+
+        if let Ok(response_string) = response.text().await {
+
+            if response_string.contains("404") {
+                info!("Failed to submit txn, response={}", response_string);
+            } else {
+                info!("Submit response={}", response_string);
+            }
+        }
+    }
     Ok(())
 }
 fn save_wallet(wallet: String,pass: String,filename: String) {
@@ -349,7 +374,33 @@ fn main_login(pik: String,pbk: String,launched: bool){
 
             }
         },
+        2 => {
 
+            if let Ok(walletdetails) = WALLET_DETAILS.lock() {
+                println!("{}", " txn");
+                let mut txn = Transaction {
+                    hash: "".to_owned(),
+                    sender: "coinbase".to_owned(),
+                    reciver: "0x1f7d366bce0b46d0487295ec9bfc194aab8ddb85".to_owned(),
+                    amount: 69,
+                    nonce: 1,
+                    type_flag: 0,
+                    payload: "".to_owned(), // Hex encoded payload
+                    pow: "".to_owned(),     // Spam protection PoW
+                    signature: "".to_owned(),
+                };
+                tokio::runtime::Builder::new_multi_thread()
+                .enable_all()
+                .build()
+                .unwrap()
+                .block_on(async {
+                    send_transaction(txn).await;
+                });
+                drop(walletdetails);
+
+            }
+
+        },
         5 => {
             info!("Bye....");
         }
