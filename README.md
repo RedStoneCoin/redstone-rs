@@ -4,23 +4,22 @@
 This is the offical implemention of the redstone protocol. It is written in rust. Protocol is subject to frequent change and as such no documention exists (however it is in the works) It is currently not ready for usage.
 
 ## To-Do List
+# core
+- [ ] Finish p2p code. 
+- [ ] Handeler functions for the p2p code (eg when you recieve a block from a peer what do you do with it. 
+- [ ] Block enacting 
+- [ ] Txn validation 
+- [ ] Mempool (stores unvalidated txns) needs implmenting.
+- [ ] Validtor code (regarding the DpoS) 
+# Node
+- [x] Json Api
+- [x] Rpc
+# Wallet
+- [x] Wallet
+- [x] Basic Wallet
+- [x] Api for the node
+- [x] Rpc
 
-- [ ] Finish p2p code. 
-- [ ] Handeler functions for the p2p code (eg when you recieve a block from a peer what do you do with it. 
-- [ ] Block enacting 
-- [ ] Txn validation 
-- [ ] Mempool (stores unvalidated txns) needs implmenting.
-- [ ] Validtor code (regarding the DpoS) 
-- [ ] Wallet 
-- [ ] Node
-- [ ] Finish p2p code. 
-- [ ] Handeler functions for the p2p code (eg when you recieve a block from a peer what do you do with it. 
-- [ ] Block enacting 
-- [ ] Txn validation 
-- [ ] Mempool (stores unvalidated txns) needs implmenting.
-- [ ] Validtor code (regarding the DpoS) 
-- [ ] Wallet 
-- [ ] Node
 
 # Security Policy
 

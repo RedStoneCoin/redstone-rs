@@ -24,6 +24,8 @@ use redstone_rs::transaction::Transaction;
 use reqwest::Client;
 use tokio::runtime::Runtime;
 use tokio;
+use crate::crypto::hash;
+use std::str;
 
 #[derive(Default)]
 struct WalletDetails {
@@ -375,20 +377,44 @@ fn main_login(pik: String,pbk: String,launched: bool){
             }
         },
         2 => {
+        
+            info!("Enter recivers pub key: ");
+            let mut reciver = String::new();
+            io::stdin().read_line(&mut reciver)
+                .expect("Failed to read input.");
+            let mut input = String::new();
+            info!("Enter a value:");
+            io::stdin().read_line(&mut input)
+                .expect("Failed to read input.");
+           let input: u64 = input.trim().parse().unwrap();
 
-            if let Ok(walletdetails) = WALLET_DETAILS.lock() {
+             if let Ok(walletdetails) = WALLET_DETAILS.lock() {
                 println!("{}", " txn");
-                let mut txn = Transaction {
+                let mut txn1 = Transaction {
                     hash: "".to_owned(),
-                    sender: "coinbase".to_owned(),
-                    reciver: "0x1f7d366bce0b46d0487295ec9bfc194aab8ddb85".to_owned(),
-                    amount: 69,
-                    nonce: 1,
+                    sender: walletdetails.wallet.as_ref().unwrap().public_key.to_owned(),
+                    reciver: reciver.to_owned(),
+                    amount: input,
+                    nonce: 0,
                     type_flag: 0,
                     payload: "".to_owned(), // Hex encoded payload
-                    pow: "".to_owned(),     // Spam protection PoW
+                    pow: "soon".to_owned(),     // Spam protection PoW
                     signature: "".to_owned(),
                 };
+                let hash1 = serde_json::to_string::<Transaction>(&txn1).unwrap();
+                let hash  = hash(hash1.as_bytes().to_vec());
+                let mut txn = Transaction {
+                    hash: hash.to_owned(),
+                    sender: walletdetails.wallet.as_ref().unwrap().public_key.to_owned(),
+                    reciver: reciver.to_owned(),
+                    amount: input,
+                    nonce: 0,
+                    type_flag: 0,
+                    payload: "".to_owned(), // Hex encoded payload
+                    pow: "soon".to_owned(),     // Spam protection PoW
+                    signature: "".to_owned(),
+                };
+                println!("Hash:{}", hash);
                 tokio::runtime::Builder::new_multi_thread()
                 .enable_all()
                 .build()

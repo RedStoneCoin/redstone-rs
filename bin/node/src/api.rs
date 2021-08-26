@@ -94,7 +94,6 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
             trace!("Txn submited by API json={}", txn);
             let try_string_to_txn = serde_json::from_str::<Transaction>(&txn);
             if let Ok(txn1) = try_string_to_txn {
-                info!("Txn submited by API");
                 mempool::add_transaction(txn1);
                 return "{ \"result\" : \"sent txn\" }".to_owned();
             } else {
@@ -103,7 +102,7 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
         }
         else {
             debug!(
-              "Failed to turn utf8 bytes to block (submit block api, error={})",
+              "Failed to turn utf8 bytes to txn (submit txn api, error={})",
               "no"
             );
         return format!(" {{ \"error\" : \" utf8 to json failed \" }}");
@@ -113,11 +112,22 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
   }
 }
 
+#[get("/get_tx/<hash>")]
+fn gettx(hash: String) -> String {
+    let get = serde_json::to_string(&mempool::get_transaction(hash).unwrap());
+    match get {
+        Ok(_) => {return "{ \"success\": true, \"txn\":".to_string() + &get.unwrap() + "}";}
+        _ => {return "{ \"success\": false,}".to_string();}
+    };
+}
+
+
 
 pub fn get_middleware() -> Vec<Route> {
     routes![must_provide_method,
             ping,
             submit_txn_v1,
+            gettx
     ]
 }
 pub fn start_api() {

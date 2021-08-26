@@ -38,6 +38,7 @@ pub fn get_transaction(hash: String) -> Result<Transaction, Box<dyn std::error::
     }
 }
 
+
 pub fn remove_transaction(hash: String) -> Result<Transaction, Box<dyn std::error::Error>> {
     let mut lock = MEMPOOL.lock()?;
     if let Some(tx) = lock.transactions.remove(&hash) {

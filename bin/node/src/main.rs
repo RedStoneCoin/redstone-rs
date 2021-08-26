@@ -7,6 +7,8 @@ mod api;
 use std::collections::HashMap;
 use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
+use redstone_rs::crypto::hash;
+
 use redstone_rs::rpc::{block_announce, Announcement, Caller};
 use std::{thread, time};
 
@@ -168,8 +170,15 @@ fn main() {
         //info!("announe block test");
         //block_announce(blk).unwrap();
     });
+    let _ = std::thread::spawn(move || {
 
-    redstone_rs::rpc::launch(rpc_port);
+        redstone_rs::rpc::launch(rpc_port);
+    });
+    while true {
+        //
+        
+    }
+    
     // init p2p
 
 

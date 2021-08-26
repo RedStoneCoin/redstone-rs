@@ -1662,3 +1662,230 @@
 [2021-08-25][14:48:12][Redstone_daemon][INFO] API server launched
 [2021-08-25][14:48:12][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
 [2021-08-25][14:48:12][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-25][14:56:40][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-25][14:56:40][Redstone_daemon][INFO] Starting redstone node
+[2021-08-25][14:56:40][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-25][14:56:40][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-25][14:56:40][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-25][14:56:40][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-25][14:56:40][Redstone_daemon][INFO] API server launched
+[2021-08-25][14:56:40][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-25][14:56:40][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-25][14:56:59][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-25][14:56:59][Redstone_daemon][INFO] Starting redstone node
+[2021-08-25][14:56:59][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-25][14:56:59][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-25][14:56:59][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-25][14:56:59][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-25][14:56:59][Redstone_daemon][INFO] API server launched
+[2021-08-25][14:56:59][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-25][14:56:59][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-25][14:57:20][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:118:69
+[2021-08-25][14:57:30][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:118:69
+[2021-08-25][15:07:32][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-25][15:07:32][Redstone_daemon][INFO] Starting redstone node
+[2021-08-25][15:07:32][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-25][15:07:32][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-25][15:07:32][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-25][15:07:32][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-25][15:07:32][Redstone_daemon][INFO] API server launched
+[2021-08-25][15:07:32][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-25][15:07:32][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-25][15:07:50][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:118:69
+[2021-08-25][15:07:51][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:118:69
+[2021-08-25][15:10:14][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-25][15:10:14][Redstone_daemon][INFO] Starting redstone node
+[2021-08-25][15:10:14][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-25][15:10:14][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-25][15:10:14][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-25][15:10:14][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-25][15:10:14][Redstone_daemon][INFO] API server launched
+[2021-08-25][15:10:14][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-25][15:10:14][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-25][15:10:33][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:118:69
+[2021-08-25][15:10:33][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:118:69
+[2021-08-25][15:11:11][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:55622, fd: 5 }
+[2021-08-25][15:11:12][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-08-25][15:11:12][Redstone_daemon::api][INFO] Txn submited by API
+[2021-08-25][15:11:12][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "1",
+    sender: "coinbase",
+    reciver: "0x1f7d366bce0b46d0487295ec9bfc194aab8ddb85",
+    amount: 69,
+    nonce: 1,
+    type_flag: 0,
+    payload: "",
+    pow: "",
+    signature: "",
+}
+[2021-08-25][15:15:54][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:118:69
+[2021-08-25][15:20:46][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-25][15:20:46][Redstone_daemon][INFO] Starting redstone node
+[2021-08-25][15:20:46][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-25][15:20:46][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-25][15:20:46][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-25][15:20:46][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-25][15:20:46][Redstone_daemon][INFO] API server launched
+[2021-08-25][15:20:46][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-25][15:20:46][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-25][15:20:53][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69
+[2021-08-25][15:20:53][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69
+[2021-08-25][15:20:54][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69
+[2021-08-25][15:20:54][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69
+[2021-08-25][15:20:54][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69
+[2021-08-25][15:20:54][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69
+[2021-08-25][15:20:54][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69
+[2021-08-25][15:20:55][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69
+[2021-08-25][15:20:55][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69
+[2021-08-26][20:16:28][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-26][20:16:28][Redstone_daemon][INFO] Starting redstone node
+[2021-08-26][20:16:28][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-26][20:16:28][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-26][20:16:28][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-26][20:16:28][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-26][20:16:28][Redstone_daemon][INFO] API server launched
+[2021-08-26][20:16:28][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-26][20:16:28][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-26][20:32:06][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:56738, fd: 5 }
+[2021-08-26][20:32:15][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-08-26][20:32:15][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "1",
+    sender: "coinbase",
+    reciver: "testn",
+    amount: 1,
+    nonce: 1,
+    type_flag: 0,
+    payload: "",
+    pow: "",
+    signature: "",
+}
+[2021-08-26][20:33:47][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-26][20:33:47][Redstone_daemon][INFO] Starting redstone node
+[2021-08-26][20:33:47][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-26][20:33:47][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-26][20:33:47][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-26][20:33:47][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-26][20:33:47][Redstone_daemon][INFO] API server launched
+[2021-08-26][20:33:47][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-26][20:34:47][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-26][20:34:47][Redstone_daemon][INFO] Starting redstone node
+[2021-08-26][20:34:47][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-26][20:34:47][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-26][20:34:47][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-26][20:34:47][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-26][20:34:47][Redstone_daemon][INFO] API server launched
+[2021-08-26][20:34:47][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-26][20:34:47][rocket::error][ERROR] Rocket failed to bind network socket to given address/port.
+[2021-08-26][20:34:47][Redstone_daemon][ERROR] FATAL: panicked at 'Address already in use (os error 98)', /home/toni/.cargo/registry/src/github.com-1ecc6299db9ec823/rocket-0.4.10/src/error.rs:193:17
+[2021-08-26][20:35:29][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-26][20:35:29][Redstone_daemon][INFO] Starting redstone node
+[2021-08-26][20:35:29][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-26][20:35:29][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-26][20:35:29][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-26][20:35:29][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-26][20:35:29][Redstone_daemon][INFO] API server launched
+[2021-08-26][20:35:29][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-26][20:35:29][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-26][20:35:39][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-08-26][20:35:39][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "1",
+    sender: "coinbase",
+    reciver: "testn",
+    amount: 123,
+    nonce: 1,
+    type_flag: 0,
+    payload: "",
+    pow: "",
+    signature: "",
+}
+[2021-08-26][22:24:17][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-26][22:24:17][Redstone_daemon][INFO] Starting redstone node
+[2021-08-26][22:24:17][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-26][22:24:17][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-26][22:24:17][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-26][22:24:17][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-26][22:24:17][Redstone_daemon][INFO] API server launched
+[2021-08-26][22:24:17][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-26][22:24:17][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-26][22:24:25][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-08-26][22:24:25][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "26337ce6ef6aa8dcbb089e49141ea1506f12807fc9adf39b8eaee164b864d4556956197239921c68656a08ed2b28c279f29c789c4b6b669dea33c9a46a0d37d9",
+    sender: "0x1f7d366bce0b46d0487295ec9bfc194aab8ddb85",
+    reciver: "test1n",
+    amount: 123,
+    nonce: 0,
+    type_flag: 0,
+    payload: "",
+    pow: "soon",
+    signature: "",
+}
