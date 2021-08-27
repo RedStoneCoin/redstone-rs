@@ -401,8 +401,11 @@ fn main_login(pik: String,pbk: String,launched: bool){
                     pow: "soon".to_owned(),     // Spam protection PoW
                     signature: "".to_owned(),
                 };
-                let hash1 = serde_json::to_string::<Transaction>(&txn1).unwrap();
-                let hash  = hash(hash1.as_bytes().to_vec());
+                let txn_str = serde_json::to_string::<Transaction>(&txn1).unwrap();
+                let hash  = hash(txn_str.as_bytes().to_vec());
+                let sign = walletdetails.wallet.as_ref().unwrap().sign(txn_str.to_string());
+
+
                 let mut txn = Transaction {
                     hash: hash.to_owned(),
                     sender: walletdetails.wallet.as_ref().unwrap().public_key.to_owned(),
@@ -412,7 +415,7 @@ fn main_login(pik: String,pbk: String,launched: bool){
                     type_flag: 0,
                     payload: "".to_owned(), // Hex encoded payload
                     pow: "soon".to_owned(),     // Spam protection PoW
-                    signature: "".to_owned(),
+                    signature: sign.unwrap().to_owned(),
                 };
                 println!("Hash:{}", hash);
                 tokio::runtime::Builder::new_multi_thread()

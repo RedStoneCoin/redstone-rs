@@ -26,13 +26,14 @@ impl Keypair {
             public_key: public_key.to_string(),
         }
     }
-
+// self.private_key.as_bytes();
     pub fn sign(&self, message: String) -> Result<String, Box<dyn std::error::Error>> {
         let secp = Secp256k1::new();
-        let sk_bytes = self.private_key.as_bytes();
-        let secretkey = SecretKey::from_slice(&sk_bytes)?;
+        let a = hex::decode(&self.private_key).unwrap();
+        let secretkey = secp256k1::key::SecretKey::from_slice(&a);
+
         let msg = Message::from_hashed_data::<sha256::Hash>(message.as_bytes());
-        let sig = secp.sign(&msg, &secretkey);
+        let sig = secp.sign(&msg, &secretkey.unwrap());
         Ok(hex::encode(sig.serialize_der().to_vec()))
     }
 
