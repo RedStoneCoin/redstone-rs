@@ -21,10 +21,12 @@ use serde::{Deserialize, Serialize};
 use lazy_static::*;
 use std::{default::Default, sync::Mutex};
 use redstone_rs::transaction::Transaction;
+
 use reqwest::Client;
 use tokio::runtime::Runtime;
 use tokio;
-use crate::crypto::hash;
+use crate::{crypto::Hashable, executable::Executable};
+
 use std::str;
 
 #[derive(Default)]
@@ -336,7 +338,7 @@ fn main_login(pik: String,pbk: String,launched: bool){
     if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
         *locked_ls = WalletDetails {
             wallet: Some(wall.clone()),
-            balance: 0,
+            balance: 10,
             locked: 0,
             uncle_root: "".to_string(),
         };
@@ -388,12 +390,12 @@ fn main_login(pik: String,pbk: String,launched: bool){
                 .expect("Failed to read input.");
            let input: u64 = input.trim().parse().unwrap();
 
-             if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-                println!("{}", " txn");
+             if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
+                if input < walletdetails.balance{
                 let mut txn1 = Transaction {
                     hash: "".to_owned(),
                     sender: walletdetails.wallet.as_ref().unwrap().public_key.to_owned(),
-                    reciver: reciver.to_owned(),
+                    reciver: reciver.trim_end().to_owned(),
                     amount: input,
                     nonce: 0,
                     type_flag: 0,
@@ -402,31 +404,29 @@ fn main_login(pik: String,pbk: String,launched: bool){
                     signature: "".to_owned(),
                 };
                 let txn_str = serde_json::to_string::<Transaction>(&txn1).unwrap();
-                let hash  = hash(txn_str.as_bytes().to_vec());
                 let sign = walletdetails.wallet.as_ref().unwrap().sign(txn_str.to_string());
 
+                txn1.pow = txn1.find_pow(1).hash;
 
-                let mut txn = Transaction {
-                    hash: hash.to_owned(),
-                    sender: walletdetails.wallet.as_ref().unwrap().public_key.to_owned(),
-                    reciver: reciver.to_owned(),
-                    amount: input,
-                    nonce: 0,
-                    type_flag: 0,
-                    payload: "".to_owned(), // Hex encoded payload
-                    pow: "soon".to_owned(),     // Spam protection PoW
-                    signature: sign.unwrap().to_owned(),
-                };
-                println!("Hash:{}", hash);
+                txn1.signature = sign.unwrap();
+                txn1.hash = txn1.hash_item();
+
+
+                println!("Hash:{}", txn1.hash);
+                println!("{:#?}", txn1);
+
                 tokio::runtime::Builder::new_multi_thread()
                 .enable_all()
                 .build()
                 .unwrap()
                 .block_on(async {
-                    send_transaction(txn).await;
+                    send_transaction(txn1).await;
                 });
-                drop(walletdetails);
-
+            }
+            else {
+                info!("You are tring to send more then you have!!! Balance: {}",walletdetails.balance);
+            }
+            drop(walletdetails);
             }
 
         },

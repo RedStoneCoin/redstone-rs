@@ -31,7 +31,6 @@ impl Keypair {
         let secp = Secp256k1::new();
         let a = hex::decode(&self.private_key).unwrap();
         let secretkey = secp256k1::key::SecretKey::from_slice(&a);
-
         let msg = Message::from_hashed_data::<sha256::Hash>(message.as_bytes());
         let sig = secp.sign(&msg, &secretkey.unwrap());
         Ok(hex::encode(sig.serialize_der().to_vec()))

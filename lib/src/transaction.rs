@@ -24,6 +24,10 @@ pub struct Transaction {
     pub pow: String,     // Spam protection PoW
     pub signature: String,
 }
+pub struct pow {
+    pub hash: String,
+    pub nonce: u64,
+}
 
 impl Hashable for Transaction {
     fn bytes(&self) -> Vec<u8> {
@@ -55,22 +59,22 @@ impl Transaction {
         txn.hash = txn.hash_item();
         txn
     }
-    pub fn find_pow(&mut self, difficulty: u64) {
+pub fn find_pow(&mut self, difficulty: u64) -> pow {
         for nonce_attempt in 0..=u64::MAX {
             self.nonce = nonce_attempt;
             if u64::from_str_radix(self.hash_item().trim_start_matches("0x"), 16).unwrap()
                 > difficulty
             {
                 self.hash = self.hash_item();
-                println!(
-                    "Found solution for difficulty {}, nonce {}, hash {}, hash value {}",
-                    difficulty,
-                    self.nonce,
-                    self.hash,
-                    u64::from_str_radix(self.hash.trim_start_matches("0x"), 16).unwrap()
-                );
+                println!("Found solution for difficulty {}, nonce {}, hash {}, hash value {}",difficulty,self.nonce,self.hash,u64::from_str_radix(self.hash.trim_start_matches("0x"), 16).unwrap());
                 break;
+
             }
+            
+        }
+        pow {
+            hash: self.hash.to_string(),
+            nonce: self.nonce
         }
     }
 }
