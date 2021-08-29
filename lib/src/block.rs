@@ -9,7 +9,7 @@ use crate::{
 };
 use log::*;
 use serde::{Deserialize, Serialize};
-#[derive(Deserialize,Serialize,Clone, Default, Debug)]
+#[derive(Deserialize, Serialize, Clone, Default, Debug)]
 pub struct Header {
     pub height: u64,
     pub timestamp: u64,
@@ -26,8 +26,7 @@ pub struct Header {
     pub vrf: String, // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
 }
 
-
-#[derive(Serialize,Clone, Default, Debug,Deserialize)]
+#[derive(Serialize, Clone, Default, Debug, Deserialize)]
 pub struct Block {
     pub hash: String,
     pub header: Header,
@@ -88,6 +87,23 @@ impl Block {
 
 impl Executable for Block {
     fn execute(&self, context: &String) -> Result<String, Box<dyn std::error::Error>> {
+        // Go through all the transactions and execute them
+        let state_get = GlobalState::current();
+        if let Err(state_error) = state_get {
+            return Err(state_error.into());
+        }
+        let mut pre_applicate_state = state_get.unwrap();
+        for txn in &self.transactions {
+            let txn_result = txn.execute(context, Some(&mut pre_applicate_state));
+            if let Err(txn_error) = txn_result {
+                return Err(txn_error.into());
+            }
+            let txn_result = txn_result.unwrap();
+            log::debug(&format!("txn_result: {}", txn_result));
+        }
+        // If we encountered no errors, we can apply the state
+
+
         todo!()
     }
 
@@ -211,7 +227,7 @@ impl Executable for Block {
                                     }
                                 }
                             }
-                            return Ok(())
+                            return Ok(());
                         }
                     }
                 }

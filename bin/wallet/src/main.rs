@@ -1,31 +1,31 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-use redstone_rs::*;
+use encryptfile as ef;
 use fern::colors::{Color, ColoredLevelConfig};
+use lazy_static::*;
 use log::*;
-use redstone_rs::*;
 use redstone_rs::block::{Block, Header};
+use redstone_rs::keypair::Keypair;
+use redstone_rs::rpc::{launch_client, Announcement, Caller};
+use redstone_rs::transaction::Transaction;
+use redstone_rs::*;
+use redstone_rs::*;
+use secrecy::Secret;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::io;
+use std::fs;
 use std::fs::File;
+use std::io;
 use std::io::prelude::*;
 use std::io::Read;
-use std::fs;
-use std::io::{Write};
-use secrecy::Secret;
-use encryptfile as ef;
+use std::io::Write;
 use std::thread;
-use redstone_rs::rpc::{launch_client, Announcement, Caller};
-use redstone_rs::keypair::Keypair;
-use serde::{Deserialize, Serialize};
-use lazy_static::*;
 use std::{default::Default, sync::Mutex};
-use redstone_rs::transaction::Transaction;
 
-use reqwest::Client;
-use tokio::runtime::Runtime;
-use tokio;
 use crate::{crypto::Hashable, executable::Executable};
+use reqwest::Client;
+use tokio;
+use tokio::runtime::Runtime;
 
 use std::str;
 
@@ -57,15 +57,12 @@ struct HashAtHeight {
     hash: String,
 }
 
-
-
 #[derive(Clone, Deserialize, Debug)]
 struct Balances {
     success: bool,
     balance: u64,
     locked: u64,
 }
-
 
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     let mut base_config = fern::Dispatch::new();
@@ -98,7 +95,6 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
             .level_for("rocket::rocket", log::LevelFilter::Off)
             .level_for("api::start_api", log::LevelFilter::Info)
             .level_for("_", log::LevelFilter::Off)
-
             .level_for("redstone_rs", log::LevelFilter::Debug)
             .level_for("wallet", log::LevelFilter::Debug),
 
@@ -155,18 +151,14 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     Ok(())
 }
 async fn send_transaction(txn: Transaction) -> Result<(), Box<dyn std::error::Error>> {
+    if (txn.signature == String::default()) {
+        return Err("Transaction not signed".into());
+    }
     let txn_json = serde_json::to_string(&txn).unwrap();
     let request_url = SERVER_ADDR.lock().unwrap().to_owned() + "/json_api/submit_txn";
 
-    if let Ok(response) = Client::new()
-        .post(request_url)
-        .json(&txn_json)
-        .send()
-        .await
-    {
-
+    if let Ok(response) = Client::new().post(request_url).json(&txn_json).send().await {
         if let Ok(response_string) = response.text().await {
-
             if response_string.contains("404") {
                 info!("Failed to submit txn, response={}", response_string);
             } else {
@@ -176,37 +168,39 @@ async fn send_transaction(txn: Transaction) -> Result<(), Box<dyn std::error::Er
     }
     Ok(())
 }
-fn save_wallet(wallet: String,pass: String,filename: String) {
-       let encrypted = {
-           let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
-           let mut encrypted = vec![];
-           let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
-           writer.write_all(wallet.as_bytes()).unwrap();
-           writer.finish().unwrap();
-           encrypted
-       };
-       fs::write(&filename, encrypted).unwrap();
-       info!("WALLET SAVED AT: {}", filename);
+fn save_wallet(wallet: String, pass: String, filename: String) {
+    let encrypted = {
+        let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
+        let mut encrypted = vec![];
+        let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
+        writer.write_all(wallet.as_bytes()).unwrap();
+        writer.finish().unwrap();
+        encrypted
+    };
+    fs::write(&filename, encrypted).unwrap();
+    info!("WALLET SAVED AT: {}", filename);
 }
 fn open_wallet(pass: String, filename: String) {
     //decryptit
     //then read it
-    let private_key = std::fs::read(filename.trim_end())
-        .expect("Something went wrong reading the file");
+    let private_key =
+        std::fs::read(filename.trim_end()).expect("Something went wrong reading the file");
     let decrypted = {
-            let decryptor = match age::Decryptor::new(&private_key[..]).unwrap() {
-                age::Decryptor::Passphrase(d) => d,
-                _ => unreachable!(),
-            };
-            let mut decrypted = vec![];
-            let mut reader = decryptor.decrypt(&Secret::new(pass.to_owned()), None).unwrap();
-            reader.read_to_end(&mut decrypted).unwrap();
-            decrypted
+        let decryptor = match age::Decryptor::new(&private_key[..]).unwrap() {
+            age::Decryptor::Passphrase(d) => d,
+            _ => unreachable!(),
+        };
+        let mut decrypted = vec![];
+        let mut reader = decryptor
+            .decrypt(&Secret::new(pass.to_owned()), None)
+            .unwrap();
+        reader.read_to_end(&mut decrypted).unwrap();
+        decrypted
     };
     let decrypted1 = String::from_utf8(decrypted);
     let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
     print!("Wallet imported successfully!\n");
-    main_login(wallet.private_key.to_string(),wallet.address(),false);
+    main_login(wallet.private_key.to_string(), wallet.address(), false);
 }
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
@@ -214,24 +208,26 @@ fn gen_keypair() {
     println!("Private key:{}", wallet.private_key);
     info!("Enter Filename: ");
     let mut filename = String::new();
-    io::stdin().read_line(&mut filename)
+    io::stdin()
+        .read_line(&mut filename)
         .expect("Failed to read input.");
     info!("Enter Password: ");
     let mut pass = String::new();
-    io::stdin().read_line(&mut pass)
+    io::stdin()
+        .read_line(&mut pass)
         .expect("Failed to read input.");
-    save_wallet(wallet.private_key,pass,filename.trim_end().to_string());
+    save_wallet(wallet.private_key, pass, filename.trim_end().to_string());
     info!("Wallet saved at: {}", filename);
 }
 
-fn commands(){
+fn commands() {
     info!("[1] Generate a new wallet");
     info!("[2] Import private key");
     info!("[3] Import wallet file");
     info!("[4] exit");
 }
 
-fn commands_logged(){
+fn commands_logged() {
     info!("[1] Show wallet balance");
     info!("[2] Send Redstone");
     info!("[3] Show transaction history");
@@ -242,12 +238,12 @@ fn commands_logged(){
 
 pub fn new_ann(ann: Announcement) {
     if let Ok(mut locked) = WALLET_DETAILS.lock() {
-        info!("Gained lock on WALLET_DETAILS");
+        debug!("Gained lock on WALLET_DETAILS");
         if ann.m_type == "block".to_string() {
-            info!("Its a block");
+            debug!("Recieved block ann");
             // ann.msg contains a block in json format
             if let Ok(blk) = serde_json::from_str::<Block>(&ann.content) {
-                if  true {
+                if true {
                     let balance_before = locked.balance;
                     let locked_balance_before = locked.locked;
                     for txn in blk.transactions {
@@ -266,7 +262,8 @@ pub fn new_ann(ann: Announcement) {
                                 4 => {
                                     locked.locked += txn.amount;
                                     info!("Locked funds, commitment: {}", txn.hash);
-                                }_ => {
+                                }
+                                _ => {
                                     error!(
                                         "Involved in unsupported transaction type, flag={}",
                                         txn.type_flag
@@ -283,12 +280,16 @@ pub fn new_ann(ann: Announcement) {
                                 }
                                 // 2 locked ballance for dpos?
                                 4 => {
-                                    if locked.balance > 64{
-                                    locked.balance -= txn.amount;
-                                    locked.locked += txn.amount;
-                                    info!("Locked funds, commitment: {}", txn.hash);
-                                    }else {
-                                        info!("You need atleast {} to be validator. Your balance {}", 64 - locked.balance, locked.balance)
+                                    if locked.balance > 64 {
+                                        locked.balance -= txn.amount;
+                                        locked.locked += txn.amount;
+                                        info!("Locked funds, commitment: {}", txn.hash);
+                                    } else {
+                                        info!(
+                                            "You need at least 64 ({} more) to be validator. Your balance {}",
+                                            64 - locked.balance,
+                                            locked.balance
+                                        )
                                     }
                                 }
                                 _ => {
@@ -302,13 +303,11 @@ pub fn new_ann(ann: Announcement) {
                         }
                     }
                     if balance_before != locked.balance {
-                        // Put it to the chain tx it on eg chain 1 top uncle roots push 1 
+                        // Put it to the chain tx it on eg chain 1 top uncle roots push 1
                         locked.uncle_root = blk.header.uncle_root.clone();
                         info!(
                             "New block {}, old balance: {}, new balance: {}",
-                            blk.hash,
-                            balance_before,
-                            locked.balance
+                            blk.hash, balance_before, locked.balance
                         );
                         if locked_balance_before != locked.locked {
                             info!(
@@ -317,7 +316,6 @@ pub fn new_ann(ann: Announcement) {
                             );
                         }
                         drop(locked);
-
                     } else {
                         debug!("Block contained no transactions affecting us");
                     }
@@ -329,8 +327,7 @@ pub fn new_ann(ann: Announcement) {
     }
 }
 
-fn main_login(pik: String,pbk: String,launched: bool){
-    
+fn main_login(pik: String, pbk: String, launched: bool) {
     let wall = Keypair {
         private_key: pik.to_string(),
         public_key: pbk.to_string(),
@@ -345,189 +342,204 @@ fn main_login(pik: String,pbk: String,launched: bool){
     }
     if let Ok(mut locked) = WALLET_DETAILS.lock() {
         info!("Gained lock on WALLET_DETAILS");
-    info!("Using wallet with publickey={}", pbk);
-    info!("Creating caller struct");
-    let caller = Caller {
-        callback: Box::new(new_ann),
-    };
-    thread::spawn(|| {
-        launch_client("127.0.0.1".to_string(),44405,vec![],caller);
-    });
+        info!("Using wallet with publickey={}", pbk);
+        info!("Creating caller struct");
+        let caller = Caller {
+            callback: Box::new(new_ann),
+        };
+        thread::spawn(|| {
+            launch_client("127.0.0.1".to_string(), 44405, vec![], caller);
+        });
 
-
-
-    drop(locked);
-    info!("Your wallet address:{}", pbk);
-    println!("Private key:{}", pik);
-    commands_logged();
-    while true {
-
-    let mut input = String::new();
-    // Reads the input from STDIN and places it in the String named input.
-    info!("Enter a value:");
-    io::stdin().read_line(&mut input)
-        .expect("Failed to read input.");
-    // Convert to an i32.
-    let input: i32 = input.trim().parse().unwrap();
-    match input {
-        1 => {
-
-            if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-                info!("Our balance: {}",walletdetails.balance);
-                drop(walletdetails);
-
-            }
-        },
-        2 => {
-        
-            info!("Enter recivers pub key: ");
-            let mut reciver = String::new();
-            io::stdin().read_line(&mut reciver)
-                .expect("Failed to read input.");
+        drop(locked);
+        info!("Your wallet address:{}", pbk);
+        println!("Private key:{}", pik);
+        commands_logged();
+        while true {
             let mut input = String::new();
+            // Reads the input from STDIN and places it in the String named input.
             info!("Enter a value:");
-            io::stdin().read_line(&mut input)
+            io::stdin()
+                .read_line(&mut input)
                 .expect("Failed to read input.");
-           let input: u64 = input.trim().parse().unwrap();
+            // Convert to an i32.
+            if let Ok(input) = input.trim().parse::<i32>().unwrap() {
+                match input {
+                    1 => {
+                        if let Ok(walletdetails) = WALLET_DETAILS.lock() {
+                            info!("Our balance: {}", walletdetails.balance);
+                            drop(walletdetails);
+                        }
+                    }
+                    2 => {
+                        info!("Enter recivers pub key: ");
+                        let mut reciver = String::new();
+                        io::stdin()
+                            .read_line(&mut reciver)
+                            .expect("Failed to read input.");
+                        let mut input = String::new();
+                        info!("Enter a value:");
+                        io::stdin()
+                            .read_line(&mut input)
+                            .expect("Failed to read input.");
+                        let input: u64 = input.trim().parse().unwrap();
 
-             if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
-                if input < walletdetails.balance{
-                let mut txn1 = Transaction {
-                    hash: "".to_owned(),
-                    sender: walletdetails.wallet.as_ref().unwrap().public_key.to_owned(),
-                    reciver: reciver.trim_end().to_owned(),
-                    amount: input,
-                    nonce: 0,
-                    type_flag: 0,
-                    payload: "".to_owned(), // Hex encoded payload
-                    pow: "soon".to_owned(),     // Spam protection PoW
-                    signature: "".to_owned(),
-                };
-                let txn_str = serde_json::to_string::<Transaction>(&txn1).unwrap();
-                let sign = walletdetails.wallet.as_ref().unwrap().sign(txn_str.to_string());
+                        if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
+                            if input < walletdetails.balance {
+                                let mut txn1 = Transaction {
+                                    hash: "".to_owned(),
+                                    sender: walletdetails
+                                        .wallet
+                                        .as_ref()
+                                        .unwrap()
+                                        .public_key
+                                        .to_owned(),
+                                    reciver: reciver.trim_end().to_owned(),
+                                    amount: input,
+                                    nonce: 0,
+                                    type_flag: 0,
+                                    payload: "".to_owned(), // Hex encoded payload
+                                    pow: "soon".to_owned(), // Spam protection PoW
+                                    signature: "".to_owned(),
+                                };
+                                let txn_str = serde_json::to_string::<Transaction>(&txn1).unwrap();
+                                let sign = walletdetails
+                                    .wallet
+                                    .as_ref()
+                                    .unwrap()
+                                    .sign(txn_str.to_string());
 
-                txn1.pow = txn1.find_pow(1).hash;
+                                txn1.pow = txn1.find_pow(1).hash;
 
-                txn1.signature = sign.unwrap();
-                txn1.hash = txn1.hash_item();
+                                txn1.signature = sign.unwrap();
+                                txn1.hash = txn1.hash_item();
 
+                                println!("Hash:{}", txn1.hash);
+                                println!("{:#?}", txn1);
 
-                println!("Hash:{}", txn1.hash);
-                println!("{:#?}", txn1);
+                                tokio::runtime::Builder::new_multi_thread()
+                                    .enable_all()
+                                    .build()
+                                    .unwrap()
+                                    .block_on(async {
+                                        send_transaction(txn1).await;
+                                    });
+                            } else {
+                                info!(
+                                    "You are tring to send more then you have!!! Balance: {}",
+                                    walletdetails.balance
+                                );
+                            }
+                            drop(walletdetails);
+                        }
+                    }
+                    5 => {
+                        info!("Bye....");
+                        break;
+                    }
 
-                tokio::runtime::Builder::new_multi_thread()
-                .enable_all()
-                .build()
-                .unwrap()
-                .block_on(async {
-                    send_transaction(txn1).await;
-                });
+                    8 => {
+                        info!("relog");
+                        // TODO: relog
+                        break;
+                    }
+                    _ => {
+                        info!("Unknown command");
+                        //dont exit loop back in here
+                    }
+                }
+            } else {
+                info!("Not a number");
             }
-            else {
-                info!("You are tring to send more then you have!!! Balance: {}",walletdetails.balance);
-            }
-            drop(walletdetails);
-            }
-
-        },
-        5 => {
-            info!("Bye....");
-        }
-
-        8 => { 
-            info!("relog");
-            break;
-        }
-        _ => {
-            info!("Unknown command");
-            //dont exit loop back in here
         }
     }
 }
-  
-}
-}
-
 
 fn wallet_control(command: i32) {
     match command {
-    1 => {
+        1 => {
             gen_keypair();
-    },
-    2 => {
-        info!("Enter private key: ");
-        let mut private_key = String::new();
-        io::stdin().read_line(&mut private_key)
-            .expect("Failed to read input.");
-        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key.trim_end().to_string());
-        info!("{:?}", wallet);
-        //save to the file
-        info!("Enter wallet filename: ");
+        }
+        2 => {
+            info!("Enter private key: ");
+            let mut private_key = String::new();
+            io::stdin()
+                .read_line(&mut private_key)
+                .expect("Failed to read input.");
+            let wallet =
+                redstone_rs::keypair::Keypair::from_private_key(private_key.trim_end().to_string());
+            info!("{:?}", wallet);
+            //save to the file
+            info!("Enter wallet filename: ");
 
-        let mut filename = String::new();
-        io::stdin().read_line(&mut filename)
-            .expect("Failed to read input.");
-        info!("Enter Password: ");
+            let mut filename = String::new();
+            io::stdin()
+                .read_line(&mut filename)
+                .expect("Failed to read input.");
+            info!("Enter Password: ");
 
-        let mut pass = String::new();
-        io::stdin().read_line(&mut pass)
-            .expect("Failed to read input.");
-    
-        save_wallet(wallet.private_key.to_string(),pass,filename.trim_end().to_string());
-    },
-    3 => {
-        let mut filename = String::new();
-        io::stdin().read_line(&mut filename)
-            .expect("Failed to read input.");
-        info!("{}", filename);
-        info!("Enter wallet password: ");
-        let mut pass = String::new();
-        io::stdin().read_line(&mut pass)
-            .expect("Failed to read input.");
-        //decryptit
-        open_wallet(pass,filename);
+            let mut pass = String::new();
+            io::stdin()
+                .read_line(&mut pass)
+                .expect("Failed to read input.");
 
-    } 
-    _ => {
-        main_not_logged();
-        info!("Unknown command");
-
+            save_wallet(
+                wallet.private_key.to_string(),
+                pass,
+                filename.trim_end().to_string(),
+            );
+        }
+        3 => {
+            let mut filename = String::new();
+            io::stdin()
+                .read_line(&mut filename)
+                .expect("Failed to read input.");
+            info!("{}", filename);
+            info!("Enter wallet password: ");
+            let mut pass = String::new();
+            io::stdin()
+                .read_line(&mut pass)
+                .expect("Failed to read input.");
+            //decryptit
+            open_wallet(pass, filename);
+        }
+        _ => {
+            main_not_logged();
+            info!("Unknown command");
+        }
     }
-  }
 }
- 
+
 fn command_control(command: i32) {
-   match command {
-       1 => {
+    match command {
+        1 => {
             wallet_control(1);
-         }
-       2 => {
-           info!("Import wallet");
-           wallet_control(2);
-       }
-       3 => {
-           info!("Import wallet file");
-           wallet_control(3);
-
-       }
-       4 => {
-        info!("Bye....");
-        //save enverything
-
-       }
-       _ => {
-           main_not_logged();
-           println!("Unknown command");
-
-       }
-   }
+        }
+        2 => {
+            info!("Import wallet");
+            wallet_control(2);
+        }
+        3 => {
+            info!("Import wallet file");
+            wallet_control(3);
+        }
+        4 => {
+            info!("Bye....");
+            //save enverything
+        }
+        _ => {
+            main_not_logged();
+            println!("Unknown command");
+        }
+    }
 }
 
 pub fn get_input_int() {
     let mut input = String::new();
     // Reads the input from STDIN and places it in the String named input.
     info!("Enter a value:");
-    io::stdin().read_line(&mut input)
+    io::stdin()
+        .read_line(&mut input)
         .expect("Failed to read input.");
     // Convert to an i32.
     let input: i32 = input.trim().parse().unwrap();
@@ -537,7 +549,8 @@ pub fn get_input_wallet() {
     let mut input = String::new();
     // Reads the input from STDIN and places it in the String named input.
     info!("Enter a value:");
-    io::stdin().read_line(&mut input)
+    io::stdin()
+        .read_line(&mut input)
         .expect("Failed to read input.");
     // Convert to an i32.
     let input: i32 = input.trim().parse().unwrap();
@@ -545,7 +558,6 @@ pub fn get_input_wallet() {
 }
 
 fn main_not_logged() {
-
     info!("Welcome Redstone Wallet!");
     info!("ALPHA 0.1-a1!");
     info!("TEST NET WALLET!");
@@ -553,7 +565,6 @@ fn main_not_logged() {
     get_input_int();
 }
 fn main() {
-
     setup_logging(3).unwrap();
 
     //start logging
@@ -568,5 +579,4 @@ fn main() {
     println!("{}", art);
 
     main_not_logged()
-
 }

@@ -43,10 +43,15 @@ pub fn choose_next_proposer(block: Block) -> Result<Validator, Box<dyn std::erro
                 return Ok(validator.clone());
             }
         }
+        log::warn!("Could not find a validator, trying again, total_stake: {}, target_coin: {}, coin_culmulative: {}, online_count {}", total_stake, target_coin, coin_culmulative, online.len());
         // we could not find a proposer, retry
+        // This should not happen, but this is a saftey catch. WCS we return the first validator
+        // TODO: Risk assess this, can this situation be triggered and then exploited?
         trys += 1;
         if trys >= 5 {
-            return Err(format!("Unexpected error: failed to find proposer after 5 trys, total_stake: {}, target_coin: {}, coin_culmulative: {}, online_count {}", total_stake, target_coin, coin_culmulative, online.len()).into());
+            // we have tried too many times, return the first validator
+            return Ok(online[0].clone());
+            log::error!("Unexpected error: failed to find proposer after 5 trys, total_stake: {}, target_coin: {}, coin_culmulative: {}, online_count {}", total_stake, target_coin, coin_culmulative, online.len());
         }
     }
 }
@@ -114,7 +119,7 @@ pub fn form_validating_commitee(
     if (validator_index as i64 + step as i64) < online.len() as i64 {
         // wrap around
         let overflow = (online.len() as i128 - (validator_index as i128 + step as i128)).abs();
-        for i in validator_index..online.len() { 
+        for i in validator_index..online.len() {
             validators.push(online[i].clone())
         }
         // now the overflow
@@ -170,6 +175,7 @@ impl Validator {
         db.set(&String::from("validators"), &self.address, &encoded)
     }
     pub fn get_online() -> Result<Vec<Validator>, Box<dyn std::error::Error>> {
+        // TODO: Check our local "proof" cache db. This is a db that contains the last "action" of the validator that proves it is online (eg validating, proposing, voting)
         todo!()
     }
 }

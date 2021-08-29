@@ -57,6 +57,4 @@ impl Blockchain {
 
         Ok(bc)
     }
-
-    
 }
