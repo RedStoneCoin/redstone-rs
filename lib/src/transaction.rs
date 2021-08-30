@@ -60,25 +60,23 @@ impl Transaction {
         txn.hash = txn.hash_item();
         txn
     }
-pub fn find_pow(&mut self, difficulty: u64) -> pow {
+pub fn find_pow(&mut self) {
         for nonce_attempt in 0..=u64::MAX {
             self.nonce = nonce_attempt;
-            let pow = u64::from_str_radix(&"7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861", 16).unwrap();
-            println!("pow test: {}",pow);
-            if pow > difficulty
+            let pow = self.hash_item();
+            //println!("pow test: {}",pow);
+            if pow.starts_with("0000")
             {
-                self.hash = self.hash_item();
-                println!("Found solution for difficulty {}, nonce {}, hash {}, hash value {}",difficulty,self.nonce,self.hash,pow);
+                self.pow = self.hash_item();
+                self.nonce = nonce_attempt;
+                println!("Found solution for , nonce {}, hash {}, hash value {}",self.nonce,self.hash,pow);
                 break;
             }
             
         }
-        pow {
-            hash: self.hash.to_string(),
-            nonce: self.nonce
-        }
     }
 }
+
 
 impl Executable for Transaction {
     /// # Execute

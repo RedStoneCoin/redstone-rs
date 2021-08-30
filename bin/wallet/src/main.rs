@@ -402,10 +402,10 @@ fn main_login(pik: String, pbk: String, launched: bool) {
                                     pow: "".to_owned(), // Spam protection PoW
                                     signature: "".to_owned(),
                                 };                    //99999999999999999999
-                                let pow = txn1.find_pow(123456);
-                                txn1.pow = pow.hash;
-                                txn1.nonce = pow.nonce;
                                 txn1.hash = txn1.hash_item();
+                                info!("hash for txn:{}", txn1.hash);
+                                let pow = txn1.find_pow();
+               
                                 let sign = walletdetails
                                 .wallet
                                 .as_ref()
@@ -414,7 +414,6 @@ fn main_login(pik: String, pbk: String, launched: bool) {
 
                                 txn1.signature = sign.unwrap();
 
-                                println!("Hash:{}", txn1.hash);
                                 println!("{:#?}", txn1);
 
                                 tokio::runtime::Builder::new_multi_thread()
@@ -422,6 +421,7 @@ fn main_login(pik: String, pbk: String, launched: bool) {
                                     .build()
                                     .unwrap()
                                     .block_on(async {
+                                        
                                         send_transaction(txn1).await;
                                     });
                             } else {
