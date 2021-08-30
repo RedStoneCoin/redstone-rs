@@ -12,7 +12,7 @@ This is the offical implemention of the redstone protocol. It is written in rust
 - [ ] Mempool (stores unvalidated txns) needs implmenting.
 - [ ] Accounts
 - [ ] Validtor code (regarding the DpoS) 
-- [ ] Fix POW for txns
+- [x] Fix POW for txns
 - [ ] Smart Contract  
 # Node
 - [x] Json Api
