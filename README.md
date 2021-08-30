@@ -10,15 +10,19 @@ This is the offical implemention of the redstone protocol. It is written in rust
 - [ ] Block enacting 
 - [ ] Txn validation 
 - [ ] Mempool (stores unvalidated txns) needs implmenting.
+- [ ] Accounts
 - [ ] Validtor code (regarding the DpoS) 
 # Node
 - [x] Json Api
 - [x] Rpc
+- [ ] Full Node
 # Wallet
 - [x] Wallet
 - [x] Basic Wallet
 - [x] Api for the node
 - [x] Rpc
+- [ ] Sync with node (When we connect to the node, node block_announce() every block he has so wallet can sync with it)
+- [ ] Gui?!
 
 
 # Security Policy

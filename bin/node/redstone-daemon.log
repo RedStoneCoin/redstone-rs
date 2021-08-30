@@ -1938,3 +1938,85 @@
 [2021-08-27][12:35:22][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:53770, fd: 12 }
 [2021-08-27][12:37:06][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:53772, fd: 12 }
 [2021-08-27][12:38:08][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:53774, fd: 12 }
+[2021-08-30][13:18:38][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-30][13:18:38][Redstone_daemon][INFO] Starting redstone node
+[2021-08-30][13:18:38][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-30][13:18:38][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-30][13:18:38][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-30][13:18:38][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-30][13:18:38][Redstone_daemon][INFO] API server launched
+[2021-08-30][13:18:38][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-30][13:18:38][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-30][13:18:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43254, fd: 9 }
+[2021-08-30][13:19:29][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43256, fd: 9 }
+[2021-08-30][13:19:31][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-08-30][13:19:31][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "ba516dab59f238a7d1d1146c5b280b8ca4d569fc0f4f57534fbab3638ed6946d4ccbcded2f1611cf607530fde258b7f12cb1aebf29e6361a91a45d5f4a6cdbed",
+    sender: "0x5b830e7a6edf1cea26a526388058269a2848c482",
+    reciver: "123",
+    amount: 1,
+    nonce: 0,
+    type_flag: 0,
+    payload: "",
+    pow: "",
+    signature: "3045022100de9b72848352cbcc32d447a23989c990ceaf997984758bffe2927e7c69cf026302204b0d3a01c143692b4bf479dfd0ae6c3c097c957e6f451001554e8594c34a4a6d",
+}
+[2021-08-30][13:27:28][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43258, fd: 9 }
+[2021-08-30][13:47:35][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43260, fd: 9 }
+[2021-08-30][13:48:40][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43262, fd: 9 }
+[2021-08-30][13:50:42][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43264, fd: 9 }
+[2021-08-30][13:51:36][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43266, fd: 9 }
+[2021-08-30][13:52:36][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43268, fd: 9 }
+[2021-08-30][13:53:23][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43270, fd: 9 }
+[2021-08-30][13:53:26][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-08-30][13:53:26][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861fc010cc40ce1d481f6843f314ae1e0baa9db4d9c1f27db72b7e573daba511e668",
+    sender: "0x5b830e7a6edf1cea26a526388058269a2848c482",
+    reciver: "1",
+    amount: 1,
+    nonce: 0,
+    type_flag: 0,
+    payload: "",
+    pow: "7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861fc010cc40ce1d481f6843f314ae1e0baa9db4d9c1f27db72b7e573daba511e668",
+    signature: "3045022100e69ea9100bacc38b8c3a4f7ad3d16a64f5bd53a8eab14df0c6d3e2d7a290c1f9022009f7e3fb3b557e11691ee0a87a0c5c4ee5be9d6c136bf29416be155e42665aed",
+}
+[2021-08-30][13:55:58][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43274, fd: 9 }
+[2021-08-30][13:56:00][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-08-30][13:56:00][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861fc010cc40ce1d481f6843f314ae1e0baa9db4d9c1f27db72b7e573daba511e668",
+    sender: "0x5b830e7a6edf1cea26a526388058269a2848c482",
+    reciver: "1",
+    amount: 1,
+    nonce: 0,
+    type_flag: 0,
+    payload: "",
+    pow: "7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861fc010cc40ce1d481f6843f314ae1e0baa9db4d9c1f27db72b7e573daba511e668",
+    signature: "3045022100e69ea9100bacc38b8c3a4f7ad3d16a64f5bd53a8eab14df0c6d3e2d7a290c1f9022009f7e3fb3b557e11691ee0a87a0c5c4ee5be9d6c136bf29416be155e42665aed",
+}
+[2021-08-30][13:57:39][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43276, fd: 9 }
+[2021-08-30][13:57:40][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-08-30][13:57:40][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861fc010cc40ce1d481f6843f314ae1e0baa9db4d9c1f27db72b7e573daba511e668",
+    sender: "0x5b830e7a6edf1cea26a526388058269a2848c482",
+    reciver: "1",
+    amount: 1,
+    nonce: 0,
+    type_flag: 0,
+    payload: "",
+    pow: "7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861fc010cc40ce1d481f6843f314ae1e0baa9db4d9c1f27db72b7e573daba511e668",
+    signature: "3045022100e69ea9100bacc38b8c3a4f7ad3d16a64f5bd53a8eab14df0c6d3e2d7a290c1f9022009f7e3fb3b557e11691ee0a87a0c5c4ee5be9d6c136bf29416be155e42665aed",
+}
+[2021-08-30][14:51:35][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43278, fd: 9 }
+[2021-08-30][14:54:18][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43280, fd: 9 }
+[2021-08-30][14:54:34][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43282, fd: 9 }
+[2021-08-30][14:55:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43284, fd: 9 }
+[2021-08-30][14:56:56][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43286, fd: 9 }
+[2021-08-30][14:57:46][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43288, fd: 9 }
+[2021-08-30][15:00:35][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43290, fd: 9 }

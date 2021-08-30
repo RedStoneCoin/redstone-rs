@@ -363,8 +363,8 @@ fn main_login(pik: String, pbk: String, launched: bool) {
                 .read_line(&mut input)
                 .expect("Failed to read input.");
             // Convert to an i32.
-            if let Ok(input) = input.trim().parse::<i32>().unwrap() {
-                match input {
+            let input: u64 = input.trim().parse().unwrap();
+            match input {
                     1 => {
                         if let Ok(walletdetails) = WALLET_DETAILS.lock() {
                             info!("Our balance: {}", walletdetails.balance);
@@ -401,16 +401,18 @@ fn main_login(pik: String, pbk: String, launched: bool) {
                                     payload: "".to_owned(), // Hex encoded payload
                                     pow: "".to_owned(), // Spam protection PoW
                                     signature: "".to_owned(),
-                                };
-                                let sign = walletdetails
-                                    .wallet
-                                    .as_ref()
-                                    .unwrap()
-                                    .sign(txn_str.to_string());
-
-                                txn1.pow = txn1.find_pow(1);
+                                };                    //99999999999999999999
+                                let pow = txn1.find_pow(123456);
+                                txn1.pow = pow.hash;
+                                txn1.nonce = pow.nonce;
                                 txn1.hash = txn1.hash_item();
-                                txn1.signature = txn1.hash.unwrap();
+                                let sign = walletdetails
+                                .wallet
+                                .as_ref()
+                                .unwrap()
+                                .sign(txn1.hash.clone());
+
+                                txn1.signature = sign.unwrap();
 
                                 println!("Hash:{}", txn1.hash);
                                 println!("{:#?}", txn1);
@@ -446,9 +448,6 @@ fn main_login(pik: String, pbk: String, launched: bool) {
                         //dont exit loop back in here
                     }
                 }
-            } else {
-                info!("Not a number");
-            }
         }
     }
 }

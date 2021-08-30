@@ -30,7 +30,7 @@ impl Executable for SmartContract {
     /// # Execute
     /// Runs the smart contract, with conext being the block hash it was called by
     /// Returns the new state hash if this smart contract ran correctly or the error code if it failed
-    fn execute(&self, context: &String,state: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
+    fn execute(&self, context: &String,state: &mut GlobalState) -> Result<String, Box<dyn std::error::Error>> {
         todo!()
     }
     /// # Evaluate
