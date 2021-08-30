@@ -1,5 +1,6 @@
 use crate::{crypto::Hashable, executable::Executable};
 use serde::{Deserialize, Serialize};
+use crate::state::GlobalState;
 
 pub enum TxType{
     Send = 0, // used to send funds
@@ -83,7 +84,7 @@ impl Executable for Transaction {
     /// # Execute
     /// Executes this transaction, updating the account balances and executing all smart contracts touched
     /// Returns the error code encountered OR the new account state hash
-    fn execute(&self, context: &String) -> Result<String, Box<dyn std::error::Error>> {
+    fn execute(&self, context: &String,state: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
         todo!()
     }
 

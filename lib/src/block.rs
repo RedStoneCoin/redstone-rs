@@ -9,7 +9,9 @@ use crate::{
 };
 use log::*;
 use serde::{Deserialize, Serialize};
+
 #[derive(Deserialize, Serialize, Clone, Default, Debug)]
+
 pub struct Header {
     pub height: u64,
     pub timestamp: u64,
@@ -86,7 +88,7 @@ impl Block {
 }
 
 impl Executable for Block {
-    fn execute(&self, context: &String) -> Result<String, Box<dyn std::error::Error>> {
+    fn execute(&self, context: &String,state: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
         // Go through all the transactions and execute them
         let state_get = GlobalState::current();
         if let Err(state_error) = state_get {
@@ -99,7 +101,7 @@ impl Executable for Block {
                 return Err(txn_error.into());
             }
             let txn_result = txn_result.unwrap();
-            log::debug(&format!("txn_result: {}", txn_result));
+            debug!("txn_result: {}", txn_result);
         }
         // If we encountered no errors, we can apply the state
 

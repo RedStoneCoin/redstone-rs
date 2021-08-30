@@ -117,7 +117,7 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
         })
         .chain(fern::log_file("redstone-wallet.log")?);
 
-    let stdout_config = fern::Dispatch::new()
+        let stdout_config = fern::Dispatch::new()
         .format(|out, message, record| {
             let colors = ColoredLevelConfig::default()
                 .info(Color::Green)
@@ -399,20 +399,18 @@ fn main_login(pik: String, pbk: String, launched: bool) {
                                     nonce: 0,
                                     type_flag: 0,
                                     payload: "".to_owned(), // Hex encoded payload
-                                    pow: "soon".to_owned(), // Spam protection PoW
+                                    pow: "".to_owned(), // Spam protection PoW
                                     signature: "".to_owned(),
                                 };
-                                let txn_str = serde_json::to_string::<Transaction>(&txn1).unwrap();
                                 let sign = walletdetails
                                     .wallet
                                     .as_ref()
                                     .unwrap()
                                     .sign(txn_str.to_string());
 
-                                txn1.pow = txn1.find_pow(1).hash;
-
-                                txn1.signature = sign.unwrap();
+                                txn1.pow = txn1.find_pow(1);
                                 txn1.hash = txn1.hash_item();
+                                txn1.signature = txn1.hash.unwrap();
 
                                 println!("Hash:{}", txn1.hash);
                                 println!("{:#?}", txn1);
