@@ -63,13 +63,13 @@ impl Transaction {
 pub fn find_pow(&mut self, difficulty: u64) -> pow {
         for nonce_attempt in 0..=u64::MAX {
             self.nonce = nonce_attempt;
-            if u64::from_str_radix(self.hash_item().trim_start_matches("0x"), 16).unwrap()
-                > difficulty
+            let pow = u64::from_str_radix(&"7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861", 16).unwrap();
+            println!("pow test: {}",pow);
+            if pow > difficulty
             {
                 self.hash = self.hash_item();
-                println!("Found solution for difficulty {}, nonce {}, hash {}, hash value {}",difficulty,self.nonce,self.hash,u64::from_str_radix(self.hash.trim_start_matches("0x"), 16).unwrap());
+                println!("Found solution for difficulty {}, nonce {}, hash {}, hash value {}",difficulty,self.nonce,self.hash,pow);
                 break;
-
             }
             
         }
@@ -84,7 +84,7 @@ impl Executable for Transaction {
     /// # Execute
     /// Executes this transaction, updating the account balances and executing all smart contracts touched
     /// Returns the error code encountered OR the new account state hash
-    fn execute(&self, context: &String,state: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
+    fn execute(&self, context: &String,state: &mut GlobalState) -> Result<String, Box<dyn std::error::Error>> {
         todo!()
     }
 
