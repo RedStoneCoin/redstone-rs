@@ -88,13 +88,9 @@ impl Block {
 }
 
 impl Executable for Block {
-    fn execute(&self, context: &String,state: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
-        // Go through all the transactions and execute them
-        let state_get = GlobalState::current();
-        if let Err(state_error) = state_get {
-            return Err(state_error.into());
-        }
-        let mut pre_applicate_state = state_get.unwrap();
+    fn execute(&self, context: &String,state_get: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
+
+        let mut pre_applicate_state = state_get;
         for txn in &self.transactions {
             let txn_result = txn.execute(context, Some(&mut pre_applicate_state));
             if let Err(txn_error) = txn_result {
