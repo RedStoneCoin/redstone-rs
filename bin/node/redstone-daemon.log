@@ -2020,3 +2020,32 @@
 [2021-08-30][14:56:56][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43286, fd: 9 }
 [2021-08-30][14:57:46][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43288, fd: 9 }
 [2021-08-30][15:00:35][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43290, fd: 9 }
+[2021-08-30][19:24:17][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-08-30][19:24:17][Redstone_daemon][INFO] Starting redstone node
+[2021-08-30][19:24:17][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-08-30][19:24:17][Redstone_daemon][WARN] Run at your own risk!
+[2021-08-30][19:24:17][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-08-30][19:24:17][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-08-30][19:24:17][Redstone_daemon][INFO] API server launched
+[2021-08-30][19:24:17][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-08-30][19:24:17][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-08-30][19:24:28][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-08-30][19:24:28][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "7fd4925a3a7863bbb21e5adb74620336eba3290d9cdaad6635128b7908cc718cdac0ef6f86581897e1e665b336a75be71ac7b73eeb3e102f53540ce86eca580c",
+    sender: "0x5b830e7a6edf1cea26a526388058269a2848c482",
+    reciver: "test",
+    amount: 1,
+    nonce: 16525,
+    type_flag: 0,
+    payload: "",
+    pow: "000024c6d367116bb668380ffa920bf422eed783e80ba20d1192b4ea96e1e3a568a652e964e9a4322daca0b074c50273b74f531ecf5dfc3cb4d9148bac2bb99a",
+    signature: "3045022100d80b08e2155660c23051c36394a9a45e5246cbc43becaae790d8064103b7329f02205f1fa48eb3087999ffb4f44214546e8d505778e49c8d21592b24fcecd4071227",
+}
+[2021-08-30][19:24:56][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "tx not in mempool"', src/api.rs:117:69

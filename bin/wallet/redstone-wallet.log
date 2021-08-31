@@ -28301,3 +28301,8 @@
 [2021-08-30][19:20:22][Redstone_wallet][INFO] Enter a value:
 [2021-08-30][19:20:22][Redstone_wallet][INFO] hash for txn:7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861fc010cc40ce1d481f6843f314ae1e0baa9db4d9c1f27db72b7e573daba511e668
 [2021-08-30][19:20:26][Redstone_wallet][INFO] Enter a value:
+[2021-08-30][19:24:14][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-08-30][19:24:23][Redstone_wallet][INFO] Enter a value:
+[2021-08-30][19:24:27][Redstone_wallet][INFO] hash for txn:7fd4925a3a7863bbb21e5adb74620336eba3290d9cdaad6635128b7908cc718cdac0ef6f86581897e1e665b336a75be71ac7b73eeb3e102f53540ce86eca580c
+[2021-08-30][19:24:28][Redstone_wallet][INFO] Submit response={ "result" : "sent txn" }
+[2021-08-30][19:24:28][Redstone_wallet][INFO] Enter a value:
