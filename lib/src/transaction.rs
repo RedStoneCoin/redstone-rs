@@ -1,7 +1,7 @@
 use crate::{crypto::Hashable, executable::Executable};
 use serde::{Deserialize, Serialize};
 use crate::state::GlobalState;
-
+use crate::{keypair::Keypair};
 pub enum TxType{
     Send = 0, // used to send funds
     Burn =  1, // used to destroy funds
@@ -89,6 +89,22 @@ impl Executable for Transaction {
     /// # Evalulate
     /// Checks if a txn is valid
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
+        let keypairs = Keypair {
+            public_key: self.sender.clone(),
+            private_key: "".to_string(),
+        };
+        let check = keypairs.verify(
+            &self.hash, 
+            &self.signature
+        );
+        match check {
+            Ok(sig) => {
+            }
+            Err(_error)=> {
+                return Err(Box::new(std::io::Error::new(std::io::ErrorKind::Other, "Invalid signature")));
+            }
+        }
+
         todo!()
     }
 
