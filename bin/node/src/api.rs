@@ -112,7 +112,7 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
   }
 }
 
-#[get("/get_tx/<hash>")]
+#[get("/get_mem_tx/<hash>")]
 fn gettx(hash: String) -> String {
     let get = serde_json::to_string(&mempool::get_transaction(hash).unwrap());
     match get {

@@ -1,6 +1,8 @@
 use crate::{crypto::Hashable, executable::Executable};
 use crate::state::GlobalState;
-
+// We wont use web3 wallets webapps will requite user 
+// to have a private to interact with the contract
+// for more info: https://ethereum.stackexchange.com/questions/82531/connecting-the-wallet-of-to-your-dapp-and-different-ethereum-wallet-types
 pub struct State {
     pub variables: Vec<String>, // the varibles, in hex
 }

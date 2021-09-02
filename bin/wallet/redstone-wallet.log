@@ -28306,3 +28306,36 @@
 [2021-08-30][19:24:27][Redstone_wallet][INFO] hash for txn:7fd4925a3a7863bbb21e5adb74620336eba3290d9cdaad6635128b7908cc718cdac0ef6f86581897e1e665b336a75be71ac7b73eeb3e102f53540ce86eca580c
 [2021-08-30][19:24:28][Redstone_wallet][INFO] Submit response={ "result" : "sent txn" }
 [2021-08-30][19:24:28][Redstone_wallet][INFO] Enter a value:
+[2021-09-02][13:46:17][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-02][13:46:17][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-02][13:46:17][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-02][13:46:17][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-02][13:46:17][Redstone_wallet][INFO] [2] Import private key
+[2021-09-02][13:46:17][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-02][13:46:17][Redstone_wallet][INFO] [4] exit
+[2021-09-02][13:46:17][Redstone_wallet][INFO] Enter a value:
+[2021-09-02][13:46:18][Redstone_wallet][INFO] Import wallet file
+[2021-09-02][13:46:19][Redstone_wallet][INFO] 1
+
+[2021-09-02][13:46:19][Redstone_wallet][INFO] Enter wallet password: 
+[2021-09-02][13:46:21][Redstone_wallet][INFO] Gained lock on WALLET_DETAILS
+[2021-09-02][13:46:21][Redstone_wallet][INFO] Using wallet with publickey=0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-02][13:46:21][Redstone_wallet][INFO] Creating caller struct
+[2021-09-02][13:46:21][Redstone_wallet][INFO] Your wallet address:0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-02][13:46:21][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-09-02][13:46:21][Redstone_wallet][INFO] [1] Show wallet balance
+[2021-09-02][13:46:21][Redstone_wallet][INFO] [2] Send Redstone
+[2021-09-02][13:46:21][Redstone_wallet][INFO] [3] Show transaction history
+[2021-09-02][13:46:21][Redstone_wallet][INFO] [4] Show balance
+[2021-09-02][13:46:21][Redstone_wallet][INFO] [8] Relogin
+[2021-09-02][13:46:21][Redstone_wallet][INFO] [5] exit
+[2021-09-02][13:46:21][Redstone_wallet][INFO] Enter a value:
+[2021-09-02][13:46:21][redstone_rs::rpc][INFO] Sent init message to server
+[2021-09-02][13:46:21][redstone_rs::rpc][INFO] Sent services register command (*=all)
+[2021-09-02][13:46:21][redstone_rs::rpc][INFO] Connected to RPC server at 127.0.0.1:44405
+[2021-09-02][13:46:21][redstone_rs::rpc][INFO] Spawned RPC listener thread
+[2021-09-02][13:46:23][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-02][13:46:23][Redstone_wallet][INFO] Enter a value:
+[2021-09-02][13:46:24][Redstone_wallet][INFO] hash for txn:7abd132288cbe2cee58042b7169f63ae9938ae818799063ae46339c81b8e861fc010cc40ce1d481f6843f314ae1e0baa9db4d9c1f27db72b7e573daba511e668
+[2021-09-02][13:46:28][Redstone_wallet][INFO] Submit response={ "result" : "sent txn" }
+[2021-09-02][13:46:28][Redstone_wallet][INFO] Enter a value:

@@ -268,6 +268,10 @@ pub fn launch(port: u64) {
                         // turn the buf into a string
                         let hi_string = String::from_utf8(hi_buffer[0..read_bytes].to_vec())
                             .unwrap_or_default();
+                        if hi_string == "sync"{
+                            //get all blocks and send them to rpc
+                            info!("SYNC") 
+                        }
                         if hi_string == "init" {
                             let services_list = ["block".to_string()]; // TODO: move to config
                             let services_list_ser =
