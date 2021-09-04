@@ -91,6 +91,8 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
         3 => base_config
             .level(log::LevelFilter::Warn)
             .level(log::LevelFilter::Info)
+            .level(log::LevelFilter::Debug)
+
             .level_for("launch_", log::LevelFilter::Off)
             .level_for("launch", log::LevelFilter::Off)
             .level_for("rocket::rocket", log::LevelFilter::Off)
