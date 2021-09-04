@@ -3,8 +3,8 @@
 ## Implementation of Redstone protocol
 This is the offical implemention of the redstone protocol. It is written in rust. Protocol is subject to frequent change and as such no documention exists (however it is in the works) It is currently not ready for usage.
 
-## To-Do List
-# core
+# To-Do List
+### core
 - [ ] Finish p2p code. 
 - [ ] Handeler functions for the p2p code (eg when you recieve a block from a peer what do you do with it. 
 - [ ] Block enacting 
@@ -15,11 +15,11 @@ This is the offical implemention of the redstone protocol. It is written in rust
 - [x] Fix POW for txns
 - [ ] Smart Contract  
 - [ ] When recived sync message from wallet provider insted of sending test blocks send every block from the db
-# Node
+### Node
 - [x] Json Api
 - [x] Rpc
 - [ ] Full Node
-# Wallet
+### Wallet
 - [x] Wallet
 - [x] Basic Wallet
 - [x] Api for the node
