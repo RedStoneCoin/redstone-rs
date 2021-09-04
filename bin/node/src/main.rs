@@ -9,7 +9,7 @@ use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
 use redstone_rs::crypto::hash;
 
-use redstone_rs::rpc::{block_announce, Announcement, Caller};
+use redstone_rs::rpc::{block_announce_big,block_announce, Announcement, Caller};
 use std::{thread, time};
 
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
@@ -163,12 +163,54 @@ fn main() {
                 validator_signatures: vec!("".to_owned()),
                 vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
             },
-            transactions: vec![txn],
+            transactions: vec![txn.clone()],
         };
+        let mut blk1 = Block {
+            hash: "".to_owned(),
+            header: Header {
+                height: 2,
+                timestamp: 1,
+                chain: 1,
+                parent_hash: "".to_owned(),
+                state_hash: "".to_owned(),
+                uncle_root: "".to_owned(),
+                proposer: "".to_owned(), // the publickey of the proposer
+                transactions_merkle_root: "".to_owned(),
+                header_payload: 0,
+                proof: "".to_owned(),              // The vrf proof of the proposer as hex
+                proposer_signature: "".to_owned(), // proposers signature
+                validator_signatures: vec!("".to_owned()),
+                vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
+            },
+            transactions: vec![txn.clone()],
+        };
+        let mut blk2 = Block {
+            hash: "".to_owned(),
+            header: Header {
+                height: 3,
+                timestamp: 1,
+                chain: 1,
+                parent_hash: "".to_owned(),
+                state_hash: "".to_owned(),
+                uncle_root: "".to_owned(),
+                proposer: "".to_owned(), // the publickey of the proposer
+                transactions_merkle_root: "".to_owned(),
+                header_payload: 0,
+                proof: "".to_owned(),              // The vrf proof of the proposer as hex
+                proposer_signature: "".to_owned(), // proposers signature
+                validator_signatures: vec!("".to_owned()),
+                vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
+            },
+            transactions: vec![txn.clone()],
+        };
+        // get blocks form db and send them to the wallet to sync it
+        let block = vec![blk,blk1,blk2];
         info!("wait 5 sec");
         thread::sleep(time::Duration::from_secs(5));
         info!("announe block test");
-        block_announce(blk).unwrap();
+        for blk in block {
+            block_announce(blk).unwrap();
+        }
     });
     let _ = std::thread::spawn(move || {
 
