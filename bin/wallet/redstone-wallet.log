@@ -28513,3 +28513,171 @@
     pow: "",
     signature: "",
 }
+[2021-09-04][14:44:18][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-04][14:44:18][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-04][14:44:18][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-04][14:44:18][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-04][14:44:18][Redstone_wallet][INFO] [2] Import private key
+[2021-09-04][14:44:18][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-04][14:44:18][Redstone_wallet][INFO] [4] exit
+[2021-09-04][14:44:18][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:44:20][Redstone_wallet][INFO] Import wallet file
+[2021-09-04][14:44:20][Redstone_wallet][INFO] 1
+
+[2021-09-04][14:44:20][Redstone_wallet][INFO] Enter wallet password: 
+[2021-09-04][14:44:40][Redstone_wallet][INFO] Gained lock on WALLET_DETAILS
+[2021-09-04][14:44:40][Redstone_wallet][INFO] Using wallet with publickey=0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:44:40][Redstone_wallet][INFO] Creating caller struct
+[2021-09-04][14:44:40][Redstone_wallet][INFO] Your wallet address:0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:44:40][Redstone_wallet][INFO] [1] Show wallet balance
+[2021-09-04][14:44:40][Redstone_wallet][INFO] [2] Send Redstone
+[2021-09-04][14:44:40][Redstone_wallet][INFO] [3] Show transaction history
+[2021-09-04][14:44:40][Redstone_wallet][INFO] [4] Show balance
+[2021-09-04][14:44:40][Redstone_wallet][INFO] [8] Relogin
+[2021-09-04][14:44:40][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-09-04][14:44:40][Redstone_wallet][INFO] [5] exit
+[2021-09-04][14:44:40][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:44:40][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-09-04][14:45:34][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-04][14:45:34][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-04][14:45:34][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-04][14:45:34][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-04][14:45:34][Redstone_wallet][INFO] [2] Import private key
+[2021-09-04][14:45:34][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-04][14:45:34][Redstone_wallet][INFO] [4] exit
+[2021-09-04][14:45:34][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:45:34][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: Empty }', src/main.rs:539:43
+[2021-09-04][14:45:37][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-04][14:45:37][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-04][14:45:37][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-04][14:45:37][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-04][14:45:37][Redstone_wallet][INFO] [2] Import private key
+[2021-09-04][14:45:37][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-04][14:45:37][Redstone_wallet][INFO] [4] exit
+[2021-09-04][14:45:37][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:45:38][Redstone_wallet][INFO] Import wallet file
+[2021-09-04][14:45:39][Redstone_wallet][INFO] 1
+
+[2021-09-04][14:45:39][Redstone_wallet][INFO] Enter wallet password: 
+[2021-09-04][14:45:45][Redstone_wallet][INFO] Gained lock on WALLET_DETAILS
+[2021-09-04][14:45:45][Redstone_wallet][INFO] Using wallet with publickey=0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:45:45][Redstone_wallet][INFO] Creating caller struct
+[2021-09-04][14:45:45][Redstone_wallet][INFO] Your wallet address:0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:45:45][Redstone_wallet][INFO] [1] Show wallet balance
+[2021-09-04][14:45:45][Redstone_wallet][INFO] [2] Send Redstone
+[2021-09-04][14:45:45][Redstone_wallet][INFO] [3] Show transaction history
+[2021-09-04][14:45:45][Redstone_wallet][INFO] [4] Show balance
+[2021-09-04][14:45:45][Redstone_wallet][INFO] [8] Relogin
+[2021-09-04][14:45:45][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-09-04][14:45:45][Redstone_wallet][INFO] [5] exit
+[2021-09-04][14:45:45][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:45:45][redstone_rs::rpc][INFO] Sent init message to server
+[2021-09-04][14:45:45][redstone_rs::rpc][INFO] Sent services register command (*=all)
+[2021-09-04][14:45:45][redstone_rs::rpc][INFO] Connected to RPC server at 127.0.0.1:44405
+[2021-09-04][14:45:45][redstone_rs::rpc][INFO] Spawned RPC listener thread
+[2021-09-04][14:45:47][redstone_rs::rpc][INFO] Peeked 531 bytes into buffer, reading
+[2021-09-04][14:45:47][redstone_rs::rpc][INFO] Recieved new announcement from server, announcement=Announcement {
+    m_type: "block",
+    content: "{\"hash\":\"\",\"header\":{\"height\":1,\"timestamp\":1,\"chain\":1,\"parent_hash\":\"\",\"state_hash\":\"\",\"uncle_root\":\"\",\"proposer\":\"\",\"transactions_merkle_root\":\"\",\"header_payload\":0,\"proof\":\"\",\"proposer_signature\":\"\",\"validator_signatures\":[\"\"],\"vrf\":\"\"},\"transactions\":[{\"hash\":\"\",\"sender\":\"coinbase\",\"reciver\":\"0x1f7d366bce0b46d0487295ec9bfc194aab8ddb85\",\"amount\":69,\"nonce\":1,\"type_flag\":0,\"payload\":\"\",\"pow\":\"\",\"signature\":\"\"}]}",
+}
+[2021-09-04][14:45:47][redstone_rs::rpc][INFO] Peeked 531 bytes into buffer, reading
+[2021-09-04][14:45:47][redstone_rs::rpc][INFO] Recieved new announcement from server, announcement=Announcement {
+    m_type: "block",
+    content: "{\"hash\":\"\",\"header\":{\"height\":2,\"timestamp\":1,\"chain\":1,\"parent_hash\":\"\",\"state_hash\":\"\",\"uncle_root\":\"\",\"proposer\":\"\",\"transactions_merkle_root\":\"\",\"header_payload\":0,\"proof\":\"\",\"proposer_signature\":\"\",\"validator_signatures\":[\"\"],\"vrf\":\"\"},\"transactions\":[{\"hash\":\"\",\"sender\":\"coinbase\",\"reciver\":\"0x1f7d366bce0b46d0487295ec9bfc194aab8ddb85\",\"amount\":69,\"nonce\":1,\"type_flag\":0,\"payload\":\"\",\"pow\":\"\",\"signature\":\"\"}]}",
+}
+[2021-09-04][14:45:47][redstone_rs::rpc][INFO] Peeked 531 bytes into buffer, reading
+[2021-09-04][14:45:47][redstone_rs::rpc][INFO] Recieved new announcement from server, announcement=Announcement {
+    m_type: "block",
+    content: "{\"hash\":\"\",\"header\":{\"height\":3,\"timestamp\":1,\"chain\":1,\"parent_hash\":\"\",\"state_hash\":\"\",\"uncle_root\":\"\",\"proposer\":\"\",\"transactions_merkle_root\":\"\",\"header_payload\":0,\"proof\":\"\",\"proposer_signature\":\"\",\"validator_signatures\":[\"\"],\"vrf\":\"\"},\"transactions\":[{\"hash\":\"\",\"sender\":\"coinbase\",\"reciver\":\"0x1f7d366bce0b46d0487295ec9bfc194aab8ddb85\",\"amount\":69,\"nonce\":1,\"type_flag\":0,\"payload\":\"\",\"pow\":\"\",\"signature\":\"\"}]}",
+}
+[2021-09-04][14:48:21][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-04][14:48:21][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-04][14:48:21][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-04][14:48:21][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-04][14:48:21][Redstone_wallet][INFO] [2] Import private key
+[2021-09-04][14:48:21][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-04][14:48:21][Redstone_wallet][INFO] [4] exit
+[2021-09-04][14:48:21][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:48:22][Redstone_wallet][INFO] Import wallet file
+[2021-09-04][14:48:22][Redstone_wallet][INFO] 1
+
+[2021-09-04][14:48:22][Redstone_wallet][INFO] Enter wallet password: 
+[2021-09-04][14:48:24][Redstone_wallet][INFO] Gained lock on WALLET_DETAILS
+[2021-09-04][14:48:24][Redstone_wallet][INFO] Using wallet with publickey=0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:48:24][Redstone_wallet][INFO] Creating caller struct
+[2021-09-04][14:48:24][Redstone_wallet][INFO] Your wallet address:0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:48:24][Redstone_wallet][INFO] Wallet is syncing please wait!
+[2021-09-04][14:48:24][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-09-04][14:48:24][redstone_rs::rpc][INFO] Sent init message to server
+[2021-09-04][14:48:24][redstone_rs::rpc][INFO] Sent services register command (*=all)
+[2021-09-04][14:48:24][redstone_rs::rpc][INFO] Connected to RPC server at 127.0.0.1:44405
+[2021-09-04][14:48:24][redstone_rs::rpc][INFO] Spawned RPC listener thread
+[2021-09-04][14:48:26][Redstone_wallet][INFO] [1] Show wallet balance
+[2021-09-04][14:48:26][Redstone_wallet][INFO] [2] Send Redstone
+[2021-09-04][14:48:26][Redstone_wallet][INFO] [3] Show transaction history
+[2021-09-04][14:48:26][Redstone_wallet][INFO] [4] Show balance
+[2021-09-04][14:48:26][Redstone_wallet][INFO] [8] Relogin
+[2021-09-04][14:48:26][Redstone_wallet][INFO] [5] exit
+[2021-09-04][14:48:26][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:52:20][redstone_rs::rpc][INFO] Peeked 0 bytes into buffer, reading
+[2021-09-04][14:52:20][redstone_rs::rpc][INFO] Read 0 bytes, assuming peer disconect
+[2021-09-04][14:54:57][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-04][14:54:57][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-04][14:54:57][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-04][14:54:57][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-04][14:54:57][Redstone_wallet][INFO] [2] Import private key
+[2021-09-04][14:54:57][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-04][14:54:57][Redstone_wallet][INFO] [4] exit
+[2021-09-04][14:54:57][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:54:58][Redstone_wallet][INFO] Import wallet file
+[2021-09-04][14:54:59][Redstone_wallet][INFO] 1
+
+[2021-09-04][14:54:59][Redstone_wallet][INFO] Enter wallet password: 
+[2021-09-04][14:55:04][Redstone_wallet][INFO] Gained lock on WALLET_DETAILS
+[2021-09-04][14:55:04][Redstone_wallet][INFO] Using wallet with publickey=0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:55:04][Redstone_wallet][INFO] Creating caller struct
+[2021-09-04][14:55:04][Redstone_wallet][INFO] Your wallet address:0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:55:04][Redstone_wallet][INFO] Wallet is syncing please wait!
+[2021-09-04][14:55:04][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-09-04][14:55:04][redstone_rs::rpc][INFO] Sent sync message to server
+[2021-09-04][14:55:04][redstone_rs::rpc][INFO] Sent init message to server
+[2021-09-04][14:55:04][redstone_rs::rpc][ERROR] Failed to write * register to stream
+[2021-09-04][14:55:06][Redstone_wallet][INFO] [1] Show wallet balance
+[2021-09-04][14:55:06][Redstone_wallet][INFO] [2] Send Redstone
+[2021-09-04][14:55:06][Redstone_wallet][INFO] [3] Show transaction history
+[2021-09-04][14:55:06][Redstone_wallet][INFO] [4] Show balance
+[2021-09-04][14:55:06][Redstone_wallet][INFO] [8] Relogin
+[2021-09-04][14:55:06][Redstone_wallet][INFO] [5] exit
+[2021-09-04][14:55:06][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:55:58][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-04][14:55:58][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-04][14:55:58][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-04][14:55:58][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-04][14:55:58][Redstone_wallet][INFO] [2] Import private key
+[2021-09-04][14:55:58][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-04][14:55:58][Redstone_wallet][INFO] [4] exit
+[2021-09-04][14:55:58][Redstone_wallet][INFO] Enter a value:
+[2021-09-04][14:56:00][Redstone_wallet][INFO] Import wallet file
+[2021-09-04][14:56:01][Redstone_wallet][INFO] 1
+
+[2021-09-04][14:56:01][Redstone_wallet][INFO] Enter wallet password: 
+[2021-09-04][14:56:04][Redstone_wallet][INFO] Gained lock on WALLET_DETAILS
+[2021-09-04][14:56:04][Redstone_wallet][INFO] Using wallet with publickey=0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:56:04][Redstone_wallet][INFO] Creating caller struct
+[2021-09-04][14:56:04][Redstone_wallet][INFO] Your wallet address:0x5b830e7a6edf1cea26a526388058269a2848c482
+[2021-09-04][14:56:04][Redstone_wallet][INFO] Wallet is syncing please wait!
+[2021-09-04][14:56:04][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-09-04][14:56:04][redstone_rs::rpc][INFO] Sent sync message to server
+[2021-09-04][14:56:04][redstone_rs::rpc][INFO] Sent init message to server
+[2021-09-04][14:56:04][redstone_rs::rpc][INFO] Sent services register command (*=all)
+[2021-09-04][14:56:04][redstone_rs::rpc][INFO] Connected to RPC server at 127.0.0.1:44405
+[2021-09-04][14:56:04][redstone_rs::rpc][INFO] Spawned RPC listener thread
+[2021-09-04][14:56:04][redstone_rs::rpc][INFO] Peeked 0 bytes into buffer, reading
+[2021-09-04][14:56:04][redstone_rs::rpc][INFO] Read 0 bytes, assuming peer disconect
+[2021-09-04][14:56:06][Redstone_wallet][INFO] [1] Show wallet balance
+[2021-09-04][14:56:06][Redstone_wallet][INFO] [2] Send Redstone
+[2021-09-04][14:56:06][Redstone_wallet][INFO] [3] Show transaction history
+[2021-09-04][14:56:06][Redstone_wallet][INFO] [4] Show balance
+[2021-09-04][14:56:06][Redstone_wallet][INFO] [8] Relogin
+[2021-09-04][14:56:06][Redstone_wallet][INFO] [5] exit
+[2021-09-04][14:56:06][Redstone_wallet][INFO] Enter a value:

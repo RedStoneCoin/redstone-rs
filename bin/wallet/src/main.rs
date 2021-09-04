@@ -21,6 +21,7 @@ use std::io::Read;
 use std::io::Write;
 use std::thread;
 use std::{default::Default, sync::Mutex};
+use std::time;
 
 use crate::{crypto::Hashable, executable::Executable};
 use reqwest::Client;
@@ -247,10 +248,7 @@ pub fn new_ann(ann: Announcement) {
                     let balance_before = locked.balance;
                     let locked_balance_before = locked.locked;
                     for txn in blk.transactions {
-                        info!("Txn: {:#?}", txn);
                         if txn.reciver == locked.wallet.as_ref().unwrap().public_key {
-                            info!("test1");
-
                             match txn.type_flag {
                                 // 0 u got some rs
                                 0 => {
@@ -354,6 +352,9 @@ fn main_login(pik: String, pbk: String, launched: bool) {
         drop(locked);
         info!("Your wallet address:{}", pbk);
         println!("Private key:{}", pik);
+        info!("Wallet is syncing please wait!");
+
+        thread::sleep(time::Duration::from_secs(2));
         commands_logged();
         while true {
             let mut input = String::new();

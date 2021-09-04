@@ -9,7 +9,7 @@ use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
 use redstone_rs::crypto::hash;
 
-use redstone_rs::rpc::{block_announce_big,block_announce, Announcement, Caller};
+use redstone_rs::rpc::{block_announce, Announcement, Caller};
 use std::{thread, time};
 
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {

@@ -32,7 +32,7 @@ impl Caller<'_> {
 
 
 pub fn block_announce(blk: Block) -> Result<(), Box<dyn std::error::Error>> {
-        info!(
+        debug!(
             "New block! Hash={}, chain={},",
             blk.hash,
             blk.header.chain,
@@ -103,7 +103,11 @@ pub fn launch_client(
         server_port
     );
     if let Ok(mut stream) = TcpStream::connect(format!("{}:{}", server_ip, server_port)) {
+
         if let Ok(_) = stream.write(b"init") {
+            if let Ok(_) =  stream.write(b"sync") {
+                info!("Sent sync message to server");
+            }
             info!("Sent init message to server");
             let mut buf = [0u8; 1024];
             if services.is_empty() {
@@ -134,7 +138,7 @@ pub fn launch_client(
                                         if let Ok(announcement) =
                                             serde_json::from_str::<Announcement>(&message_string)
                                         {
-                                            info!("Recieved new announcement from server, announcement={:#?}", announcement);
+                                            debug!("Recieved new announcement from server, announcement={:#?}", announcement);
                                             caller.call(announcement);
 
                                             trace!(
@@ -192,7 +196,7 @@ pub fn launch_client(
                                     if let Ok(announcement) =
                                         serde_json::from_str::<Announcement>(&message_string)
                                     {
-                                        info!("Recieved new announcement from server, announcement={:#?}", announcement);
+                                        debug!("Recieved new announcement from server, announcement={:#?}", announcement);
                                         caller.call(announcement);
 
                                         trace!("Called the caller's callback with announcement");
@@ -234,7 +238,9 @@ pub fn launch(port: u64) {
                             .unwrap_or_default();
                         if hi_string == "sync"{
                             //get all blocks and send them to rpc
-                            info!("SYNC") 
+                            info!("Wallet provider requsted sync with network!");
+                            // get block send them to provider
+
                         }
                         if hi_string == "init" {
                             let services_list = ["block".to_string()]; // TODO: move to config
