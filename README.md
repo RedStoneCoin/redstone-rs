@@ -14,6 +14,7 @@ This is the offical implemention of the redstone protocol. It is written in rust
 - [ ] Validtor code (regarding the DpoS) 
 - [x] Fix POW for txns
 - [ ] Smart Contract  
+- [ ] When recived sync message from wallet provider insted of sending test blocks send every block from the db
 # Node
 - [x] Json Api
 - [x] Rpc
@@ -23,7 +24,7 @@ This is the offical implemention of the redstone protocol. It is written in rust
 - [x] Basic Wallet
 - [x] Api for the node
 - [x] Rpc
-- [ ] Sync with node (When we connect to the node, node block_announce() every block he has so wallet can sync with it)
+- [x] Send sync message to the node via rpc
 - [ ] Gui?!
 
 
