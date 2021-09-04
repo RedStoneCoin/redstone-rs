@@ -29,43 +29,7 @@ impl Caller<'_> {
         (self.callback)(ann)
     }
 }
-pub fn block_announce_big(blk: Vec<Block>) -> Result<(), Box<dyn std::error::Error>> {
-    info!(
-        "Sending blocks to rpc client,"   
-    );
 
-let connections = &mut CONNECTIONS.lock().unwrap();
-for blks in blk {
-for (stream, subscriptions) in connections.iter_mut() {
-    if subscriptions.contains(&"block".to_string()) {
-        if let Err(e) = stream.write(
-            
-            serde_json::to_string(&Announcement {
-                m_type: "block".to_string(),
-                content: serde_json::to_string(&blks).unwrap_or_default(),
-            })
-            .unwrap_or_default()
-            .as_bytes(),
-        ) {
-            trace!(
-                "Failed to announce blocks={} to peer, got error={}",
-                blks.hash,
-                e,
-            );
-        }
-    }
-}
-
-let mut local_callbacks = LOCAL_CALLBACKS.lock().unwrap();
-for callback in local_callbacks.iter_mut() {
-    callback.call(Announcement {
-        m_type: "block".to_string(),
-        content: serde_json::to_string(&blks).unwrap_or_default(),
-    });
-}
-}
-Ok(())
-}
 
 pub fn block_announce(blk: Block) -> Result<(), Box<dyn std::error::Error>> {
         info!(
