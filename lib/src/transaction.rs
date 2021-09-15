@@ -84,7 +84,20 @@ impl Executable for Transaction {
     /// Executes this transaction, updating the account balances and executing all smart contracts touched
     /// Returns the error code encountered OR the new account state hash
     fn execute(&self, context: &String,state: &mut GlobalState) -> Result<String, Box<dyn std::error::Error>> {
+        if context == "send" {
+            let acc_sender = Account::get(self.sender.clone());
+            let acc_reciver = Account::get(self.reciver.clone());
+            acc_sender.unwrap().balance -= self.amount;
+            acc_reciver.unwrap().balance += self.amount;
+        }
+        if context == "coinbase" {
+            let acc_reciver = Account::get(self.reciver.clone());
+            acc_reciver.unwrap().balance += self.amount;
+        }
+
         todo!()
+
+
     }
 
     /// # Evalulate
@@ -99,7 +112,7 @@ impl Executable for Transaction {
             &self.signature
         );
         let pow_txn = self.hash_item();
-        let db_txn = "";
+        let db_txn = ""; // Open the database and check for txn hash
         
         if check.is_ok() {
             // Signature is valid
@@ -107,13 +120,13 @@ impl Executable for Transaction {
             // Proof of work is valid
                 if self.hash != db_txn {
                     // Transaction is original
-                    let acc_sender = Account::get(self.sender.clone());
-                    let acc_reciver = Account::get(self.reciver.clone());
+                    //let acc_sender = Account::get(self.sender.clone());
+                    //let acc_reciver = Account::get(self.reciver.clone());
 
                     if self.amount < Account::get(self.sender.clone()).unwrap().balance {
                         // Transaction is valid
-                        acc_sender.unwrap().balance -= self.amount;
-                        acc_reciver.unwrap().balance += self.amount;
+                        //acc_sender.unwrap().balance -= self.amount;
+                        //acc_reciver.unwrap().balance += self.amount;
                         return Ok(());
                     } else {
                         // Transaction is invalid
