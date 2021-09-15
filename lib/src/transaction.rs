@@ -1,7 +1,7 @@
 use crate::{crypto::Hashable, executable::Executable};
 use serde::{Deserialize, Serialize};
 use crate::state::GlobalState;
-use crate::{keypair::Keypair};
+use crate::{keypair::Keypair,account::Account};
 pub enum TxType{
     Send = 0, // used to send funds
     Burn =  1, // used to destroy funds
@@ -68,6 +68,7 @@ pub fn find_pow(&mut self) {
             if pow.starts_with("0000")
             {
                 self.pow = self.hash_item();
+                self.hash = self.hash_item();
                 self.nonce = nonce_attempt;
                 println!("Found solution for , nonce {}, hash {}, hash value {}",self.nonce,self.hash,pow);
                 break;
@@ -97,14 +98,38 @@ impl Executable for Transaction {
             &self.hash, 
             &self.signature
         );
-        match check {
-            Ok(sig) => {
-            }
-            Err(_error)=> {
-                return Err(Box::new(std::io::Error::new(std::io::ErrorKind::Other, "Invalid signature")));
-            }
-        }
+        let pow_txn = self.hash_item();
+        let db_txn = "";
+        
+        if check.is_ok() {
+            // Signature is valid
+            if pow_txn == self.hash {
+            // Proof of work is valid
+                if self.hash != db_txn {
+                    // Transaction is original
+                    let acc_sender = Account::get(self.sender.clone());
+                    let acc_reciver = Account::get(self.reciver.clone());
 
+                    if self.amount < Account::get(self.sender.clone()).unwrap().balance {
+                        // Transaction is valid
+                        acc_sender.unwrap().balance -= self.amount;
+                        acc_reciver.unwrap().balance += self.amount;
+                        return Ok(());
+                    } else {
+                        // Transaction is invalid
+                        return Err("Transaction amount is greater than sender's balance").unwrap();
+                    }
+                } 
+                else {
+                    // Transaction is not original
+                    return Err("Transaction is not original").unwrap();
+                }
+                } 
+            } 
+            else {
+                // Proof of work is invalid
+                return Err("ErrInvalidPow").unwrap();
+            } 
         todo!()
     }
 
