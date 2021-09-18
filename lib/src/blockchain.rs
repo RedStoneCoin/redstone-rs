@@ -8,7 +8,6 @@ pub struct Blockchain {
 impl Blockchain {
     pub fn new(index: u64) -> Self {
         let bc = Blockchain { index };
-
         bc
     }
     pub fn index(&self) -> u64 {

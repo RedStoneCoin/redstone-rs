@@ -1,7 +1,14 @@
 use crate::{crypto::Hashable, executable::Executable};
 use serde::{Deserialize, Serialize};
 use crate::state::GlobalState;
-use crate::{keypair::Keypair,account::Account};
+use crate::{
+    keypair::Keypair,
+    account::Account,
+    mempool::Mempool,
+    blockchain::Blockchain,
+    block::Block
+};
+use crate::mempool::get_transaction;
 pub enum TxType{
     Send = 0, // used to send funds
     Burn =  1, // used to destroy funds
@@ -78,7 +85,6 @@ pub fn find_pow(&mut self) {
     }
 }
 
-
 impl Executable for Transaction {
     /// # Execute
     /// Executes this transaction, updating the account balances and executing all smart contracts touched
@@ -113,36 +119,60 @@ impl Executable for Transaction {
         );
         let pow_txn = self.hash_item();
         let db_txn = ""; // Open the database and check for txn hash
-        
+        let mpool = get_transaction(self.hash.clone());
+        let chains = 5;
+        for chn in 0..chains {
+            let load = Blockchain::load(chn);
+            //check for transaction in blockcahin
+            if load.is_ok() {
+                let chain = load.unwrap();
+                for txn in chain.blocks {
+                    if txn.hash == pow_txn {
+                        db_txn = txn.hash;
+                        break;
+                    }
+                }
+            }
+            
+        }
         if check.is_ok() {
             // Signature is valid
-            if pow_txn == self.hash {
-            // Proof of work is valid
-                if self.hash != db_txn {
-                    // Transaction is original
-                    //let acc_sender = Account::get(self.sender.clone());
-                    //let acc_reciver = Account::get(self.reciver.clone());
-
-                    if self.amount < Account::get(self.sender.clone()).unwrap().balance {
-                        // Transaction is valid
-                        //acc_sender.unwrap().balance -= self.amount;
-                        //acc_reciver.unwrap().balance += self.amount;
-                        return Ok(());
-                    } else {
-                        // Transaction is invalid
-                        return Err("Transaction amount is greater than sender's balance").unwrap();
+            if pow_txn.starts_with("0000") {
+                if pow_txn == self.hash {
+                // Proof of work is valid
+                    if self.hash != db_txn {
+                        // Transaction is original
+                        //let acc_sender = Account::get(self.sender.clone());
+                        //let acc_reciver = Account::get(self.reciver.clone());
+                        if  let Err(mpool) = mpool {
+                            if self.amount < Account::get(self.sender.clone()).unwrap().balance {
+                                // Transaction is valid
+                                //acc_sender.unwrap().balance -= self.amount;
+                                //acc_reciver.unwrap().balance += self.amount;
+                                return Ok(());
+                            } else {
+                                // Transaction is invalid
+                                return Err("Transaction amount is greater than sender's balance").unwrap();
+                            }
+                        } else {
+                            // Transaction is invalid
+                            return Err("Transaction is in mempool").unwrap();
+                        }
+                    } 
+                    else {
+                        // Transaction is not original
+                        return Err("Transaction is not original").unwrap();
                     }
-                } 
-                else {
-                    // Transaction is not original
-                    return Err("Transaction is not original").unwrap();
+                } else {
+                    // Proof of work is invalid
+                    return Err("Proof of work is invalid").unwrap();
                 }
-                } 
             } 
             else {
                 // Proof of work is invalid
                 return Err("ErrInvalidPow").unwrap();
             } 
+        }
         todo!()
     }
 

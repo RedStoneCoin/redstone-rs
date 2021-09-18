@@ -28,6 +28,7 @@ impl Database {
         }
         String::default()
     }
+
     pub fn set(
         &self,
         path: &String,

@@ -7,7 +7,9 @@ use std::io::{Read, Write};
 use std::net::TcpStream;
 use std::sync::Mutex;
 use serde::{Deserialize, Serialize};
-
+use crate::{
+    blockchain::Blockchain,
+};
 lazy_static! {
     static ref CONNECTIONS: Mutex<Vec<(TcpStream, Vec<String>)>> = Mutex::new(vec![]);
     pub static ref LOCAL_CALLBACKS: Mutex<Vec<Caller<'static>>> = Mutex::new(vec![]);
@@ -248,7 +250,11 @@ pub fn launch(port: u64) {
                             //get all blocks and send them to rpc
                             info!("Wallet provider requsted sync with network!");
                             // get block send them to provider
-
+                            let chains = 5;
+                            for chn in 0..chains {
+                                let load = Blockchain::load(chn);
+                            }
+         
                         }
                         if hi_string == "init" {
                             let services_list = ["block".to_string()]; // TODO: move to config
