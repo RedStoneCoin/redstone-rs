@@ -10,11 +10,14 @@ use serde::{Deserialize, Serialize};
 use crate::{
     blockchain::Blockchain,
 };
+use std::{thread, time};
+
 lazy_static! {
     static ref CONNECTIONS: Mutex<Vec<(TcpStream, Vec<String>)>> = Mutex::new(vec![]);
     pub static ref LOCAL_CALLBACKS: Mutex<Vec<Caller<'static>>> = Mutex::new(vec![]);
 
 }
+
 #[derive(Debug, Default, Clone,Serialize, Deserialize)]
 
 pub struct Announcement {
@@ -251,10 +254,19 @@ pub fn launch(port: u64) {
                             info!("Wallet provider requsted sync with network!");
                             // get block send them to provider
                             let chains = 5;
+                            // look in db for chains!!!!!!!!!!!!!!!!
                             for chn in 0..chains {
                                 let load = Blockchain::load(chn);
+                                //check for transaction in blockcahin
+                                if load.is_ok() {
+                                    let chain = load.unwrap();
+                                    for blk in chain.blocks {
+                                        block_announce(blk).unwrap();
+                                        thread::sleep(time::Duration::from_millis(100));
+                                    }
+                                }
+                                
                             }
-         
                         }
                         if hi_string == "init" {
                             let services_list = ["block".to_string()]; // TODO: move to config
