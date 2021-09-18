@@ -1,5 +1,6 @@
 use crate::transaction::Transaction;
 use std::{collections::HashMap, sync::Mutex};
+use crate::executable::Executable;
 use lazy_static::lazy_static;
 lazy_static! {
     static ref MEMPOOL: Mutex<Mempool> = Mutex::new(Mempool::default());
@@ -23,10 +24,15 @@ impl Mempool {
 
 pub fn add_transaction(tx: Transaction) -> Result<(), Box<dyn std::error::Error>> {
     let org_tx = tx.clone();
-    let mut lock = MEMPOOL.lock()?;
-    lock.transactions.insert(tx.hash.clone(), tx);
-    info!("Transaction added to the mempool: {:#?}", org_tx);
-    Ok(())
+    let validate_tx = tx.evalute();
+    if let Err(e) = validate_tx {
+        return Err(e);
+    } else {
+        let mut lock = MEMPOOL.lock()?;
+        lock.transactions.insert(tx.hash.clone(), tx);
+        info!("Transaction added to the mempool: {:#?}", org_tx);
+        Ok(())
+    }
 }
 
 pub fn get_transaction(hash: String) -> Result<Transaction, Box<dyn std::error::Error>> {
