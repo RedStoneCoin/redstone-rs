@@ -8,7 +8,7 @@ This is the offical implemention of the redstone protocol. It is written in rust
 - [ ] Finish p2p code. 
 - [ ] Handeler functions for the p2p code (eg when you recieve a block from a peer what do you do with it. 
 - [ ] Block enacting 
-- [ ] Txn validation 
+- [x] Txn validation (99% will be done when blockchain lib is done)
 - [ ] Mempool (stores unvalidated txns) needs implmenting.
 - [ ] Accounts
 - [ ] Validtor code (regarding the DpoS) 

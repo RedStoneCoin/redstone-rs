@@ -121,6 +121,7 @@ impl Executable for Transaction {
         let db_txn = ""; // Open the database and check for txn hash
         let mpool = get_transaction(self.hash.clone());
         let chains = 5;
+        // look in db for chains!!!!!!!!!!!!!!!!
         for chn in 0..chains {
             let load = Blockchain::load(chn);
             //check for transaction in blockcahin
