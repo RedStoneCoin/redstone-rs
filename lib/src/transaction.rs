@@ -126,23 +126,6 @@ impl Executable for Transaction {
     /// Checks if a txn is valid
     /// Todo fix error messages
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
-
-        let acc = Account{
-            address: self.reciver.clone(),
-            balance: 0,
-            smart_contract: false
-        };
-        Account::save(&acc);
-        let acc = Account{
-            address: self.sender.clone(),
-            balance: 2,
-            smart_contract: false
-        };
-        Account::save(&acc);
-        let keypairs = Keypair {
-            public_key: self.sender.clone(),
-            private_key: "".to_string(),
-        };
         let check = keypairs.verify(
             &self.hash, 
             &self.signature
@@ -153,13 +136,13 @@ impl Executable for Transaction {
         let chains = 5;
         // look in db for chains!!!!!!!!!!!!!!!!
         for chn in 0..chains {
-           //let mut db_handle = Database::new();
-           // db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
-           // let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
-           // print!("output form db:{}",block_txn_is_in);
-           // if block_txn_is_in != *"-1" {
-           //     return Err("Transaction already in block").unwrap();
-           // }
+            let mut db_handle = Database::new();
+            db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
+            let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
+            print!("output form db:{}",block_txn_is_in);
+            if block_txn_is_in != *"-1" {
+                return Err("Transaction already in block").unwrap();
+            }
         }
         if check.is_ok() {
             // Signature is valid
@@ -189,7 +172,6 @@ impl Executable for Transaction {
             } 
         }
         let mut reviver1 = self.sender.trim_end().clone().to_string();
-        println!("{}",reviver1);
         let mut acc_reciver = Account::get(reviver1);
 
         match self.type_flag {
@@ -213,7 +195,6 @@ impl Executable for Transaction {
                     }
                 }
             }, 
-
             _ => {
                 return Err("Transaction Invalid type Flag").unwrap();
             }
