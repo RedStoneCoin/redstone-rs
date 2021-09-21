@@ -6,9 +6,12 @@ use crate::{
     account::Account,
     mempool::Mempool,
     blockchain::Blockchain,
-    block::Block
+    block::Block,
+    database::Database
 };
 use crate::mempool::get_transaction;
+use crate::blockchain::DATABASE_PATH_PREFIX;
+
 pub enum TxType{
     Send = 0, // used to send funds
     Burn =  1, // used to destroy funds
@@ -92,13 +95,26 @@ impl Executable for Transaction {
     fn execute(&self, context: &String,state: &mut GlobalState) -> Result<String, Box<dyn std::error::Error>> {
         if context == "send" {
             let acc_sender = Account::get(self.sender.clone());
-            let acc_reciver = Account::get(self.reciver.clone());
+            let mut acc_reciver = Account::get(self.reciver.clone());
+            if let Err(acc_reciver1) = acc_reciver {
+                let acc = Account{
+                    address: self.reciver.clone(),
+                    balance: self.amount,
+                    smart_contract: false
+                };
+                Account::save(&acc);
+            } else {
+                acc_reciver.unwrap().balance += self.amount;
+            }
             acc_sender.unwrap().balance -= self.amount;
-            acc_reciver.unwrap().balance += self.amount;
         }
         if context == "coinbase" {
             let acc_reciver = Account::get(self.reciver.clone());
             acc_reciver.unwrap().balance += self.amount;
+        }
+        if context == "burn" {
+            let acc_reciver = Account::get(self.reciver.clone());
+            acc_reciver.unwrap().balance -= self.amount;
         }
 
         todo!()
@@ -108,7 +124,21 @@ impl Executable for Transaction {
 
     /// # Evalulate
     /// Checks if a txn is valid
+    /// Todo fix error messages
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
+
+        let acc = Account{
+            address: self.reciver.clone(),
+            balance: 0,
+            smart_contract: false
+        };
+        Account::save(&acc);
+        let acc = Account{
+            address: self.sender.clone(),
+            balance: 2,
+            smart_contract: false
+        };
+        Account::save(&acc);
         let keypairs = Keypair {
             public_key: self.sender.clone(),
             private_key: "".to_string(),
@@ -123,18 +153,13 @@ impl Executable for Transaction {
         let chains = 5;
         // look in db for chains!!!!!!!!!!!!!!!!
         for chn in 0..chains {
-            let load = Blockchain::load(chn);
-            //check for transaction in blockcahin
-            if load.is_ok() {
-                let chain = load.unwrap();
-                for txn in chain.blocks {
-                    if txn.hash == pow_txn {
-                        db_txn = txn.hash;
-                        break;
-                    }
-                }
-            }
-            
+           //let mut db_handle = Database::new();
+           // db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
+           // let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
+           // print!("output form db:{}",block_txn_is_in);
+           // if block_txn_is_in != *"-1" {
+           //     return Err("Transaction already in block").unwrap();
+           // }
         }
         if check.is_ok() {
             // Signature is valid
@@ -146,19 +171,8 @@ impl Executable for Transaction {
                         //let acc_sender = Account::get(self.sender.clone());
                         //let acc_reciver = Account::get(self.reciver.clone());
                         if  let Err(mpool) = mpool {
-                            if self.amount < Account::get(self.sender.clone()).unwrap().balance {
-                                // Transaction is valid
-                                //acc_sender.unwrap().balance -= self.amount;
-                                //acc_reciver.unwrap().balance += self.amount;
-                                return Ok(());
-                            } else {
-                                // Transaction is invalid
-                                return Err("Transaction amount is greater than sender's balance").unwrap();
-                            }
-                        } else {
-                            // Transaction is invalid
                             return Err("Transaction is in mempool").unwrap();
-                        }
+                        } 
                     } 
                     else {
                         // Transaction is not original
@@ -174,7 +188,37 @@ impl Executable for Transaction {
                 return Err("ErrInvalidPow").unwrap();
             } 
         }
-        todo!()
+        let mut reviver1 = self.sender.trim_end().clone().to_string();
+        println!("{}",reviver1);
+        let mut acc_reciver = Account::get(reviver1);
+
+        match self.type_flag {
+            0 => {
+                if let Err(acc_reciver1) = acc_reciver {
+                    let acc = Account{
+                            address: self.sender.clone(),
+                            balance: 0,
+                            smart_contract: false
+                        };
+                        Account::save(&acc);
+                        return Err("Sender is new account with balance of 0! Account saved!").unwrap();
+                } 
+                else {
+                    if self.amount < acc.balance {
+                        // Transaction is valid
+                        return Ok(())
+                    } else {
+                            // Transaction is invalid
+                            return Err("Transaction amount is greater than sender's balance").unwrap();
+                    }
+                }
+            }, 
+
+            _ => {
+                return Err("Transaction Invalid type Flag").unwrap();
+            }
+        }
+      
     }
 
     /// # Cost

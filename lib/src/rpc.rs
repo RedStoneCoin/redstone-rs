@@ -256,16 +256,7 @@ pub fn launch(port: u64) {
                             let chains = 5;
                             // look in db for chains!!!!!!!!!!!!!!!!
                             for chn in 0..chains {
-                                let load = Blockchain::load(chn);
-                                //check for transaction in blockcahin
-                                if load.is_ok() {
-                                    let chain = load.unwrap();
-                                    for blk in chain.blocks {
-                                        block_announce(blk).unwrap();
-                                        thread::sleep(time::Duration::from_millis(100));
-                                    }
-                                }
-                                
+                                //let load = Blockchain::load(chn);
                             }
                         }
                         if hi_string == "init" {

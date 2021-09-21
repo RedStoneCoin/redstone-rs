@@ -2772,3 +2772,332 @@
 [2021-09-11][19:39:42][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
 [2021-09-11][19:39:43][redstone_rs::rpc][DEBUG] New block! Hash=2, chain=1,
 [2021-09-11][19:39:44][redstone_rs::rpc][DEBUG] New block! Hash=3, chain=1,
+[2021-09-21][15:06:53][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:06:53][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:06:53][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:06:53][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:06:53][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:06:53][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:06:53][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:06:53][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:06:53][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:06:56][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41486, fd: 22 }
+[2021-09-21][15:06:56][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-21][15:06:57][Redstone_daemon][ERROR] FATAL: panicked at 'called `Option::unwrap()` on a `None` value', /home/toni/Documents/redstone-rs/lib/src/blockchain.rs:55:51
+[2021-09-21][15:08:08][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:08:08][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:08:08][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:08:08][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:08:08][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:08:08][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:08:08][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:08:08][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:08:08][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:08:10][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41492, fd: 5 }
+[2021-09-21][15:08:10][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-21][15:08:10][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41494, fd: 5 }
+[2021-09-21][15:08:23][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:08:23][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction already in block"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:138:60
+[2021-09-21][15:10:14][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:10:14][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:10:14][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:10:14][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:10:14][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:10:14][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:10:14][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:10:14][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:10:14][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:10:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41496, fd: 5 }
+[2021-09-21][15:10:16][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-21][15:10:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41498, fd: 5 }
+[2021-09-21][15:10:21][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:10:21][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction already in block"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:139:60
+[2021-09-21][15:11:30][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:11:30][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:11:30][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:11:30][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:11:30][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:11:30][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:11:30][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:11:30][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:11:30][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:11:32][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41500, fd: 6 }
+[2021-09-21][15:11:32][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-21][15:11:32][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41502, fd: 6 }
+[2021-09-21][15:11:40][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:11:40][Redstone_daemon][ERROR] FATAL: panicked at 'not yet implemented', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:198:9
+[2021-09-21][15:12:27][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:12:27][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:12:27][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:12:27][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:12:27][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:12:27][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:12:27][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:12:27][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:12:27][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:12:49][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41504, fd: 5 }
+[2021-09-21][15:12:49][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-21][15:12:49][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41506, fd: 5 }
+[2021-09-21][15:12:53][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:12:53][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "000055eb6cdd36046458e14a55efebdb668498dead9850d42e8ea758b905b0804fbb4aa4a2912d98cf2c4edb3734a1b8dc4ef5dd3793e75be7198121f70f68a4",
+    sender: "0x9ec672b9957a57b6862056feb9d7c32903b5501f",
+    reciver: "1",
+    amount: 1,
+    nonce: 3108,
+    type_flag: 0,
+    payload: "",
+    pow: "000055eb6cdd36046458e14a55efebdb668498dead9850d42e8ea758b905b0804fbb4aa4a2912d98cf2c4edb3734a1b8dc4ef5dd3793e75be7198121f70f68a4",
+    signature: "304502210087f45362fdd5e1e80d5c898cd50694f41267eea6133b9b00d178cd5a70e27ccc02207325674f2569e23718e1f6d3ae588667173a23cf667a5533da14a8c9c3f084e8",
+}
+[2021-09-21][15:13:34][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:13:34][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:13:34][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:13:34][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:13:34][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:13:34][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:13:34][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:13:34][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:13:34][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:13:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41508, fd: 5 }
+[2021-09-21][15:13:48][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-21][15:13:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41510, fd: 5 }
+[2021-09-21][15:13:55][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:13:55][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:174:68
+[2021-09-21][15:16:29][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:16:29][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:16:29][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:16:29][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:16:29][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:16:29][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:16:29][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:16:29][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:16:29][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:16:41][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41512, fd: 13 }
+[2021-09-21][15:16:41][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-21][15:16:41][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41514, fd: 13 }
+[2021-09-21][15:16:45][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:16:46][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:171:68
+[2021-09-21][15:18:16][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:18:16][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:18:16][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:18:16][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:18:16][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:18:16][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:18:16][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:18:16][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:18:16][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:18:18][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:18:18][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:169:53
+[2021-09-21][15:36:59][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:36:59][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:36:59][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:36:59][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:36:59][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:36:59][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:36:59][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:36:59][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:36:59][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:37:57][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:37:57][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:37:57][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:37:57][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:37:57][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:37:57][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:37:57][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:37:57][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:37:57][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:38:11][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41516, fd: 23 }
+[2021-09-21][15:38:11][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-21][15:38:11][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41518, fd: 23 }
+[2021-09-21][15:38:17][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:38:17][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:184:53
+[2021-09-21][15:42:36][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:42:36][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:42:36][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:42:36][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:42:36][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:42:36][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:42:36][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:42:36][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:42:36][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:42:44][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:42:44][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:185:54
+[2021-09-21][15:43:25][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][15:43:25][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][15:43:25][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][15:43:25][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][15:43:25][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][15:43:25][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][15:43:25][Redstone_daemon][INFO] API server launched
+[2021-09-21][15:43:25][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][15:43:25][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][15:43:31][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41520, fd: 5 }
+[2021-09-21][15:43:31][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-21][15:43:31][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:41522, fd: 5 }
+[2021-09-21][15:43:35][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][15:43:35][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:186:54
+[2021-09-21][16:06:12][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][16:06:12][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][16:06:12][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][16:06:12][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][16:06:12][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][16:06:12][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][16:06:12][Redstone_daemon][INFO] API server launched
+[2021-09-21][16:06:12][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][16:06:12][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][16:06:15][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][16:06:16][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction amount is greater than sender's balance"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:198:91
+[2021-09-21][16:07:12][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][16:07:12][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][16:07:12][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][16:07:12][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][16:07:12][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][16:07:12][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][16:07:12][Redstone_daemon][INFO] API server launched
+[2021-09-21][16:07:12][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][16:07:12][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][16:07:14][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][16:07:14][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction amount is greater than sender's balance"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:206:95
+[2021-09-21][16:09:24][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][16:09:24][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][16:09:24][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][16:09:24][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][16:09:24][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][16:09:24][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][16:09:24][Redstone_daemon][INFO] API server launched
+[2021-09-21][16:09:24][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][16:09:24][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-21][16:09:26][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-21][16:09:26][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "000055eb6cdd36046458e14a55efebdb668498dead9850d42e8ea758b905b0804fbb4aa4a2912d98cf2c4edb3734a1b8dc4ef5dd3793e75be7198121f70f68a4",
+    sender: "0x9ec672b9957a57b6862056feb9d7c32903b5501f",
+    reciver: "1",
+    amount: 1,
+    nonce: 3108,
+    type_flag: 0,
+    payload: "",
+    pow: "000055eb6cdd36046458e14a55efebdb668498dead9850d42e8ea758b905b0804fbb4aa4a2912d98cf2c4edb3734a1b8dc4ef5dd3793e75be7198121f70f68a4",
+    signature: "304502210087f45362fdd5e1e80d5c898cd50694f41267eea6133b9b00d178cd5a70e27ccc02207325674f2569e23718e1f6d3ae588667173a23cf667a5533da14a8c9c3f084e8",
+}
+[2021-09-21][16:10:04][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-21][16:10:04][Redstone_daemon][INFO] Starting redstone node
+[2021-09-21][16:10:04][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-21][16:10:04][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-21][16:10:04][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-21][16:10:04][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-21][16:10:04][Redstone_daemon][INFO] API server launched
+[2021-09-21][16:10:04][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-21][16:10:04][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405

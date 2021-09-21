@@ -204,11 +204,11 @@ fn main() {
             transactions: vec![txn.clone()],
         };
         // get blocks form db and send them to the wallet to sync it
-      //  let block = vec![blk,blk1,blk2];
+        //  let block = vec![blk,blk1,blk2];
         //info!("wait 5 sec");
         //thread::sleep(time::Duration::from_secs(5));
         //info!("announe block test");
-        ///block_announce(blk).unwrap();
+        //block_announce(blk).unwrap();
         //thread::sleep(time::Duration::from_secs(1));
 
         //block_announce(blk1).unwrap();
@@ -220,7 +220,7 @@ fn main() {
 
        // for blk in block {
        //     block_announce(blk).unwrap();
-        //}
+       //}
     });
     let _ = std::thread::spawn(move || {
 

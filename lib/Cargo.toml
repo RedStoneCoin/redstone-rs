@@ -1,7 +1,7 @@
 [package]
 name = "redstone_rs"
 version = "0.1.0"
-authors = ["LeoCornelius <leocornelius019@gmail.com>"]
+authors = ["LeoCornelius <leocornelius019@gmail.com>, Redstone Developers"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
