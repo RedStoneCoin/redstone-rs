@@ -204,7 +204,8 @@ fn open_wallet(pass: String, filename: String) {
     let decrypted1 = String::from_utf8(decrypted);
     let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
     print!("Wallet imported successfully!\n");
-    main_login(wallet.private_key.to_string(), wallet.address(), false);
+    let walelt1 = wallet.clone();
+    main_login(wallet.private_key.to_string(), wallet.public_key,walelt1.address(), false);
 }
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
@@ -328,7 +329,7 @@ pub fn new_ann(ann: Announcement) {
     }
 }
 
-fn main_login(pik: String, pbk: String, launched: bool) {
+fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
     let wall = Keypair {
         private_key: pik.to_string(),
         public_key: pbk.to_string(),
@@ -353,7 +354,9 @@ fn main_login(pik: String, pbk: String, launched: bool) {
         });
 
         drop(locked);
-        info!("Your wallet address:{}", pbk);
+        info!("Your wallet address:{}", addr);
+        info!("Your wallet public key:{}", pbk);
+
         println!("Private key:{}", pik);
         info!("Wallet is syncing please wait!");
 
@@ -406,17 +409,12 @@ fn main_login(pik: String, pbk: String, launched: bool) {
                                     pow: "".to_owned(), // Spam protection PoW
                                     signature: "".to_owned(),
                                 };                    //99999999999999999999
-                                txn1.hash = txn1.hash_item();
-                                info!("hash for txn:{}", txn1.hash);
                                 let pow = txn1.find_pow();
                
-                                let sign = walletdetails
-                                .wallet
-                                .as_ref()
-                                .unwrap()
-                                .sign(txn1.hash.clone());
+                                let sign = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone());
 
-                                txn1.signature = sign.unwrap();
+                                info!("hash for txn:{}", txn1.hash);
+                                txn1.signature = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone()).unwrap();
 
                                 println!("{:#?}", txn1);
 

@@ -126,6 +126,10 @@ impl Executable for Transaction {
     /// Checks if a txn is valid
     /// Todo fix error messages
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
+       let keypairs = Keypair {
+            public_key: self.sender.clone(),
+            private_key: "".to_string(),
+        };
         let check = keypairs.verify(
             &self.hash, 
             &self.signature
@@ -136,57 +140,66 @@ impl Executable for Transaction {
         let chains = 5;
         // look in db for chains!!!!!!!!!!!!!!!!
         for chn in 0..chains {
-            let mut db_handle = Database::new();
-            db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
-            let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
-            print!("output form db:{}",block_txn_is_in);
-            if block_txn_is_in != *"-1" {
-                return Err("Transaction already in block").unwrap();
-            }
+           // let mut db_handle = Database::new();
+          //  db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
+           // let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
+           // print!("output form db:{}",block_txn_is_in);
+          //  if block_txn_is_in != *"-1" {
+           //     return Err("Transaction already in block").unwrap();
+          //  }
         }
-        if check.is_ok() {
-            // Signature is valid
-            if pow_txn.starts_with("0000") {
-                if pow_txn == self.hash {
-                // Proof of work is valid
-                    if self.hash != db_txn {
-                        // Transaction is original
-                        //let acc_sender = Account::get(self.sender.clone());
-                        //let acc_reciver = Account::get(self.reciver.clone());
-                        if  let Err(mpool) = mpool {
-                            return Err("Transaction is in mempool").unwrap();
-                        } 
-                    } 
-                    else {
-                        // Transaction is not original
-                        return Err("Transaction is not original").unwrap();
-                    }
-                } else {
-                    // Proof of work is invalid
-                    return Err("Proof of work is invalid").unwrap();
-                }
-            } 
-            else {
+        if let Err(ref check1) = check {
+            println!("{:?}",check);
+            return Err("Signature is not valid").unwrap();      
+        }
+        if pow_txn.starts_with("0000") {
+
+        } 
+        else {
+            // Proof of work is invalid
+            return Err("ErrInvalidPow").unwrap();
+        }
+        if pow_txn == self.hash {
+            // Proof of work is valid
+        } else {
                 // Proof of work is invalid
                 return Err("ErrInvalidPow").unwrap();
-            } 
+        } 
+        if self.hash != db_txn {
+            // Transaction is original
+            //let acc_sender = Account::get(self.sender.clone());
+            //let acc_reciver = Account::get(self.reciver.clone());
+        } 
+        else {
+            // Transaction is not original
+            return Err("Transaction is not original").unwrap();
         }
-        let mut reviver1 = self.sender.trim_end().clone().to_string();
-        let mut acc_reciver = Account::get(reviver1);
+        if let Err(ref mpool) = mpool {
+
+        } else {
+            println!("{:?}",mpool);
+            return Err("Transaction is in mempool").unwrap();
+
+        }
+        let mut sender = keypairs.address();
+        let mut acc_sender = Account::get(sender);
 
         match self.type_flag {
             0 => {
-                if let Err(acc_reciver1) = acc_reciver {
+                if let Err(ref acc_sender1) = acc_sender {
+
+                    println!("{:?}",acc_sender1);
                     let acc = Account{
                             address: self.sender.clone(),
                             balance: 0,
                             smart_contract: false
-                        };
-                        Account::save(&acc);
-                        return Err("Sender is new account with balance of 0! Account saved!").unwrap();
+                    };
+                    let save = Account::save(&acc);
+                    println!("{:?}",save);
+                    return Err("Sender is new account with balance of 0! Account saved!").unwrap();
                 } 
                 else {
-                    if self.amount < acc.balance {
+                    if self.amount < acc_sender.unwrap().balance {
                         // Transaction is valid
                         return Ok(())
                     } else {
