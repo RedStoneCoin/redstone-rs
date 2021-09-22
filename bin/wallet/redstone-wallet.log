@@ -29703,3 +29703,237 @@
 [2021-09-22][16:32:50][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
 [2021-09-22][16:32:50][Redstone_wallet][INFO] Submit response=
 [2021-09-22][16:32:50][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:40:48][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][16:40:49][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:40:55][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][16:40:55][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][16:40:55][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][16:40:55][Redstone_wallet][INFO] Submit response=
+[2021-09-22][16:40:55][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:49:41][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][16:49:41][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:49:47][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][16:49:47][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][16:49:47][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][16:49:47][Redstone_wallet][INFO] Submit response=
+[2021-09-22][16:49:47][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:49:50][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][16:49:51][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:49:56][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][16:49:56][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][16:49:56][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][16:49:56][Redstone_wallet][INFO] Submit response=
+[2021-09-22][16:49:56][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:50:47][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][16:50:48][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:50:54][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][16:50:54][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][16:50:54][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][16:50:54][Redstone_wallet][INFO] Submit response=
+[2021-09-22][16:50:54][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:50:59][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][16:50:59][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:51:05][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][16:51:05][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][16:51:05][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][16:51:05][Redstone_wallet][INFO] Submit response=
+[2021-09-22][16:51:05][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:52:54][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][16:52:54][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:52:59][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][16:53:00][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][16:53:00][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][16:53:00][Redstone_wallet][INFO] Submit response=
+[2021-09-22][16:53:00][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:54:28][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][16:54:28][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:54:34][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][16:54:34][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][16:54:35][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][16:54:35][Redstone_wallet][INFO] Submit response=
+[2021-09-22][16:54:35][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:54:56][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][16:54:56][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][16:55:02][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][16:55:02][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][16:55:03][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][16:55:03][Redstone_wallet][INFO] Submit response=
+[2021-09-22][16:55:03][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:02:33][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:02:35][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:02:42][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:02:42][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:02:42][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:02:42][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:02:42][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:02:54][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: Empty }', src/main.rs:373:51
+[2021-09-22][17:03:04][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-22][17:03:04][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-22][17:03:04][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-22][17:03:04][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-22][17:03:04][Redstone_wallet][INFO] [2] Import private key
+[2021-09-22][17:03:04][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-22][17:03:04][Redstone_wallet][INFO] [4] exit
+[2021-09-22][17:03:04][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:03:08][Redstone_wallet][INFO] Import wallet
+[2021-09-22][17:03:08][Redstone_wallet][INFO] Enter private key: 
+[2021-09-22][17:03:14][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-22][17:03:14][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-22][17:03:14][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-22][17:03:14][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-22][17:03:14][Redstone_wallet][INFO] [2] Import private key
+[2021-09-22][17:03:14][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-22][17:03:14][Redstone_wallet][INFO] [4] exit
+[2021-09-22][17:03:14][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:03:15][Redstone_wallet][INFO] Import wallet file
+[2021-09-22][17:03:16][Redstone_wallet][INFO] 1
+
+[2021-09-22][17:03:16][Redstone_wallet][INFO] Enter wallet password: 
+[2021-09-22][17:03:18][Redstone_wallet][INFO] Gained lock on WALLET_DETAILS
+[2021-09-22][17:03:18][Redstone_wallet][INFO] Using wallet with publickey=027758ef91bc27b420082011e71167db0752a2e9010a2cffa4e41fe5507d3cec0b
+[2021-09-22][17:03:18][Redstone_wallet][INFO] Creating caller struct
+[2021-09-22][17:03:18][Redstone_wallet][INFO] Your wallet address:0x9ec672b9957a57b6862056feb9d7c32903b5501f
+[2021-09-22][17:03:18][Redstone_wallet][INFO] Your wallet public key:027758ef91bc27b420082011e71167db0752a2e9010a2cffa4e41fe5507d3cec0b
+[2021-09-22][17:03:18][Redstone_wallet][INFO] Wallet is syncing please wait!
+[2021-09-22][17:03:18][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-09-22][17:03:18][redstone_rs::rpc][INFO] Sent sync message to server
+[2021-09-22][17:03:18][redstone_rs::rpc][INFO] Sent init message to server
+[2021-09-22][17:03:18][redstone_rs::rpc][INFO] Sent services register command (*=all)
+[2021-09-22][17:03:18][redstone_rs::rpc][INFO] Connected to RPC server at 127.0.0.1:44405
+[2021-09-22][17:03:18][redstone_rs::rpc][INFO] Spawned RPC listener thread
+[2021-09-22][17:03:20][Redstone_wallet][INFO] [1] Show wallet balance
+[2021-09-22][17:03:20][Redstone_wallet][INFO] [2] Send Redstone
+[2021-09-22][17:03:20][Redstone_wallet][INFO] [3] Show transaction history
+[2021-09-22][17:03:20][Redstone_wallet][INFO] [4] Show balance
+[2021-09-22][17:03:20][Redstone_wallet][INFO] [8] Relogin
+[2021-09-22][17:03:20][Redstone_wallet][INFO] [5] exit
+[2021-09-22][17:03:20][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:03:21][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:03:22][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:03:27][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:03:27][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:03:27][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:03:27][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:03:27][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:03:52][redstone_rs::rpc][INFO] Peeked 0 bytes into buffer, reading
+[2021-09-22][17:03:52][redstone_rs::rpc][INFO] Read 0 bytes, assuming peer disconect
+[2021-09-22][17:04:03][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:04:03][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:04:08][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:04:08][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:04:09][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:04:09][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:04:09][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:26:59][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:27:00][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:27:05][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:27:05][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:27:05][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:27:05][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:27:05][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:30:05][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:30:05][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:30:12][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:30:12][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:30:13][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:30:13][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:30:13][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:30:34][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:30:35][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:30:44][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:30:44][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:30:44][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:30:44][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:30:44][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:31:36][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:31:37][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:31:44][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:31:44][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:31:44][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:31:44][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:31:44][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:32:39][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:32:41][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:32:46][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:32:46][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:32:47][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:32:47][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:32:47][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:32:48][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:32:49][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:32:54][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:32:54][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:32:54][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:32:54][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:32:54][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:33:16][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:34:13][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-09-22][17:34:13][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-09-22][17:34:13][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-09-22][17:34:13][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-09-22][17:34:13][Redstone_wallet][INFO] [2] Import private key
+[2021-09-22][17:34:13][Redstone_wallet][INFO] [3] Import wallet file
+[2021-09-22][17:34:13][Redstone_wallet][INFO] [4] exit
+[2021-09-22][17:34:13][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:34:13][Redstone_wallet][INFO] Import wallet file
+[2021-09-22][17:34:13][Redstone_wallet][INFO] 1
+
+[2021-09-22][17:34:13][Redstone_wallet][INFO] Enter wallet password: 
+[2021-09-22][17:34:16][Redstone_wallet][INFO] Gained lock on WALLET_DETAILS
+[2021-09-22][17:34:16][Redstone_wallet][INFO] Using wallet with publickey=027758ef91bc27b420082011e71167db0752a2e9010a2cffa4e41fe5507d3cec0b
+[2021-09-22][17:34:16][Redstone_wallet][INFO] Creating caller struct
+[2021-09-22][17:34:16][Redstone_wallet][INFO] Your wallet address:0x9ec672b9957a57b6862056feb9d7c32903b5501f
+[2021-09-22][17:34:16][Redstone_wallet][INFO] Your wallet public key:027758ef91bc27b420082011e71167db0752a2e9010a2cffa4e41fe5507d3cec0b
+[2021-09-22][17:34:16][Redstone_wallet][INFO] Wallet is syncing please wait!
+[2021-09-22][17:34:16][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-09-22][17:34:16][redstone_rs::rpc][INFO] Sent sync message to server
+[2021-09-22][17:34:16][redstone_rs::rpc][INFO] Sent init message to server
+[2021-09-22][17:34:16][redstone_rs::rpc][INFO] Sent services register command (*=all)
+[2021-09-22][17:34:16][redstone_rs::rpc][INFO] Connected to RPC server at 127.0.0.1:44405
+[2021-09-22][17:34:16][redstone_rs::rpc][INFO] Spawned RPC listener thread
+[2021-09-22][17:34:18][Redstone_wallet][INFO] [1] Show wallet balance
+[2021-09-22][17:34:18][Redstone_wallet][INFO] [2] Send Redstone
+[2021-09-22][17:34:18][Redstone_wallet][INFO] [3] Show transaction history
+[2021-09-22][17:34:18][Redstone_wallet][INFO] [4] Show balance
+[2021-09-22][17:34:18][Redstone_wallet][INFO] [8] Relogin
+[2021-09-22][17:34:18][Redstone_wallet][INFO] [5] exit
+[2021-09-22][17:34:18][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:34:21][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:34:22][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:34:28][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:34:28][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:34:28][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:34:28][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:34:28][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:34:47][redstone_rs::rpc][INFO] Peeked 0 bytes into buffer, reading
+[2021-09-22][17:34:47][redstone_rs::rpc][INFO] Read 0 bytes, assuming peer disconect
+[2021-09-22][17:34:51][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:34:52][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:35:01][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:35:01][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:35:02][reqwest::async_impl::client][DEBUG] response '200 OK' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:35:02][Redstone_wallet][INFO] Submit response={ "result" : "sent txn" }
+[2021-09-22][17:35:02][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:35:24][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:35:26][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:35:32][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:35:32][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:35:32][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:35:32][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:35:32][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:36:38][Redstone_wallet][INFO] Unknown command
+[2021-09-22][17:36:38][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:36:40][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:36:40][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:36:45][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:36:45][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:36:46][reqwest::async_impl::client][DEBUG] response '200 OK' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:36:46][Redstone_wallet][INFO] Submit response={ "result" : "sent txn" }
+[2021-09-22][17:36:46][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:36:50][Redstone_wallet][INFO] Enter recivers pub key: 
+[2021-09-22][17:36:50][Redstone_wallet][INFO] Enter a value:
+[2021-09-22][17:36:55][Redstone_wallet][INFO] hash for txn:000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6
+[2021-09-22][17:36:55][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-09-22][17:36:56][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-09-22][17:36:56][Redstone_wallet][INFO] Submit response=
+[2021-09-22][17:36:56][Redstone_wallet][INFO] Enter a value:

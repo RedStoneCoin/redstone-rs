@@ -3333,3 +3333,345 @@
 [2021-09-22][16:32:36][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
 [2021-09-22][16:32:50][Redstone_daemon::api][INFO] Transaction recived by api!
 [2021-09-22][16:32:50][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:199:91
+[2021-09-22][16:39:15][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][16:39:15][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][16:39:15][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][16:39:15][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][16:39:15][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][16:39:15][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][16:39:15][Redstone_daemon][INFO] API server launched
+[2021-09-22][16:39:15][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][16:39:15][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][16:40:46][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][16:40:46][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][16:40:46][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][16:40:46][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][16:40:46][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][16:40:46][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][16:40:46][Redstone_daemon][INFO] API server launched
+[2021-09-22][16:40:46][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][16:40:46][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][16:40:55][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][16:40:55][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][16:49:39][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][16:49:39][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][16:49:39][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][16:49:39][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][16:49:39][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][16:49:39][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][16:49:39][Redstone_daemon][INFO] API server launched
+[2021-09-22][16:49:39][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][16:49:39][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][16:49:47][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][16:49:47][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][16:49:56][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][16:49:56][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][16:50:49][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][16:50:49][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][16:50:49][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][16:50:49][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][16:50:49][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][16:50:49][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][16:50:49][Redstone_daemon][INFO] API server launched
+[2021-09-22][16:50:49][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][16:50:49][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][16:50:54][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][16:50:54][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][16:51:05][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][16:51:05][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][16:51:35][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][16:51:35][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][16:51:35][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][16:51:35][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][16:51:35][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][16:51:35][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][16:51:35][Redstone_daemon][INFO] API server launched
+[2021-09-22][16:51:35][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][16:51:35][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][16:53:00][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][16:53:00][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][16:54:29][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][16:54:29][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][16:54:29][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][16:54:29][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][16:54:29][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][16:54:29][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][16:54:29][Redstone_daemon][INFO] API server launched
+[2021-09-22][16:54:29][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][16:54:29][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][16:54:34][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][16:54:35][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][16:55:01][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][16:55:01][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][16:55:01][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][16:55:01][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][16:55:01][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][16:55:01][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][16:55:01][Redstone_daemon][INFO] API server launched
+[2021-09-22][16:55:01][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][16:55:01][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][16:55:02][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][16:55:03][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][17:02:37][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:02:37][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:02:37][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:02:37][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:02:37][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:02:37][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:02:37][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:02:37][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:02:37][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:02:42][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:02:42][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][17:03:18][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:53150, fd: 23 }
+[2021-09-22][17:03:18][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-22][17:03:18][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:53152, fd: 23 }
+[2021-09-22][17:03:27][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:03:27][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][17:04:01][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:04:01][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:04:01][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:04:01][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:04:01][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:04:01][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:04:01][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:04:01][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:04:01][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:04:08][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:04:09][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][17:26:57][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:26:57][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:26:57][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:26:57][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:26:57][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:26:57][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:26:57][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:26:57][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:26:57][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:27:05][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:27:05][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][17:30:07][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:30:07][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:30:07][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:30:07][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:30:07][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:30:07][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:30:07][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:30:07][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:30:07][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:30:12][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:30:13][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][17:30:38][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:30:38][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:30:38][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:30:38][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:30:38][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:30:38][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:30:38][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:30:38][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:30:38][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:30:44][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:30:44][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][17:31:40][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:31:40][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:31:40][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:31:40][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:31:40][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:31:40][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:31:40][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:31:40][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:31:40][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:31:44][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:31:44][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][17:32:38][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:32:38][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:32:38][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:32:38][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:32:38][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:32:38][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:32:38][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:32:38][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:32:38][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:32:46][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:32:47][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:200:91
+[2021-09-22][17:32:54][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:32:54][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction amount is greater than sender's balance"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:208:95
+[2021-09-22][17:34:11][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:34:11][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:34:11][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:34:11][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:34:11][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:34:11][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:34:11][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:34:11][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:34:11][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:34:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:53154, fd: 5 }
+[2021-09-22][17:34:16][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-22][17:34:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:53156, fd: 5 }
+[2021-09-22][17:34:28][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:34:28][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction amount is greater than sender's balance"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:208:95
+[2021-09-22][17:34:54][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:34:54][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:34:54][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:34:54][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:34:54][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:34:54][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:34:54][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:34:54][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:34:54][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:35:01][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:35:02][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6",
+    sender: "027758ef91bc27b420082011e71167db0752a2e9010a2cffa4e41fe5507d3cec0b",
+    reciver: "1",
+    amount: 1,
+    nonce: 92854,
+    type_flag: 0,
+    payload: "",
+    pow: "000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6",
+    signature: "3045022100be5eb0a1354271b316d7b772b22c052d48d20d40b49779994f978e980bec106b022004d6912168c54de539f84570cac1a2e1065cc0fc1ffafe2df9bb380307eb1803",
+}
+[2021-09-22][17:35:32][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:35:32][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction is in mempool"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:182:53
+[2021-09-22][17:36:36][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:36:36][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:36:36][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:36:36][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:36:36][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:36:36][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:36:36][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:36:36][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:36:36][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-22][17:36:45][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:36:46][redstone_rs::mempool][INFO] Transaction added to the mempool: Transaction {
+    hash: "000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6",
+    sender: "027758ef91bc27b420082011e71167db0752a2e9010a2cffa4e41fe5507d3cec0b",
+    reciver: "1",
+    amount: 1,
+    nonce: 92854,
+    type_flag: 0,
+    payload: "",
+    pow: "000035f070b10ff93e4a55850f010798699bbdd8778c73c29a2f6dea40f6dcf7a355e2a869eaf9cff1a88ed3508f0c6c113bd004727554fe08bcd3ded36669f6",
+    signature: "3045022100be5eb0a1354271b316d7b772b22c052d48d20d40b49779994f978e980bec106b022004d6912168c54de539f84570cac1a2e1065cc0fc1ffafe2df9bb380307eb1803",
+}
+[2021-09-22][17:36:55][Redstone_daemon::api][INFO] Transaction recived by api!
+[2021-09-22][17:36:56][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction is in mempool"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:182:53

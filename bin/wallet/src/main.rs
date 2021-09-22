@@ -167,6 +167,9 @@ async fn send_transaction(txn: Transaction) -> Result<(), Box<dyn std::error::Er
                 info!("Failed to submit txn, response={}", response_string);
             } else {
                 info!("Submit response={}", response_string);
+                if response_string.len() == 0 {
+                    info!("Transaction Failure");
+                }
             }
         }
     }

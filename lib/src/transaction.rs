@@ -140,13 +140,14 @@ impl Executable for Transaction {
         let chains = 5;
         // look in db for chains!!!!!!!!!!!!!!!!
         for chn in 0..chains {
-           // let mut db_handle = Database::new();
-          //  db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
-           // let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
+            let mut db_handle = Database::new();
+            db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
+            let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
            // print!("output form db:{}",block_txn_is_in);
-          //  if block_txn_is_in != *"-1" {
-           //     return Err("Transaction already in block").unwrap();
-          //  }
+            if block_txn_is_in.len() == 0 {
+            } else {
+                return Err("Transaction already in block").unwrap();
+            }
         }
         if let Err(ref check1) = check {
             println!("{:?}",check);
@@ -190,12 +191,12 @@ impl Executable for Transaction {
 
                     println!("{:?}",acc_sender1);
                     let acc = Account{
-                            address: self.sender.clone(),
+                            address: keypairs.address(),
                             balance: 0,
                             smart_contract: false
                     };
-                    let save = Account::save(&acc);
-                    println!("{:?}",save);
+                    let save = acc.save();
+                    println!("Database:{:?}",save);
                     return Err("Sender is new account with balance of 0! Account saved!").unwrap();
                 } 
                 else {

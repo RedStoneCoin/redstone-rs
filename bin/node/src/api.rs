@@ -97,7 +97,7 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
                 mempool::add_transaction(txn1);
                 return "{ \"result\" : \"sent txn\" }".to_owned();
             } else {
-                return "{ \"result\" : \"failure\" }".to_owned();
+                return "{ \"result\" : \"FAILURE PLEASE TRY LATER\" }".to_owned();
             }
         }
         else {

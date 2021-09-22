@@ -35,9 +35,12 @@ impl Database {
         key: &String,
         value: &String,
     ) -> Result<(), Box<dyn std::error::Error>> {
+       
         if let Some(db) = self.dbs.get(path) {
             db.insert(key.as_bytes(), value.as_bytes())?;
+            return Ok(())
         }
         Err("Db not open".into())
+        
     }
 }
