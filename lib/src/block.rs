@@ -6,9 +6,11 @@ use crate::{
     mempool,
     state::{GlobalState, Round},
     transaction::Transaction,
+    database::Database
 };
 use log::*;
 use serde::{Deserialize, Serialize};
+use crate::blockchain::DATABASE_PATH_PREFIX;
 
 #[derive(Deserialize, Serialize, Clone, Default, Debug)]
 
@@ -101,6 +103,9 @@ impl Executable for Block {
             }
             let txn_result = txn_result.unwrap();
             debug!("txn_result: {}", txn_result);
+            let mut db_handle = Database::new();
+            db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.header.chain))?;
+            db_handle.set(&"transactions".to_owned(), &self.hash,&"1".to_string());
         }
         // If we encountered no errors, we can apply the state
         todo!()

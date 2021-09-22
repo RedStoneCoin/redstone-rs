@@ -87,6 +87,10 @@ pub fn find_pow(&mut self) {
         }
     }
 }
+pub fn set(txn: String,chn: u64) {
+
+
+}
 
 impl Executable for Transaction {
     /// # Execute

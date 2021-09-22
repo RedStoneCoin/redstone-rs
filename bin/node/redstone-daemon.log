@@ -3675,3 +3675,19 @@
 }
 [2021-09-22][17:36:55][Redstone_daemon::api][INFO] Transaction recived by api!
 [2021-09-22][17:36:56][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction is in mempool"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:182:53
+[2021-09-22][17:47:45][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-22][17:47:45][Redstone_daemon][INFO] Starting redstone node
+[2021-09-22][17:47:45][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-22][17:47:45][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-22][17:47:45][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-22][17:47:45][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-22][17:47:45][Redstone_daemon][INFO] API server launched
+[2021-09-22][17:47:45][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-22][17:47:45][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
