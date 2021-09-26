@@ -181,15 +181,13 @@ impl Executable for Transaction {
             return Err("Transaction is not original").unwrap();
         }
         if let Err(ref mpool) = mpool {
-
         } else {
             println!("{:?}",mpool);
             return Err("Transaction is in mempool").unwrap();
-
         }
+
         let mut sender = keypairs.address();
         let mut acc_sender = Account::get(sender);
-
         match self.type_flag {
             0 => {
                 if let Err(ref acc_sender1) = acc_sender {
@@ -202,15 +200,13 @@ impl Executable for Transaction {
                         // Transaction is valid
                         return Ok(())
                     } else {
-                            // Transaction is invalid
-                            return Err("Transaction amount is greater than sender's balance").unwrap();
+                        // Transaction is invalid
+                        return Err("Transaction amount is greater than sender's balance").unwrap();
                     }
                 }
             },
             1 => {
                 if let Err(ref acc_sender1) = acc_sender {
-
-
                     return Err("Failed to get receiver's account").unwrap();
                 } 
                 else {
@@ -218,7 +214,7 @@ impl Executable for Transaction {
                         // Transaction is valid
                         return Ok(())
                     } else {
-                            // Transaction is invalid
+                        // Transaction is invalid
                         return Err("Transaction amount is greater than sender's balance").unwrap();
                     }               
                 }

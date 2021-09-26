@@ -1,6 +1,5 @@
 
 #![feature(proc_macro_hygiene, decl_macro)]
-
 use encryptfile as ef;
 use fern::colors::{Color, ColoredLevelConfig};
 use lazy_static::*;
@@ -10,7 +9,6 @@ use redstone_rs::block::{Block, Header};
 use redstone_rs::keypair::Keypair;
 use redstone_rs::rpc::{launch_client, Announcement, Caller};
 use redstone_rs::transaction::Transaction;
-use redstone_rs::*;
 use redstone_rs::*;
 use secrecy::Secret;
 use serde::{Deserialize, Serialize};
@@ -36,15 +34,18 @@ struct WalletDetails {
     locked: u64,
     uncle_root: String,
 }
+
 lazy_static! {
     static ref WALLET_DETAILS: Mutex<WalletDetails> = Mutex::new(WalletDetails::default());
     static ref SERVER_ADDR: Mutex<String> = Mutex::new(String::from("http://127.0.0.1:8000"));
 }
+
 #[derive(Clone, Deserialize, Debug)]
 struct Blockcount {
     success: bool,
     blockcount: u64,
 }
+
 #[derive(Clone, Deserialize, Debug)]
 struct Transactioncount {
     success: bool,
@@ -152,6 +153,7 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     }));
     Ok(())
 }
+
 async fn send_transaction(txn: Transaction) -> Result<(), Box<dyn std::error::Error>> {
     if (txn.signature == String::default()) {
         return Err("Transaction not signed".into());
@@ -194,9 +196,8 @@ fn save_wallet(wallet: String, pass: String, filename: String) {
     fs::write(&filename, encrypted).unwrap();
     info!("WALLET SAVED AT: {}", filename);
 }
+
 fn open_wallet(pass: String, filename: String) {
-    //decryptit
-    //then read it
     let private_key =
         std::fs::read(filename.trim_end()).expect("Something went wrong reading the file");
     let decrypted = {
