@@ -351,33 +351,28 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
     .unwrap()
     .block_on(async {
         let gacc = get_account(addr.clone()).await;
-        println!("{:?}", gacc);
-        let acc_json = gacc;
-        let v: Value = serde_json::from_str(&acc_json).unwrap();
-        let val = &v["Result"]["balance"];
-        println!("{}",val);
-        match val {
-            Null => {
-                if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-                    *locked_ls = WalletDetails {
-                        wallet: Some(wall.clone()),
-                        balance: 0,
-                        locked: 0,
-                        uncle_root: "".to_string(),
-                    };
-                }
+        if gacc.clone() == "" {
+            if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                *locked_ls = WalletDetails {
+                    wallet: Some(wall.clone()),
+                    balance: 0,
+                    locked: 0,
+                    uncle_root: "".to_string(),
+                };
             }
-            _ => {
-                if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-                    *locked_ls = WalletDetails {
-                        wallet: Some(wall.clone()),
-                        balance: val.as_u64().expect("not a valid u64"),
-                        locked: 0,
-                        uncle_root: "".to_string(),
-                    };
-                }
+        } else {
+            let v: Value = serde_json::from_str(&gacc).unwrap();
+            let val = &v["Result"]["balance"];
+            if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                *locked_ls = WalletDetails {
+                    wallet: Some(wall.clone()),
+                    balance: val.as_u64().expect("not a valid u64"),
+                    locked: 0,
+                    uncle_root: "".to_string(),
+            };
             }
         }
+
     });
     if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
         *locked_ls = WalletDetails {
@@ -479,6 +474,12 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                             }
                             drop(walletdetails);
                         }
+                    }
+                    4 => {
+                        if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
+                            info!("Your current balance: {}", walletdetails.balance);
+                            drop(walletdetails);
+                         }
                     }
                     5 => {
                         info!("Bye....");

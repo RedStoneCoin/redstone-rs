@@ -104,7 +104,11 @@ impl Executable for Transaction {
         if context == "send" {
             let acc_sender = Account::get(sender);
             let mut acc_reciver = Account::get(reciver);
+            if let Err(acc_sender1) = acc_sender {
+                return Err("Failed to get senders's account").unwrap();
+            }
             if let Err(acc_reciver1) = acc_reciver {
+                // we get error if its new account and we craete it with balance he got
                 let acc = Account{
                     address: self.reciver.clone(),
                     balance: self.amount,
@@ -190,15 +194,8 @@ impl Executable for Transaction {
             0 => {
                 if let Err(ref acc_sender1) = acc_sender {
 
-                    println!("{:?}",acc_sender1);
-                    let acc = Account{
-                            address: keypairs.address(),
-                            balance: 0,
-                            smart_contract: false
-                    };
-                    let save = acc.save();
-                    println!("Database:{:?}",save);
-                    return Err("Sender is new account with balance of 0! Account saved!").unwrap();
+
+                    return Err("Failed to get receiver's account").unwrap();
                 } 
                 else {
                     if self.amount < acc_sender.unwrap().balance {
@@ -213,15 +210,8 @@ impl Executable for Transaction {
             1 => {
                 if let Err(ref acc_sender1) = acc_sender {
 
-                    println!("{:?}",acc_sender1);
-                    let acc = Account{
-                            address: keypairs.address(),
-                            balance: 0,
-                            smart_contract: false
-                    };
-                    let save = acc.save();
-                    println!("Database:{:?}",save);
-                    return Err("Sender is new account with balance of 0! Account saved!").unwrap();
+
+                    return Err("Failed to get receiver's account").unwrap();
                 } 
                 else {
                     if self.amount < acc_sender.unwrap().balance {
