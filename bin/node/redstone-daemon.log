@@ -3691,3 +3691,69 @@
 [2021-09-22][17:47:45][Redstone_daemon][INFO] API server launched
 [2021-09-22][17:47:45][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
 [2021-09-22][17:47:45][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-26][10:36:14][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-26][10:36:14][Redstone_daemon][INFO] Starting redstone node
+[2021-09-26][10:36:14][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-26][10:36:14][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-26][10:36:14][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-26][10:36:14][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-26][10:36:14][Redstone_daemon][INFO] API server launched
+[2021-09-26][10:36:14][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-26][10:36:14][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-26][10:36:43][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-26][10:36:47][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-26][10:37:22][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48590, fd: 6 }
+[2021-09-26][10:37:22][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-26][10:37:22][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48594, fd: 6 }
+[2021-09-26][10:37:34][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-26][10:37:49][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Sender is new account with balance of 0! Account saved!"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:212:91
+[2021-09-26][10:39:20][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-26][10:39:20][Redstone_daemon][INFO] Starting redstone node
+[2021-09-26][10:39:20][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-26][10:39:20][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-26][10:39:20][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-26][10:39:20][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-26][10:39:20][Redstone_daemon][INFO] API server launched
+[2021-09-26][10:39:20][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-26][10:39:20][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-26][10:53:21][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48596, fd: 5 }
+[2021-09-26][10:53:21][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-26][10:53:21][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48598, fd: 5 }
+[2021-09-26][10:54:23][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48600, fd: 5 }
+[2021-09-26][10:54:23][redstone_rs::rpc][INFO] Wallet provider requsted sync with network!
+[2021-09-26][10:54:23][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48602, fd: 5 }
+[2021-09-26][11:11:02][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-26][11:11:02][Redstone_daemon][INFO] Starting redstone node
+[2021-09-26][11:11:02][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-26][11:11:02][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-26][11:11:02][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-26][11:11:02][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-26][11:11:02][Redstone_daemon][INFO] API server launched
+[2021-09-26][11:11:02][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-26][11:11:02][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-26][11:13:09][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48604, fd: 5 }
+[2021-09-26][11:17:51][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48608, fd: 5 }
+[2021-09-26][11:35:03][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48612, fd: 5 }
+[2021-09-26][11:35:35][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48614, fd: 5 }
+[2021-09-26][11:36:54][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:48616, fd: 5 }

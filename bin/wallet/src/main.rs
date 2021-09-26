@@ -5,6 +5,7 @@ use encryptfile as ef;
 use fern::colors::{Color, ColoredLevelConfig};
 use lazy_static::*;
 use log::*;
+use serde_json::{Value};
 use redstone_rs::block::{Block, Header};
 use redstone_rs::keypair::Keypair;
 use redstone_rs::rpc::{launch_client, Announcement, Caller};
@@ -23,14 +24,11 @@ use std::io::Write;
 use std::thread;
 use std::{default::Default, sync::Mutex};
 use std::time;
-
 use crate::{crypto::Hashable, executable::Executable};
 use reqwest::Client;
 use tokio;
 use tokio::runtime::Runtime;
-
 use std::str;
-
 #[derive(Default)]
 struct WalletDetails {
     wallet: Option<Keypair>,
@@ -175,6 +173,15 @@ async fn send_transaction(txn: Transaction) -> Result<(), Box<dyn std::error::Er
     }
     Ok(())
 }
+
+async fn get_account(addr: String) -> String {
+    //Using format! here removes one unnecessary allocation
+    let request_url = format!("{}/json_api/get_acc/{}",SERVER_ADDR.lock().unwrap().to_owned(), addr);
+    let body = reqwest::get(request_url).await.unwrap().text().await;
+    //println!("body = {:?}", body);
+    return body.unwrap();
+}
+
 fn save_wallet(wallet: String, pass: String, filename: String) {
     let encrypted = {
         let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
@@ -337,10 +344,45 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
         private_key: pik.to_string(),
         public_key: pbk.to_string(),
     };
+
+    tokio::runtime::Builder::new_multi_thread()
+    .enable_all()
+    .build()
+    .unwrap()
+    .block_on(async {
+        let gacc = get_account(addr.clone()).await;
+        println!("{:?}", gacc);
+        let acc_json = gacc;
+        let v: Value = serde_json::from_str(&acc_json).unwrap();
+        let val = &v["Result"]["balance"];
+        println!("{}",val);
+        match val {
+            Null => {
+                if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                    *locked_ls = WalletDetails {
+                        wallet: Some(wall.clone()),
+                        balance: 0,
+                        locked: 0,
+                        uncle_root: "".to_string(),
+                    };
+                }
+            }
+            _ => {
+                if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                    *locked_ls = WalletDetails {
+                        wallet: Some(wall.clone()),
+                        balance: val.as_u64().expect("not a valid u64"),
+                        locked: 0,
+                        uncle_root: "".to_string(),
+                    };
+                }
+            }
+        }
+    });
     if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
         *locked_ls = WalletDetails {
             wallet: Some(wall.clone()),
-            balance: 10,
+            balance: 0,
             locked: 0,
             uncle_root: "".to_string(),
         };

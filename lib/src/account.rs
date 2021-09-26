@@ -1,13 +1,13 @@
 use std::fmt::format;
+use serde::Serialize;
 
 use crate::database::Database;
-#[derive(Clone, Default, Debug, PartialEq)]
+#[derive(Clone, Default, Debug, PartialEq,Serialize)]
 pub struct Account {
     pub address: String,
     pub balance: u64,
     pub smart_contract: bool,
 }
-
 impl Account {
     pub fn get(address: String) -> Result<Account, Box<dyn std::error::Error>> {
         let mut database_handle = Database::new();

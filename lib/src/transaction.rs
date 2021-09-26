@@ -97,9 +97,17 @@ impl Executable for Transaction {
     /// Executes this transaction, updating the account balances and executing all smart contracts touched
     /// Returns the error code encountered OR the new account state hash
     fn execute(&self, context: &String,state: &mut GlobalState) -> Result<String, Box<dyn std::error::Error>> {
+        let keypairs = Keypair {
+            public_key: self.sender.clone(),
+            private_key: "".to_string(),
+        };
+
+        let sender = keypairs.address();
+        let reciver = self.reciver.clone();
         if context == "send" {
-            let acc_sender = Account::get(self.sender.clone());
-            let mut acc_reciver = Account::get(self.reciver.clone());
+
+            let acc_sender = Account::get(sender);
+            let mut acc_reciver = Account::get(reciver);
             if let Err(acc_reciver1) = acc_reciver {
                 let acc = Account{
                     address: self.reciver.clone(),

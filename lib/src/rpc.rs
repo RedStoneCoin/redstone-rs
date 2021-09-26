@@ -108,11 +108,6 @@ pub fn launch_client(
         server_port
     );
     if let Ok(mut stream) = TcpStream::connect(format!("{}:{}", server_ip, server_port)) {
-        if let Ok(_) = stream.write(b"sync") {
-            info!("Sent sync message to server");
-        }
-    }
-    if let Ok(mut stream) = TcpStream::connect(format!("{}:{}", server_ip, server_port)) {
         //if let Ok(_) = stream.write(b"sync") {
         //    info!("Sent sync message to server");
         //}
@@ -249,16 +244,6 @@ pub fn launch(port: u64) {
                         // turn the buf into a string
                         let hi_string = String::from_utf8(hi_buffer[0..read_bytes].to_vec())
                             .unwrap_or_default();
-                        if hi_string == "sync"{
-                            //get all blocks and send them to rpc
-                            info!("Wallet provider requsted sync with network!");
-                            // get block send them to provider
-                            let chains = 5;
-                            // look in db for chains!!!!!!!!!!!!!!!!
-                            for chn in 0..chains {
-                                //let load = Blockchain::load(chn);
-                            }
-                        }
                         if hi_string == "init" {
                             let services_list = ["block".to_string()]; // TODO: move to config
                             let services_list_ser =
