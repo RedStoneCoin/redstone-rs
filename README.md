@@ -64,13 +64,12 @@ cd target
 - [ ] Finish p2p code.
 - [ ] Handeler functions for the p2p code (eg when you recieve a block from a peer what do you do with it.
 - [ ] Block enacting
-- [X] Txn validation (99% will be done when blockchain lib is done)
+- [X] Txn validation
 - [X] Mempool (stores unvalidated txns) needs implmenting.
 - [ ] Accounts
 - [ ] Validtor code (regarding the DpoS)
 - [X] Fix POW for txns
 - [ ] Smart Contract
-- [ ] When recived sync message from wallet provider insted of sending test blocks send every block from the db
 - [ ] When transaction is executed add it to the db, so we can check if there is duplicate transaction
 
 ### Node
@@ -85,7 +84,6 @@ cd target
 - [X] Basic Wallet
 - [X] Api for the node
 - [X] Rpc
-- [X] Send sync message to the node via rpc
 - [ ] Gui?!
 
 # Security Policy
