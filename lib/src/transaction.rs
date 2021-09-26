@@ -87,10 +87,7 @@ pub fn find_pow(&mut self) {
         }
     }
 }
-pub fn set(txn: String,chn: u64) {
 
-
-}
 
 impl Executable for Transaction {
     /// # Execute
@@ -105,7 +102,6 @@ impl Executable for Transaction {
         let sender = keypairs.address();
         let reciver = self.reciver.clone();
         if context == "send" {
-
             let acc_sender = Account::get(sender);
             let mut acc_reciver = Account::get(reciver);
             if let Err(acc_reciver1) = acc_reciver {
@@ -120,14 +116,7 @@ impl Executable for Transaction {
             }
             acc_sender.unwrap().balance -= self.amount;
         }
-        if context == "coinbase" {
-            let acc_reciver = Account::get(self.reciver.clone());
-            acc_reciver.unwrap().balance += self.amount;
-        }
-        if context == "burn" {
-            let acc_reciver = Account::get(self.reciver.clone());
-            acc_reciver.unwrap().balance -= self.amount;
-        }
+
 
         todo!()
 
@@ -219,6 +208,29 @@ impl Executable for Transaction {
                             // Transaction is invalid
                             return Err("Transaction amount is greater than sender's balance").unwrap();
                     }
+                }
+            },
+            1 => {
+                if let Err(ref acc_sender1) = acc_sender {
+
+                    println!("{:?}",acc_sender1);
+                    let acc = Account{
+                            address: keypairs.address(),
+                            balance: 0,
+                            smart_contract: false
+                    };
+                    let save = acc.save();
+                    println!("Database:{:?}",save);
+                    return Err("Sender is new account with balance of 0! Account saved!").unwrap();
+                } 
+                else {
+                    if self.amount < acc_sender.unwrap().balance {
+                        // Transaction is valid
+                        return Ok(())
+                    } else {
+                            // Transaction is invalid
+                        return Err("Transaction amount is greater than sender's balance").unwrap();
+                    }               
                 }
             }, 
             _ => {
