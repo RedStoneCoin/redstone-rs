@@ -124,11 +124,13 @@ fn gettx(hash: String) -> String {
 
 #[get("/get_acc/<public_key>")]
 fn getacc(public_key: String) -> String {
-    let get = serde_json::to_string(&Account::get(public_key).unwrap());
-    match get {
-        Ok(_) => {return "{ \"success\": true, \"Result\":".to_string() + &get.unwrap() + "}";}
-        _ => {return "{ \"success\": false,}".to_string();}
-    };
+    if let Err(get1) = Account::get(public_key.clone())  {
+        return "{ \"result\" : \"failure\" }".to_owned();    } 
+    else {
+        let get = serde_json::to_string(&Account::get(public_key).unwrap());
+        return "{ \"success\": true, \"Result\":".to_string() + &get.unwrap() + "}";
+
+    }
 }
 
 
