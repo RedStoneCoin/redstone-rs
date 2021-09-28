@@ -66,7 +66,7 @@ cd target
 - [ ] Block enacting
 - [X] Txn validation
 - [X] Mempool (stores unvalidated txns) needs implmenting.
-- [ ] Accounts
+- [x] Accounts
 - [ ] Validtor code (regarding the DpoS)
 - [X] Fix POW for txns
 - [ ] Smart Contract

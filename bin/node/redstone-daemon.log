@@ -3779,3 +3779,337 @@
 [2021-09-26][17:52:00][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
 [2021-09-26][17:52:41][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
 [2021-09-26][17:52:41][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:60758, fd: 5 }
+[2021-09-27][18:08:49][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-27][18:08:49][Redstone_daemon][INFO] Starting redstone node
+[2021-09-27][18:08:49][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-27][18:08:49][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-27][18:08:49][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-27][18:08:49][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-27][18:08:49][Redstone_daemon][INFO] API server launched
+[2021-09-27][18:08:49][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-27][18:08:49][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-27][18:08:51][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42908, fd: 5 }
+[2021-09-27][18:09:58][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-27][18:09:58][Redstone_daemon][INFO] Starting redstone node
+[2021-09-27][18:09:58][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-27][18:09:58][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-27][18:09:58][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-27][18:09:58][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-27][18:09:58][Redstone_daemon][INFO] API server launched
+[2021-09-27][18:09:58][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-27][18:09:58][Redstone_daemon][INFO] wait 5 sec
+[2021-09-27][18:09:58][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-27][18:09:58][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42910, fd: 5 }
+[2021-09-27][18:10:03][Redstone_daemon][INFO] announe block test
+[2021-09-27][18:10:03][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
+[2021-09-27][18:10:04][redstone_rs::rpc][DEBUG] New block! Hash=2, chain=1,
+[2021-09-27][18:10:05][redstone_rs::rpc][DEBUG] New block! Hash=3, chain=1,
+[2021-09-27][18:32:43][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42916, fd: 5 }
+[2021-09-27][18:32:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42918, fd: 5 }
+[2021-09-27][18:32:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42920, fd: 5 }
+[2021-09-27][18:32:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42922, fd: 5 }
+[2021-09-27][18:32:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42924, fd: 5 }
+[2021-09-27][18:32:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42926, fd: 5 }
+[2021-09-27][18:32:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42928, fd: 5 }
+[2021-09-27][18:32:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42930, fd: 5 }
+[2021-09-27][18:32:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42932, fd: 5 }
+[2021-09-27][18:32:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42934, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42936, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42938, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42940, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42942, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42946, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42948, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42952, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42954, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42956, fd: 5 }
+[2021-09-27][18:32:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42958, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42960, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42964, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42966, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42968, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42970, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42972, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42974, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42976, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42978, fd: 5 }
+[2021-09-27][18:32:48][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42982, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42984, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42986, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42988, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42990, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42992, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42994, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42996, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:42998, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43000, fd: 5 }
+[2021-09-27][18:32:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43002, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43004, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43008, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43010, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43012, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43014, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43016, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43018, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43020, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43022, fd: 5 }
+[2021-09-27][18:32:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43026, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43028, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43030, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43032, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43034, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43036, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43038, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43040, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43042, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43044, fd: 5 }
+[2021-09-27][18:33:16][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43046, fd: 5 }
+[2021-09-27][18:35:12][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43050, fd: 5 }
+[2021-09-27][18:35:40][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:35:40][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43052, fd: 5 }
+[2021-09-27][18:36:00][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:36:04][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:36:06][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:36:11][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:36:49][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][18:38:13][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43054, fd: 5 }
+[2021-09-27][18:39:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43056, fd: 5 }
+[2021-09-27][18:40:14][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][18:41:30][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43060, fd: 5 }
+[2021-09-27][18:41:35][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:42:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43062, fd: 5 }
+[2021-09-27][18:42:50][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:42:59][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:43:13][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:43:19][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43064, fd: 5 }
+[2021-09-27][18:43:26][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:44:05][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43066, fd: 5 }
+[2021-09-27][18:44:08][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:45:34][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43068, fd: 5 }
+[2021-09-27][18:45:41][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:46:07][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43070, fd: 5 }
+[2021-09-27][18:46:10][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:46:23][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43072, fd: 5 }
+[2021-09-27][18:46:24][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:48:30][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43074, fd: 5 }
+[2021-09-27][18:48:34][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:49:59][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43076, fd: 5 }
+[2021-09-27][18:50:00][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:51:43][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43078, fd: 5 }
+[2021-09-27][18:52:28][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43080, fd: 5 }
+[2021-09-27][18:53:04][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43082, fd: 5 }
+[2021-09-27][18:53:06][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][18:53:13][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43084, fd: 5 }
+[2021-09-27][18:53:14][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][18:55:04][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43086, fd: 5 }
+[2021-09-27][18:55:40][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][18:55:47][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43092, fd: 5 }
+[2021-09-27][18:55:48][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][18:58:14][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43094, fd: 5 }
+[2021-09-27][18:58:15][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][18:58:15][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:00:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43096, fd: 5 }
+[2021-09-27][19:00:57][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:01:41][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43098, fd: 5 }
+[2021-09-27][19:01:43][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:01:54][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43100, fd: 5 }
+[2021-09-27][19:01:56][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:02:07][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43102, fd: 5 }
+[2021-09-27][19:02:14][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:02:18][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43104, fd: 5 }
+[2021-09-27][19:02:29][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:02:42][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43106, fd: 5 }
+[2021-09-27][19:02:44][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:04:24][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43110, fd: 5 }
+[2021-09-27][19:04:26][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:07:14][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43112, fd: 5 }
+[2021-09-27][19:07:14][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43114, fd: 5 }
+[2021-09-27][19:07:22][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43116, fd: 5 }
+[2021-09-27][19:07:33][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:07:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43118, fd: 5 }
+[2021-09-27][19:07:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43120, fd: 5 }
+[2021-09-27][19:07:46][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43122, fd: 5 }
+[2021-09-27][19:07:46][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43124, fd: 5 }
+[2021-09-27][19:08:01][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43126, fd: 5 }
+[2021-09-27][19:08:05][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43128, fd: 5 }
+[2021-09-27][19:08:05][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43130, fd: 5 }
+[2021-09-27][19:08:32][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43134, fd: 5 }
+[2021-09-27][19:08:42][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43136, fd: 5 }
+[2021-09-27][19:08:47][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:09:31][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43138, fd: 5 }
+[2021-09-27][19:09:38][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:11:44][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43142, fd: 5 }
+[2021-09-27][19:11:53][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:11:53][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:12:03][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43144, fd: 5 }
+[2021-09-27][19:12:06][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:12:06][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:12:09][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43148, fd: 5 }
+[2021-09-27][19:12:15][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:13:27][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43150, fd: 5 }
+[2021-09-27][19:13:29][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:13:47][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43152, fd: 5 }
+[2021-09-27][19:13:48][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:15:17][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43154, fd: 5 }
+[2021-09-27][19:15:19][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:15:31][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43156, fd: 5 }
+[2021-09-27][19:15:32][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:15:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43158, fd: 5 }
+[2021-09-27][19:15:47][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:16:49][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43162, fd: 5 }
+[2021-09-27][19:16:51][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:18:43][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:18:48][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:19:22][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:19:22][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:19:24][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:19:45][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:22:13][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:22:14][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:22:41][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-27][19:22:41][Redstone_daemon][INFO] Starting redstone node
+[2021-09-27][19:22:41][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-27][19:22:41][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-27][19:22:41][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-27][19:22:41][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-27][19:22:41][Redstone_daemon][INFO] API server launched
+[2021-09-27][19:22:41][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-27][19:22:41][Redstone_daemon][INFO] wait 5 sec
+[2021-09-27][19:22:41][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-27][19:22:42][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:22:46][Redstone_daemon][INFO] announe block test
+[2021-09-27][19:22:46][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
+[2021-09-27][19:22:47][redstone_rs::rpc][DEBUG] New block! Hash=2, chain=1,
+[2021-09-27][19:22:48][redstone_rs::rpc][DEBUG] New block! Hash=3, chain=1,
+[2021-09-27][19:22:50][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:22:51][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:22:52][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:25:27][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-27][19:25:27][Redstone_daemon][INFO] Starting redstone node
+[2021-09-27][19:25:27][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-27][19:25:27][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-27][19:25:27][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-27][19:25:27][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-27][19:25:27][Redstone_daemon][INFO] API server launched
+[2021-09-27][19:25:27][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-27][19:25:27][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-27][19:25:28][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:25:37][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:27:24][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43166, fd: 5 }
+[2021-09-27][19:27:29][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:28:01][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43168, fd: 5 }
+[2021-09-27][19:28:17][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:28:17][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:28:17][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:29:18][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43170, fd: 5 }
+[2021-09-27][19:29:25][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:31:11][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43172, fd: 5 }
+[2021-09-27][19:31:15][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:31:32][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43174, fd: 5 }
+[2021-09-27][19:31:34][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:31:59][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43176, fd: 5 }
+[2021-09-27][19:32:00][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Io(Custom { kind: Other, error: "could not acquire lock on \"accounts/db\": Os { code: 11, kind: WouldBlock, message: \"Resource temporarily unavailable\" }" })', src/api.rs:127:63
+[2021-09-27][19:32:00][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:32:47][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43178, fd: 5 }
+[2021-09-27][19:32:49][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:33:12][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43180, fd: 5 }
+[2021-09-27][19:33:14][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:34:58][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43184, fd: 5 }
+[2021-09-27][19:35:03][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:35:52][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:36:04][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-27][19:36:04][Redstone_daemon][INFO] Starting redstone node
+[2021-09-27][19:36:04][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-27][19:36:04][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-27][19:36:04][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-27][19:36:04][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-27][19:36:04][Redstone_daemon][INFO] API server launched
+[2021-09-27][19:36:04][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-27][19:36:04][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-27][19:36:06][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:50:08][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-27][19:50:08][Redstone_daemon][INFO] Starting redstone node
+[2021-09-27][19:50:08][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-27][19:50:08][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-27][19:50:08][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-27][19:50:08][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-27][19:50:08][Redstone_daemon][INFO] API server launched
+[2021-09-27][19:50:08][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-27][19:50:08][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-27][19:50:16][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Poor formating or address not found"', src/api.rs:127:63
+[2021-09-27][19:58:17][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-27][19:58:17][Redstone_daemon][INFO] Starting redstone node
+[2021-09-27][19:58:17][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-27][19:58:17][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-27][19:58:17][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-27][19:58:17][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-27][19:58:17][Redstone_daemon][INFO] API server launched
+[2021-09-27][19:58:17][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-27][19:58:17][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-27][19:58:42][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43190, fd: 5 }
+[2021-09-28][19:30:25][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-09-28][19:30:25][Redstone_daemon][INFO] Starting redstone node
+[2021-09-28][19:30:25][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-09-28][19:30:25][Redstone_daemon][WARN] Run at your own risk!
+[2021-09-28][19:30:25][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-09-28][19:30:25][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-09-28][19:30:25][Redstone_daemon][INFO] API server launched
+[2021-09-28][19:30:25][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-09-28][19:30:25][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-09-28][19:30:32][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:43320, fd: 5 }

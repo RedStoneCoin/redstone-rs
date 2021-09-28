@@ -115,11 +115,13 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
 
 #[get("/get_mem_tx/<hash>")]
 fn gettx(hash: String) -> String {
-    let get = serde_json::to_string(&mempool::get_transaction(hash).unwrap());
-    match get {
-        Ok(_) => {return "{ \"success\": true, \"txn\":".to_string() + &get.unwrap() + "}";}
-        _ => {return "{ \"success\": false,}".to_string();}
-    };
+    if let Err(get1) = mempool::get_transaction(hash.clone())  {
+        return "{ \"result\" : \"failure\" }".to_owned();    } 
+    else {
+        let get = serde_json::to_string(&mempool::get_transaction(hash.clone()).unwrap());
+        return "{ \"success\": true, \"Result\":".to_string() + &get.unwrap() + "}";
+
+    }
 }
 
 #[get("/get_acc/<public_key>")]

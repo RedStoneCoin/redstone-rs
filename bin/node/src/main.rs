@@ -205,17 +205,6 @@ fn main() {
         };
         // get blocks form db and send them to the wallet to sync it
         //  let block = vec![blk,blk1,blk2];
-        //info!("wait 5 sec");
-        //thread::sleep(time::Duration::from_secs(5));
-        //info!("announe block test");
-        //block_announce(blk).unwrap();
-        //thread::sleep(time::Duration::from_secs(1));
-
-        //block_announce(blk1).unwrap();
-        //thread::sleep(time::Duration::from_secs(1));
-
-        //block_announce(blk2).unwrap();
-        //thread::sleep(time::Duration::from_secs(1));
 
 
        // for blk in block {
