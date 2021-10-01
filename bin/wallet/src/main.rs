@@ -177,12 +177,19 @@ async fn send_transaction(txn: Transaction) -> Result<(), Box<dyn std::error::Er
 }
 
 async fn get_account(addr: String) -> String {
-    //Using format! here removes one unnecessary allocation
+    //Using format! hre removes one unnecessary allocation
+    
     let request_url = format!("{}/json_api/get_acc/{}",SERVER_ADDR.lock().unwrap().to_owned(), addr);
-    let body = reqwest::get(request_url).await.unwrap().text().await;
-    //println!("body = {:?}", body);
-    return body.unwrap();
+    let body = reqwest::get(request_url.clone()).await;
+    
+    match reqwest::get(request_url.clone()).await{
+        Err(eer) => {
+            return "".to_string()
+        }
+        Ok(resp) => return resp.text().await.unwrap()
+    }
 }
+
 
 fn save_wallet(wallet: String, pass: String, filename: String) {
     let encrypted = {
@@ -351,7 +358,17 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
     .build()
     .unwrap()
     .block_on(async {
+        if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+            *locked_ls = WalletDetails {
+                wallet: Some(wall.clone()),
+                balance: 0,
+                locked: 0,
+                uncle_root: "".to_string(),
+            };
+            drop(locked_ls)
+        }
         let gacc = get_account(addr.clone()).await;
+        debug!("{}",gacc);
         if gacc.clone() == "" {
             if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
                 *locked_ls = WalletDetails {
@@ -360,6 +377,8 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                     locked: 0,
                     uncle_root: "".to_string(),
                 };
+                drop(locked_ls)
+
             }
         } else {
             let v: Value = serde_json::from_str(&gacc).unwrap();
@@ -371,6 +390,8 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                     locked: 0,
                     uncle_root: "".to_string(),
             };
+            drop(locked_ls)
+
             }
         }
 
