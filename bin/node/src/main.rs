@@ -4,6 +4,7 @@ use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
 mod api;
+mod cli;
 use std::collections::HashMap;
 use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
@@ -102,10 +103,10 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
 fn startnnode() {
 }
 fn main() {
+    cli::cli();
     setup_logging(3).unwrap();
     let p2p_port = 44404;
     let rpc_port = p2p_port + 1;
-
     let art = " 
     ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
     ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝

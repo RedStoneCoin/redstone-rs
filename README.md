@@ -76,6 +76,7 @@ cd target
 
 - [X] Json Api
 - [X] Rpc
+- [ ] CLI 
 - [ ] Full Node
 
 ### Wallet
