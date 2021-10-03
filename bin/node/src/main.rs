@@ -103,8 +103,15 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
 fn startnnode() {
 }
 fn main() {
-    cli::cli();
-    setup_logging(3).unwrap();
+    //retrive args from cli::cli();
+    let args = cli::cli();
+    let arg1 = &args[0];
+    let arg2 = &args[1];
+    let arg3 = &args[2];
+
+
+
+
     let p2p_port = 44404;
     let rpc_port = p2p_port + 1;
     let art = " 
