@@ -1,7 +1,7 @@
 # Redstone-rs
 
 ## Implementation of Redstone protocol
-
+Redstone Project is a p2p custom blockchain implementation, where we have a network made of subchains for better speeds and scalability.
 This is the offical implemention of the redstone protocol. It is written in rust. Protocol is subject to frequent change and as such no documention exists (however it is in the works) It is currently not ready for usage.
 
 ## Table of Contents
