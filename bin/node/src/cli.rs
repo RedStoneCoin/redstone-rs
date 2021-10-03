@@ -25,7 +25,7 @@ pub fn cli() {
                           .help("logging level")
                           .required(false))
                           .get_matches();
-
+    /*
     if matches.value_of("validator").unwrap() == "true" {
         println!("We are validator")
     }
@@ -35,5 +35,6 @@ pub fn cli() {
     if matches.value_of("logging").unwrap() == "debug" {
         println!("Debug logging")
     }
+    */
     // more program logic goes here...
 }

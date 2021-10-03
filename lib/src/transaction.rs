@@ -1,5 +1,6 @@
 use crate::{crypto::Hashable, executable::Executable};
 use serde::{Deserialize, Serialize};
+use rand::Rng;
 use crate::state::GlobalState;
 use crate::{
     keypair::Keypair,
@@ -71,7 +72,9 @@ impl Transaction {
         txn
     }
 pub fn find_pow(&mut self) {
+        let mut rng = rand::thread_rng();
         for nonce_attempt in 0..=u64::MAX {
+            let nonce_attempt = rng.gen::<u64>();
             self.nonce = nonce_attempt;
             let pow = self.hash_item();
             //println!("pow test: {}",pow);

@@ -454,7 +454,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                         let input: u64 = input.trim().parse().unwrap();
 
                         if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
-                            if input < walletdetails.balance {
+                            if input < 1000 {
                                 let mut txn1 = Transaction {
                                     hash: "".to_owned(),
                                     sender: walletdetails
