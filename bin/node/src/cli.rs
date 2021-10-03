@@ -3,7 +3,7 @@ use clap::{Arg, App, SubCommand};
 /// Simple program to greet a person
 
 
-pub fn cli() {
+pub fn cli() ->  Vec<String>{
     let matches =  App::new("Redstone Node")
                         .version("0.1.0")
                         .author("Redstone Developers. <redstonecrypto@gmail.com>")
@@ -25,16 +25,12 @@ pub fn cli() {
                           .help("logging level")
                           .required(false))
                           .get_matches();
-    /*
-    if matches.value_of("validator").unwrap() == "true" {
-        println!("We are validator")
-    }
-    if matches.value_of("mode").unwrap() == "fl" {
-        println!("We are full node")
-    }
-    if matches.value_of("logging").unwrap() == "debug" {
-        println!("Debug logging")
-    }
-    */
-    // more program logic goes here...
+    
+    // return vec of args
+    let mut args = Vec::new();
+    args.push(matches.value_of("validator").unwrap_or("").to_string());
+    args.push(matches.value_of("mode").unwrap_or("").to_string());
+    args.push(matches.value_of("logging").unwrap_or("").to_string());
+    args
+    
 }

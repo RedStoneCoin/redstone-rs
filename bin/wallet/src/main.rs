@@ -253,10 +253,9 @@ fn commands() {
 fn commands_logged() {
     info!("[1] Show wallet balance");
     info!("[2] Send Redstone");
-    info!("[3] Show transaction history");
-    info!("[4] Show balance");
-    info!("[8] Relogin");
-    info!("[5] exit");
+    info!("[3] Send Custom Transaction");
+    
+    info!("[4] exit");
 }
 
 pub fn new_ann(ann: Announcement) {
@@ -497,13 +496,79 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                             drop(walletdetails);
                         }
                     }
-                    4 => {
+                    // send custom transaction where user will input everything in transaction
+                    // format
+
+                    3 => {
+                        info!("Enter recivers pub key: ");
+                        let mut reciver = String::new();
+                        io::stdin()
+                            .read_line(&mut reciver)
+                            .expect("Failed to read input.");
+                        let mut input = String::new();
+                        info!("Enter a amout:");
+                        io::stdin()
+                            .read_line(&mut input)
+                            .expect("Failed to read input.");
+                        let input: u64 = input.trim().parse().unwrap();
+
+                        let mut py = String::new();
+                        info!("Enter payload:");
+                        io::stdin()
+                            .read_line(&mut py)
+                            .expect("Failed to read input.");
+
+                        let mut type_flag = String::new();
+                        info!("Enter type_flag:");
+                        io::stdin()
+                            .read_line(&mut type_flag)
+                            .expect("Failed to read input.");
+                        let type_flag: u8 = type_flag.trim().parse().unwrap();
+
                         if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
-                            info!("Your current balance: {}", walletdetails.balance);
+                            if input < 1000 {
+                                let mut txn1 = Transaction {
+                                    hash: "".to_owned(),
+                                    sender: walletdetails
+                                        .wallet
+                                        .as_ref()
+                                        .unwrap()
+                                        .public_key
+                                        .to_owned(),
+                                    reciver: reciver.trim_end().to_owned(),
+                                    amount: input,
+                                    nonce: 0,
+                                    type_flag: type_flag,
+                                    payload: py.to_owned(), // Hex encoded payload
+                                    pow: "".to_owned(), // Spam protection PoW
+                                    signature: "".to_owned(),
+                                };                    //99999999999999999999
+                                let pow = txn1.find_pow();
+               
+                                let sign = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone());
+
+                                info!("hash for txn:{}", txn1.hash);
+                                txn1.signature = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone()).unwrap();
+
+                                println!("{:#?}", txn1);
+
+                                tokio::runtime::Builder::new_multi_thread()
+                                    .enable_all()
+                                    .build()
+                                    .unwrap()
+                                    .block_on(async {
+                                        send_transaction(txn1).await;
+                                    });
+                            } else {
+                                info!(
+                                    "You are tring to send more then you have!!! Balance: {}",
+                                    walletdetails.balance
+                                );
+                            }
                             drop(walletdetails);
-                         }
+                        }
                     }
-                    5 => {
+                    4 => {
                         info!("Bye....");
                         break;
                     }

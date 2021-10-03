@@ -124,7 +124,7 @@ impl Executable for Transaction {
             acc_sender.unwrap().balance -= self.amount;
         }
 
-
+        // finish transaction
         todo!()
 
 
@@ -188,6 +188,7 @@ impl Executable for Transaction {
             println!("{:?}",mpool);
             return Err("Transaction is in mempool").unwrap();
         }
+        //check for more things and validate them
 
         let mut sender = keypairs.address();
         let mut acc_sender = Account::get(sender);
