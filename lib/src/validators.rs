@@ -50,8 +50,8 @@ pub fn choose_next_proposer(block: Block) -> Result<Validator, Box<dyn std::erro
         trys += 1;
         if trys >= 5 {
             // we have tried too many times, return the first validator
-            return Ok(online[0].clone());
             log::error!("Unexpected error: failed to find proposer after 5 trys, total_stake: {}, target_coin: {}, coin_culmulative: {}, online_count {}", total_stake, target_coin, coin_culmulative, online.len());
+            return Ok(online[0].clone());
         }
     }
 }
