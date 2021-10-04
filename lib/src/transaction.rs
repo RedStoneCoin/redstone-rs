@@ -1,4 +1,4 @@
-use crate::{crypto::Hashable, executable::Executable};
+use crate::{crypto::Hashable, executable::Executable, state::GlobalState};
 use serde::{Deserialize, Serialize};
 
 pub enum TxType{
@@ -83,7 +83,13 @@ impl Executable for Transaction {
     /// # Execute
     /// Executes this transaction, updating the account balances and executing all smart contracts touched
     /// Returns the error code encountered OR the new account state hash
-    fn execute(&self, context: &String) -> Result<String, Box<dyn std::error::Error>> {
+    /// The changes are not applied on disc, but rather we mutate the state object passed to us
+    /// This allows rollbacks and in memory applications
+    fn execute(&self, context: &String, state: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
+        if state.is_none() {
+            return Err("Must have a state to mutate".into());
+        }
+        
         todo!()
     }
 
