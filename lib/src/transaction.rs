@@ -134,6 +134,44 @@ impl Executable for Transaction {
     /// Checks if a txn is valid
     /// Todo fix error messages
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
+        if self.type_flag == 6 {
+            // validate chain creation
+            if self.payload.len() > 100 {
+                return Err("Chain name too long".to_string()).unwrap();
+            }
+            if self.payload.len() < 3 {
+                return Err("Chain name too short".to_string()).unwrap();
+            }
+            if self.payload.contains(" ") {
+                return Err("Chain name cannot contain spaces".to_string()).unwrap();
+            }
+
+
+        }
+        
+
+       // check if transaction is coinbase>>
+
+       if self.type_flag == 7 {
+           // validate coinbase
+           if self.sender != "0x0000000000000000000000000000000000000000" {
+               return Err("Coinbase sender is not 0x0000000000000000000000000000000000000000".to_string()).unwrap();
+           }
+
+           if self.amount != 1 {
+              return Err("Coinbase amount is not 1".to_string()).unwrap();
+           }
+           Ok(())
+       } else {
+        if self.amount == 0 {
+            return Err("Amount is 0".to_string()).unwrap();
+        }
+        if self.sender == self.reciver {
+            return Err("Sender and reciver are the same".to_string()).unwrap();
+        }
+        if self.amount > 100000 {
+            return Err("Amount is too large".to_string()).unwrap();
+        }
        let keypairs = Keypair {
             public_key: self.sender.clone(),
             private_key: "".to_string(),
@@ -209,9 +247,10 @@ impl Executable for Transaction {
                     }
                 }
             },
+            // validate type 1 2 3 4 5
             1 => {
                 if let Err(ref acc_sender1) = acc_sender {
-                    return Err("Failed to get receiver's account").unwrap();
+                    return Err("Failed to get sender's account").unwrap();
                 } 
                 else {
                     if self.amount < acc_sender.unwrap().balance {
@@ -220,13 +259,73 @@ impl Executable for Transaction {
                     } else {
                         // Transaction is invalid
                         return Err("Transaction amount is greater than sender's balance").unwrap();
-                    }               
+                    }
                 }
-            }, 
+            },
+            2 => {
+                if let Err(ref acc_sender1) = acc_sender {
+                    return Err("Failed to get sender's account").unwrap();
+                } 
+                else {
+                    if self.amount < acc_sender.unwrap().balance {
+                        // Transaction is valid
+                        return Ok(())
+                    } else {
+                        // Transaction is invalid
+                        return Err("Transaction amount is greater than sender's balance").unwrap();
+                    }
+                }
+            },
+            3 => {
+                if let Err(ref acc_sender1) = acc_sender {
+                    return Err("Failed to get sender's account").unwrap();
+                } 
+                else {
+                    if self.amount < acc_sender.unwrap().balance {
+                        // Transaction is valid
+                        return Ok(())
+                    } else {
+                        // Transaction is invalid
+                        return Err("Transaction amount is greater than sender's balance").unwrap();
+                    }
+                }
+            },
+            4 => {
+                if let Err(ref acc_sender1) = acc_sender {
+                    return Err("Failed to get sender's account").unwrap();
+                } 
+                else {
+                    if self.amount < acc_sender.unwrap().balance {
+                        // Transaction is valid
+                        return Ok(())
+                    } else {
+                        // Transaction is invalid
+                        return Err("Transaction amount is greater than sender's balance").unwrap();
+                    }
+                }
+            },
+            5 => {
+                if let Err(ref acc_sender1) = acc_sender {
+                    return Err("Failed to get sender's account").unwrap();
+                } 
+                else {
+                    // plus gas fee for smart contract!!!!!
+                    if self.amount < acc_sender.unwrap().balance {
+                        // Transaction is valid
+                        return Ok(())
+                    } else {
+                        // Transaction is invalid
+                        return Err("Transaction amount is greater than sender's balance").unwrap();
+                    }
+                }
+            },
+            
+ 
             _ => {
                 return Err("Transaction Invalid type Flag").unwrap();
             }
         }
+    }
       
     }
 
