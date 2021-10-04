@@ -1,6 +1,8 @@
 use crate::database::Database;
 use sled;
 const DATABASE_PATH_PREFIX: &str = "blockchain_db_";
+
+#[derive(Clone)]
 pub struct Blockchain {
     index: u64,
 }

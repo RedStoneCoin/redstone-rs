@@ -87,6 +87,7 @@ impl Round {
     }
 }
 
+#[derive(Clone)]
 pub struct GlobalState {
     accounts: Vec<Account>,
     tips: Vec<Block>,
