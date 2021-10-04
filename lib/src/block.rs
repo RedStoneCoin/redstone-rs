@@ -86,24 +86,20 @@ impl Block {
 }
 
 impl Executable for Block {
-    fn execute(&self, context: &String) -> Result<String, Box<dyn std::error::Error>> {
+    fn execute(&self, context: &String, globalState: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
         // Go through all the transactions and execute them
-        let state_get = GlobalState::current();
-        if let Err(state_error) = state_get {
-            return Err(state_error.into());
-        }
-        let mut pre_applicate_state = state_get.unwrap();
+        let mut gs = globalState.unwrap();
+        let mut pre_applicate_state = gs.clone();
         for txn in &self.transactions {
             let txn_result = txn.execute(context, Some(&mut pre_applicate_state));
             if let Err(txn_error) = txn_result {
                 return Err(txn_error.into());
             }
             let txn_result = txn_result.unwrap();
-            log::debug(&format!("txn_result: {}", txn_result));
+            log::debug!("txn_result: {}", txn_result);
         }
         // If we encountered no errors, we can apply the state
-
-
+        *gs = pre_applicate_state;
         todo!()
     }
 
