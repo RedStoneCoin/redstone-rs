@@ -18,7 +18,7 @@ fn get_message_types() -> HashMap<u16, &'static str> {
     message_types.insert(13, "Get Block Count (ask)");
     message_types.insert(14, "Get Block Count (response)");
     message_types.insert(15, "Get Global Block Count (ask)");
-    message_types.insert(16, "Get Global Block Count (response)")
+    message_types.insert(16, "Get Global Block Count (response)");
     message_types.insert(17, "Get Chain count (ask)");
     message_types.insert(18, "Get Chain count (response)");
     message_types.insert(19, "Ping");
@@ -43,6 +43,5 @@ pub fn get_message_type_name(message_type: u16) -> &'static str {
 }
 
     
-// Make test for it in rust
-
-
+// Language: rust
+// Test: lib/src/p2p/message_types.rs
