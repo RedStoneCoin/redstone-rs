@@ -4566,3 +4566,52 @@
 [2021-10-03][19:46:27][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "Transaction amount is greater than sender's balance"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:207:91
 [2021-10-03][19:47:12][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:49070, fd: 6 }
 [2021-10-03][19:47:19][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: "ErrInvalidPow"', /home/toni/Documents/redstone-rs/lib/src/transaction.rs:169:41
+[2021-10-04][12:15:53][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-10-04][12:15:53][Redstone_daemon][INFO] Starting redstone node
+[2021-10-04][12:15:53][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-04][12:15:53][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-04][12:15:53][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-04][12:15:53][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-04][12:15:53][Redstone_daemon][INFO] API server launched
+[2021-10-04][12:15:53][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-04][12:15:53][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-04][12:15:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:57368, fd: 5 }
+[2021-10-05][12:13:05][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-10-05][12:13:05][Redstone_daemon][INFO] Starting redstone node
+[2021-10-05][12:13:05][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-05][12:13:05][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-05][12:13:05][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-05][12:13:05][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-05][12:13:05][Redstone_daemon][INFO] API server launched
+[2021-10-05][12:13:05][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-05][12:13:05][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-11][21:04:24][Redstone_daemon][INFO]  
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+    
+[2021-10-11][21:04:24][Redstone_daemon][INFO] Starting redstone node
+[2021-10-11][21:04:24][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-11][21:04:24][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-11][21:04:24][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-11][21:04:24][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-11][21:04:24][Redstone_daemon][INFO] API server launched
+[2021-10-11][21:04:24][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-11][21:04:24][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405

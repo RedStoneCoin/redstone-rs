@@ -4,12 +4,12 @@ use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
 mod api;
-mod cli;
 use std::collections::HashMap;
 use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
 use redstone_rs::crypto::hash;
-
+extern crate clap;
+use clap::{Arg, App, SubCommand};
 use redstone_rs::rpc::{block_announce, Announcement, Caller};
 use std::{thread, time};
 
@@ -104,13 +104,43 @@ fn startnnode() {
 }
 fn main() {
     //retrive args from cli::cli();
-    let args = cli::cli();
-    let arg1 = &args[0];
-    let arg2 = &args[1];
-    let arg3 = &args[2];
-
-
-
+    // TODO CLI!
+    let matches =  App::new("Redstone Node")
+                        .version("0.1.0")
+                        .author("Redstone Developers. <redstonecrypto@gmail.com>")
+                        .about("Redstone Deamon Software")
+                          .arg(Arg::with_name("validator")
+                          .long("validator") // allow --name
+                          .takes_value(true)
+                          .help("validator")
+                          .required(false))
+                          .arg(Arg::with_name("mode")
+                          .long("mode") // allow --name
+                          .takes_value(true)
+                          .help("mode")
+                          .required(false))
+                          .arg(Arg::with_name("logging")
+                          .long("logging") // allow --name
+                          .takes_value(true)
+                          .help("logging level")
+                          .required(false))
+                          .get_matches();
+    
+    // return vec of args
+    let mut args = Vec::new();
+    args.push(matches.value_of("validator").unwrap_or("").to_string());
+    args.push(matches.value_of("mode").unwrap_or("").to_string());
+    args.push(matches.value_of("logging").unwrap_or("").to_string());
+    // setup logging
+    match args[2].as_ref() {
+        "0" => {
+            setup_logging(1).unwrap();
+        }
+        _ => {
+            setup_logging(3).unwrap();
+        }
+    }
+    
 
     let p2p_port = 44404;
     let rpc_port = p2p_port + 1;
