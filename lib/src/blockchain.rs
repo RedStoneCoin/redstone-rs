@@ -1,8 +1,7 @@
 use crate::database::Database;
 use sled;
-const DATABASE_PATH_PREFIX: &str = "blockchain_db_";
-
-#[derive(Clone)]
+pub const DATABASE_PATH_PREFIX: &str = "blockchain_db_";
+#[derive(Debug, Clone)]
 pub struct Blockchain {
     index: u64,
 }
@@ -10,7 +9,6 @@ pub struct Blockchain {
 impl Blockchain {
     pub fn new(index: u64) -> Self {
         let bc = Blockchain { index };
-
         bc
     }
     pub fn index(&self) -> u64 {

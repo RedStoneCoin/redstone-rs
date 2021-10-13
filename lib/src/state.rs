@@ -120,6 +120,7 @@ impl GlobalState {
         db.open(&"globalstate".to_string())?;
         Ok(db.get(&"globalstate".to_string(), &"hash".to_string()))
     }
+
     pub fn set_current(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut db = Database::new();
         db.open(&"globalstate".to_string())?;

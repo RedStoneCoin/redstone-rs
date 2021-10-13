@@ -7,12 +7,17 @@ use std::io::{Read, Write};
 use std::net::TcpStream;
 use std::sync::Mutex;
 use serde::{Deserialize, Serialize};
+use crate::{
+    blockchain::Blockchain,
+};
+use std::{thread, time};
 
 lazy_static! {
     static ref CONNECTIONS: Mutex<Vec<(TcpStream, Vec<String>)>> = Mutex::new(vec![]);
     pub static ref LOCAL_CALLBACKS: Mutex<Vec<Caller<'static>>> = Mutex::new(vec![]);
 
 }
+
 #[derive(Debug, Default, Clone,Serialize, Deserialize)]
 
 pub struct Announcement {
@@ -30,8 +35,9 @@ impl Caller<'_> {
     }
 }
 
+
 pub fn block_announce(blk: Block) -> Result<(), Box<dyn std::error::Error>> {
-        info!(
+        debug!(
             "New block! Hash={}, chain={},",
             blk.hash,
             blk.header.chain,
@@ -102,9 +108,14 @@ pub fn launch_client(
         server_port
     );
     if let Ok(mut stream) = TcpStream::connect(format!("{}:{}", server_ip, server_port)) {
+        //if let Ok(_) = stream.write(b"sync") {
+        //    info!("Sent sync message to server");
+        //}
         if let Ok(_) = stream.write(b"init") {
+
             info!("Sent init message to server");
             let mut buf = [0u8; 1024];
+
             if services.is_empty() {
                 // use all services we can discard the read bytes
                 if let Ok(_) = stream.read(&mut buf) {
@@ -112,6 +123,7 @@ pub fn launch_client(
                     if let Ok(_) = stream.write(b"*") {
                         info!("Sent services register command (*=all)");
                         info!("Connected to RPC server at 127.0.0.1:{}", server_port);
+
                         let _loop_thread_handle = std::thread::spawn(move || loop {
                             let mut buf = [0u8; 2048];
                             if let Ok(size_of_msg) = stream.peek(&mut buf) {
@@ -133,7 +145,7 @@ pub fn launch_client(
                                         if let Ok(announcement) =
                                             serde_json::from_str::<Announcement>(&message_string)
                                         {
-                                            info!("Recieved new announcement from server, announcement={:#?}", announcement);
+                                            debug!("Recieved new announcement from server, announcement={:#?}", announcement);
                                             caller.call(announcement);
 
                                             trace!(
@@ -144,6 +156,7 @@ pub fn launch_client(
                                 }
                             }
                         });
+
                         info!("Spawned RPC listener thread");
                         return Ok(());
                     } else {
@@ -191,7 +204,7 @@ pub fn launch_client(
                                     if let Ok(announcement) =
                                         serde_json::from_str::<Announcement>(&message_string)
                                     {
-                                        info!("Recieved new announcement from server, announcement={:#?}", announcement);
+                                        debug!("Recieved new announcement from server, announcement={:#?}", announcement);
                                         caller.call(announcement);
 
                                         trace!("Called the caller's callback with announcement");

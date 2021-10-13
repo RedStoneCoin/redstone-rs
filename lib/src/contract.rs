@@ -1,5 +1,8 @@
-use crate::{crypto::Hashable, executable::Executable, state::GlobalState};
-
+use crate::{crypto::Hashable, executable::Executable};
+use crate::state::GlobalState;
+// We wont use web3 wallets webapps will requite user 
+// to have a private to interact with the contract
+// for more info: https://ethereum.stackexchange.com/questions/82531/connecting-the-wallet-of-to-your-dapp-and-different-ethereum-wallet-types
 pub struct State {
     pub variables: Vec<String>, // the varibles, in hex
 }
@@ -29,7 +32,7 @@ impl Executable for SmartContract {
     /// # Execute
     /// Runs the smart contract, with conext being the block hash it was called by
     /// Returns the new state hash if this smart contract ran correctly or the error code if it failed
-    fn execute(&self, context: &String, state: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
+    fn execute(&self, context: &String, state: &mut GlobalState) -> Result<String, Box<dyn std::error::Error>> {
         todo!()
     }
     /// # Evaluate

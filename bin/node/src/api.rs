@@ -13,6 +13,7 @@ use std::error::Error;
 use rocket::get;
 use rocket::post;
 use redstone_rs::transaction::Transaction;
+use redstone_rs::account::Account;
 
 use rocket::config::{Config, Environment, LoggingLevel};
 lazy_static! {
@@ -58,7 +59,7 @@ fn ping() -> &'static str {
 
 #[post("/submit_txn", format = "application/json", data = "<txn_data>")]
 pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
-    info!("Transaction recived by api!");
+    debug!("Transaction recived by api!");
     let mut holder_vec: Vec<u8> = vec![];
     let mut txn_data1 = txn_data.open();
 
@@ -97,7 +98,7 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
                 mempool::add_transaction(txn1);
                 return "{ \"result\" : \"sent txn\" }".to_owned();
             } else {
-                return "{ \"result\" : \"failure\" }".to_owned();
+                return "{ \"result\" : \"FAILURE PLEASE TRY LATER\" }".to_owned();
             }
         }
         else {
@@ -112,22 +113,35 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
   }
 }
 
-#[get("/get_tx/<hash>")]
+#[get("/get_mem_tx/<hash>")]
 fn gettx(hash: String) -> String {
-    let get = serde_json::to_string(&mempool::get_transaction(hash).unwrap());
-    match get {
-        Ok(_) => {return "{ \"success\": true, \"txn\":".to_string() + &get.unwrap() + "}";}
-        _ => {return "{ \"success\": false,}".to_string();}
-    };
+    if let Err(get1) = mempool::get_transaction(hash.clone())  {
+        return "{ \"result\" : \"failure\" }".to_owned();    } 
+    else {
+        let get = serde_json::to_string(&mempool::get_transaction(hash.clone()).unwrap());
+        return "{ \"success\": true, \"Result\":".to_string() + &get.unwrap() + "}";
+
+    }
 }
 
+#[get("/get_acc/<public_key>")]
+fn getacc(public_key: String) -> String {
+    if let Err(get1) = Account::get(public_key.clone())  {
+        return "{ \"result\" : \"failure\" }".to_owned();    } 
+    else {
+        let get = serde_json::to_string(&Account::get(public_key).unwrap());
+        return "{ \"success\": true, \"Result\":".to_string() + &get.unwrap() + "}";
+
+    }
+}
 
 
 pub fn get_middleware() -> Vec<Route> {
     routes![must_provide_method,
             ping,
             submit_txn_v1,
-            gettx
+            gettx,
+            getacc
     ]
 }
 pub fn start_api() {

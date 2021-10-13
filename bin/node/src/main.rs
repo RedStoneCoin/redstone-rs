@@ -4,6 +4,7 @@ use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
 mod api;
+mod cli;
 use std::collections::HashMap;
 use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
@@ -102,10 +103,17 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
 fn startnnode() {
 }
 fn main() {
-    setup_logging(3).unwrap();
+    //retrive args from cli::cli();
+    let args = cli::cli();
+    let arg1 = &args[0];
+    let arg2 = &args[1];
+    let arg3 = &args[2];
+
+
+
+
     let p2p_port = 44404;
     let rpc_port = p2p_port + 1;
-
     let art = " 
     ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
     ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
@@ -147,7 +155,7 @@ fn main() {
             signature: "".to_owned(),
         };
         let mut blk = Block {
-            hash: "".to_owned(),
+            hash: "1".to_owned(),
             header: Header {
                 height: 1,
                 timestamp: 1,
@@ -163,12 +171,53 @@ fn main() {
                 validator_signatures: vec!("".to_owned()),
                 vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
             },
-            transactions: vec![txn],
+            transactions: vec![txn.clone()],
         };
-        //info!("wait 5 sec");
-        //thread::sleep(time::Duration::from_secs(5));
-        //info!("announe block test");
-        //block_announce(blk).unwrap();
+        let mut blk1 = Block {
+            hash: "2".to_owned(),
+            header: Header {
+                height: 2,
+                timestamp: 1,
+                chain: 1,
+                parent_hash: "".to_owned(),
+                state_hash: "".to_owned(),
+                uncle_root: "".to_owned(),
+                proposer: "".to_owned(), // the publickey of the proposer
+                transactions_merkle_root: "".to_owned(),
+                header_payload: 0,
+                proof: "".to_owned(),              // The vrf proof of the proposer as hex
+                proposer_signature: "".to_owned(), // proposers signature
+                validator_signatures: vec!("".to_owned()),
+                vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
+            },
+            transactions: vec![txn.clone()],
+        };
+        let mut blk2 = Block {
+            hash: "3".to_owned(),
+            header: Header {
+                height: 3,
+                timestamp: 1,
+                chain: 1,
+                parent_hash: "".to_owned(),
+                state_hash: "".to_owned(),
+                uncle_root: "".to_owned(),
+                proposer: "".to_owned(), // the publickey of the proposer
+                transactions_merkle_root: "".to_owned(),
+                header_payload: 0,
+                proof: "".to_owned(),              // The vrf proof of the proposer as hex
+                proposer_signature: "".to_owned(), // proposers signature
+                validator_signatures: vec!("".to_owned()),
+                vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
+            },
+            transactions: vec![txn.clone()],
+        };
+        // get blocks form db and send them to the wallet to sync it
+        //  let block = vec![blk,blk1,blk2];
+
+
+       // for blk in block {
+       //     block_announce(blk).unwrap();
+       //}
     });
     let _ = std::thread::spawn(move || {
 

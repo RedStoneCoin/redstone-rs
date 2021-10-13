@@ -6,10 +6,14 @@ use crate::{
     mempool,
     state::{GlobalState, Round},
     transaction::Transaction,
+    database::Database
 };
 use log::*;
 use serde::{Deserialize, Serialize};
+use crate::blockchain::DATABASE_PATH_PREFIX;
+
 #[derive(Deserialize, Serialize, Clone, Default, Debug)]
+
 pub struct Header {
     pub height: u64,
     pub timestamp: u64,
@@ -86,20 +90,22 @@ impl Block {
 }
 
 impl Executable for Block {
-    fn execute(&self, context: &String, globalState: Option<&mut GlobalState>) -> Result<String, Box<dyn std::error::Error>> {
+    fn execute(&self, context: &String, globalState: &mut GlobalState) -> Result<String, Box<dyn std::error::Error>> {
         // Go through all the transactions and execute them
-        let mut gs = globalState.unwrap();
-        let mut pre_applicate_state = gs.clone();
+        let mut pre_applicate_state = globalState.clone();
         for txn in &self.transactions {
-            let txn_result = txn.execute(context, Some(&mut pre_applicate_state));
+            let txn_result = txn.execute(context, &mut pre_applicate_state);
             if let Err(txn_error) = txn_result {
                 return Err(txn_error.into());
             }
             let txn_result = txn_result.unwrap();
+            let mut db_handle = Database::new();
+            db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.header.chain))?;
+            db_handle.set(&"transactions".to_owned(), &self.hash,&"1".to_string());
             log::debug!("txn_result: {}", txn_result);
         }
         // If we encountered no errors, we can apply the state
-        *gs = pre_applicate_state;
+        *globalState = pre_applicate_state;
         todo!()
     }
 

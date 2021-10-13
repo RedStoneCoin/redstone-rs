@@ -44,8 +44,8 @@ impl Keypair {
         let sig_bytes = hex::decode(signature)?;
         let signature: Signature = Signature::from_der(&sig_bytes)?;
         let secp = Secp256k1::new();
-        let pk_bytes = self.public_key.as_bytes();
-        let publickey = PublicKey::from_slice(&pk_bytes)?;
+        let pk_bytes = hex::decode(self.public_key.as_bytes());
+        let publickey = PublicKey::from_slice(&pk_bytes.unwrap())?;
         let msg = Message::from_hashed_data::<sha256::Hash>(message.as_bytes());
         return Ok(secp.verify(&msg, &signature, &publickey).is_ok());
     }

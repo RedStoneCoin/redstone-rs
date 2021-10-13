@@ -19,3 +19,4 @@ serde = { version = "1.0", features = ["derive"] }
 reqwest = { version = "0.11", features = ["json"] }
 openssl = { version = "0.10", features = ["vendored"] }
 tokio = { version = "1.10.0", features = ["rt-multi-thread"] }
+try-catch = "0.2.2"
