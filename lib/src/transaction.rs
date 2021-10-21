@@ -139,188 +139,41 @@ impl Executable for Transaction {
     /// Checks if a txn is valid
     /// Leo port this to the global state thing
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
-        if self.type_flag == 6 {
-            // validate chain creation
-            if self.payload.len() > 100 {
-                return Err("Chain name too long".to_string()).unwrap();
-            }
-            if self.payload.len() < 3 {
-                return Err("Chain name too short".to_string()).unwrap();
-            }
-            if self.payload.contains(" ") {
-                return Err("Chain name cannot contain spaces".to_string()).unwrap();
+        let mpool = get_transaction(self.hash.clone());
+        if let Err(ref mpool) = mpool {
+        } else {
+            println!("{:?}", mpool);
+            return Err("Transaction is in mempool").unwrap();
+        }
+        let keypairs = Keypair {
+            public_key: self.sender.clone(),
+            private_key: "".to_string(),
+        };
+        let check = keypairs.verify(&self.hash, &self.signature);
+        if let Err(ref check1) = check {
+            println!("{:?}", check);
+            return Err("Signature is not valid").unwrap();
+        }
+        if pow_txn.starts_with("0000") {
+        } else {
+            // Proof of work is invalid
+            return Err("ErrInvalidPow").unwrap();
+        }
+        if pow_txn != self.hash_item() {
+            // Proof of work is invalid
+            return Err("ErrInvalidPow").unwrap();
+        }
+        for chn in 0..chains {
+            let mut db_handle = Database::new();
+            db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
+            let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
+            // print!("output form db:{}",block_txn_is_in);
+            if block_txn_is_in.len() == 0 {
+            } else {
+                return Err("Transaction already in block").unwrap();
             }
         }
-
-        // check if transaction is coinbase>>
-
-        if self.type_flag == 7 {
-            // validate coinbase
-            if self.sender != "0x0000000000000000000000000000000000000000" {
-                return Err(
-                    "Coinbase sender is not 0x0000000000000000000000000000000000000000".to_string(),
-                )
-                .unwrap();
-            }
-
-            if self.amount != 1 {
-                return Err("Coinbase amount is not 1".to_string()).unwrap();
-            }
-            Ok(())
-        } else {
-            if self.amount == 0 {
-                return Err("Amount is 0".to_string()).unwrap();
-            }
-            if self.sender == self.reciver {
-                return Err("Sender and reciver are the same".to_string()).unwrap();
-            }
-            if self.amount > 100000 {
-                return Err("Amount is too large".to_string()).unwrap();
-            }
-            let keypairs = Keypair {
-                public_key: self.sender.clone(),
-                private_key: "".to_string(),
-            };
-            let check = keypairs.verify(&self.hash, &self.signature);
-            let pow_txn = self.hash_item();
-            let db_txn = ""; // Open the database and check for txn hash
-            let mpool = get_transaction(self.hash.clone());
-            let chains = 5;
-            // look in db for chains!!!!!!!!!!!!!!!!
-            for chn in 0..chains {
-                let mut db_handle = Database::new();
-                db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
-                let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
-                // print!("output form db:{}",block_txn_is_in);
-                if block_txn_is_in.len() == 0 {
-                } else {
-                    return Err("Transaction already in block").unwrap();
-                }
-            }
-            if let Err(ref check1) = check {
-                println!("{:?}", check);
-                return Err("Signature is not valid").unwrap();
-            }
-            if pow_txn.starts_with("0000") {
-            } else {
-                // Proof of work is invalid
-                return Err("ErrInvalidPow").unwrap();
-            }
-            if pow_txn == self.hash {
-                // Proof of work is valid
-            } else {
-                // Proof of work is invalid
-                return Err("ErrInvalidPow").unwrap();
-            }
-            if self.hash != db_txn {
-                // Transaction is original
-                //let acc_sender = Account::get(self.sender.clone());
-                //let acc_reciver = Account::get(self.reciver.clone());
-            } else {
-                // Transaction is not original
-                return Err("Transaction is not original").unwrap();
-            }
-            if let Err(ref mpool) = mpool {
-            } else {
-                println!("{:?}", mpool);
-                return Err("Transaction is in mempool").unwrap();
-            }
-            //check for more things and validate them
-
-            let mut sender = keypairs.address();
-            let mut acc_sender = Account::get(sender);
-            match self.type_flag {
-                0 => {
-                    if let Err(ref acc_sender1) = acc_sender {
-                        return Err("Failed to get receiver's account").unwrap();
-                    } else {
-                        if self.amount < acc_sender.unwrap().balance {
-                            // Transaction is valid
-                            return Ok(());
-                        } else {
-                            // Transaction is invalid
-                            return Err("Transaction amount is greater than sender's balance")
-                                .unwrap();
-                        }
-                    }
-                }
-                // validate type 1 2 3 4 5
-                1 => {
-                    if let Err(ref acc_sender1) = acc_sender {
-                        return Err("Failed to get sender's account").unwrap();
-                    } else {
-                        if self.amount < acc_sender.unwrap().balance {
-                            // Transaction is valid
-                            return Ok(());
-                        } else {
-                            // Transaction is invalid
-                            return Err("Transaction amount is greater than sender's balance")
-                                .unwrap();
-                        }
-                    }
-                }
-                2 => {
-                    if let Err(ref acc_sender1) = acc_sender {
-                        return Err("Failed to get sender's account").unwrap();
-                    } else {
-                        if self.amount < acc_sender.unwrap().balance {
-                            // Transaction is valid
-                            return Ok(());
-                        } else {
-                            // Transaction is invalid
-                            return Err("Transaction amount is greater than sender's balance")
-                                .unwrap();
-                        }
-                    }
-                }
-                3 => {
-                    if let Err(ref acc_sender1) = acc_sender {
-                        return Err("Failed to get sender's account").unwrap();
-                    } else {
-                        if self.amount < acc_sender.unwrap().balance {
-                            // Transaction is valid
-                            return Ok(());
-                        } else {
-                            // Transaction is invalid
-                            return Err("Transaction amount is greater than sender's balance")
-                                .unwrap();
-                        }
-                    }
-                }
-                4 => {
-                    if let Err(ref acc_sender1) = acc_sender {
-                        return Err("Failed to get sender's account").unwrap();
-                    } else {
-                        if self.amount < acc_sender.unwrap().balance {
-                            // Transaction is valid
-                            return Ok(());
-                        } else {
-                            // Transaction is invalid
-                            return Err("Transaction amount is greater than sender's balance")
-                                .unwrap();
-                        }
-                    }
-                }
-                5 => {
-                    if let Err(ref acc_sender1) = acc_sender {
-                        return Err("Failed to get sender's account").unwrap();
-                    } else {
-                        // plus gas fee for smart contract!!!!!
-                        if self.amount < acc_sender.unwrap().balance {
-                            // Transaction is valid
-                            return Ok(());
-                        } else {
-                            // Transaction is invalid
-                            return Err("Transaction amount is greater than sender's balance")
-                                .unwrap();
-                        }
-                    }
-                }
-
-                _ => {
-                    return Err("Transaction Invalid type Flag").unwrap();
-                }
-            }
+            
         }
     }
 
