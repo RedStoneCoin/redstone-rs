@@ -31058,3 +31058,108 @@
 [2021-10-21][16:13:24][Redstone_wallet][INFO] [3] Import wallet file
 [2021-10-21][16:13:24][Redstone_wallet][INFO] [4] exit
 [2021-10-21][16:13:24][Redstone_wallet][INFO] Enter a value:
+[2021-10-21][17:26:38][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-10-21][17:26:38][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-10-21][17:26:38][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-10-21][17:26:38][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-10-21][17:26:38][Redstone_wallet][INFO] [2] Import private key
+[2021-10-21][17:26:38][Redstone_wallet][INFO] [3] Import wallet file
+[2021-10-21][17:26:38][Redstone_wallet][INFO] [4] exit
+[2021-10-21][17:26:38][Redstone_wallet][INFO] Enter a value:
+[2021-10-21][17:26:40][Redstone_wallet][INFO] Import wallet file
+[2021-10-21][17:26:43][Redstone_wallet][INFO] test1
+
+[2021-10-21][17:26:43][Redstone_wallet][INFO] Enter wallet password: 
+[2021-10-21][17:26:45][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: DecryptionFailed', src/main.rs:217:14
+[2021-10-21][17:27:24][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-10-21][17:27:24][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-10-21][17:27:24][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-10-21][17:27:24][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-10-21][17:27:24][Redstone_wallet][INFO] [2] Import private key
+[2021-10-21][17:27:24][Redstone_wallet][INFO] [3] Import wallet file
+[2021-10-21][17:27:24][Redstone_wallet][INFO] [4] exit
+[2021-10-21][17:27:24][Redstone_wallet][INFO] Enter a value:
+[2021-10-21][17:27:25][Redstone_wallet][INFO] Import wallet file
+[2021-10-21][17:27:26][Redstone_wallet][INFO] test
+
+[2021-10-21][17:27:26][Redstone_wallet][INFO] Enter wallet password: 
+[2021-10-21][17:27:28][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: DecryptionFailed', src/main.rs:217:14
+[2021-10-21][17:29:52][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-10-21][17:29:52][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-10-21][17:29:52][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-10-21][17:29:52][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-10-21][17:29:52][Redstone_wallet][INFO] [2] Import private key
+[2021-10-21][17:29:52][Redstone_wallet][INFO] [3] Import wallet file
+[2021-10-21][17:29:52][Redstone_wallet][INFO] [4] exit
+[2021-10-21][17:29:52][Redstone_wallet][INFO] Enter a value:
+[2021-10-21][17:29:54][Redstone_wallet][INFO] Import wallet file
+[2021-10-21][17:29:55][Redstone_wallet][INFO] test
+
+[2021-10-21][17:29:55][Redstone_wallet][INFO] Enter wallet password: 
+[2021-10-21][17:29:57][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: DecryptionFailed', src/main.rs:217:14
+[2021-10-21][17:32:08][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-10-21][17:32:08][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-10-21][17:32:08][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-10-21][17:32:08][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-10-21][17:32:08][Redstone_wallet][INFO] [2] Import private key
+[2021-10-21][17:32:08][Redstone_wallet][INFO] [3] Import wallet file
+[2021-10-21][17:32:08][Redstone_wallet][INFO] [4] exit
+[2021-10-21][17:32:08][Redstone_wallet][INFO] Enter a value:
+[2021-10-21][17:32:09][Redstone_wallet][INFO] Import wallet file
+[2021-10-21][17:32:11][Redstone_wallet][INFO] test1
+
+[2021-10-21][17:32:11][Redstone_wallet][INFO] Enter wallet password: 
+[2021-10-21][17:32:13][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: DecryptionFailed', src/main.rs:217:14
+[2021-10-21][17:32:31][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-10-21][17:32:31][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-10-21][17:32:31][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-10-21][17:32:31][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-10-21][17:32:31][Redstone_wallet][INFO] [2] Import private key
+[2021-10-21][17:32:31][Redstone_wallet][INFO] [3] Import wallet file
+[2021-10-21][17:32:31][Redstone_wallet][INFO] [4] exit
+[2021-10-21][17:32:31][Redstone_wallet][INFO] Enter a value:
+[2021-10-21][17:32:33][Redstone_wallet][INFO] Your wallet address:0xf3246eea606e3f6898ed15e9c97d65636770c4d3
+[2021-10-21][17:32:33][Redstone_wallet][INFO] Enter Filename: 
+[2021-10-21][17:32:35][Redstone_wallet][INFO] Enter Password: 
+[2021-10-21][17:32:37][Redstone_wallet][INFO] Wallet saved at: test
+
+[2021-10-21][17:32:40][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-10-21][17:32:40][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-10-21][17:32:40][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-10-21][17:32:40][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-10-21][17:32:40][Redstone_wallet][INFO] [2] Import private key
+[2021-10-21][17:32:40][Redstone_wallet][INFO] [3] Import wallet file
+[2021-10-21][17:32:40][Redstone_wallet][INFO] [4] exit
+[2021-10-21][17:32:40][Redstone_wallet][INFO] Enter a value:
+[2021-10-21][17:32:41][Redstone_wallet][INFO] Import wallet file
+[2021-10-21][17:32:42][Redstone_wallet][INFO] test
+
+[2021-10-21][17:32:42][Redstone_wallet][INFO] Enter wallet password: 
+[2021-10-21][17:32:45][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-21][17:32:45][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-21][17:32:45][Redstone_wallet][DEBUG] 
+[2021-10-21][17:32:45][Redstone_wallet][INFO] Gained lock on WALLET_DETAILS
+[2021-10-21][17:32:45][Redstone_wallet][INFO] Using wallet with publickey=02423f20353cae60868a611da4fe591438e06d7dbc33cbeb776ff70e8985465bae
+[2021-10-21][17:32:45][Redstone_wallet][INFO] Creating caller struct
+[2021-10-21][17:32:45][Redstone_wallet][INFO] Your wallet address:0xf3246eea606e3f6898ed15e9c97d65636770c4d3
+[2021-10-21][17:32:45][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-21][17:32:45][Redstone_wallet][INFO] Your wallet public key:02423f20353cae60868a611da4fe591438e06d7dbc33cbeb776ff70e8985465bae
+[2021-10-21][17:32:45][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-21][17:32:47][Redstone_wallet][INFO] [1] Show wallet balance
+[2021-10-21][17:32:47][Redstone_wallet][INFO] [2] Send Redstone
+[2021-10-21][17:32:47][Redstone_wallet][INFO] [3] Send Custom Transaction
+[2021-10-21][17:32:47][Redstone_wallet][INFO] [4] exit
+[2021-10-21][17:32:47][Redstone_wallet][INFO] Enter a value:
+[2021-10-21][17:35:42][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-10-21][17:35:42][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-10-21][17:35:42][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-10-21][17:35:42][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-10-21][17:35:42][Redstone_wallet][INFO] [2] Import private key
+[2021-10-21][17:35:42][Redstone_wallet][INFO] [3] Import wallet file
+[2021-10-21][17:35:42][Redstone_wallet][INFO] [4] exit
+[2021-10-21][17:35:42][Redstone_wallet][INFO] Enter a value:
+[2021-10-21][17:35:43][Redstone_wallet][INFO] Import wallet file
+[2021-10-21][17:35:44][Redstone_wallet][INFO] test
+
+[2021-10-21][17:35:44][Redstone_wallet][INFO] Enter wallet password: 
+[2021-10-21][17:35:47][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: DecryptionFailed', src/main.rs:217:14

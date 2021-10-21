@@ -23,6 +23,9 @@ use std::time;
 use reqwest::Client;
 use tokio;
 use std::str;
+use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
+use fltk::input::Input;
+use fltk::valuator::ValueInput;
 #[derive(Default)]
 struct WalletDetails {
     wallet: Option<Keypair>,
@@ -222,6 +225,27 @@ fn open_wallet(pass: String, filename: String) {
     let walelt1 = wallet.clone();
     main_login(wallet.private_key.to_string(), wallet.public_key,walelt1.address(), false);
 }
+fn open_wallet_gui(pass: String, filename: String) {
+    let private_key =
+        std::fs::read(filename.trim_end()).expect("Something went wrong reading the file");
+    let decrypted = {
+        let decryptor = match age::Decryptor::new(&private_key[..]).unwrap() {
+            age::Decryptor::Passphrase(d) => d,
+            _ => unreachable!(),
+        };
+        let mut decrypted = vec![];
+        let mut reader = decryptor
+            .decrypt(&Secret::new(pass.to_owned()), None)
+            .unwrap();
+        reader.read_to_end(&mut decrypted).unwrap();
+        decrypted
+    };
+    let decrypted1 = String::from_utf8(decrypted);
+    let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
+    print!("Wallet imported successfully!\n");
+    let walelt1 = wallet.clone();
+    main_login_gui(wallet.private_key.to_string(), wallet.public_key,walelt1.address());
+}
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
     info!("Your wallet address:{}", wallet.address());
@@ -238,6 +262,16 @@ fn gen_keypair() {
         .expect("Failed to read input.");
     save_wallet(wallet.private_key, pass, filename.trim_end().to_string());
     info!("Wallet saved at: {}", filename);
+}
+fn gen_keypair_gui(pass: String, filename: String) {
+
+    let wallet = redstone_rs::keypair::Keypair::generate();
+    save_wallet(wallet.clone().private_key,(&pass.clone().to_string().trim_end()).to_string(), filename.to_string());
+    println!("Wallet address:{}", wallet.clone().address());
+
+
+
+    println!("Wallet saved at: {:?}", filename);
 }
 
 fn commands() {
@@ -342,7 +376,20 @@ pub fn new_ann(ann: Announcement) {
         }
     }
 }
-fn main_login_gui(pik: String, pbk: String, addr: String) {
+fn main_login_gui(pik: String, pbk: String, addr11: String) {
+    let app = app::App::default();
+    let mut wind = Window::new(100, 100, 800, 600, "Redstone GUI Wallet Logged v0.1");
+    let mut addr = Frame::new(0, 50, 550, 40, "Address:");
+    let mut addr = Frame::new(0, 50, 1000, 40, "Addr");
+    let mut gui_bal = Frame::new(0, 70, 800, 40, "Balance:");
+    let mut gui_bal1 = Frame::new(0, 70, 1000, 40, "1234");
+    addr.set_label(&addr11);
+    let mut addr_send = Input::new(70, 50, 100, 40, "Send to");
+    let mut amount = ValueInput::new(70, 110, 100, 40, "Amount");
+    let mut but = Button::new(70, 210, 100, 40, "Send");
+    let mut but1 = Button::new(70, 310, 100, 40, "Copy address");
+    wind.end();
+    wind.show();
     let wall = Keypair {
         private_key: pik.to_string(),
         public_key: pbk.to_string(),
@@ -362,7 +409,7 @@ fn main_login_gui(pik: String, pbk: String, addr: String) {
             };
             drop(locked_ls)
         }
-        let gacc = get_account(addr.clone()).await;
+        let gacc = get_account(addr11.clone()).await;
         debug!("{}",gacc);
         if gacc.clone() == "" {
             if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
@@ -399,23 +446,68 @@ fn main_login_gui(pik: String, pbk: String, addr: String) {
             uncle_root: "".to_string(),
         };
     }
+    if let Ok(walletdetails) = WALLET_DETAILS.lock() {
+        gui_bal1.set_label(&format!("{}", walletdetails.balance));
+        drop(walletdetails);
+    }
     if let Ok(mut locked) = WALLET_DETAILS.lock() {
-        info!("Gained lock on WALLET_DETAILS");
-        info!("Using wallet with publickey={}", pbk);
-        info!("Creating caller struct");
         let caller = Caller {
             callback: Box::new(new_ann),
         };
         thread::spawn(|| {
             launch_client("127.0.0.1".to_string(), 44405, vec![], caller);
         });
-
         drop(locked);
-        info!("Your wallet address:{}", addr);
-        info!("Your wallet public key:{}", pbk);
-        println!("Private key:{}", pik);
-        thread::sleep(time::Duration::from_secs(2));
+    }
+    but.set_callback(move |_| {
+        println!("Send");
+        if let Ok(walletdetails) = WALLET_DETAILS.lock() {
+
+            let mut txn1 = Transaction {
+                hash: "".to_owned(),
+                sender: walletdetails
+                    .wallet
+                    .as_ref()
+                    .unwrap()
+                    .public_key
+                    .to_owned(),
+                reciver: addr_send.value().to_owned(),
+                amount: amount.value().to_u64().to_owned(),
+                nonce: 0,
+                type_flag: 0,
+                payload: "".to_owned(), // Hex encoded payload
+                pow: "".to_owned(), // Spam protection PoW
+                signature: "".to_owned(),
+            };                    //99999999999999999999
+            let pow = txn1.find_pow();
+
+            let sign = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone());
+
+            txn1.signature = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone()).unwrap();
+
+
+            tokio::runtime::Builder::new_multi_thread()
+                .enable_all()
+                .build()
+                .unwrap()
+                .block_on(async {
+                    
+                    send_transaction(txn1).await;
+                });
+        }
+    });
+
+
+    app.run().unwrap();
 }
+
+
+
+
+
+
+
+
 
 fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
     let wall = Keypair {
@@ -764,9 +856,7 @@ fn main_not_logged() {
     commands();
     get_input_int();
 }
-pub fn main_not_logged_gui() {
-    
-}
+
 fn main() {
 
     // get argument from command line
@@ -774,9 +864,22 @@ fn main() {
     // if there is gui arg
     if args.len() > 1 {
         if args[1] == "gui" {
-            println!("GUI STARTING");
-            // TODO: gui
-            
+            let app = app::App::default();
+            let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet v0.1");
+            let mut frame = Frame::new(0, 0, 400, 300, "");
+            let mut pass = Input::new(150, 50, 100, 40, "Password");
+            let mut file = Input::new(150, 110, 100, 40, "Filename");
+
+            let mut but = Button::new(50, 210, 100, 40, "Create Wallet");
+            let mut but2 = Button::new(250, 210, 100, 40, "Import Wallet");
+            wind.end();
+            wind.show();
+            let mut file1 = file.clone();
+            let mut pass1 = pass.clone();
+            but.set_callback(move |_| gen_keypair_gui(pass.value().parse().clone().unwrap(),file.value().parse().clone().unwrap()));
+            but2.set_callback(move |_| open_wallet_gui(pass1.value().parse().unwrap(),file1.value().parse().unwrap()));
+            app.run().unwrap();
+        
         }
         if args[1] == "cli" {
             setup_logging(3).unwrap();
