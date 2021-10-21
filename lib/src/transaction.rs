@@ -135,7 +135,7 @@ impl Executable for Transaction {
         todo!()
     }
 
-    /// # Evalulate
+    /// # Evalulate 
     /// Checks if a txn is valid
     /// Leo port this to the global state thing
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
@@ -150,9 +150,19 @@ impl Executable for Transaction {
             private_key: "".to_string(),
         };
         let check = keypairs.verify(&self.hash, &self.signature);
+        let pow_txn = self.hash_item();
         if let Err(ref check1) = check {
             println!("{:?}", check);
             return Err("Signature is not valid").unwrap();
+        }
+        for chn in 0..5 {
+            let mut db_handle = Database::new();
+            db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
+            let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
+            if block_txn_is_in.len() == 0 {
+            } else {
+                return Err("Transaction already in block").unwrap();
+            }        
         }
         if pow_txn.starts_with("0000") {
         } else {
@@ -163,18 +173,7 @@ impl Executable for Transaction {
             // Proof of work is invalid
             return Err("ErrInvalidPow").unwrap();
         }
-        for chn in 0..chains {
-            let mut db_handle = Database::new();
-            db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
-            let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
-            // print!("output form db:{}",block_txn_is_in);
-            if block_txn_is_in.len() == 0 {
-            } else {
-                return Err("Transaction already in block").unwrap();
-            }
-        }
-            
-        }
+        todo!()
     }
 
     /// # Cost
