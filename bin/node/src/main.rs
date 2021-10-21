@@ -100,11 +100,8 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     Ok(())
 }
 
-fn startnnode() {
-}
-fn main() {
-    //retrive args from cli::cli();
-    // TODO CLI!
+fn cli() {
+        /*
     let matches =  App::new("Redstone Node")
                         .version("0.1.0")
                         .author("Redstone Developers. <redstonecrypto@gmail.com>")
@@ -140,125 +137,40 @@ fn main() {
             setup_logging(3).unwrap();
         }
     }
-    
+    */
+}
+fn main() {
+    // TODO CLI!
+    setup_logging(3).unwrap();
 
     let p2p_port = 44404;
     let rpc_port = p2p_port + 1;
-    let art = " 
-    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗
-    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝
-    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗  
-    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝  
-    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗
-    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝
-    ";
-    info!("{}",art);
+    let assci_art = "
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+";
+    info!("{}",assci_art);
+
     info!("Starting redstone node");
     warn!("Warning, this software is not stable");
     warn!("Run at your own risk!");
-
-    // init mempool
     mempool::Mempool::init(HashMap::new()).unwrap();
-    // init p2p
-    // let _ = std::thread::spawn(move || {
-    //    redstone_rs::p2p::start_server(p2p_port);
-    // });
-
-
-    // init rpc
     info!("Launching API server at 0.0.0.0:8000");
-
     let _ = std::thread::spawn(move || {
         api::start_api();
     });
     info!("API server launched");
     let _ = std::thread::spawn(move || {
-        let mut txn = Transaction {
-            hash: "".to_owned(),
-            sender: "coinbase".to_owned(),
-            reciver: "0x1f7d366bce0b46d0487295ec9bfc194aab8ddb85".to_owned(),
-            amount: 69,
-            nonce: 1,
-            type_flag: 0,
-            payload: "".to_owned(), // Hex encoded payload
-            pow: "".to_owned(),     // Spam protection PoW
-            signature: "".to_owned(),
-        };
-        let mut blk = Block {
-            hash: "1".to_owned(),
-            header: Header {
-                height: 1,
-                timestamp: 1,
-                chain: 1,
-                parent_hash: "".to_owned(),
-                state_hash: "".to_owned(),
-                uncle_root: "".to_owned(),
-                proposer: "".to_owned(), // the publickey of the proposer
-                transactions_merkle_root: "".to_owned(),
-                header_payload: 0,
-                proof: "".to_owned(),              // The vrf proof of the proposer as hex
-                proposer_signature: "".to_owned(), // proposers signature
-                validator_signatures: vec!("".to_owned()),
-                vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
-            },
-            transactions: vec![txn.clone()],
-        };
-        let mut blk1 = Block {
-            hash: "2".to_owned(),
-            header: Header {
-                height: 2,
-                timestamp: 1,
-                chain: 1,
-                parent_hash: "".to_owned(),
-                state_hash: "".to_owned(),
-                uncle_root: "".to_owned(),
-                proposer: "".to_owned(), // the publickey of the proposer
-                transactions_merkle_root: "".to_owned(),
-                header_payload: 0,
-                proof: "".to_owned(),              // The vrf proof of the proposer as hex
-                proposer_signature: "".to_owned(), // proposers signature
-                validator_signatures: vec!("".to_owned()),
-                vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
-            },
-            transactions: vec![txn.clone()],
-        };
-        let mut blk2 = Block {
-            hash: "3".to_owned(),
-            header: Header {
-                height: 3,
-                timestamp: 1,
-                chain: 1,
-                parent_hash: "".to_owned(),
-                state_hash: "".to_owned(),
-                uncle_root: "".to_owned(),
-                proposer: "".to_owned(), // the publickey of the proposer
-                transactions_merkle_root: "".to_owned(),
-                header_payload: 0,
-                proof: "".to_owned(),              // The vrf proof of the proposer as hex
-                proposer_signature: "".to_owned(), // proposers signature
-                validator_signatures: vec!("".to_owned()),
-                vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
-            },
-            transactions: vec![txn.clone()],
-        };
-        // get blocks form db and send them to the wallet to sync it
-        //  let block = vec![blk,blk1,blk2];
-
-
-       // for blk in block {
-       //     block_announce(blk).unwrap();
-       //}
-    });
-    let _ = std::thread::spawn(move || {
-
         redstone_rs::rpc::launch(rpc_port);
     });
-    while true {
-        //
-        
-    }
+    info!("RPC server launched");
+    // loop so program does not end
+    loop {}
     
-    // init p2p
 
 
 }
