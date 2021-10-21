@@ -3,6 +3,7 @@
 use fern::colors::{Color, ColoredLevelConfig};
 use lazy_static::*;
 use log::*;
+use std::env;
 use serde_json::{Value};
 use redstone_rs::block::{Block};
 use redstone_rs::keypair::Keypair;
@@ -341,6 +342,80 @@ pub fn new_ann(ann: Announcement) {
         }
     }
 }
+fn main_login_gui(pik: String, pbk: String, addr: String) {
+    let wall = Keypair {
+        private_key: pik.to_string(),
+        public_key: pbk.to_string(),
+    };
+
+    tokio::runtime::Builder::new_multi_thread()
+    .enable_all()
+    .build()
+    .unwrap()
+    .block_on(async {
+        if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+            *locked_ls = WalletDetails {
+                wallet: Some(wall.clone()),
+                balance: 0,
+                locked: 0,
+                uncle_root: "".to_string(),
+            };
+            drop(locked_ls)
+        }
+        let gacc = get_account(addr.clone()).await;
+        debug!("{}",gacc);
+        if gacc.clone() == "" {
+            if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                *locked_ls = WalletDetails {
+                    wallet: Some(wall.clone()),
+                    balance: 0,
+                    locked: 0,
+                    uncle_root: "".to_string(),
+                };
+                drop(locked_ls)
+
+            }
+        } else {
+            let v: Value = serde_json::from_str(&gacc).unwrap();
+            let val = &v["Result"]["balance"];
+            if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                *locked_ls = WalletDetails {
+                    wallet: Some(wall.clone()),
+                    balance: val.as_u64().expect("not a valid u64"),
+                    locked: 0,
+                    uncle_root: "".to_string(),
+            };
+            drop(locked_ls)
+
+            }
+        }
+
+    });
+    if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+        *locked_ls = WalletDetails {
+            wallet: Some(wall.clone()),
+            balance: 0,
+            locked: 0,
+            uncle_root: "".to_string(),
+        };
+    }
+    if let Ok(mut locked) = WALLET_DETAILS.lock() {
+        info!("Gained lock on WALLET_DETAILS");
+        info!("Using wallet with publickey={}", pbk);
+        info!("Creating caller struct");
+        let caller = Caller {
+            callback: Box::new(new_ann),
+        };
+        thread::spawn(|| {
+            launch_client("127.0.0.1".to_string(), 44405, vec![], caller);
+        });
+
+        drop(locked);
+        info!("Your wallet address:{}", addr);
+        info!("Your wallet public key:{}", pbk);
+        println!("Private key:{}", pik);
+        thread::sleep(time::Duration::from_secs(2));
+}
 
 fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
     let wall = Keypair {
@@ -413,10 +488,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
         drop(locked);
         info!("Your wallet address:{}", addr);
         info!("Your wallet public key:{}", pbk);
-
         println!("Private key:{}", pik);
-        info!("Wallet is syncing please wait!");
-
         thread::sleep(time::Duration::from_secs(2));
         commands_logged();
         while true {
@@ -692,6 +764,9 @@ fn main_not_logged() {
     commands();
     get_input_int();
 }
+pub fn main_not_logged_gui() {
+    
+}
 fn main() {
 
     // get argument from command line
@@ -699,8 +774,11 @@ fn main() {
     // if there is gui arg
     if args.len() > 1 {
         if args[1] == "gui" {
+            println!("GUI STARTING");
+            // TODO: gui
+            
         }
-        else {
+        if args[1] == "cli" {
             setup_logging(3).unwrap();
             //start logging
             let art = " 
