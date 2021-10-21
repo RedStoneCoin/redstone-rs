@@ -137,7 +137,7 @@ impl Executable for Transaction {
 
     /// # Evalulate
     /// Checks if a txn is valid
-    /// Todo fix error messages
+    /// Leo port this to the global state thing
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
         if self.type_flag == 6 {
             // validate chain creation

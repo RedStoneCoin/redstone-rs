@@ -1,20 +1,17 @@
 
 #![feature(proc_macro_hygiene, decl_macro)]
-use encryptfile as ef;
 use fern::colors::{Color, ColoredLevelConfig};
 use lazy_static::*;
 use log::*;
 use serde_json::{Value};
-use redstone_rs::block::{Block, Header};
+use redstone_rs::block::{Block};
 use redstone_rs::keypair::Keypair;
 use redstone_rs::rpc::{launch_client, Announcement, Caller};
 use redstone_rs::transaction::Transaction;
 use redstone_rs::*;
 use secrecy::Secret;
-use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use serde::{Deserialize};
 use std::fs;
-use std::fs::File;
 use std::io;
 use std::io::prelude::*;
 use std::io::Read;
@@ -22,10 +19,8 @@ use std::io::Write;
 use std::thread;
 use std::{default::Default, sync::Mutex};
 use std::time;
-use crate::{crypto::Hashable, executable::Executable};
 use reqwest::Client;
 use tokio;
-use tokio::runtime::Runtime;
 use std::str;
 #[derive(Default)]
 struct WalletDetails {
@@ -154,10 +149,11 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     Ok(())
 }
 
-async fn send_transaction(txn: Transaction) -> Result<(), Box<dyn std::error::Error>> {
-    if (txn.signature == String::default()) {
-        return Err("Transaction not signed".into());
-    }
+async fn send_transaction(txn: Transaction) {
+    if txn.signature == "" {
+        //tx not signed
+        println!("Transaction not signed");
+    } else {
     let txn_json = serde_json::to_string(&txn).unwrap();
     let request_url = SERVER_ADDR.lock().unwrap().to_owned() + "/json_api/submit_txn";
 
@@ -173,7 +169,7 @@ async fn send_transaction(txn: Transaction) -> Result<(), Box<dyn std::error::Er
             }
         }
     }
-    Ok(())
+    }
 }
 
 async fn get_account(addr: String) -> String {
