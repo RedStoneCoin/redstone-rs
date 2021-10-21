@@ -385,7 +385,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let mut gui_bal1 = Frame::new(0, 70, 1000, 40, "1234");
     addr.set_label(&addr11);
     let mut addr_send = Input::new(70, 50, 100, 40, "Send to");
-    let mut amount = ValueInput::new(70, 110, 100, 40, "Amount");
+    let mut amount = Input::new(70, 110, 100, 40, "Amount");
     let mut but = Button::new(70, 210, 100, 40, "Send");
     let mut but1 = Button::new(70, 310, 100, 40, "Copy address");
     wind.end();
@@ -445,6 +445,8 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
             locked: 0,
             uncle_root: "".to_string(),
         };
+        drop(locked_ls);
+
     }
     if let Ok(walletdetails) = WALLET_DETAILS.lock() {
         gui_bal1.set_label(&format!("{}", walletdetails.balance));
@@ -462,7 +464,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
     but.set_callback(move |_| {
         println!("Send");
         if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-
+            
             let mut txn1 = Transaction {
                 hash: "".to_owned(),
                 sender: walletdetails
@@ -472,7 +474,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
                     .public_key
                     .to_owned(),
                 reciver: addr_send.value().to_owned(),
-                amount: amount.value().to_u64().to_owned(),
+                amount: amount.value().parse::<u64>().unwrap().to_owned(),
                 nonce: 0,
                 type_flag: 0,
                 payload: "".to_owned(), // Hex encoded payload
@@ -485,6 +487,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
 
             txn1.signature = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone()).unwrap();
 
+            println!("{:?}",txn1);
 
             tokio::runtime::Builder::new_multi_thread()
                 .enable_all()
@@ -496,6 +499,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
                 });
         }
     });
+    // thread with while loop to update the wallet
 
 
     app.run().unwrap();
