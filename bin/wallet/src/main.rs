@@ -36,7 +36,7 @@ struct WalletDetails {
     locked: u64,
     uncle_root: String,
 }
-
+use fltk::input::SecretInput;
 lazy_static! {
     static ref WALLET_DETAILS: Mutex<WalletDetails> = Mutex::new(WalletDetails::default());
     static ref SERVER_ADDR: Mutex<String> = Mutex::new(String::from("http://127.0.0.1:8000"));
@@ -401,6 +401,9 @@ fn gui_tips() {
 }
 fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let app = app::App::default();
+
+    app::background(223,223,223);
+
     let mut wind = Window::new(100, 100, 800, 600, "Redstone GUI Wallet Logged v0.1");
     let mut addr = Frame::new(0, 50, 550, 40, "Address:");
     let mut addr = Frame::new(0, 50, 1000, 40, "Addr");
@@ -412,8 +415,8 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let mut gui_notification1 = Frame::new(0, 100, 800, 40, "");
 
     addr.set_label(&addr11.clone());
-    let mut addr_send = Input::new(70, 50, 100, 40, "Send to");
-    let mut amount = Input::new(70, 110, 100, 40, "Amount");
+    let mut addr_send = Input::new(70, 50, 150, 40, "Send to");
+    let mut amount = Input::new(70, 110, 50, 40, "Amount");
     let mut but = Button::new(70, 210, 100, 40, "Send");
     let mut but1 = Button::new(70, 310, 100, 40, "Copy address");
     let mut but2 = Button::new(70, 260, 100, 40, "Re Balance");
@@ -932,7 +935,7 @@ fn main() {
             let app = app::App::default();
             let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet v0.1");
             let mut frame = Frame::new(0, 0, 400, 300, "");
-            let mut pass = Input::new(150, 50, 100, 40, "Password");
+            let mut pass = SecretInput::new(150, 50, 100, 40, "Password");
             let mut file = Input::new(150, 110, 100, 40, "Filename");
             let mut but = Button::new(50, 210, 100, 40, "Create Wallet");
             let mut but2 = Button::new(250, 210, 100, 40, "Import Wallet");

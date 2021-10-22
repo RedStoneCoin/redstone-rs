@@ -31378,3 +31378,61 @@
 [2021-10-22][11:23:11][Redstone_wallet][DEBUG] Recieved block ann
 [2021-10-22][11:23:11][Redstone_wallet][INFO] You got RS: 69
 [2021-10-22][11:23:11][Redstone_wallet][INFO] New block 1, old balance: 0, new balance: 69
+[2021-10-22][11:27:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:27:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:27:51][Redstone_wallet][DEBUG] 
+[2021-10-22][11:27:51][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:27:51][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-22][11:28:31][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:28:31][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:28:31][Redstone_wallet][DEBUG] 
+[2021-10-22][11:28:31][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:28:31][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-22][11:29:42][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:29:42][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:29:42][Redstone_wallet][DEBUG] 
+[2021-10-22][11:29:42][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:29:42][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-22][11:30:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:30:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:30:18][Redstone_wallet][DEBUG] 
+[2021-10-22][11:30:18][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:30:18][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-22][11:30:53][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:30:53][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:30:53][Redstone_wallet][DEBUG] 
+[2021-10-22][11:30:53][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:30:53][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-22][11:31:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:31:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:31:16][Redstone_wallet][DEBUG] 
+[2021-10-22][11:31:16][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:31:16][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-22][11:31:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:31:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:31:18][Redstone_wallet][DEBUG] 
+[2021-10-22][11:31:18][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:31:18][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-22][11:31:33][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:31:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:31:52][reqwest::async_impl::client][DEBUG] response '500 Internal Server Error' for http://127.0.0.1:8000/json_api/submit_txn
+[2021-10-22][11:31:52][Redstone_wallet][INFO] Submit response=
+[2021-10-22][11:31:52][Redstone_wallet][INFO] Transaction Failure
+[2021-10-22][11:35:46][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:35:46][reqwest::async_impl::client][DEBUG] response '200 OK' for http://127.0.0.1:8000/json_api/get_acc/0x1530fc2f2364e35f1408087119b497e3ea324d5c
+[2021-10-22][11:35:46][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:35:46][reqwest::async_impl::client][DEBUG] response '200 OK' for http://127.0.0.1:8000/json_api/get_acc/0x1530fc2f2364e35f1408087119b497e3ea324d5c
+[2021-10-22][11:35:46][Redstone_wallet][DEBUG] { "result" : "failure" }
+[2021-10-22][11:35:46][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:35:46][redstone_rs::rpc][INFO] Sent init message to server
+[2021-10-22][11:35:46][redstone_rs::rpc][INFO] Sent services register command (*=all)
+[2021-10-22][11:35:46][redstone_rs::rpc][INFO] Connected to RPC server at 127.0.0.1:44405
+[2021-10-22][11:35:46][redstone_rs::rpc][INFO] Spawned RPC listener thread
+[2021-10-22][11:40:26][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2021-10-22][11:40:26][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2021-10-22][11:40:26][Redstone_wallet][INFO] TEST NET WALLET!
+[2021-10-22][11:40:26][Redstone_wallet][INFO] [1] Generate a new wallet
+[2021-10-22][11:40:26][Redstone_wallet][INFO] [2] Import private key
+[2021-10-22][11:40:26][Redstone_wallet][INFO] [3] Import wallet file
+[2021-10-22][11:40:26][Redstone_wallet][INFO] [4] exit
+[2021-10-22][11:40:26][Redstone_wallet][INFO] Enter a value:
