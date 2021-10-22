@@ -193,7 +193,7 @@ async fn get_account(addr: String) -> String {
 
 fn save_wallet(wallet: String, pass: String, filename: String) {
     let encrypted = {
-        let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.to_owned()));
+        let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.trim_end().to_owned()));
         let mut encrypted = vec![];
         let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
         writer.write_all(wallet.as_bytes()).unwrap();
@@ -205,6 +205,7 @@ fn save_wallet(wallet: String, pass: String, filename: String) {
 }
 
 fn open_wallet(pass: String, filename: String) {
+
     let private_key =
         std::fs::read(filename.trim_end()).expect("Something went wrong reading the file");
     let decrypted = {
@@ -214,7 +215,7 @@ fn open_wallet(pass: String, filename: String) {
         };
         let mut decrypted = vec![];
         let mut reader = decryptor
-            .decrypt(&Secret::new(pass.to_owned()), None)
+            .decrypt(&Secret::new(pass.trim_end().to_owned()), None)
             .unwrap();
         reader.read_to_end(&mut decrypted).unwrap();
         decrypted
@@ -228,6 +229,7 @@ fn open_wallet(pass: String, filename: String) {
 fn open_wallet_gui(pass: String, filename: String) {
     let private_key =
         std::fs::read(filename.trim_end()).expect("Something went wrong reading the file");
+    println!("{:#?}", pass);
     let decrypted = {
         let decryptor = match age::Decryptor::new(&private_key[..]).unwrap() {
             age::Decryptor::Passphrase(d) => d,
@@ -235,7 +237,7 @@ fn open_wallet_gui(pass: String, filename: String) {
         };
         let mut decrypted = vec![];
         let mut reader = decryptor
-            .decrypt(&Secret::new(pass.to_owned()), None)
+            .decrypt(&Secret::new(pass.trim_end().to_owned()), None)
             .unwrap();
         reader.read_to_end(&mut decrypted).unwrap();
         decrypted
@@ -388,6 +390,8 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let mut amount = Input::new(70, 110, 100, 40, "Amount");
     let mut but = Button::new(70, 210, 100, 40, "Send");
     let mut but1 = Button::new(70, 310, 100, 40, "Copy address");
+    let mut but1 = Button::new(70, 255, 100, 40, "Refrash Balance");
+
     wind.end();
     wind.show();
     let wall = Keypair {
