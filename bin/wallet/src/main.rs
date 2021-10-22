@@ -394,7 +394,19 @@ fn gui_tips() {
     let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet Logged Tips v0.1");
     let mut label = Frame::new(0, 0, 300, 150, "Welcome to the Redstone Wallet\n\n");
     let mut label1 = Frame::new(0, 0, 300, 250, "To see balance click re-balance!\n\n");
-
+    wind.end();
+    wind.show();
+    app.run().unwrap();
+}
+fn priv_key_gui(pik: String) {
+    let app = app::App::default();
+    let mut wind = Window::new(100, 100, 400, 300, "Close this windows, Redstone Wallet v0.1");
+    let mut but4 = Button::new(0, 0, 400, 300, "Copy Private Key");
+    but4.set_callback(move |_| {
+        let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
+        println!("{:?}", ctx.get_contents());
+        ctx.set_contents(pik.to_owned()).unwrap();
+    });
     wind.end();
     wind.show();
     app.run().unwrap();
@@ -420,8 +432,9 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let mut but = Button::new(70, 210, 100, 40, "Send");
     let mut but1 = Button::new(70, 310, 100, 40, "Copy address");
     let mut but2 = Button::new(70, 260, 100, 40, "Re Balance");
-    let mut but3 = Button::new(70, 360, 100, 40, "Tips");
-    
+    let mut but4 = Button::new(70, 360, 100, 40, "Private Key");
+    let mut but3 = Button::new(70, 410, 100, 40, "Tips");
+
 
     let mut not = 0;
     
@@ -432,7 +445,11 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
         }
         gui_notification.set_label(&format!("Balance updated {}", not));
         not += 1;
+    });
+    let mut pik1 = pik.clone();
 
+    but4.set_callback( move |_| {
+        priv_key_gui(pik1.clone());
     });
     but1.set_callback(move |_| {
         let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
@@ -935,10 +952,12 @@ fn main() {
             let app = app::App::default();
             let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet v0.1");
             let mut frame = Frame::new(0, 0, 400, 300, "");
-            let mut pass = SecretInput::new(150, 50, 100, 40, "Password");
-            let mut file = Input::new(150, 110, 100, 40, "Filename");
-            let mut but = Button::new(50, 210, 100, 40, "Create Wallet");
-            let mut but2 = Button::new(250, 210, 100, 40, "Import Wallet");
+            let mut pass = SecretInput::new(150, 60, 100, 40, "Password");
+            let mut pik = SecretInput::new(150, 10, 100, 40, "Private Key");
+            let mut file = Input::new(150, 110, 110, 40, "Filename");
+            let mut but = Button::new(30, 210, 100, 40, "Create Wallet");
+            let mut but2 = Button::new(150, 210, 100, 40, "Import key");
+            let mut but2 = Button::new(270, 210, 100, 40, "Import Wallet");
             wind.end();
             wind.show();
             let mut file1 = file.clone();
