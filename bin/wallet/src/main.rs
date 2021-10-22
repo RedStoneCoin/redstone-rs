@@ -962,20 +962,15 @@ fn main() {
             wind.show();
             let mut file1 = file.clone();
             let mut file2 = file.clone();
-
             let mut pass1 = pass.clone();
             let mut pass2 = pass.clone();
-
             let mut pik1 = pik.clone();
             but3.set_callback(move |_| {
                 let wallet = redstone_rs::keypair::Keypair::from_private_key(pik1.value().parse().unwrap());
                 save_wallet(wallet.private_key, pass2.value(), file2.value());
             });
-
             but.set_callback(move |_| gen_keypair_gui(pass.value().parse().clone().unwrap(),file.value().parse().clone().unwrap()));
             but2.set_callback(move |_| open_wallet_gui(pass1.value().parse().unwrap(),file1.value().parse().unwrap()));
-
-
             app.run().unwrap();
         
         }
