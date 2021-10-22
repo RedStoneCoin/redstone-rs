@@ -169,6 +169,50 @@ fn main() {
     });
     info!("RPC server launched");
     // loop so program does not end
+    let _ = std::thread::spawn(move || {
+        let mut txn = Transaction {
+            hash: "".to_owned(),
+            sender: "coinbase".to_owned(),
+            reciver: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
+            amount: 69,
+            nonce: 1,
+            type_flag: 0,
+            payload: "".to_owned(), // Hex encoded payload
+            pow: "".to_owned(),     // Spam protection PoW
+            signature: "".to_owned(),
+        };
+        let mut blk = Block {
+            hash: "1".to_owned(),
+            header: Header {
+                height: 1,
+                timestamp: 1,
+                chain: 1,
+                parent_hash: "".to_owned(),
+                state_hash: "".to_owned(),
+                uncle_root: "".to_owned(),
+                proposer: "".to_owned(), // the publickey of the proposer
+                transactions_merkle_root: "".to_owned(),
+                header_payload: 0,
+                proof: "".to_owned(),              // The vrf proof of the proposer as hex
+                proposer_signature: "".to_owned(), // proposers signature
+                validator_signatures: vec!("".to_owned()),
+                vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
+            },
+            transactions: vec![txn.clone()],
+        };
+        
+        // get blocks form db and send them to the wallet to sync it
+        //  let block = vec![blk,blk1,blk2];
+        info!("wait 5 sec");
+        thread::sleep(time::Duration::from_secs(5));
+        info!("announe block test");
+        block_announce(blk).unwrap();
+        thread::sleep(time::Duration::from_secs(1));
+
+
+
+    });
+    
     loop {}
     
 

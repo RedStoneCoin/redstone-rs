@@ -25,6 +25,9 @@ use tokio;
 use std::str;
 use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
 use fltk::input::Input;
+extern crate clipboard;
+use clipboard::ClipboardProvider;
+use clipboard::ClipboardContext;
 use fltk::valuator::ValueInput;
 #[derive(Default)]
 struct WalletDetails {
@@ -378,27 +381,71 @@ pub fn new_ann(ann: Announcement) {
         }
     }
 }
+
+fn gui_tips() {
+    let app = app::App::default();
+    let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet Logged Tips v0.1");
+    let mut label = Frame::new(0, 0, 300, 150, "Welcome to the Redstone Wallet\n\n");
+    let mut label1 = Frame::new(0, 0, 300, 250, "To see balance click re-balance!\n\n");
+
+    wind.end();
+    wind.show();
+    app.run().unwrap();
+}
 fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let app = app::App::default();
     let mut wind = Window::new(100, 100, 800, 600, "Redstone GUI Wallet Logged v0.1");
     let mut addr = Frame::new(0, 50, 550, 40, "Address:");
     let mut addr = Frame::new(0, 50, 1000, 40, "Addr");
     let mut gui_bal = Frame::new(0, 70, 800, 40, "Balance:");
-    let mut gui_bal1 = Frame::new(0, 70, 1000, 40, "1234");
-    addr.set_label(&addr11);
+    let mut gui_bal1 = Frame::new(0, 70, 1000, 40, "");
+    let mut gui_bal3 = Frame::new(0, 70, 1000, 40, "");
+    let addr_copy = addr11.clone();
+    let mut gui_notification = Frame::new(0, 100, 800, 40, "");
+    let mut gui_notification1 = Frame::new(0, 100, 800, 40, "");
+
+    addr.set_label(&addr11.clone());
     let mut addr_send = Input::new(70, 50, 100, 40, "Send to");
     let mut amount = Input::new(70, 110, 100, 40, "Amount");
     let mut but = Button::new(70, 210, 100, 40, "Send");
     let mut but1 = Button::new(70, 310, 100, 40, "Copy address");
-    let mut but1 = Button::new(70, 255, 100, 40, "Refrash Balance");
+    let mut but2 = Button::new(70, 260, 100, 40, "Re Balance");
+    let mut but3 = Button::new(70, 360, 100, 40, "Tips");
+    
 
+    let mut not = 0;
+    
+    but2.set_callback(move |_| {
+        if let Ok(walletdetails) = WALLET_DETAILS.lock() {
+            gui_bal1.set_label(&format!("{}", walletdetails.balance));
+            drop(walletdetails);
+        }
+        gui_notification.set_label(&format!("Balance updated {}", not));
+        not += 1;
+
+    });
+    but1.set_callback(move |_| {
+        let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
+        println!("{:?}", ctx.get_contents());
+        ctx.set_contents(addr_copy.to_owned()).unwrap();
+    });
+
+    but3.set_callback(move |_| {
+        gui_tips();
+    });
+ 
     wind.end();
     wind.show();
     let wall = Keypair {
         private_key: pik.to_string(),
         public_key: pbk.to_string(),
     };
-
+    let caller = Caller {
+        callback: Box::new(new_ann),
+    };
+    thread::spawn(|| {
+        launch_client("127.0.0.1".to_string(), 44405, vec![], caller);
+    });
     tokio::runtime::Builder::new_multi_thread()
     .enable_all()
     .build()
@@ -429,14 +476,17 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
         } else {
             let v: Value = serde_json::from_str(&gacc).unwrap();
             let val = &v["Result"]["balance"];
-            if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-                *locked_ls = WalletDetails {
-                    wallet: Some(wall.clone()),
-                    balance: val.as_u64().expect("not a valid u64"),
-                    locked: 0,
-                    uncle_root: "".to_string(),
-            };
-            drop(locked_ls)
+            if &v["result"] != "failure" {
+
+                if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                    *locked_ls = WalletDetails {
+                        wallet: Some(wall.clone()),
+                        balance: val.as_u64().expect("not a valid u64"),
+                        locked: 0,
+                        uncle_root: "".to_string(),
+                };
+                drop(locked_ls)
+            }
 
             }
         }
@@ -452,10 +502,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
         drop(locked_ls);
 
     }
-    if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-        gui_bal1.set_label(&format!("{}", walletdetails.balance));
-        drop(walletdetails);
-    }
+
     if let Ok(mut locked) = WALLET_DETAILS.lock() {
         let caller = Caller {
             callback: Box::new(new_ann),
@@ -553,14 +600,17 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
         } else {
             let v: Value = serde_json::from_str(&gacc).unwrap();
             let val = &v["Result"]["balance"];
-            if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-                *locked_ls = WalletDetails {
-                    wallet: Some(wall.clone()),
-                    balance: val.as_u64().expect("not a valid u64"),
-                    locked: 0,
-                    uncle_root: "".to_string(),
-            };
-            drop(locked_ls)
+            if &v["result"] != "failure" {
+                if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                    *locked_ls = WalletDetails {
+                        wallet: Some(wall.clone()),
+                        balance: val.as_u64().expect("not a valid u64"),
+                        locked: 0,
+                        uncle_root: "".to_string(),
+                };
+                drop(locked_ls)
+
+            }
 
             }
         }
@@ -877,7 +927,6 @@ fn main() {
             let mut frame = Frame::new(0, 0, 400, 300, "");
             let mut pass = Input::new(150, 50, 100, 40, "Password");
             let mut file = Input::new(150, 110, 100, 40, "Filename");
-
             let mut but = Button::new(50, 210, 100, 40, "Create Wallet");
             let mut but2 = Button::new(250, 210, 100, 40, "Import Wallet");
             wind.end();
