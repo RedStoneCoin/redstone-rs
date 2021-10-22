@@ -31341,3 +31341,40 @@
 [2021-10-22][11:10:21][Redstone_wallet][INFO] Enter a value:
 [2021-10-22][11:10:25][redstone_rs::rpc][INFO] Peeked 0 bytes into buffer, reading
 [2021-10-22][11:10:25][redstone_rs::rpc][INFO] Read 0 bytes, assuming peer disconect
+[2021-10-22][11:14:35][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:14:35][reqwest::async_impl::client][DEBUG] response '200 OK' for http://127.0.0.1:8000/json_api/get_acc/0x1530fc2f2364e35f1408087119b497e3ea324d5c
+[2021-10-22][11:14:35][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:14:35][reqwest::async_impl::client][DEBUG] response '200 OK' for http://127.0.0.1:8000/json_api/get_acc/0x1530fc2f2364e35f1408087119b497e3ea324d5c
+[2021-10-22][11:14:35][Redstone_wallet][DEBUG] { "result" : "failure" }
+[2021-10-22][11:14:35][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:14:35][redstone_rs::rpc][INFO] Sent init message to server
+[2021-10-22][11:14:35][redstone_rs::rpc][INFO] Sent services register command (*=all)
+[2021-10-22][11:14:35][redstone_rs::rpc][INFO] Connected to RPC server at 127.0.0.1:44405
+[2021-10-22][11:14:35][redstone_rs::rpc][INFO] Spawned RPC listener thread
+[2021-10-22][11:14:36][redstone_rs::rpc][INFO] Peeked 532 bytes into buffer, reading
+[2021-10-22][11:14:36][redstone_rs::rpc][DEBUG] Recieved new announcement from server, announcement=Announcement {
+    m_type: "block",
+    content: "{\"hash\":\"1\",\"header\":{\"height\":1,\"timestamp\":1,\"chain\":1,\"parent_hash\":\"\",\"state_hash\":\"\",\"uncle_root\":\"\",\"proposer\":\"\",\"transactions_merkle_root\":\"\",\"header_payload\":0,\"proof\":\"\",\"proposer_signature\":\"\",\"validator_signatures\":[\"\"],\"vrf\":\"\"},\"transactions\":[{\"hash\":\"\",\"sender\":\"coinbase\",\"reciver\":\"0x1530fc2f2364e35f1408087119b497e3ea324d5c\",\"amount\":69,\"nonce\":1,\"type_flag\":0,\"payload\":\"\",\"pow\":\"\",\"signature\":\"\"}]}",
+}
+[2021-10-22][11:14:36][Redstone_wallet][DEBUG] Gained lock on WALLET_DETAILS
+[2021-10-22][11:14:36][Redstone_wallet][DEBUG] Recieved block ann
+[2021-10-22][11:14:36][Redstone_wallet][DEBUG] Block contained no transactions affecting us
+[2021-10-22][11:23:08][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:23:08][reqwest::async_impl::client][DEBUG] response '200 OK' for http://127.0.0.1:8000/json_api/get_acc/0x1530fc2f2364e35f1408087119b497e3ea324d5c
+[2021-10-22][11:23:08][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-22][11:23:08][reqwest::async_impl::client][DEBUG] response '200 OK' for http://127.0.0.1:8000/json_api/get_acc/0x1530fc2f2364e35f1408087119b497e3ea324d5c
+[2021-10-22][11:23:08][Redstone_wallet][DEBUG] { "result" : "failure" }
+[2021-10-22][11:23:08][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-22][11:23:08][redstone_rs::rpc][INFO] Sent init message to server
+[2021-10-22][11:23:08][redstone_rs::rpc][INFO] Sent services register command (*=all)
+[2021-10-22][11:23:08][redstone_rs::rpc][INFO] Connected to RPC server at 127.0.0.1:44405
+[2021-10-22][11:23:08][redstone_rs::rpc][INFO] Spawned RPC listener thread
+[2021-10-22][11:23:11][redstone_rs::rpc][INFO] Peeked 532 bytes into buffer, reading
+[2021-10-22][11:23:11][redstone_rs::rpc][DEBUG] Recieved new announcement from server, announcement=Announcement {
+    m_type: "block",
+    content: "{\"hash\":\"1\",\"header\":{\"height\":1,\"timestamp\":1,\"chain\":1,\"parent_hash\":\"\",\"state_hash\":\"\",\"uncle_root\":\"\",\"proposer\":\"\",\"transactions_merkle_root\":\"\",\"header_payload\":0,\"proof\":\"\",\"proposer_signature\":\"\",\"validator_signatures\":[\"\"],\"vrf\":\"\"},\"transactions\":[{\"hash\":\"\",\"sender\":\"coinbase\",\"reciver\":\"0x1530fc2f2364e35f1408087119b497e3ea324d5c\",\"amount\":69,\"nonce\":1,\"type_flag\":0,\"payload\":\"\",\"pow\":\"\",\"signature\":\"\"}]}",
+}
+[2021-10-22][11:23:11][Redstone_wallet][DEBUG] Gained lock on WALLET_DETAILS
+[2021-10-22][11:23:11][Redstone_wallet][DEBUG] Recieved block ann
+[2021-10-22][11:23:11][Redstone_wallet][INFO] You got RS: 69
+[2021-10-22][11:23:11][Redstone_wallet][INFO] New block 1, old balance: 0, new balance: 69

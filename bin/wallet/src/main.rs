@@ -300,12 +300,19 @@ pub fn new_ann(ann: Announcement) {
         if ann.m_type == "block".to_string() {
             debug!("Recieved block ann");
             // ann.msg contains a block in json format
+
+            
+            
             if let Ok(blk) = serde_json::from_str::<Block>(&ann.content) {
                 if true {
+                    let keypair = Keypair {
+                        private_key: "".to_string(),
+                        public_key: locked.wallet.as_ref().unwrap().public_key.to_string(),
+                    };
                     let balance_before = locked.balance;
                     let locked_balance_before = locked.locked;
                     for txn in blk.transactions {
-                        if txn.reciver == locked.wallet.as_ref().unwrap().public_key {
+                        if txn.reciver == keypair.address() {
                             match txn.type_flag {
                                 // 0 u got some rs
                                 0 => {
@@ -443,9 +450,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let caller = Caller {
         callback: Box::new(new_ann),
     };
-    thread::spawn(|| {
-        launch_client("127.0.0.1".to_string(), 44405, vec![], caller);
-    });
+
     tokio::runtime::Builder::new_multi_thread()
     .enable_all()
     .build()
@@ -922,6 +927,8 @@ fn main() {
     // if there is gui arg
     if args.len() > 1 {
         if args[1] == "gui" {
+            setup_logging(3).unwrap();
+
             let app = app::App::default();
             let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet v0.1");
             let mut frame = Frame::new(0, 0, 400, 300, "");
