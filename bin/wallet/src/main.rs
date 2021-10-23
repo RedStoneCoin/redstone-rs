@@ -29,6 +29,7 @@ extern crate clipboard;
 use clipboard::ClipboardProvider;
 use clipboard::ClipboardContext;
 use fltk::valuator::ValueInput;
+use fltk_theme::{widget_themes, WidgetTheme, ThemeType};
 #[derive(Default)]
 struct WalletDetails {
     wallet: Option<Keypair>,
@@ -951,6 +952,8 @@ fn main() {
 
             let app = app::App::default();
             let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet v0.1");
+            let widget_theme = WidgetTheme::new(ThemeType::AquaClassic);
+            widget_theme.apply();
             let mut frame = Frame::new(0, 0, 400, 300, "");
             let mut pass = SecretInput::new(150, 60, 100, 40, "Password");
             let mut pik = SecretInput::new(150, 10, 100, 40, "Private Key");
@@ -992,3 +995,9 @@ fn main() {
     }
 
 }
+
+
+
+
+
+// Whoa 1000 line of code =) 

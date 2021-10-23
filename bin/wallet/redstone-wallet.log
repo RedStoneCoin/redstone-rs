@@ -31463,3 +31463,4 @@
 [2021-10-22][12:12:35][Redstone_wallet][DEBUG] 
 [2021-10-22][12:12:35][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
 [2021-10-22][12:12:35][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:19:40][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "No such file or directory" }', src/main.rs:207:37

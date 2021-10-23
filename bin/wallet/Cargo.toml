@@ -22,3 +22,4 @@ tokio = { version = "1.10.0", features = ["rt-multi-thread"] }
 try-catch = "0.2.2"
 fltk = "1.2.9"
 clipboard = "0.5.0"
+fltk-theme = "0.4.2"
