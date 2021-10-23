@@ -30,6 +30,17 @@ use clipboard::ClipboardProvider;
 use clipboard::ClipboardContext;
 use fltk::valuator::ValueInput;
 use fltk_theme::{widget_themes, WidgetTheme, ThemeType};
+use fltk_theme::{WidgetScheme, SchemeType};
+use fltk::output::Output;
+use std::sync::RwLock;
+use fltk::enums::Mode;
+use fltk::enums::ColorDepth;
+
+extern crate qrcode_generator;
+
+use qrcode_generator::QrCodeEcc;
+
+use fltk::image::Image;
 #[derive(Default)]
 struct WalletDetails {
     wallet: Option<Keypair>,
@@ -390,15 +401,7 @@ pub fn new_ann(ann: Announcement) {
     }
 }
 
-fn gui_tips() {
-    let app = app::App::default();
-    let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet Logged Tips v0.1");
-    let mut label = Frame::new(0, 0, 300, 150, "Welcome to the Redstone Wallet\n\n");
-    let mut label1 = Frame::new(0, 0, 300, 250, "To see balance click re-balance!\n\n");
-    wind.end();
-    wind.show();
-    app.run().unwrap();
-}
+
 fn priv_key_gui(pik: String) {
     let app = app::App::default();
     let mut wind = Window::new(100, 100, 400, 300, "Close this windows, Redstone Wallet v0.1");
@@ -412,55 +415,43 @@ fn priv_key_gui(pik: String) {
     wind.show();
     app.run().unwrap();
 }
+
 fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let app = app::App::default();
-
-    app::background(223,223,223);
-
     let mut wind = Window::new(100, 100, 800, 600, "Redstone GUI Wallet Logged v0.1");
-    let mut addr = Frame::new(0, 50, 550, 40, "Address:");
-    let mut addr = Frame::new(0, 50, 1000, 40, "Addr");
-    let mut gui_bal = Frame::new(0, 70, 800, 40, "Balance:");
-    let mut gui_bal1 = Frame::new(0, 70, 1000, 40, "");
-    let mut gui_bal3 = Frame::new(0, 70, 1000, 40, "");
+    let mut gui_addr = Output::new(400, 50, 370, 40, "Address:");
+    let mut frame = Frame::default().size_of(&wind);
+    let mut gui_bal4 = Output::new(400, 110, 60, 40, "Balance:");
     let addr_copy = addr11.clone();
     let mut gui_notification = Frame::new(0, 100, 800, 40, "");
     let mut gui_notification1 = Frame::new(0, 100, 800, 40, "");
-
-    addr.set_label(&addr11.clone());
-    let mut addr_send = Input::new(70, 50, 150, 40, "Send to");
+    gui_addr.set_value(&addr11.clone());
+    let mut addr_send = Input::new(70, 50, 200, 40, "Send to");
     let mut amount = Input::new(70, 110, 50, 40, "Amount");
-    let mut but = Button::new(70, 210, 100, 40, "Send");
-    let mut but1 = Button::new(70, 310, 100, 40, "Copy address");
-    let mut but2 = Button::new(70, 260, 100, 40, "Re Balance");
-    let mut but4 = Button::new(70, 360, 100, 40, "Private Key");
-    let mut but3 = Button::new(70, 410, 100, 40, "Tips");
-
-
-    let mut not = 0;
-    
-    but2.set_callback(move |_| {
-        if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-            gui_bal1.set_label(&format!("{}", walletdetails.balance));
-            drop(walletdetails);
-        }
-        gui_notification.set_label(&format!("Balance updated {}", not));
-        not += 1;
-    });
+    let mut but = Button::new(70, 160, 100, 40, "Send");
+    let mut gui_tx_sent_notfy = Frame::new(0, 10, 800, 40, "");
+    let mut but2 = Button::new(460, 110, 40, 40, "↺");
+    let mut but4 = Button::new(10, 540, 100, 40, "Private Key");
     let mut pik1 = pik.clone();
+    let mut pbk1 = pbk.clone();
+    // Encode some data into bits.
+    let mut result = qrcode_generator::to_image(addr11.clone(), QrCodeEcc::Low, 512).unwrap();
+    frame.draw(move |f| {
+        let mut image = fltk::image::RgbImage::new(&mut result, 512, 512, ColorDepth::L8).unwrap();
+        image.scale(256, 256, true, true);
 
+        image.draw(450, 200, 256, 256);
+    });
     but4.set_callback( move |_| {
         priv_key_gui(pik1.clone());
     });
-    but1.set_callback(move |_| {
-        let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
-        println!("{:?}", ctx.get_contents());
-        ctx.set_contents(addr_copy.to_owned()).unwrap();
+
+    but2.set_callback(move |_| {
+        if let Ok(walletdetails) = WALLET_DETAILS.lock() {
+            gui_bal4.set_value(&format!("{}", walletdetails.balance));
+        }
     });
 
-    but3.set_callback(move |_| {
-        gui_tips();
-    });
  
     wind.end();
     wind.show();
@@ -471,6 +462,9 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let caller = Caller {
         callback: Box::new(new_ann),
     };
+
+
+
 
     tokio::runtime::Builder::new_multi_thread()
     .enable_all()
@@ -541,7 +535,9 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
     but.set_callback(move |_| {
         println!("Send");
         if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-            
+            println!("Send1");
+            gui_tx_sent_notfy.set_label(&format!("Please wait!!!"));
+
             let mut txn1 = Transaction {
                 hash: "".to_owned(),
                 sender: walletdetails
@@ -565,18 +561,18 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
             txn1.signature = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone()).unwrap();
 
             println!("{:?}",txn1);
+            gui_tx_sent_notfy.set_label(&format!("Transaction sent! Hash 8:1: {}", txn1.hash[1..8].to_string()));
 
             tokio::runtime::Builder::new_multi_thread()
                 .enable_all()
                 .build()
                 .unwrap()
                 .block_on(async {
-                    
                     send_transaction(txn1).await;
                 });
         }
+
     });
-    // thread with while loop to update the wallet
 
 
     app.run().unwrap();
@@ -952,7 +948,8 @@ fn main() {
 
             let app = app::App::default();
             let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet v0.1");
-            let widget_theme = WidgetTheme::new(ThemeType::AquaClassic);
+
+            let widget_theme = WidgetTheme::new(ThemeType::Dark);
             widget_theme.apply();
             let mut frame = Frame::new(0, 0, 400, 300, "");
             let mut pass = SecretInput::new(150, 60, 100, 40, "Password");

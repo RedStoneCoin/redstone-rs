@@ -31464,3 +31464,568 @@
 [2021-10-22][12:12:35][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
 [2021-10-22][12:12:35][redstone_rs::rpc][ERROR] Failed to connect to server
 [2021-10-23][11:19:40][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Os { code: 2, kind: NotFound, message: "No such file or directory" }', src/main.rs:207:37
+[2021-10-23][11:20:03][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:20:03][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:20:03][Redstone_wallet][DEBUG] 
+[2021-10-23][11:20:03][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:20:03][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:22:17][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:22:17][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:22:17][Redstone_wallet][DEBUG] 
+[2021-10-23][11:22:17][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:22:17][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:25:08][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:25:08][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:25:08][Redstone_wallet][DEBUG] 
+[2021-10-23][11:25:08][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:25:08][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:25:50][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:25:50][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:25:50][Redstone_wallet][DEBUG] 
+[2021-10-23][11:25:50][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:25:50][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:28:35][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:28:35][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:28:35][Redstone_wallet][DEBUG] 
+[2021-10-23][11:28:35][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:28:35][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:30:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:30:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:30:51][Redstone_wallet][DEBUG] 
+[2021-10-23][11:30:51][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:30:51][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:32:41][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: DecryptionFailed', src/main.rs:247:14
+[2021-10-23][11:32:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:32:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:32:51][Redstone_wallet][DEBUG] 
+[2021-10-23][11:32:51][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:32:51][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:33:48][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:33:48][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:33:48][Redstone_wallet][DEBUG] 
+[2021-10-23][11:33:48][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:33:48][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:34:29][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:34:29][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:34:29][Redstone_wallet][DEBUG] 
+[2021-10-23][11:34:29][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:34:29][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:34:53][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:34:53][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:34:53][Redstone_wallet][DEBUG] 
+[2021-10-23][11:34:53][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:34:53][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:35:15][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:35:15][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:35:15][Redstone_wallet][DEBUG] 
+[2021-10-23][11:35:15][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:35:15][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:35:54][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:35:54][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:35:54][Redstone_wallet][DEBUG] 
+[2021-10-23][11:35:54][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:35:54][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:36:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:36:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:36:40][Redstone_wallet][DEBUG] 
+[2021-10-23][11:36:40][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:36:40][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:37:10][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:37:10][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:37:10][Redstone_wallet][DEBUG] 
+[2021-10-23][11:37:10][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:37:10][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:37:38][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:37:38][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:37:38][Redstone_wallet][DEBUG] 
+[2021-10-23][11:37:38][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:37:38][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:39:00][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:39:00][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:39:00][Redstone_wallet][DEBUG] 
+[2021-10-23][11:39:00][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:39:00][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:39:28][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:39:28][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:39:28][Redstone_wallet][DEBUG] 
+[2021-10-23][11:39:28][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:39:28][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:39:52][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:39:52][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:39:52][Redstone_wallet][DEBUG] 
+[2021-10-23][11:39:52][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:39:52][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:40:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:40:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:40:16][Redstone_wallet][DEBUG] 
+[2021-10-23][11:40:16][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:40:16][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:40:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:40:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:40:40][Redstone_wallet][DEBUG] 
+[2021-10-23][11:40:40][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:40:40][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:41:48][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:41:48][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:41:48][Redstone_wallet][DEBUG] 
+[2021-10-23][11:41:48][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:41:48][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:42:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:42:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:42:16][Redstone_wallet][DEBUG] 
+[2021-10-23][11:42:16][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:42:16][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:46:04][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:46:04][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:46:04][Redstone_wallet][DEBUG] 
+[2021-10-23][11:46:04][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:46:04][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:47:24][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:53:04][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:53:04][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:53:04][Redstone_wallet][DEBUG] 
+[2021-10-23][11:53:04][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:53:04][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:57:58][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:57:58][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:57:58][Redstone_wallet][DEBUG] 
+[2021-10-23][11:57:58][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:57:58][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:58:42][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:58:42][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:58:42][Redstone_wallet][DEBUG] 
+[2021-10-23][11:58:42][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:58:42][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:59:08][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:59:08][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:59:08][Redstone_wallet][DEBUG] 
+[2021-10-23][11:59:08][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:59:08][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][11:59:32][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:59:32][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][11:59:32][Redstone_wallet][DEBUG] 
+[2021-10-23][11:59:32][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][11:59:32][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:02:41][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:02:41][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:02:41][Redstone_wallet][DEBUG] 
+[2021-10-23][12:02:41][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:02:41][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:03:19][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:03:19][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:03:19][Redstone_wallet][DEBUG] 
+[2021-10-23][12:03:19][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:03:19][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:06:17][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:06:17][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:06:17][Redstone_wallet][DEBUG] 
+[2021-10-23][12:06:17][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:06:17][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:06:21][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: Empty }', src/main.rs:526:55
+[2021-10-23][12:06:52][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:06:52][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:06:52][Redstone_wallet][DEBUG] 
+[2021-10-23][12:06:52][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:06:52][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:10:04][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:10:04][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:10:04][Redstone_wallet][DEBUG] 
+[2021-10-23][12:10:04][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:10:04][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:11:22][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:11:22][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:11:22][Redstone_wallet][DEBUG] 
+[2021-10-23][12:11:22][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:11:22][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:15:32][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:15:32][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:15:32][Redstone_wallet][DEBUG] 
+[2021-10-23][12:15:32][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:15:32][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:15:34][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: Empty }', src/main.rs:535:55
+[2021-10-23][12:17:15][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:17:15][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:17:15][Redstone_wallet][DEBUG] 
+[2021-10-23][12:17:15][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:17:15][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:17:18][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: Empty }', src/main.rs:521:55
+[2021-10-23][12:18:13][Redstone_wallet][ERROR] FATAL: panicked at 'called `Option::unwrap()` on a `None` value', src/main.rs:450:22
+[2021-10-23][12:18:19][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:19][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:19][Redstone_wallet][DEBUG] 
+[2021-10-23][12:18:21][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:21][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:21][Redstone_wallet][DEBUG] 
+[2021-10-23][12:18:22][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:22][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:22][Redstone_wallet][DEBUG] 
+[2021-10-23][12:18:23][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:23][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:23][Redstone_wallet][DEBUG] 
+[2021-10-23][12:18:23][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:23][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:23][Redstone_wallet][DEBUG] 
+[2021-10-23][12:18:25][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:25][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:25][Redstone_wallet][DEBUG] 
+[2021-10-23][12:18:26][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:26][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:18:26][Redstone_wallet][DEBUG] 
+[2021-10-23][12:19:14][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:19:14][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:19:14][Redstone_wallet][DEBUG] 
+[2021-10-23][12:19:14][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:19:14][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:19:17][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:19:24][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:19:27][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:20:09][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:20:09][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:20:09][Redstone_wallet][DEBUG] 
+[2021-10-23][12:20:09][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:20:09][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:20:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:20:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:20:40][Redstone_wallet][DEBUG] 
+[2021-10-23][12:20:40][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:20:40][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][12:21:06][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:21:09][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:21:10][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:21:10][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:23:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:23:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][12:23:18][Redstone_wallet][DEBUG] 
+[2021-10-23][12:23:18][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][12:23:18][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:06:44][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:06:44][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:06:44][Redstone_wallet][DEBUG] 
+[2021-10-23][14:06:44][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:06:44][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:07:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:07:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:07:18][Redstone_wallet][DEBUG] 
+[2021-10-23][14:07:18][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:07:18][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:11:01][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: DecryptionFailed', src/main.rs:248:14
+[2021-10-23][14:11:06][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:11:06][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:11:06][Redstone_wallet][DEBUG] 
+[2021-10-23][14:11:06][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:11:06][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:11:57][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:11:57][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:11:57][Redstone_wallet][DEBUG] 
+[2021-10-23][14:11:57][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:11:57][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:12:38][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:12:38][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:12:38][Redstone_wallet][DEBUG] 
+[2021-10-23][14:12:38][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:12:38][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:13:01][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:13:01][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:13:01][Redstone_wallet][DEBUG] 
+[2021-10-23][14:13:01][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:13:01][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:13:24][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:13:24][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:13:24][Redstone_wallet][DEBUG] 
+[2021-10-23][14:13:24][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:13:24][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:13:53][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:13:53][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:13:53][Redstone_wallet][DEBUG] 
+[2021-10-23][14:13:53][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:13:53][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:14:42][Redstone_wallet][ERROR] FATAL: panicked at 'Something went wrong reading the file: Os { code: 2, kind: NotFound, message: "No such file or directory" }', src/main.rs:238:44
+[2021-10-23][14:14:46][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:14:46][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:14:46][Redstone_wallet][DEBUG] 
+[2021-10-23][14:14:46][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:14:46][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:15:42][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:15:42][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:15:42][Redstone_wallet][DEBUG] 
+[2021-10-23][14:15:42][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:15:42][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:16:11][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:16:11][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:16:11][Redstone_wallet][DEBUG] 
+[2021-10-23][14:16:11][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:16:11][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:16:39][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:16:39][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:16:39][Redstone_wallet][DEBUG] 
+[2021-10-23][14:16:39][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:16:39][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:17:37][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: DecryptionFailed', src/main.rs:248:14
+[2021-10-23][14:17:44][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:17:44][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:17:44][Redstone_wallet][DEBUG] 
+[2021-10-23][14:17:44][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:17:44][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:18:57][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: Empty }', src/main.rs:531:55
+[2021-10-23][14:19:36][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:19:36][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:19:36][Redstone_wallet][DEBUG] 
+[2021-10-23][14:19:36][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:19:36][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:19:43][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:21:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:21:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:21:16][Redstone_wallet][DEBUG] 
+[2021-10-23][14:21:16][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:21:16][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:21:22][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:23:14][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:23:14][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:23:14][Redstone_wallet][DEBUG] 
+[2021-10-23][14:23:14][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:23:14][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:23:29][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:25:32][Redstone_wallet][ERROR] FATAL: panicked at 'Something went wrong reading the file: Os { code: 2, kind: NotFound, message: "No such file or directory" }', src/main.rs:238:44
+[2021-10-23][14:25:35][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: DecryptionFailed', src/main.rs:248:14
+[2021-10-23][14:25:41][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:25:41][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:25:41][Redstone_wallet][DEBUG] 
+[2021-10-23][14:25:41][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:25:41][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:25:50][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:27:32][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:27:32][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:27:32][Redstone_wallet][DEBUG] 
+[2021-10-23][14:27:32][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:27:32][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:27:38][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:28:46][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:28:46][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:28:46][Redstone_wallet][DEBUG] 
+[2021-10-23][14:28:46][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:28:46][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:28:51][Redstone_wallet][ERROR] FATAL: panicked at 'begin <= end (4 <= 1) when slicing `0000a0fe0079e142e40033d26ed8539e567ba638a789258a75e9c4e22488b9b6f6adb9b26ff3ffdb130634b23fe1184eac24f938102607c552844f220bc576d1`', src/main.rs:547:84
+[2021-10-23][14:29:24][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:29:24][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:29:24][Redstone_wallet][DEBUG] 
+[2021-10-23][14:29:24][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:29:24][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:29:32][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:30:38][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:30:56][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:30:56][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:43:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:43:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:43:40][Redstone_wallet][DEBUG] 
+[2021-10-23][14:43:40][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:43:40][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:45:03][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:45:03][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:45:03][Redstone_wallet][DEBUG] 
+[2021-10-23][14:45:03][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:45:03][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:45:05][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:45:05][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:45:05][Redstone_wallet][DEBUG] 
+[2021-10-23][14:45:05][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:45:05][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][14:46:39][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:46:39][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][14:46:39][Redstone_wallet][DEBUG] 
+[2021-10-23][14:46:39][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][14:46:39][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:05:37][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:05:37][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:05:37][Redstone_wallet][DEBUG] 
+[2021-10-23][15:05:37][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:05:37][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:06:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:06:40][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:06:40][Redstone_wallet][DEBUG] 
+[2021-10-23][15:06:40][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:06:40][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:07:14][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:07:14][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:07:14][Redstone_wallet][DEBUG] 
+[2021-10-23][15:07:14][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:07:14][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:08:22][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:08:22][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:08:22][Redstone_wallet][DEBUG] 
+[2021-10-23][15:08:22][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:08:22][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:12:25][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:12:25][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:12:25][Redstone_wallet][DEBUG] 
+[2021-10-23][15:12:26][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:12:26][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:14:09][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:14:09][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:14:09][Redstone_wallet][DEBUG] 
+[2021-10-23][15:14:09][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:14:09][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:14:09][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:442:76
+[2021-10-23][15:14:31][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:14:31][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:14:31][Redstone_wallet][DEBUG] 
+[2021-10-23][15:14:31][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:14:31][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:14:31][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:442:74
+[2021-10-23][15:15:04][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:15:04][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:15:04][Redstone_wallet][DEBUG] 
+[2021-10-23][15:15:04][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:15:04][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:15:31][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:15:31][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:15:31][Redstone_wallet][DEBUG] 
+[2021-10-23][15:15:31][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:15:31][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:15:31][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:442:80
+[2021-10-23][15:16:45][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:16:45][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:16:45][Redstone_wallet][DEBUG] 
+[2021-10-23][15:16:45][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:16:45][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:18:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:18:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:18:51][Redstone_wallet][DEBUG] 
+[2021-10-23][15:18:51][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:18:51][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:23:36][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:23:36][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:23:36][Redstone_wallet][DEBUG] 
+[2021-10-23][15:23:36][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:23:36][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:23:36][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:78
+[2021-10-23][15:24:14][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:24:14][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:24:14][Redstone_wallet][DEBUG] 
+[2021-10-23][15:24:14][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:24:14][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:25:03][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:25:03][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:25:03][Redstone_wallet][DEBUG] 
+[2021-10-23][15:25:03][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:25:03][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:25:04][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:78
+[2021-10-23][15:25:25][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:25:25][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:25:25][Redstone_wallet][DEBUG] 
+[2021-10-23][15:25:25][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:25:25][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:25:25][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:78
+[2021-10-23][15:25:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:25:51][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:25:51][Redstone_wallet][DEBUG] 
+[2021-10-23][15:25:51][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:25:51][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:25:51][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:78
+[2021-10-23][15:26:24][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:26:24][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:26:24][Redstone_wallet][DEBUG] 
+[2021-10-23][15:26:24][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:26:24][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:26:46][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:26:46][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:26:46][Redstone_wallet][DEBUG] 
+[2021-10-23][15:26:46][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:26:46][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:27:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:27:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:27:16][Redstone_wallet][DEBUG] 
+[2021-10-23][15:27:16][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:27:16][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:27:16][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:80
+[2021-10-23][15:27:43][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:27:43][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:27:43][Redstone_wallet][DEBUG] 
+[2021-10-23][15:27:43][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:27:43][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:27:43][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:78
+[2021-10-23][15:28:03][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:28:03][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:28:03][Redstone_wallet][DEBUG] 
+[2021-10-23][15:28:03][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:28:03][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:28:36][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:28:36][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:28:36][Redstone_wallet][DEBUG] 
+[2021-10-23][15:28:36][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:28:36][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:28:36][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:78
+[2021-10-23][15:29:10][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:29:10][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:29:10][Redstone_wallet][DEBUG] 
+[2021-10-23][15:29:10][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:29:10][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:30:10][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:30:10][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:30:10][Redstone_wallet][DEBUG] 
+[2021-10-23][15:30:10][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:30:10][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:30:10][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:78
+[2021-10-23][15:31:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:31:18][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:31:18][Redstone_wallet][DEBUG] 
+[2021-10-23][15:31:18][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:31:18][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:33:07][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:33:07][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:33:07][Redstone_wallet][DEBUG] 
+[2021-10-23][15:33:07][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:33:07][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:33:47][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:33:47][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:33:47][Redstone_wallet][DEBUG] 
+[2021-10-23][15:33:47][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:33:47][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:33:47][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:77
+[2021-10-23][15:34:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:34:16][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:34:16][Redstone_wallet][DEBUG] 
+[2021-10-23][15:34:16][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:34:16][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:34:44][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:34:44][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:34:44][Redstone_wallet][DEBUG] 
+[2021-10-23][15:34:44][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:34:44][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:35:45][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:35:45][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:35:45][Redstone_wallet][DEBUG] 
+[2021-10-23][15:35:45][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:35:45][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:35:45][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:441:77
+[2021-10-23][15:40:36][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:40:36][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:40:36][Redstone_wallet][DEBUG] 
+[2021-10-23][15:40:36][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:40:36][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:40:36][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:440:92
+[2021-10-23][15:41:19][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:41:19][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:41:19][Redstone_wallet][DEBUG] 
+[2021-10-23][15:41:19][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:41:19][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:41:19][Redstone_wallet][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: Internal(ImageFormatError)', src/main.rs:440:92
+[2021-10-23][15:41:37][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:41:37][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:41:37][Redstone_wallet][DEBUG] 
+[2021-10-23][15:41:37][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:41:37][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:43:22][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:43:22][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:43:22][Redstone_wallet][DEBUG] 
+[2021-10-23][15:43:22][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:43:22][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:44:15][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:44:15][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:44:15][Redstone_wallet][DEBUG] 
+[2021-10-23][15:44:15][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:44:15][redstone_rs::rpc][ERROR] Failed to connect to server
+[2021-10-23][15:45:25][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:45:25][reqwest::connect][DEBUG] starting new connection: http://127.0.0.1:8000/
+[2021-10-23][15:45:25][Redstone_wallet][DEBUG] 
+[2021-10-23][15:45:25][redstone_rs::rpc][INFO] Launching RPC server client, connecting to server on port=44405
+[2021-10-23][15:45:25][redstone_rs::rpc][ERROR] Failed to connect to server
