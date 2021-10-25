@@ -1,0 +1,26 @@
+[package]
+name = "Redstone-wallet"
+version = "0.1.0"
+authors = ["LeoCornelius <leocornelius019@gmail.com>, Redstone Developers"]
+edition = "2018"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+redstone_rs = { path = "../../lib"} 
+fern = { version = "0.6", features = ["colored"] }
+log = "0.4.14"
+chrono = "0.4.19"
+age = "0.6.0"
+secrecy = "0.7.0"
+encryptfile = "0.1.3"
+rocket = { version = "0.4.10", default-features = true }
+lazy_static = "1.4.0"
+serde_json = "1"
+serde = { version = "1.0", features = ["derive"] }
+reqwest = { version = "0.11", features = ["json"] }
+openssl = { version = "0.10", features = ["vendored"] }
+tokio = { version = "1.10.0", features = ["rt-multi-thread"] }
+try-catch = "0.2.2"
+fltk = "1.2.9"
+clipboard = "0.5.0"
+fltk-theme = "0.4.2"
+qrcode-generator = "4.1.1"

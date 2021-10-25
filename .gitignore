@@ -1,0 +1,6 @@
+
+*lock
+**target
+*.rsw
+.vscode/**
+**.log
