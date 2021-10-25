@@ -14,6 +14,7 @@ use rocket::get;
 use rocket::post;
 use redstone_rs::transaction::Transaction;
 use redstone_rs::account::Account;
+use redstone_rs::keypair;
 
 use rocket::config::{Config, Environment, LoggingLevel};
 lazy_static! {
@@ -124,6 +125,16 @@ fn gettx(hash: String) -> String {
     }
 }
 
+#[get("/get_block/<hash>")]
+fn get_blk(hash: String) -> String {
+    
+    // TODO: Get chain count from the config, for every chain look in to the db get block by hash if it exist
+    let mut result = "{ \"result\" : \"failure\" }".to_owned();
+    todo!();
+    return(result.to_string());
+}
+
+
 #[get("/get_acc/<public_key>")]
 fn getacc(public_key: String) -> String {
     if let Err(get1) = Account::get(public_key.clone())  {
@@ -131,8 +142,15 @@ fn getacc(public_key: String) -> String {
     else {
         let get = serde_json::to_string(&Account::get(public_key).unwrap());
         return "{ \"success\": true, \"Result\":".to_string() + &get.unwrap() + "}";
-
     }
+}
+#[get("/create_wallet")]
+fn create_wallet() -> String {
+    let wallet = redstone_rs::keypair::Keypair::generate();
+    let public_key = wallet.public_key.to_string();
+    let private_key = wallet.private_key.to_string();
+    let address = wallet.address().to_string();
+    return format!("{{ \"public_key\": \"{}\", \"private_key\": \"{}\", \"address\": \"{}\" }}", public_key, private_key, address);
 }
 
 
@@ -141,7 +159,8 @@ pub fn get_middleware() -> Vec<Route> {
             ping,
             submit_txn_v1,
             gettx,
-            getacc
+            getacc,
+            create_wallet
     ]
 }
 pub fn start_api() {

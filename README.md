@@ -70,29 +70,23 @@ cd target/debug
 
 - [ ] Finish p2p code.
 - [ ] Handeler functions for the p2p code (eg when you recieve a block from a peer what do you do with it.
-- [ ] Block enacting
-- [X] Txn validation
-- [X] Mempool (stores unvalidated txns) needs implmenting.
-- [x] Accounts
+- [ ] Block enacting, Save block get block.
+- [ ] Txn validation
 - [ ] Validtor code (regarding the DpoS)
-- [X] Fix POW for txns
 - [ ] Smart Contract
 - [ ] When transaction is executed add it to the db, so we can check if there is duplicate transaction
 
 ### Node
 
-- [X] Json Api
-- [X] Rpc
+- [X] Json Api:
+- - [ ] Get Block
+- - [ ] Get Transaction
 - [ ] CLI 
 - [ ] Full Node
 
-### Wallet
-
-- [X] Wallet
-- [X] Basic Wallet
-- [X] Api for the node
-- [X] Rpc
-- [ ] Gui?!
+## Wallet
+- [ ] DONE
+ 
 
 # Security Policy
 
