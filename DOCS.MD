@@ -35,7 +35,7 @@ Rust example:
             
         }
 ```
-To make transaction cration easyier we made own javascript lib! [LIB]("https://github.com/RedStoneCoin/Redstone-js/")
+To make transaction cration easyier we made own javascript lib! [LIB](https://github.com/RedStoneCoin/Redstone-js/)
 
 ## JSON-API
 Every json api request goes to the <node-ip>:8000/json_api/
