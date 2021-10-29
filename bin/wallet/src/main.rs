@@ -79,14 +79,14 @@ struct Balances {
     locked: u64,
 }
 pub fn to_atomc(amount: f64) -> u64 {
-    (amount * (10_i64.pow(config().decimal_places as u32) as f64)) as u64 // (amount * 10000 for 4 dec places)
+    (amount * (10_i64.pow(6 as u32) as f64)) as u64 // (amount * 10000 for 4 dec places)
 }
 
-pub fn to_dec(amount: u64) -> f64 {
+pub fn to_dec(amount: u64) -> u64 {
     if amount == 0 {
-        return 0 as f64;
+        return 0 as u64;
     } else {
-        return amount as f64 / (10_i64.pow(config().decimal_places as u32)) as f64;
+        return amount as u64 / (10_i64.pow(6 as u32)) as u64;
         // (amount / 10000 for 4 dec places)
     }
 }
@@ -180,7 +180,6 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
 }
 
 async fn send_transaction(txn: Transaction) {
-    txn.amount = to_atomc(txn.amount);
     if txn.signature == "" {
         //tx not signed
         println!("Transaction not signed");
@@ -559,7 +558,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
                     .public_key
                     .to_owned(),
                 reciver: addr_send.value().to_owned(),
-                amount: amount.value().parse::<u64>().unwrap().to_owned(),
+                amount: to_atomc(amount.value().parse::<f64>().unwrap()).to_owned(),
                 nonce: 0,
                 type_flag: 0,
                 payload: "".to_owned(), // Hex encoded payload
@@ -687,7 +686,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
             match input {
                     1 => {
                         if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-                            info!("Our balance: {}", to_dec(walletdetails.balance);
+                            info!("Our balance: {}", to_dec(walletdetails.balance));
                             drop(walletdetails);
                         }
                     }
@@ -702,10 +701,10 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                         io::stdin()
                             .read_line(&mut input)
                             .expect("Failed to read input.");
-                        let input: u64 = input.trim().parse().unwrap();
+                        let input: f64 = input.trim().parse().unwrap();
 
                         if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
-                            if input < 1000 {
+                            if input < 1000.0 {
                                 let mut txn1 = Transaction {
                                     hash: "".to_owned(),
                                     sender: walletdetails
@@ -715,7 +714,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                                         .public_key
                                         .to_owned(),
                                     reciver: reciver.trim_end().to_owned(),
-                                    amount: input,
+                                    amount: to_atomc(input).to_owned(),
                                     nonce: 0,
                                     type_flag: 0,
                                     payload: "".to_owned(), // Hex encoded payload
