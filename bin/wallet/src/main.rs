@@ -78,7 +78,18 @@ struct Balances {
     balance: u64,
     locked: u64,
 }
+pub fn to_atomc(amount: f64) -> u64 {
+    (amount * (10_i64.pow(config().decimal_places as u32) as f64)) as u64 // (amount * 10000 for 4 dec places)
+}
 
+pub fn to_dec(amount: u64) -> f64 {
+    if amount == 0 {
+        return 0 as f64;
+    } else {
+        return amount as f64 / (10_i64.pow(config().decimal_places as u32)) as f64;
+        // (amount / 10000 for 4 dec places)
+    }
+}
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     let mut base_config = fern::Dispatch::new();
     base_config = match verbosity {
@@ -169,6 +180,7 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
 }
 
 async fn send_transaction(txn: Transaction) {
+    txn.amount = to_atomc(txn.amount);
     if txn.signature == "" {
         //tx not signed
         println!("Transaction not signed");
@@ -328,7 +340,7 @@ pub fn new_ann(ann: Announcement) {
                             match txn.type_flag {
                                 // 0 u got some rs
                                 0 => {
-                                    info!("You got RS: {}", txn.amount);
+                                    info!("You got RS: {}", to_dec(txn.amount));
 
                                     locked.balance += txn.amount;
                                 }
@@ -675,7 +687,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
             match input {
                     1 => {
                         if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-                            info!("Our balance: {}", walletdetails.balance);
+                            info!("Our balance: {}", to_dec(walletdetails.balance);
                             drop(walletdetails);
                         }
                     }
