@@ -722,7 +722,6 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                                     signature: "".to_owned(),
                                 };                    //99999999999999999999
                                 let pow = txn1.find_pow();
-               
                                 let sign = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone());
 
                                 info!("hash for txn:{}", txn1.hash);
