@@ -15,6 +15,8 @@ use rocket::post;
 use redstone_rs::transaction::Transaction;
 use redstone_rs::account::Account;
 use redstone_rs::keypair::Keypair;
+use rocket::http::hyper::header::Headers;
+use rocket::http::hyper::header::AccessControlAllowOrigin;
 
 use rocket::config::{Config, Environment, LoggingLevel};
 lazy_static! {
@@ -246,11 +248,24 @@ fn es_tx(pik: String,from: String,amount: f64,to: String) -> String {
 
 #[get("/create_wallet")]
 fn create_wallet() -> String {
+    let mut headers = Headers::new();
+    headers.set(
+        AccessControlAllowOrigin::Any
+    );
     let wallet = redstone_rs::keypair::Keypair::generate();
     let public_key = wallet.public_key.to_string();
     let private_key = wallet.private_key.to_string();
     let address = wallet.address().to_string();
     return format!("{{ \"public_key\": \"{}\", \"private_key\": \"{}\", \"address\": \"{}\" }}", public_key, private_key, address);
+}
+#[get("/from_private_key/<pik>")]
+fn from_private_key(pik: String) -> String {
+    let keypair = keypair::Keypair::from_private_key(pik);
+    let public_key = keypair.public_key.to_string();
+    let private_key = keypair.private_key.to_string();
+    let address = keypair.address().to_string();
+    return format!("{{ \"public_key\": \"{}\", \"private_key\": \"{}\", \"address\": \"{}\" }}", public_key, private_key, address);
+
 }
 
 
@@ -262,7 +277,8 @@ pub fn get_middleware() -> Vec<Route> {
             getacc,
             create_wallet,
             submit_txn_v1_np,
-            es_tx
+            es_tx,
+            from_private_key
     ]
 }
 pub fn start_api() {
