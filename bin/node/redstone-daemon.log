@@ -5094,3 +5094,528 @@
 [2021-10-30][18:52:26][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidSecretKey', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:60:78
 [2021-10-30][18:53:16][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidSecretKey', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:60:78
 [2021-10-30][18:54:57][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: '$', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:26:25][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: OddLength', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:49:43][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:49:45][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:49:46][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:49:46][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:49:47][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:49:47][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:49:48][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:49:48][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:49:48][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:51:43][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:51:45][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:51:46][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:51:46][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:51:47][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:51:47][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:51:48][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:51:48][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-30][19:51:48][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: InvalidHexCharacter { c: 't', index: 0 }', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:57:34
+[2021-10-31][16:53:04][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][16:53:04][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][16:53:04][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][16:53:04][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][16:53:04][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][16:53:04][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][16:53:04][Redstone_daemon][INFO] API server launched
+[2021-10-31][16:53:04][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][16:53:04][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][16:53:04][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][16:53:04][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][16:53:09][Redstone_daemon][INFO] announe block test
+[2021-10-31][16:53:09][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
+[2021-10-31][16:53:32][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39030, fd: 5 }
+[2021-10-31][17:02:13][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:02:13][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:02:13][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:02:13][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:02:13][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:02:13][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:02:13][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:02:13][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:02:13][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:02:13][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:02:13][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:02:15][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39032, fd: 6 }
+[2021-10-31][17:02:18][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:02:18][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
+[2021-10-31][17:02:22][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39034, fd: 6 }
+[2021-10-31][17:02:40][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:02:40][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:02:40][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:02:40][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:02:40][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:02:40][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:02:40][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:02:40][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:02:40][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:02:40][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:02:40][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:02:42][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39036, fd: 6 }
+[2021-10-31][17:02:45][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:02:45][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
+[2021-10-31][17:03:09][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:03:09][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:03:09][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:03:09][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:03:09][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:03:09][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:03:09][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:03:09][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:03:09][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:03:09][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:03:09][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:03:12][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39040, fd: 5 }
+[2021-10-31][17:03:14][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:03:14][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
+[2021-10-31][17:03:44][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:03:44][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:03:44][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:03:44][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:03:44][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:03:44][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:03:44][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:03:44][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:03:44][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:03:44][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:03:44][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:03:46][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39042, fd: 6 }
+[2021-10-31][17:03:49][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:03:49][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
+[2021-10-31][17:05:10][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:05:10][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:05:10][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:05:10][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:05:10][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:05:10][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:05:10][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:05:10][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:05:10][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:05:10][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:05:10][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:05:15][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:05:15][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
+[2021-10-31][17:06:00][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39044, fd: 5 }
+[2021-10-31][17:07:45][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39046, fd: 5 }
+[2021-10-31][17:09:04][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39050, fd: 5 }
+[2021-10-31][17:13:17][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39052, fd: 5 }
+[2021-10-31][17:13:36][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39054, fd: 5 }
+[2021-10-31][17:13:55][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39056, fd: 5 }
+[2021-10-31][17:14:12][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39060, fd: 5 }
+[2021-10-31][17:14:39][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39062, fd: 5 }
+[2021-10-31][17:14:56][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39064, fd: 5 }
+[2021-10-31][17:15:15][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39066, fd: 5 }
+[2021-10-31][17:18:43][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:18:43][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:18:43][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:18:43][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:18:43][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:18:43][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:18:43][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:18:43][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:18:43][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:18:43][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:18:43][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:18:48][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:18:48][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=1,
+[2021-10-31][17:18:55][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: OddLength', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:16:48
+[2021-10-31][17:22:33][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:22:33][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:22:33][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:22:33][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:22:33][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:22:33][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:22:33][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:22:33][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:22:33][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:22:33][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:22:33][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:22:34][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39070, fd: 6 }
+[2021-10-31][17:22:38][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:22:38][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=2,
+[2021-10-31][17:26:09][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:26:09][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:26:09][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:26:09][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:26:09][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:26:09][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:26:09][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:26:09][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:26:09][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:26:09][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:26:09][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:26:14][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:26:14][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=2,
+[2021-10-31][17:26:18][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: OddLength', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:16:48
+[2021-10-31][17:26:38][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:26:38][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:26:38][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:26:38][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:26:38][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:26:38][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:26:38][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:26:38][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:26:38][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:26:38][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:26:38][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:26:40][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39072, fd: 6 }
+[2021-10-31][17:26:43][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:26:43][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=2,
+[2021-10-31][17:27:09][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:27:09][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:27:09][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:27:09][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:27:09][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:27:09][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:27:09][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:27:09][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:27:09][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:27:09][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:27:09][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:27:10][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39074, fd: 4 }
+[2021-10-31][17:27:14][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:27:14][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=2,
+[2021-10-31][17:28:09][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:28:09][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:28:09][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:28:09][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:28:09][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:28:09][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:28:09][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:28:09][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:28:09][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:28:09][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:28:09][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:28:11][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39076, fd: 6 }
+[2021-10-31][17:28:14][Redstone_daemon][INFO] announe block test
+[2021-10-31][17:28:14][redstone_rs::rpc][DEBUG] New block! Hash=1, chain=2,
+[2021-10-31][17:29:33][Redstone_daemon][ERROR] FATAL: panicked at 'called `Result::unwrap()` on an `Err` value: OddLength', /home/toni/Documents/redstone-rs/lib/src/keypair.rs:16:48
+[2021-10-31][17:30:27][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:30:27][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:30:27][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:30:27][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:30:27][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:30:27][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:30:27][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:30:27][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:30:27][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:30:27][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:30:27][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:30:28][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39078, fd: 6 }
+[2021-10-31][17:30:32][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:30:32][redstone_rs::rpc][DEBUG] New block! Hash=0302db1c230c9e215a2cb251a2b08af301c8046661298de92b3a250fcf682d36, chain=2,
+[2021-10-31][17:31:41][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:31:41][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:31:41][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:31:41][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:31:41][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:31:41][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:31:41][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:31:41][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:31:41][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:31:41][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:31:41][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:31:42][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39080, fd: 6 }
+[2021-10-31][17:31:46][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:31:46][redstone_rs::rpc][DEBUG] New block! Hash=0302db1c230c9e215a2cb251a2b08af301c8046661298de92b3a250fcf682d36, chain=2,
+[2021-10-31][17:32:17][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39082, fd: 6 }
+[2021-10-31][17:32:29][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39084, fd: 6 }
+[2021-10-31][17:33:27][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39086, fd: 6 }
+[2021-10-31][17:34:03][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:34:03][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:34:03][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:34:03][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:34:03][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:34:03][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:34:03][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:34:03][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:34:03][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:34:03][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:34:03][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:34:03][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39092, fd: 6 }
+[2021-10-31][17:34:08][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:34:08][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-10-31][17:34:35][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:34:35][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:34:35][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:34:35][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:34:35][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:34:35][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:34:35][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:34:35][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:34:35][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:34:35][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:34:35][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:34:36][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39096, fd: 6 }
+[2021-10-31][17:34:40][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:34:40][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-10-31][17:37:57][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39098, fd: 6 }
+[2021-10-31][17:38:30][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39100, fd: 6 }
+[2021-10-31][17:38:52][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39102, fd: 6 }
+[2021-10-31][17:39:01][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39104, fd: 6 }
+[2021-10-31][17:39:11][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39106, fd: 6 }
+[2021-10-31][17:40:14][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39108, fd: 6 }
+[2021-10-31][17:42:05][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39110, fd: 6 }
+[2021-10-31][17:43:21][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:43:21][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:43:21][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:43:21][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:43:21][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:43:21][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:43:21][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:43:21][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:43:21][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:43:21][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:43:21][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:43:22][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39112, fd: 6 }
+[2021-10-31][17:43:26][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:43:26][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-10-31][17:44:21][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:44:21][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:44:21][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:44:21][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:44:21][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:44:21][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:44:21][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:44:21][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:44:21][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:44:21][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:44:21][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:44:22][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39114, fd: 6 }
+[2021-10-31][17:44:26][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:44:26][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-10-31][17:44:49][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:44:49][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:44:49][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:44:49][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:44:49][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:44:49][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:44:49][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:44:49][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:44:49][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:44:49][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:44:49][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:44:50][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39116, fd: 6 }
+[2021-10-31][17:44:54][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:44:54][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-10-31][17:45:38][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:45:38][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:45:38][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:45:38][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:45:38][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:45:38][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:45:38][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:45:38][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:45:38][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:45:38][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:45:38][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:45:39][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39118, fd: 6 }
+[2021-10-31][17:45:43][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:45:43][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-10-31][17:46:28][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:46:28][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:46:28][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:46:28][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:46:28][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:46:28][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:46:28][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:46:28][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:46:28][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:46:28][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:46:28][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:46:29][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39120, fd: 6 }
+[2021-10-31][17:46:33][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:46:33][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-10-31][17:47:16][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:47:16][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:47:16][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:47:16][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:47:16][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:47:16][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:47:16][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:47:16][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:47:16][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:47:16][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:47:16][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:47:18][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39122, fd: 6 }
+[2021-10-31][17:47:21][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:47:21][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-10-31][17:48:20][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-10-31][17:48:20][Redstone_daemon][INFO] Starting redstone node
+[2021-10-31][17:48:20][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-10-31][17:48:20][Redstone_daemon][WARN] Run at your own risk!
+[2021-10-31][17:48:20][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-10-31][17:48:20][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-10-31][17:48:20][Redstone_daemon][INFO] API server launched
+[2021-10-31][17:48:20][Redstone_daemon][INFO] RPC server launched
+[2021-10-31][17:48:20][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-10-31][17:48:20][Redstone_daemon][INFO] wait 5 sec
+[2021-10-31][17:48:20][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-10-31][17:48:21][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39124, fd: 5 }
+[2021-10-31][17:48:25][Redstone_daemon][INFO] announe block test1 
+[2021-10-31][17:48:25][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-10-31][17:48:41][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39126, fd: 5 }
+[2021-10-31][17:53:17][redstone_rs::rpc][INFO] New incoming stream: TcpStream { addr: 127.0.0.1:44405, peer: 127.0.0.1:39128, fd: 5 }

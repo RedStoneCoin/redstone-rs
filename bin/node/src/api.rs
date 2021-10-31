@@ -126,6 +126,9 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
         return "{ \"result\" : \"failure\" }".to_owned();
   }
 }
+
+
+
 #[post("/submit_txn_np", format = "application/json", data = "<txn_data>")]
 pub fn submit_txn_v1_np(txn_data: rocket::Data) -> String {
     debug!("Transaction recived by api!");
@@ -265,10 +268,18 @@ fn from_private_key(pik: String) -> String {
     let private_key = keypair.private_key.to_string();
     let address = keypair.address().to_string();
     return format!("{{ \"public_key\": \"{}\", \"private_key\": \"{}\", \"address\": \"{}\" }}", public_key, private_key, address);
-
 }
 
-
+#[get("/pk_to_acc/<pik>")]
+fn pkacc(pik: String) -> String {
+    let keypair = Keypair {
+        private_key: pik.clone(),
+        public_key: pik.clone(),
+    };
+    let addr = keypair.address().to_string();
+    // check for errors
+    return format!("{{ \"address\": \"{}\" }}", addr);
+}
 pub fn get_middleware() -> Vec<Route> {
     routes![must_provide_method,
             ping,
@@ -278,7 +289,8 @@ pub fn get_middleware() -> Vec<Route> {
             create_wallet,
             submit_txn_v1_np,
             es_tx,
-            from_private_key
+            from_private_key,
+            pkacc
     ]
 }
 pub fn start_api() {

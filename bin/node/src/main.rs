@@ -171,8 +171,8 @@ fn main() {
     // loop so program does not end
     let _ = std::thread::spawn(move || {
         let mut txn = Transaction {
-            hash: "".to_owned(),
-            sender: "coinbase".to_owned(),
+            hash: "321".to_owned(),
+            sender: "0302db1c230c9e215a2cb251a2b08af301c8046661298de92b3a250fcf682d36".to_owned(),
             reciver: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
             amount: 69,
             nonce: 1,
@@ -181,12 +181,23 @@ fn main() {
             pow: "".to_owned(),     // Spam protection PoW
             signature: "".to_owned(),
         };
+        let mut txn1 = Transaction {
+            hash: "123".to_owned(),
+            sender: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f".to_owned(),
+            reciver: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
+            amount: 29,
+            nonce: 1,
+            type_flag: 0,
+            payload: "".to_owned(), // Hex encoded payload
+            pow: "".to_owned(),     // Spam protection PoW
+            signature: "".to_owned(),
+        };
         let mut blk = Block {
-            hash: "1".to_owned(),
+            hash: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f".to_owned(),
             header: Header {
-                height: 1,
+                height: 66,
                 timestamp: 1,
-                chain: 1,
+                chain: 2,
                 parent_hash: "".to_owned(),
                 state_hash: "".to_owned(),
                 uncle_root: "".to_owned(),
@@ -198,14 +209,14 @@ fn main() {
                 validator_signatures: vec!("".to_owned()),
                 vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
             },
-            transactions: vec![txn.clone()],
+            transactions: vec![txn.clone(), txn1.clone()],
         };
         
         // get blocks form db and send them to the wallet to sync it
         //  let block = vec![blk,blk1,blk2];
         info!("wait 5 sec");
         thread::sleep(time::Duration::from_secs(5));
-        info!("announe block test");
+        info!("announe block test1 ");
         block_announce(blk).unwrap();
         thread::sleep(time::Duration::from_secs(1));
 
