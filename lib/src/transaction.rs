@@ -111,25 +111,7 @@ impl Executable for Transaction {
 
         let sender = keypairs.address();
         let reciver = self.reciver.clone();
-        if context == "send" {
-            let acc_sender = Account::get(sender);
-            let mut acc_reciver = Account::get(reciver);
-            if let Err(acc_sender1) = acc_sender {
-                return Err("Failed to get senders's account").unwrap();
-            }
-            if let Err(acc_reciver1) = acc_reciver {
-                // we get error if its new account and we craete it with balance he got
-                let acc = Account {
-                    address: self.reciver.clone(),
-                    balance: self.amount,
-                    smart_contract: false,
-                };
-                Account::save(&acc);
-            } else {
-                acc_reciver.unwrap().balance += self.amount;
-            }
-            acc_sender.unwrap().balance -= self.amount;
-        }
+        
 
         // finish transaction
         todo!()

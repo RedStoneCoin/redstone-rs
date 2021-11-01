@@ -47,12 +47,16 @@ pub fn choose_next_proposer(block: Block) -> Result<Validator, Box<dyn std::erro
         // we could not find a proposer, retry
         // This should not happen, but this is a saftey catch. WCS we return the first validator
         // TODO: Risk assess this, can this situation be triggered and then exploited?
+
         trys += 1;
+
         if trys >= 5 {
             // we have tried too many times, return the first validator
             log::error!("Unexpected error: failed to find proposer after 5 trys, total_stake: {}, target_coin: {}, coin_culmulative: {}, online_count {}", total_stake, target_coin, coin_culmulative, online.len());
             return Ok(online[0].clone());
+            
         }
+        
     }
 }
 
