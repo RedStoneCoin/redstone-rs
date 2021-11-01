@@ -7,6 +7,7 @@ mod api;
 use std::collections::HashMap;
 use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
+use redstone_rs::account::Account;
 use redstone_rs::crypto::hash;
 extern crate clap;
 use clap::{Arg, App, SubCommand};
@@ -192,6 +193,13 @@ fn main() {
             pow: "".to_owned(),     // Spam protection PoW
             signature: "".to_owned(),
         };
+        let acc = Account {
+            address: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
+            balance: 0,
+            smart_contract: false,
+
+        };
+        account::Account::save(&acc);
         let mut blk = Block {
             hash: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f".to_owned(),
             header: Header {

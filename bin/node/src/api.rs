@@ -246,6 +246,7 @@ fn es_tx(pik: String,from: String,amount: f64,to: String) -> String {
     let pow = txn1.find_pow();
     let sig = keypair.sign(txn1.hash.clone());
     txn1.signature = sig.unwrap();
+    mempool::add_transaction(txn1);
     return "{ \"success\": true, \"Result\":".to_string() + "Not failure" + "}";
 }
 

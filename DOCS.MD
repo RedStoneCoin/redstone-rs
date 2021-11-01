@@ -48,6 +48,7 @@ There will be a lot more apis this is just start.
 - gettx (mempool)
 - getacc
 - create_wallet
+- pkacc
 
 #### PING
 
@@ -95,7 +96,6 @@ response: Public key, Private Key and Address
 #### Sign
 Signs a hash without wallet doing it
 ```
-request: <node-ip>:8000/json_api/sign/<private_key>/<string>
 ```
 ```
 response: singature
@@ -109,4 +109,13 @@ from = PUBLIC KEY!!!
 amount = float or not
 to = ADDRESS!!!
 request: <node-ip>:8000/json_api/send_easy_transaction/<pik>/<from>/<amount>/<to>
+```
+
+#### Public key to Address
+From public key retrives an address!
+```
+request: <node-ip>:8000/json_api/pkacc/<publicc_key>
+```
+```
+returns: {address: address} 
 ```
