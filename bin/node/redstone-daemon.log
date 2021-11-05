@@ -5639,3 +5639,23 @@
 [2021-10-31][17:59:21][Redstone_daemon][INFO] wait 5 sec
 [2021-10-31][17:59:26][Redstone_daemon][INFO] announe block test1 
 [2021-10-31][17:59:26][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,
+[2021-11-03][14:06:35][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2021-11-03][14:06:35][Redstone_daemon][INFO] Starting redstone node
+[2021-11-03][14:06:35][Redstone_daemon][WARN] Warning, this software is not stable
+[2021-11-03][14:06:35][Redstone_daemon][WARN] Run at your own risk!
+[2021-11-03][14:06:35][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2021-11-03][14:06:35][Redstone_daemon][INFO] Launching API server at 0.0.0.0:8000
+[2021-11-03][14:06:35][Redstone_daemon][INFO] API server launched
+[2021-11-03][14:06:35][Redstone_daemon][INFO] RPC server launched
+[2021-11-03][14:06:35][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2021-11-03][14:06:35][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2021-11-03][14:06:36][Redstone_daemon][INFO] wait 5 sec
+[2021-11-03][14:06:41][Redstone_daemon][INFO] announe block test1 
+[2021-11-03][14:06:41][redstone_rs::rpc][DEBUG] New block! Hash=02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f, chain=2,

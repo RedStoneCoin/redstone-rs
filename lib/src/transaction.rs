@@ -121,6 +121,7 @@ impl Executable for Transaction {
     /// Checks if a txn is valid
     /// Leo port this to the global state thing
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
+        println!("Evaluating transaction hash: {}", self.hash.clone());
         let mpool = get_transaction(self.hash.clone());
         if let Err(ref mpool) = mpool {
         } else {
@@ -137,6 +138,7 @@ impl Executable for Transaction {
             println!("{:?}", check);
             return Err("Signature is not valid").unwrap();
         }
+        // add chain count
         for chn in 0..5 {
             let mut db_handle = Database::new();
             db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
@@ -154,6 +156,40 @@ impl Executable for Transaction {
         if pow_txn != self.hash_item() {
             // Proof of work is invalid
             return Err("ErrInvalidPow").unwrap();
+        }
+        if self.sender.len() != 64 {
+            return Err("ErrInvalidSender").unwrap();
+        }
+        if self.nonce > u64::MAX {
+            return Err("ErrInvalidNonce").unwrap();
+        }
+        if self.nonce == 1 {
+            return Err("ErrInvalidNonce").unwrap();
+        }
+        if ![1, 2, 3, 4, 5, 6, 7].contains(&self.type_flag) {
+            println!(
+                "Transaction {} has unsupported type={}",
+                self.hash,
+                self.type_flag,
+            );
+            return Err("ErrInvalidType").unwrap();
+        }
+        match self.type_flag {
+            1 => {
+                // Transfer
+                if self.amount > u64::MAX {
+                    return Err("ErrInvalidAmount").unwrap();
+                }
+                if self.reciver.len() != 64 {
+                    return Err("ErrInvalidReciver").unwrap();
+                }
+                // TODO get account from the state and check if it exists and if it has enough funds
+                // TODO check if the reciver is the same as the sender
+            },
+            _ => {
+                // TODO add other types
+                return Err("ErrInvalidType").unwrap();
+            }
         }
         todo!()
     }
