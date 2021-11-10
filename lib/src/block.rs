@@ -101,7 +101,7 @@ impl Executable for Block {
             let txn_result = txn_result.unwrap();
             let mut db_handle = Database::new();
             db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.header.chain))?;
-            db_handle.set(&"transactions".to_owned(), &self.hash,&"1".to_string());
+            db_handle.set(&"transactions".to_owned(), &self.hash,&"1".to_string()).unwrap();
             log::debug!("txn_result: {}", txn_result);
         }
         // If we encountered no errors, we can apply the state
@@ -244,6 +244,8 @@ impl Executable for Block {
     /// # Cost
     /// Not used, will panic if called
     fn cost(&self, context: &String) -> u64 {
+        
+        
         unimplemented!()
     }
 }
