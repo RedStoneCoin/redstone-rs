@@ -101,8 +101,7 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     Ok(())
 }
 
-fn cli() {
-        /*
+fn main() {
     let matches =  App::new("Redstone Node")
                         .version("0.1.0")
                         .author("Redstone Developers. <redstonecrypto@gmail.com>")
@@ -122,30 +121,41 @@ fn cli() {
                           .takes_value(true)
                           .help("logging level")
                           .required(false))
+                          .arg(Arg::with_name("api_port")
+                            .long("api") // allow --name
+                            .takes_value(true)
+                            .help("api port")
+                            .required(false))
+                        .arg(Arg::with_name("rpc_port")
+                            .long("rpc") // allow --name
+                            .takes_value(true)
+                            .help("rpc port")
+                            .required(false))
                           .get_matches();
     
     // return vec of args
-    let mut args = Vec::new();
-    args.push(matches.value_of("validator").unwrap_or("").to_string());
-    args.push(matches.value_of("mode").unwrap_or("").to_string());
-    args.push(matches.value_of("logging").unwrap_or("").to_string());
-    // setup logging
-    match args[2].as_ref() {
-        "0" => {
-            setup_logging(1).unwrap();
-        }
-        _ => {
-            setup_logging(3).unwrap();
-        }
+
+    let mut rpc_port = matches.value_of("rpc_port").unwrap_or("").to_string();
+    let api_port = matches.value_of("api_port").unwrap_or("").to_string();
+    let mut validator = matches.value_of("validator").unwrap_or("").to_string();
+    let mode = matches.value_of("mode").unwrap_or("").to_string();
+    let logging = matches.value_of("logging").unwrap_or("").to_string();
+    // if rpc_port is empty set it to 44405
+    if rpc_port.is_empty() {
+        rpc_port = "44405".to_string();
     }
-    */
+    println!("rpc={:?}", rpc_port);
+
+    main_run(rpc_port.parse::<u16>().unwrap().into())
+
+    // setup logging
+
 }
-fn main() {
+fn main_run(rpc_port: u64) {
     // TODO CLI!
+
     setup_logging(3).unwrap();
 
-    let p2p_port = 44404;
-    let rpc_port = p2p_port + 1;
     let assci_art = "
     ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
     ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
@@ -168,7 +178,7 @@ fn main() {
     let _ = std::thread::spawn(move || {
         redstone_rs::rpc::launch(rpc_port);
     });
-    info!("RPC server launched");
+    info!("RPC server launched port {}", rpc_port);
     // loop so program does not end
     let _ = std::thread::spawn(move || {
         let mut txn = Transaction {
@@ -227,9 +237,6 @@ fn main() {
         info!("announe block test1 ");
         block_announce(blk).unwrap();
         thread::sleep(time::Duration::from_secs(1));
-
-
-
     });
     
     loop {}

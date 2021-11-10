@@ -2,6 +2,7 @@
 
 - [TRANSACTION](#TRANSACTION)
 - [NODE JSON API](#JSON-API)
+- [NODE](#NODE)
 
 ## TRANSACTION
 
@@ -118,4 +119,12 @@ request: <node-ip>:8000/json_api/pkacc/<publicc_key>
 ```
 ```
 returns: {address: address} 
+```
+
+## NODE
+### NODE CLI
+
+#### RPC
+```
+./Redstone-node --rpc <rpc_port>
 ```
