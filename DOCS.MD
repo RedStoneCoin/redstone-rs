@@ -128,3 +128,7 @@ returns: {address: address}
 ```
 ./Redstone-node --rpc <rpc_port>
 ```
+#### TEST-NET
+```
+./Redstone-node --testnet
+```
