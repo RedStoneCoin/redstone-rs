@@ -180,6 +180,7 @@ impl Validator {
     }
     pub fn get_online() -> Result<Vec<Validator>, Box<dyn std::error::Error>> {
         // TODO: Check our local "proof" cache db. This is a db that contains the last "action" of the validator that proves it is online (eg validating, proposing, voting)
+        // USE STATE DB
         todo!()
     }
 }
