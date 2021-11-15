@@ -132,3 +132,7 @@ returns: {address: address}
 ```
 ./Redstone-node --testnet
 ```
+#### DISABLE API
+```
+./Redstone-node --no_api
+```

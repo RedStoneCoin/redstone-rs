@@ -87,7 +87,7 @@ cd target/debug
 - [ ] Full Node
 
 ## Wallet
-- [ ] DONE
+- [x] DONE
  
 
 # Security Policy

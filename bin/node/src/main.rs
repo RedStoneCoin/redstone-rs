@@ -122,7 +122,7 @@ fn main() {
                           .help("logging level")
                           .required(false))
                           .arg(Arg::with_name("api_port")
-                            .long("api") // allow --name
+                            .long("api_port") // allow --name
                             .takes_value(true)
                             .help("api port")
                             .required(false))
@@ -137,6 +137,12 @@ fn main() {
                             .takes_value(false)
                             .help("testnet")
                             .required(false))
+                        .arg(Arg::with_name("no_api")
+                            .long("no_api") // allow --name
+                            .takes_value(true)
+                            .help("no api")
+                            .required(false))
+                
                           .get_matches();
     
     // return vec of args
@@ -147,21 +153,23 @@ fn main() {
     let mode = matches.value_of("mode").unwrap_or("").to_string();
     let logging = matches.value_of("logging").unwrap_or("").to_string();
     let mut testnet = matches.is_present("testnet");
+    let mut api = matche.is_present("no_api");
     // if rpc_port is empty set it to 44405
     if rpc_port.is_empty() {
-        
         rpc_port = "44405".to_string();
     }
     if testnet == true {
         testnet = true;
     }
-    println!("{}", testnet);
-    main_run(rpc_port.parse::<u16>().unwrap().into(),testnet)
+    if api.is_empty() {
+        api = true;
+    }
+    main_run(rpc_port.parse::<u16>().unwrap().into(),testnet,api)
 
     // setup logging
 
 }
-fn main_run(rpc_port: u64,test: bool) {
+fn main_run(rpc_port: u64,test: bool,api: bool) {
     // TODO move to config file
     let ver = "0.0.1";
     setup_logging(3).unwrap();
@@ -180,10 +188,14 @@ fn main_run(rpc_port: u64,test: bool) {
     warn!("Warning, this software is not stable");
     warn!("Run at your own risk!");
     mempool::Mempool::init(HashMap::new()).unwrap();
+    if api {
     info!("Launching API server at 0.0.0.0:8000");
     let _ = std::thread::spawn(move || {
         api::start_api();
     });
+    } else {
+        info("API DISABLED!!!");
+    }
     let _ = std::thread::spawn(move || {
         redstone_rs::rpc::launch(rpc_port);
     });
