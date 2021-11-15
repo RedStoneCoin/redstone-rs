@@ -179,7 +179,7 @@ impl Executable for Transaction {
             return Err("ErrInvalidType").unwrap();
         }
         match self.type_flag {
-            1 => {
+            0 => {
                 // Transfer
                 if self.amount > u64::MAX {
                     return Err("ErrInvalidAmount").unwrap();
@@ -190,11 +190,17 @@ impl Executable for Transaction {
                 // TODO get account from the state and check if it exists and if it has enough funds
                 
                 let sender = Account::get(self.sender.clone())?;
-                if sender.balance < self.amount {
-                    return Err("ErrInsufficientFunds").unwrap();
+                let reciver = Account::get(self.reciver.clone())?; 
+                match Account::get(self.sender.clone()) {
+                    Ok(_) => {
+                        if sender.balance < self.amount {
+                            return Err("ErrInsufficientFunds").unwrap();
+                        }
+                    },
+                    Err(e) => {
+                        return Err("ErrAccountNotFound").unwrap();
+                    }
                 }
-                
-                
             },
             _ => {
                 // TODO add other types
