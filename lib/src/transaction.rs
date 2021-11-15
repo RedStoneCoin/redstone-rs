@@ -108,17 +108,16 @@ impl Executable for Transaction {
             public_key: self.sender.clone(),
             private_key: "".to_string(),
         };
-        let state = GlobalState.clone();
         let sender = keypairs.address();
         let reciver = self.reciver.clone();
         // tx count
         let mut db_handle = Database::new();
-        db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.chain))?;
-        db_handle.get(&"transactions_count".to_owned(), "transactions".to_owned())?;
-        let mut tx_count = db_handle.get_value()?;
-        tx_count = tx_count.parse::<u64>().unwrap();
-        tx_count += 1;
-        db_handle.set(&"transactions_count".to_owned(),tx_count.to_string());
+        db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, "txs"))?;
+        let mut tx_count = db_handle.get(&"transactions".to_owned(), &"transactions_count".to_owned());
+        // tx count to u64
+        let mut tx_count1 = tx_count.parse::<u64>().unwrap();
+        tx_count1 += 1;
+        db_handle.set(&"transactions".to_owned(),&"transactions_count".to_owned(),&tx_count1.to_string());
         // tx count end
         // finish transaction
         todo!()
@@ -126,7 +125,6 @@ impl Executable for Transaction {
 
     /// # Evalulate 
     /// Checks if a txn is valid
-    /// Leo port this to the global state thing
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
         println!("Evaluating transaction hash: {}", self.hash.clone());
         let mpool = get_transaction(self.hash.clone());
@@ -145,16 +143,15 @@ impl Executable for Transaction {
             println!("{:?}", check);
             return Err("Signature is not valid").unwrap();
         }
-        // add chain count
-        for chn in 0..5 {
-            let mut db_handle = Database::new();
-            db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, chn))?;
-            let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
-            if block_txn_is_in.len() == 0 {
-            } else {
-                return Err("Transaction already in block").unwrap();
-            }        
-        }
+        // add check in db txs if there was transaction executed wit hsame hash
+        let mut db_handle = Database::new();
+        db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, "txs"))?;
+        let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
+        if block_txn_is_in.len() == 0 {
+        } else {
+            return Err("Transaction already in block").unwrap();
+        }    
+    
         if pow_txn.starts_with("0000") {
         } else {
             // Proof of work is invalid
@@ -191,8 +188,13 @@ impl Executable for Transaction {
                     return Err("ErrInvalidReciver").unwrap();
                 }
                 // TODO get account from the state and check if it exists and if it has enough funds
-                // TODO check if the reciver is the same as the sender
-
+                
+                let sender = Account::get(self.sender.clone())?;
+                if sender.balance < self.amount {
+                    return Err("ErrInsufficientFunds").unwrap();
+                }
+                
+                
             },
             _ => {
                 // TODO add other types
