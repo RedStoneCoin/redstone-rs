@@ -108,11 +108,18 @@ impl Executable for Transaction {
             public_key: self.sender.clone(),
             private_key: "".to_string(),
         };
-
+        let state = GlobalState.clone();
         let sender = keypairs.address();
         let reciver = self.reciver.clone();
-        
-
+        // tx count
+        let mut db_handle = Database::new();
+        db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.chain))?;
+        db_handle.get(&"transactions_count".to_owned(), "transactions".to_owned())?;
+        let mut tx_count = db_handle.get_value()?;
+        tx_count = tx_count.parse::<u64>().unwrap();
+        tx_count += 1;
+        db_handle.set(&"transactions_count".to_owned(),tx_count.to_string());
+        // tx count end
         // finish transaction
         todo!()
     }
@@ -185,6 +192,7 @@ impl Executable for Transaction {
                 }
                 // TODO get account from the state and check if it exists and if it has enough funds
                 // TODO check if the reciver is the same as the sender
+
             },
             _ => {
                 // TODO add other types
