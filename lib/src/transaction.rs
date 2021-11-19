@@ -110,16 +110,70 @@ impl Executable for Transaction {
         };
         let sender = keypairs.address();
         let reciver = self.reciver.clone();
-        // tx count
+        let sender_account = Account::get(self.sender.clone())?;
+
+        match self.type_flag {
+            0 => {
+                // burn
+                let mut sender_account = sender_account.clone();
+                sender_account.balance -= self.amount;
+                sender_account.save()?;
+                let mut db_handle = Database::new();
+
+                db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, "txs"))?;
+                let mut tx_count_brun = db_handle.get(&"transactions".to_owned(), &"transactions_count_burn".to_owned());
+                let mut tx_count_burn_1 = tx_count_brun.parse::<u64>().unwrap();
+                tx_count_burn_1 += 1;
+                db_handle.set(&"transactions".to_owned(),&"transactions_count".to_owned(),&tx_count_burn_1.to_string());
+                drop(db_handle);
+
+            }
+            1 => {
+                // send
+                let mut sender_account = sender_account.clone();
+                sender_account.balance -= self.amount;
+                // check for reciver if exist
+                let check = match Account::get(self.reciver.clone()) {
+                    Ok(account) => {
+                        let mut account = account.clone();
+                        account.balance += self.amount;
+                        account.save()?;
+                    }
+                    Err(_) => {
+                        // create new account
+                        let mut account = Account {
+                            address: self.reciver.clone(),
+                            balance: self.amount,
+                            smart_contract: false,
+                        };
+                        account.save()?;
+
+                    }
+                };
+            }
+            _ => {
+                // return error
+                return Err(Box::new(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    "Invalid transaction type",
+                )));
+            }
+        
+        }
+
         let mut db_handle = Database::new();
+        // END OF TRANSACTION execution
         db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, "txs"))?;
         let mut tx_count = db_handle.get(&"transactions".to_owned(), &"transactions_count".to_owned());
-        // tx count to u64
         let mut tx_count1 = tx_count.parse::<u64>().unwrap();
         tx_count1 += 1;
         db_handle.set(&"transactions".to_owned(),&"transactions_count".to_owned(),&tx_count1.to_string());
-        // tx count end
-        // finish transaction
+        // TODO SAVE TX
+        db_handle.set(&"transactions".to_owned(),&self.hash.clone(),&self.hash.clone());
+        drop(db_handle);
+
+
+
         todo!()
     }
 
@@ -148,10 +202,8 @@ impl Executable for Transaction {
         db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, "txs"))?;
         let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
         if block_txn_is_in.len() == 0 {
-        } else {
             return Err("Transaction already in block").unwrap();
-        }    
-    
+        } 
         if pow_txn.starts_with("0000") {
         } else {
             // Proof of work is invalid
@@ -167,7 +219,7 @@ impl Executable for Transaction {
         if self.nonce > u64::MAX {
             return Err("ErrInvalidNonce").unwrap();
         }
-        if self.nonce == 1 {
+        if self.nonce < 0 {
             return Err("ErrInvalidNonce").unwrap();
         }
         if ![1, 2, 3, 4, 5, 6, 7].contains(&self.type_flag) {
@@ -187,8 +239,6 @@ impl Executable for Transaction {
                 if self.reciver.len() != 64 {
                     return Err("ErrInvalidReciver").unwrap();
                 }
-                // TODO get account from the state and check if it exists and if it has enough funds
-                
                 let sender = Account::get(self.sender.clone())?;
                 let reciver = Account::get(self.reciver.clone())?; 
                 match Account::get(self.sender.clone()) {
@@ -201,6 +251,8 @@ impl Executable for Transaction {
                         return Err("ErrAccountNotFound").unwrap();
                     }
                 }
+                // finish THIS but for now return ok(())
+                return Ok(());
             },
             _ => {
                 // TODO add other types
