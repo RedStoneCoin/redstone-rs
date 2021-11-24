@@ -232,7 +232,7 @@ impl Executable for Transaction {
         }
         match self.type_flag {
             0 => {
-                // Transfer
+                // burn
                 if self.amount > u64::MAX {
                     return Err("ErrInvalidAmount").unwrap();
                 }
@@ -254,6 +254,51 @@ impl Executable for Transaction {
                 // finish THIS but for now return ok(())
                 return Ok(());
             },
+            1 => {
+                // send
+                if self.amount > u64::MAX {
+                    return Err("ErrInvalidAmount").unwrap();
+                }
+                if self.reciver.len() != 64 {
+                    return Err("ErrInvalidReciver").unwrap();
+                }
+                let sender = Account::get(self.sender.clone())?;
+                let reciver = Account::get(self.reciver.clone())?; 
+                match Account::get(self.sender.clone()) {
+                    Ok(_) => {
+                        if sender.balance < self.amount {
+                            return Err("ErrInsufficientFunds").unwrap();
+                        }
+                    },
+                    Err(e) => {
+                        return Err("ErrAccountNotFound").unwrap();
+                    }
+                }
+                // finish THIS but for now return ok(())
+                return Ok(());
+            },
+            2 => {
+                // ToggleOnline
+                if self.amount > u64::MAX {
+                    return Err("ErrInvalidAmount").unwrap();
+                }
+                if self.reciver.len() != 64 {
+                    return Err("ErrInvalidReciver").unwrap();
+                }
+                let sender = Account::get(self.sender.clone())?;
+                let reciver = Account::get(self.reciver.clone())?;
+                match Account::get(self.sender.clone()) {
+                    Ok(_) => {
+                        if sender.balance < self.amount {
+                            return Err("ErrInsufficientFunds").unwrap();
+                        }
+                    },
+                    Err(e) => {
+                        return Err("ErrAccountNotFound").unwrap();
+                    }
+                }
+                // TODO
+            }
             _ => {
                 // TODO add other types
                 return Err("ErrInvalidType").unwrap();
