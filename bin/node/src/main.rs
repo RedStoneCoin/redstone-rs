@@ -137,10 +137,10 @@ fn main() {
                             .takes_value(false)
                             .help("testnet")
                             .required(false))
-                        .arg(Arg::with_name("no_api")
-                            .long("no_api") // allow --name
+                        .arg(Arg::with_name("private_key")
+                            .long("private_key") // allow --name
                             .takes_value(true)
-                            .help("no api")
+                            .help("private_key")
                             .required(false))
                 
                           .get_matches();
@@ -153,23 +153,34 @@ fn main() {
     let mode = matches.value_of("mode").unwrap_or("").to_string();
     let logging = matches.value_of("logging").unwrap_or("").to_string();
     let mut testnet = matches.is_present("testnet");
-    let mut api = matche.is_present("no_api");
+    let mut api = matches.is_present("no_api");
+    let private_key = matches.value_of("private_key").unwrap_or("").to_string();
     // if rpc_port is empty set it to 44405
+    
     if rpc_port.is_empty() {
         rpc_port = "44405".to_string();
     }
     if testnet == true {
         testnet = true;
     }
-    if api.is_empty() {
+    if api == true {
         api = true;
+    } else {
+        api = false;
     }
-    main_run(rpc_port.parse::<u16>().unwrap().into(),testnet,api)
+
+    // if validator is not emtpy but there is no private key
+    if !validator.is_empty() && private_key.is_empty() {
+        println!("Private key is required for validator");
+        return;
+    }
+    println!("{}",validator);
+    main_run(rpc_port.parse::<u16>().unwrap().into(),testnet,api,private_key,validator)
 
     // setup logging
 
 }
-fn main_run(rpc_port: u64,test: bool,api: bool) {
+fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: String) {
     // TODO move to config file
     let ver = "0.0.1";
     setup_logging(3).unwrap();
@@ -187,6 +198,15 @@ fn main_run(rpc_port: u64,test: bool,api: bool) {
     info!("Starting redstone node {}" , ver);
     warn!("Warning, this software is not stable");
     warn!("Run at your own risk!");
+    if validator != "" {
+        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key);
+
+
+
+        info!("Starting VALIDATOR NODE");
+        info!("Validator: {}",wallet.address());
+
+    }
     mempool::Mempool::init(HashMap::new()).unwrap();
     if api {
     info!("Launching API server at 0.0.0.0:8000");
@@ -194,7 +214,7 @@ fn main_run(rpc_port: u64,test: bool,api: bool) {
         api::start_api();
     });
     } else {
-        info("API DISABLED!!!");
+        info!("API DISABLED!!!");
     }
     let _ = std::thread::spawn(move || {
         redstone_rs::rpc::launch(rpc_port);
