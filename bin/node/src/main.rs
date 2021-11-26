@@ -13,7 +13,9 @@ extern crate clap;
 use clap::{Arg, App, SubCommand};
 use redstone_rs::rpc::{block_announce, Announcement, Caller};
 use std::{thread, time};
-
+use std::path::Path;
+use std::fs;
+use redstone_rs::blockchain::Blockchain;
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     let mut base_config = fern::Dispatch::new();
     base_config = match verbosity {
@@ -100,7 +102,6 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     }));
     Ok(())
 }
-
 fn main() {
     let matches =  App::new("Redstone Node")
                         .version("0.1.0")
@@ -200,12 +201,8 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
     warn!("Run at your own risk!");
     if validator != "" {
         let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key);
-
-
-
         info!("Starting VALIDATOR NODE");
         info!("Validator: {}",wallet.address());
-
     }
     mempool::Mempool::init(HashMap::new()).unwrap();
     if api {
@@ -219,8 +216,18 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
     let _ = std::thread::spawn(move || {
         redstone_rs::rpc::launch(rpc_port);
     });
+    // check if datadir exists
+    let datadir = "./datadir";
+
+
+    // crete test chain
     if test == true {
         // loop so program does not end
+        if !Path::new(datadir).exists() {
+            info!("Creating datadir");
+            fs::create_dir(datadir).unwrap();
+            Blockchain::test_chains();
+        }
         let _ = std::thread::spawn(move || {
             let mut txn = Transaction {
                 hash: "321".to_owned(),
@@ -280,7 +287,10 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
             thread::sleep(time::Duration::from_secs(1));
         });
     }
-    loop {}
+    loop {
+        // dont exit loop, if removed node wont work
+        // -- Founder - Nov 26 '21 at 10:37
+    }
     
 
 

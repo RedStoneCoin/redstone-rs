@@ -11,8 +11,8 @@ pub struct Account {
 impl Account {
     pub fn get(address: String) -> Result<Account, Box<dyn std::error::Error>> {
         let mut database_handle = Database::new();
-        database_handle.open(&"accounts".into())?;
-        let encoded = database_handle.get(&"accounts".into(), &address);
+        database_handle.open(&"./datadir/accounts".into())?;
+        let encoded = database_handle.get(&"./datadir/accounts".into(), &address);
         if encoded.len() == 0 {
             println!("{:?}",encoded);
             return Err("Poor formating or address not found".into());
@@ -23,8 +23,8 @@ impl Account {
     pub fn save(&self) -> Result<(), Box<dyn std::error::Error>> {
         let encoded = self.acc_string();
         let mut database_handle = Database::new();
-        database_handle.open(&"accounts".into())?;
-        database_handle.set(&"accounts".into(), &self.address, &encoded)
+        database_handle.open(&"./datadir/accounts".into())?;
+        database_handle.set(&"./datadir/accounts".into(), &self.address, &encoded)
 
     }
     pub fn from_string(encoded: String) -> Result<Account, Box<dyn std::error::Error>> {

@@ -1,6 +1,6 @@
 use crate::database::Database;
 use sled;
-pub const DATABASE_PATH_PREFIX: &str = "blockchain_db_";
+pub const DATABASE_PATH_PREFIX: &str = "./datadir/blockchain_db_";
 #[derive(Debug, Clone)]
 pub struct Blockchain {
     index: u64,
@@ -54,7 +54,15 @@ impl Blockchain {
             &String::from("save"),
         );
         let bc = Blockchain::from_string(encoded).unwrap();
-
         Ok(bc)
+    }
+    pub fn test_chains() -> Vec<Self> {
+        let mut chains = Vec::new();
+        for i in 0..10 {
+            let mut bc = Blockchain::new(i);
+            bc.save().unwrap();
+            chains.push(bc);
+        }
+        chains
     }
 }
