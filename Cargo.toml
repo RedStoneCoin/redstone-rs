@@ -1,5 +1,6 @@
 [workspace]
 members = [
-  "bin",
+  "bin/node",
+  "bin/wallet",
   "lib"
 ]
