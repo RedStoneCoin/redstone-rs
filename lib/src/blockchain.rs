@@ -1,6 +1,6 @@
 use crate::database::Database;
 use sled;
-pub const DATABASE_PATH_PREFIX: &str = "./datadir/blockchain_db_";
+pub const DATABASE_PATH_PREFIX: &str = "./datadir/blockchain_db_"; // TODO: move to config
 #[derive(Debug, Clone)]
 pub struct Blockchain {
     index: u64,
@@ -55,6 +55,20 @@ impl Blockchain {
         );
         let bc = Blockchain::from_string(encoded).unwrap();
         Ok(bc)
+    }
+    pub fn list() -> Result<Vec<Self>, Box<dyn std::error::Error>> {
+        let mut db_handle = Database::new();
+        let mut list = Vec::new();
+        let mut index = 0;
+        loop {
+            if let Ok(_) = db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, index)) {
+                list.push(Self::load(index)?);
+                index += 1;
+            } else {
+                break;
+            }
+        }
+        Ok(list)
     }
     pub fn test_chains() -> Vec<Self> {
         let mut chains = Vec::new();
