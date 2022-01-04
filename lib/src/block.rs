@@ -1,16 +1,16 @@
+use crate::blockchain::{self, DATABASE_PATH_PREFIX};
 use crate::{
     blockchain::Blockchain,
     crypto::{Hashable, Vrf},
+    database::Database,
     executable::Executable,
     keypair::Keypair,
     mempool,
     state::{GlobalState, Round},
-    transaction::Transaction,
-    database::Database
+    transaction::{Transaction, TxType},
 };
 use log::*;
 use serde::{Deserialize, Serialize};
-use crate::blockchain::DATABASE_PATH_PREFIX;
 
 #[derive(Deserialize, Serialize, Clone, Default, Debug)]
 
@@ -62,6 +62,7 @@ impl Block {
     pub fn add_txn(&mut self, txn: Transaction) {
         self.transactions.push(txn);
     }
+    // TODO: read from database
     pub fn get(hash: String) -> Result<Block, Box<dyn std::error::Error>> {
         Ok(Block::default())
     }
@@ -90,9 +91,13 @@ impl Block {
 }
 
 impl Executable for Block {
-    fn execute(&self, context: &String, globalState: &mut GlobalState) -> Result<String, Box<dyn std::error::Error>> {
+    fn execute(
+        &self,
+        context: &String,
+        global_state: &mut GlobalState,
+    ) -> Result<String, Box<dyn std::error::Error>> {
         // Go through all the transactions and execute them
-        let mut pre_applicate_state = globalState.clone();
+        let mut pre_applicate_state = global_state.clone();
         for txn in &self.transactions {
             let txn_result = txn.execute(context, &mut pre_applicate_state);
             if let Err(txn_error) = txn_result {
@@ -101,12 +106,15 @@ impl Executable for Block {
             let txn_result = txn_result.unwrap();
             let mut db_handle = Database::new();
             db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.header.chain))?;
-            db_handle.set(&"transactions".to_owned(), &self.hash,&"1".to_string()).unwrap();
+            db_handle
+                .set(&"transactions".to_owned(), &self.hash, &"1".to_string())
+                .unwrap();
             log::debug!("txn_result: {}", txn_result);
         }
         // If we encountered no errors, we can apply the state
-        *globalState = pre_applicate_state;
-        todo!()
+        *global_state = pre_applicate_state;
+        // TODO: what else needs to be done? (i dont think anything else - check)
+        Ok(String::default())
     }
 
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
@@ -118,7 +126,29 @@ impl Executable for Block {
         if let Ok(bc) = Blockchain::load(self.header.chain) {
             if self.header.height == 0 {
                 // if this block is the genesis block of this chain, the parent block should contain a create chain TXN
-                // TODO: Get parent block and look for this txn
+                // UNLESS this is the genesis block of the first chain
+                let index_chain = Blockchain::load(0);
+                if let Ok(_) = index_chain {
+                    // Get parent block and look for this txn
+                    match Block::get(self.header.parent_hash.clone()) {
+                        Ok(parent_block) => {
+                            let mut found: bool = false;
+
+                            for txn in &parent_block.transactions {
+                                if txn.type_flag == TxType::CreateChain as u8 {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if !found {
+                                return Err("No create chain TXN found in parent block".into());
+                            }
+                        }
+                        Err(err) => {
+                            return Err(format!("failed to get parent block error={}", err).into());
+                        }
+                    }
+                }
             } else {
                 // check if the height and parent hash is correct on the specified chain
                 let chain_tip = bc.tip();
@@ -226,11 +256,9 @@ impl Executable for Block {
                                             txn.hash, e
                                         )
                                         .into());
-                                    }        
-
+                                    }
                                 }
                             }
-                            return Ok(());
                         }
                     }
                 }
@@ -242,10 +270,12 @@ impl Executable for Block {
     }
 
     /// # Cost
-    /// Not used, will panic if called
+    /// the sum of the cost of all the transactions in the block
     fn cost(&self, context: &String) -> u64 {
-        
-        
-        unimplemented!()
+        let mut sum: u64 = 0;
+        for txn in &self.transactions {
+            sum += txn.cost(context);
+        }
+        sum
     }
 }
