@@ -59,6 +59,7 @@ request: <node-ip>:8000/json_api/get_acc/<public_key>
 response: Full account details (Address Balance is smart-contract)
 #### Create redstone keypair
 Redstone keypairs are normal keypairs but to make things easier for future app developers we made it an api request!
+*KEYPAIRS ARE CREATED ON SERVER SIDE FOR CLIENT SIDE CREATION PELEASE CHECK REDSTONE JS*
 ```
 request: <node-ip>:8000/json_api/create_wallet
 ```
