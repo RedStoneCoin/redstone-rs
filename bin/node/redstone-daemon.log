@@ -6155,3 +6155,106 @@
 [2021-11-26][10:48:45][Redstone_daemon][INFO] Creating datadir
 [2021-11-26][10:48:45][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
 [2021-11-26][10:48:45][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2022-01-17][11:30:49][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2022-01-17][11:30:49][Redstone_daemon][INFO] Starting redstone node 0.0.1
+[2022-01-17][11:30:49][Redstone_daemon][WARN] Warning, this software is not stable
+[2022-01-17][11:30:49][Redstone_daemon][WARN] Run at your own risk!
+[2022-01-17][11:30:49][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2022-01-17][11:30:49][Redstone_daemon][INFO] API DISABLED!!!
+[2022-01-17][11:30:49][Redstone_daemon][INFO] Creating datadir
+[2022-01-17][11:30:49][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2022-01-17][11:30:49][Redstone_daemon][INFO] Creating api token
+[2022-01-17][11:30:49][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2022-01-17][11:31:46][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2022-01-17][11:31:46][Redstone_daemon][INFO] Starting redstone node 0.0.1
+[2022-01-17][11:31:46][Redstone_daemon][WARN] Warning, this software is not stable
+[2022-01-17][11:31:46][Redstone_daemon][WARN] Run at your own risk!
+[2022-01-17][11:31:46][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2022-01-17][11:31:46][Redstone_daemon][INFO] API DISABLED!!!
+[2022-01-17][11:31:46][Redstone_daemon][INFO] Creating datadir
+[2022-01-17][11:31:46][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2022-01-17][11:31:46][Redstone_daemon][INFO] Creating api token
+[2022-01-17][11:31:46][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2022-01-17][11:35:15][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2022-01-17][11:35:15][Redstone_daemon][INFO] Starting redstone node 0.0.1
+[2022-01-17][11:35:15][Redstone_daemon][WARN] Warning, this software is not stable
+[2022-01-17][11:35:15][Redstone_daemon][WARN] Run at your own risk!
+[2022-01-17][11:35:15][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2022-01-17][11:35:15][Redstone_daemon][INFO] API DISABLED!!!
+[2022-01-17][11:35:15][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2022-01-17][11:35:15][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2022-01-17][11:35:20][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2022-01-17][11:35:20][Redstone_daemon][INFO] Starting redstone node 0.0.1
+[2022-01-17][11:35:20][Redstone_daemon][WARN] Warning, this software is not stable
+[2022-01-17][11:35:20][Redstone_daemon][WARN] Run at your own risk!
+[2022-01-17][11:35:20][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2022-01-17][11:35:20][Redstone_daemon][INFO] API DISABLED!!!
+[2022-01-17][11:35:20][Redstone_daemon][INFO] Creating datadir
+[2022-01-17][11:35:20][Redstone_daemon][INFO] Creating api token
+[2022-01-17][11:35:20][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2022-01-17][11:35:20][Redstone_daemon][INFO] API Token: -1253210868
+[2022-01-17][11:35:20][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2022-01-17][11:35:38][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2022-01-17][11:35:38][Redstone_daemon][INFO] Starting redstone node 0.0.1
+[2022-01-17][11:35:38][Redstone_daemon][WARN] Warning, this software is not stable
+[2022-01-17][11:35:38][Redstone_daemon][WARN] Run at your own risk!
+[2022-01-17][11:35:38][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2022-01-17][11:35:38][Redstone_daemon][INFO] API DISABLED!!!
+[2022-01-17][11:35:38][Redstone_daemon][INFO] Creating datadir
+[2022-01-17][11:35:38][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2022-01-17][11:35:38][Redstone_daemon][INFO] Creating api token
+[2022-01-17][11:35:38][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2022-01-17][11:35:38][Redstone_daemon][INFO] API Token: -788206779
+[2022-01-17][11:36:51][Redstone_daemon][INFO] 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+
+[2022-01-17][11:36:51][Redstone_daemon][INFO] Starting redstone node 0.0.1
+[2022-01-17][11:36:51][Redstone_daemon][WARN] Warning, this software is not stable
+[2022-01-17][11:36:51][Redstone_daemon][WARN] Run at your own risk!
+[2022-01-17][11:36:51][redstone_rs::mempool][DEBUG] Initialzing mempool with 0 transactions
+[2022-01-17][11:36:51][Redstone_daemon][INFO] API DISABLED!!!
+[2022-01-17][11:36:51][Redstone_daemon][INFO] Creating datadir
+[2022-01-17][11:36:51][redstone_rs::rpc][INFO] Launching RPC server on TCP port: 44405
+[2022-01-17][11:36:51][Redstone_daemon][INFO] Creating api token
+[2022-01-17][11:36:51][redstone_rs::rpc][INFO] RPC Server bound to 127.0.0.1:44405
+[2022-01-17][11:36:51][Redstone_daemon][INFO] API Token: -2062837776

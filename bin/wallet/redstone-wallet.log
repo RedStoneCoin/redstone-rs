@@ -32098,3 +32098,11 @@
 [2021-10-30][16:12:27][Redstone_wallet][INFO] [3] Send Custom Transaction
 [2021-10-30][16:12:27][Redstone_wallet][INFO] [4] exit
 [2021-10-30][16:12:27][Redstone_wallet][INFO] Enter a value:
+[2022-01-14][22:15:40][Redstone_wallet][INFO] Welcome Redstone Wallet!
+[2022-01-14][22:15:40][Redstone_wallet][INFO] ALPHA 0.1-a1!
+[2022-01-14][22:15:40][Redstone_wallet][INFO] TEST NET WALLET!
+[2022-01-14][22:15:40][Redstone_wallet][INFO] [1] Generate a new wallet
+[2022-01-14][22:15:40][Redstone_wallet][INFO] [2] Import private key
+[2022-01-14][22:15:40][Redstone_wallet][INFO] [3] Import wallet file
+[2022-01-14][22:15:40][Redstone_wallet][INFO] [4] exit
+[2022-01-14][22:15:40][Redstone_wallet][INFO] Enter a value:

@@ -47,7 +47,8 @@ Cmake
 ```
 ** Fedora **
 ``
-sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel libX11-devel
+sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel libX11-devel libXinerama-devel-1.1.4-9.fc35
+pango-devel
 ``
 
 ##### Generic Linux

@@ -16,6 +16,10 @@ use std::{thread, time};
 use std::path::Path;
 use std::fs;
 use redstone_rs::blockchain::Blockchain;
+use fs::File;
+use std::io::Write;
+extern crate rand;
+
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     let mut base_config = fern::Dispatch::new();
     base_config = match verbosity {
@@ -218,8 +222,21 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
     });
     // check if datadir exists
     let datadir = "./datadir";
+    if !Path::new(datadir).exists() {
+        info!("Creating datadir");
+        fs::create_dir(datadir).unwrap();
+        info!("Creating api token");
+        // token = ./datadir/token.api
+        let path = "./datadir/token.api";
+        let token: i32 = rand::random();
+        let mut file = File::create(path).unwrap();
+        let token_write = format!("{}",token);
+        // remove - 
+        let token_write = token_write.replace("-","");
+        file.write_all(&token_write.as_bytes()).unwrap();
+        info!("API Token: {}",token);
 
-
+    }
     // crete test chain
     if test == true {
         // loop so program does not end
@@ -290,6 +307,8 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
     loop {
         // dont exit loop, if removed node wont work
         // -- Founder - Nov 26 '21 at 10:37
+        // sleep for a while
+        thread::sleep(time::Duration::from_secs(1));
     }
     
 

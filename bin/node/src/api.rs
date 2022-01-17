@@ -17,7 +17,8 @@ use redstone_rs::account::Account;
 use redstone_rs::keypair::Keypair;
 use rocket::http::hyper::header::Headers;
 use rocket::http::hyper::header::AccessControlAllowOrigin;
-
+use rocket::fairing::AdHoc;
+use std::fs;
 use rocket::config::{Config, Environment, LoggingLevel};
 lazy_static! {
     static ref WALLET_DETAILS: Mutex<Vec<String>> = Mutex::new(Vec::new());
@@ -294,12 +295,23 @@ pub fn get_middleware() -> Vec<Route> {
             pkacc
     ]
 }
+
+
+// header token must be provided
+// token = ./datadir/token.api
+
+pub fn get_token() {
+    let token = fs::read_to_string("./datadir/token.api").unwrap();
+    token.to_string();
+}
+
 pub fn start_api() {
+    // Add api token
     let config = Config::build(Environment::Staging)
         .log_level(LoggingLevel::Critical) // disables logging
         .finalize()
-        .unwrap();
 
+        .unwrap();
     rocket::custom(config)
         .mount("/json_api/", get_middleware())
         .launch();
