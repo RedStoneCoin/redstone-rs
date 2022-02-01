@@ -168,11 +168,7 @@ fn main() {
     if testnet == true {
         testnet = true;
     }
-    if api == true {
-        api = true;
-    } else {
-        api = false;
-    }
+
 
     // if validator is not emtpy but there is no private key
     if !validator.is_empty() && private_key.is_empty() {
@@ -180,7 +176,7 @@ fn main() {
         return;
     }
     println!("{}",validator);
-    main_run(rpc_port.parse::<u16>().unwrap().into(),testnet,api,private_key,validator)
+    main_run(rpc_port.parse::<u16>().unwrap().into(),testnet,true,private_key,validator)
 
     // setup logging
 

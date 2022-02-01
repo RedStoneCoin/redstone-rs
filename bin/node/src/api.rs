@@ -200,10 +200,9 @@ fn gettx(hash: String) -> String {
 #[get("/get_block/<hash>")]
 fn get_blk(hash: String) -> String {
     
-    // TODO: Get chain count from the config, for every chain look in to the db get block by hash if it exist
+    // TODO
     let mut result = "{ \"result\" : \"failure\" }".to_owned();
-    todo!();
-    return(result.to_string());
+    return result.to_string();
 }
 
 
@@ -307,13 +306,17 @@ pub fn get_token() {
 
 pub fn start_api() {
     // Add api token
+    let token = fs::read_to_string("./datadir/token.api").unwrap();
+    
     let config = Config::build(Environment::Staging)
         .log_level(LoggingLevel::Critical) // disables logging
         .finalize()
-
         .unwrap();
+    // Header apikey
+    let url = format!("/json_api/{}/", token.to_string());
+    info!("API mounted on {}", url);
     rocket::custom(config)
-        .mount("/json_api/", get_middleware())
+        .mount(&url, get_middleware())
         .launch();
 
 }
