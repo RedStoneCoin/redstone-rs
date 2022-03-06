@@ -13,7 +13,6 @@ use log::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Clone, Default, Debug)]
-
 pub struct Header {
     pub height: u64,
     pub timestamp: u64,

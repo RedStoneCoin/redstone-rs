@@ -129,7 +129,7 @@ impl GlobalState {
         let mut db = Database::new();
         db.open(&"globalstate".to_string())?;
         if let Some(curr) = db.get(&"globalstate".to_string(), &"hash".to_string())? {
-            return Ok(curr)
+            return Ok(curr);
         } else {
             return Err("Key not found in DB".into());
         }

@@ -1,40 +1,39 @@
-
 #![feature(proc_macro_hygiene, decl_macro)]
 use fern::colors::{Color, ColoredLevelConfig};
+use fltk::input::Input;
+use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
 use lazy_static::*;
 use log::*;
-use std::env;
-use serde_json::{Value};
-use redstone_rs::block::{Block};
+use redstone_rs::block::Block;
 use redstone_rs::keypair::Keypair;
 use redstone_rs::rpc::{launch_client, Announcement, Caller};
 use redstone_rs::transaction::Transaction;
 use redstone_rs::*;
+use reqwest::Client;
 use secrecy::Secret;
-use serde::{Deserialize};
+use serde::Deserialize;
+use serde_json::Value;
+use std::env;
 use std::fs;
 use std::io;
 use std::io::prelude::*;
 use std::io::Read;
 use std::io::Write;
-use std::thread;
-use std::{default::Default, sync::Mutex};
-use std::time;
-use reqwest::Client;
-use tokio;
 use std::str;
-use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
-use fltk::input::Input;
+use std::thread;
+use std::time;
+use std::{default::Default, sync::Mutex};
+use tokio;
 extern crate clipboard;
-use clipboard::ClipboardProvider;
 use clipboard::ClipboardContext;
-use fltk::valuator::ValueInput;
-use fltk_theme::{widget_themes, WidgetTheme, ThemeType};
-use fltk_theme::{WidgetScheme, SchemeType};
-use fltk::output::Output;
-use std::sync::RwLock;
-use fltk::enums::Mode;
+use clipboard::ClipboardProvider;
 use fltk::enums::ColorDepth;
+use fltk::enums::Mode;
+use fltk::output::Output;
+use fltk::valuator::ValueInput;
+use fltk_theme::{widget_themes, ThemeType, WidgetTheme};
+use fltk_theme::{SchemeType, WidgetScheme};
+use std::sync::RwLock;
 
 extern crate qrcode_generator;
 
@@ -117,7 +116,6 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
             .level(log::LevelFilter::Warn)
             .level(log::LevelFilter::Info)
             .level(log::LevelFilter::Debug)
-
             .level_for("launch_", log::LevelFilter::Off)
             .level_for("launch", log::LevelFilter::Off)
             .level_for("rocket::rocket", log::LevelFilter::Off)
@@ -145,7 +143,7 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
         })
         .chain(fern::log_file("redstone-wallet.log")?);
 
-        let stdout_config = fern::Dispatch::new()
+    let stdout_config = fern::Dispatch::new()
         .format(|out, message, record| {
             let colors = ColoredLevelConfig::default()
                 .info(Color::Green)
@@ -184,42 +182,44 @@ async fn send_transaction(txn: Transaction) {
         //tx not signed
         println!("Transaction not signed");
     } else {
-    let txn_json = serde_json::to_string(&txn).unwrap();
-    let request_url = SERVER_ADDR.lock().unwrap().to_owned() + "/json_api/submit_txn";
+        let txn_json = serde_json::to_string(&txn).unwrap();
+        let request_url = SERVER_ADDR.lock().unwrap().to_owned() + "/json_api/submit_txn";
 
-    if let Ok(response) = Client::new().post(request_url).json(&txn_json).send().await {
-        if let Ok(response_string) = response.text().await {
-            if response_string.contains("404") {
-                info!("Failed to submit txn, response={}", response_string);
-            } else {
-                info!("Submit response={}", response_string);
-                if response_string.len() == 0 {
-                    info!("Transaction Failure");
+        if let Ok(response) = Client::new().post(request_url).json(&txn_json).send().await {
+            if let Ok(response_string) = response.text().await {
+                if response_string.contains("404") {
+                    info!("Failed to submit txn, response={}", response_string);
+                } else {
+                    info!("Submit response={}", response_string);
+                    if response_string.len() == 0 {
+                        info!("Transaction Failure");
+                    }
                 }
             }
         }
-    }
     }
 }
 
 async fn get_account(addr: String) -> String {
     //Using format! hre removes one unnecessary allocation
-    
-    let request_url = format!("{}/json_api/get_acc/{}",SERVER_ADDR.lock().unwrap().to_owned(), addr);
+
+    let request_url = format!(
+        "{}/json_api/get_acc/{}",
+        SERVER_ADDR.lock().unwrap().to_owned(),
+        addr
+    );
     let body = reqwest::get(request_url.clone()).await;
-    
-    match reqwest::get(request_url.clone()).await{
-        Err(eer) => {
-            return "".to_string()
-        }
-        Ok(resp) => return resp.text().await.unwrap()
+
+    match reqwest::get(request_url.clone()).await {
+        Err(eer) => return "".to_string(),
+        Ok(resp) => return resp.text().await.unwrap(),
     }
 }
 
-
 fn save_wallet(wallet: String, pass: String, filename: String) {
     let encrypted = {
-        let encryptor = age::Encryptor::with_user_passphrase(Secret::new(pass.trim_end().to_owned()));
+        let encryptor =
+            age::Encryptor::with_user_passphrase(Secret::new(pass.trim_end().to_owned()));
         let mut encrypted = vec![];
         let mut writer = encryptor.wrap_output(&mut encrypted).unwrap();
         writer.write_all(wallet.as_bytes()).unwrap();
@@ -231,7 +231,6 @@ fn save_wallet(wallet: String, pass: String, filename: String) {
 }
 
 fn open_wallet(pass: String, filename: String) {
-
     let private_key =
         std::fs::read(filename.trim_end()).expect("Something went wrong reading the file");
     let decrypted = {
@@ -250,7 +249,12 @@ fn open_wallet(pass: String, filename: String) {
     let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
     print!("Wallet imported successfully!\n");
     let walelt1 = wallet.clone();
-    main_login(wallet.private_key.to_string(), wallet.public_key,walelt1.address(), false);
+    main_login(
+        wallet.private_key.to_string(),
+        wallet.public_key,
+        walelt1.address(),
+        false,
+    );
 }
 fn open_wallet_gui(pass: String, filename: String) {
     let private_key =
@@ -272,7 +276,11 @@ fn open_wallet_gui(pass: String, filename: String) {
     let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
     print!("Wallet imported successfully!\n");
     let walelt1 = wallet.clone();
-    main_login_gui(wallet.private_key.to_string(), wallet.public_key,walelt1.address());
+    main_login_gui(
+        wallet.private_key.to_string(),
+        wallet.public_key,
+        walelt1.address(),
+    );
 }
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
@@ -292,12 +300,13 @@ fn gen_keypair() {
     info!("Wallet saved at: {}", filename);
 }
 fn gen_keypair_gui(pass: String, filename: String) {
-
     let wallet = redstone_rs::keypair::Keypair::generate();
-    save_wallet(wallet.clone().private_key,(&pass.clone().to_string().trim_end()).to_string(), filename.to_string());
+    save_wallet(
+        wallet.clone().private_key,
+        (&pass.clone().to_string().trim_end()).to_string(),
+        filename.to_string(),
+    );
     println!("Wallet address:{}", wallet.clone().address());
-
-
 
     println!("Wallet saved at: {:?}", filename);
 }
@@ -313,7 +322,7 @@ fn commands_logged() {
     info!("[1] Show wallet balance");
     info!("[2] Send Redstone");
     info!("[3] Send Custom Transaction");
-    
+
     info!("[4] exit");
 }
 
@@ -324,8 +333,6 @@ pub fn new_ann(ann: Announcement) {
             debug!("Recieved block ann");
             // ann.msg contains a block in json format
 
-            
-            
             if let Ok(blk) = serde_json::from_str::<Block>(&ann.content) {
                 if true {
                     let keypair = Keypair {
@@ -412,10 +419,15 @@ pub fn new_ann(ann: Announcement) {
     }
 }
 
-
 fn priv_key_gui(pik: String) {
     let app = app::App::default();
-    let mut wind = Window::new(100, 100, 400, 300, "Close this windows, Redstone Wallet v0.1");
+    let mut wind = Window::new(
+        100,
+        100,
+        400,
+        300,
+        "Close this windows, Redstone Wallet v0.1",
+    );
     let mut but4 = Button::new(0, 0, 400, 300, "Copy Private Key");
     but4.set_callback(move |_| {
         let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
@@ -465,7 +477,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
 
         image.draw(450, 200, 256, 256);
     });
-    but4.set_callback( move |_| {
+    but4.set_callback(move |_| {
         priv_key_gui(pik1.clone());
     });
 
@@ -475,7 +487,6 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
         }
     });
 
- 
     wind.end();
     wind.show();
     let wall = Keypair {
@@ -486,26 +497,11 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
         callback: Box::new(new_ann),
     };
 
-
-
-
     tokio::runtime::Builder::new_multi_thread()
-    .enable_all()
-    .build()
-    .unwrap()
-    .block_on(async {
-        if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-            *locked_ls = WalletDetails {
-                wallet: Some(wall.clone()),
-                balance: 0,
-                locked: 0,
-                uncle_root: "".to_string(),
-            };
-            drop(locked_ls)
-        }
-        let gacc = get_account(addr11.clone()).await;
-        debug!("{}",gacc);
-        if gacc.clone() == "" {
+        .enable_all()
+        .build()
+        .unwrap()
+        .block_on(async {
             if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
                 *locked_ls = WalletDetails {
                     wallet: Some(wall.clone()),
@@ -514,27 +510,35 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
                     uncle_root: "".to_string(),
                 };
                 drop(locked_ls)
-
             }
-        } else {
-            let v: Value = serde_json::from_str(&gacc).unwrap();
-            let val = &v["Result"]["balance"];
-            if &v["result"] != "failure" {
-
+            let gacc = get_account(addr11.clone()).await;
+            debug!("{}", gacc);
+            if gacc.clone() == "" {
                 if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
                     *locked_ls = WalletDetails {
                         wallet: Some(wall.clone()),
-                        balance: val.as_u64().expect("not a valid u64"),
+                        balance: 0,
                         locked: 0,
                         uncle_root: "".to_string(),
-                };
-                drop(locked_ls)
+                    };
+                    drop(locked_ls)
+                }
+            } else {
+                let v: Value = serde_json::from_str(&gacc).unwrap();
+                let val = &v["Result"]["balance"];
+                if &v["result"] != "failure" {
+                    if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                        *locked_ls = WalletDetails {
+                            wallet: Some(wall.clone()),
+                            balance: val.as_u64().expect("not a valid u64"),
+                            locked: 0,
+                            uncle_root: "".to_string(),
+                        };
+                        drop(locked_ls)
+                    }
+                }
             }
-
-            }
-        }
-
-    });
+        });
     if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
         *locked_ls = WalletDetails {
             wallet: Some(wall.clone()),
@@ -543,7 +547,6 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
             uncle_root: "".to_string(),
         };
         drop(locked_ls);
-
     }
 
     if let Ok(mut locked) = WALLET_DETAILS.lock() {
@@ -563,28 +566,35 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
 
             let mut txn1 = Transaction {
                 hash: "".to_owned(),
-                sender: walletdetails
-                    .wallet
-                    .as_ref()
-                    .unwrap()
-                    .public_key
-                    .to_owned(),
+                sender: walletdetails.wallet.as_ref().unwrap().public_key.to_owned(),
                 reciver: addr_send.value().to_owned(),
                 amount: to_atomc(amount.value().parse::<f64>().unwrap()).to_owned(),
                 nonce: 0,
                 type_flag: 0,
                 payload: "".to_owned(), // Hex encoded payload
-                pow: "".to_owned(), // Spam protection PoW
+                pow: "".to_owned(),     // Spam protection PoW
                 signature: "".to_owned(),
-            };                    //99999999999999999999
+            }; //99999999999999999999
             let pow = txn1.find_pow();
 
-            let sign = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone());
+            let sign = walletdetails
+                .wallet
+                .as_ref()
+                .unwrap()
+                .sign(txn1.hash.clone());
 
-            txn1.signature = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone()).unwrap();
+            txn1.signature = walletdetails
+                .wallet
+                .as_ref()
+                .unwrap()
+                .sign(txn1.hash.clone())
+                .unwrap();
 
-            println!("{:?}",txn1);
-            gui_tx_sent_notfy.set_label(&format!("Transaction sent! Hash 8:1: {}", txn1.hash[1..8].to_string()));
+            println!("{:?}", txn1);
+            gui_tx_sent_notfy.set_label(&format!(
+                "Transaction sent! Hash 8:1: {}",
+                txn1.hash[1..8].to_string()
+            ));
             transaction_hash(txn1.hash.to_string());
             tokio::runtime::Builder::new_multi_thread()
                 .enable_all()
@@ -598,14 +608,6 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
     app.run().unwrap();
 }
 
-
-
-
-
-
-
-
-
 fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
     let wall = Keypair {
         private_key: pik.to_string(),
@@ -613,22 +615,10 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
     };
 
     tokio::runtime::Builder::new_multi_thread()
-    .enable_all()
-    .build()
-    .unwrap()
-    .block_on(async {
-        if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-            *locked_ls = WalletDetails {
-                wallet: Some(wall.clone()),
-                balance: 0,
-                locked: 0,
-                uncle_root: "".to_string(),
-            };
-            drop(locked_ls)
-        }
-        let gacc = get_account(addr.clone()).await;
-        debug!("{}",gacc);
-        if gacc.clone() == "" {
+        .enable_all()
+        .build()
+        .unwrap()
+        .block_on(async {
             if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
                 *locked_ls = WalletDetails {
                     wallet: Some(wall.clone()),
@@ -637,27 +627,35 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                     uncle_root: "".to_string(),
                 };
                 drop(locked_ls)
-
             }
-        } else {
-            let v: Value = serde_json::from_str(&gacc).unwrap();
-            let val = &v["Result"]["balance"];
-            if &v["result"] != "failure" {
+            let gacc = get_account(addr.clone()).await;
+            debug!("{}", gacc);
+            if gacc.clone() == "" {
                 if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
                     *locked_ls = WalletDetails {
                         wallet: Some(wall.clone()),
-                        balance: val.as_u64().expect("not a valid u64"),
+                        balance: 0,
                         locked: 0,
                         uncle_root: "".to_string(),
-                };
-                drop(locked_ls)
-
+                    };
+                    drop(locked_ls)
+                }
+            } else {
+                let v: Value = serde_json::from_str(&gacc).unwrap();
+                let val = &v["Result"]["balance"];
+                if &v["result"] != "failure" {
+                    if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
+                        *locked_ls = WalletDetails {
+                            wallet: Some(wall.clone()),
+                            balance: val.as_u64().expect("not a valid u64"),
+                            locked: 0,
+                            uncle_root: "".to_string(),
+                        };
+                        drop(locked_ls)
+                    }
+                }
             }
-
-            }
-        }
-
-    });
+        });
     if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
         *locked_ls = WalletDetails {
             wallet: Some(wall.clone()),
@@ -693,155 +691,171 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
             // Convert to an i32.
             let input: u64 = input.trim().parse().unwrap();
             match input {
-                    1 => {
-                        if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-                            info!("Our balance: {}", to_dec(walletdetails.balance));
-                            drop(walletdetails);
-                        }
-                    }
-                    2 => {
-                        info!("Enter recivers pub key: ");
-                        let mut reciver = String::new();
-                        io::stdin()
-                            .read_line(&mut reciver)
-                            .expect("Failed to read input.");
-                        let mut input = String::new();
-                        info!("Enter a value:");
-                        io::stdin()
-                            .read_line(&mut input)
-                            .expect("Failed to read input.");
-                        let input: f64 = input.trim().parse().unwrap();
-
-                        if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
-                            if input < 1000.0 {
-                                let mut txn1 = Transaction {
-                                    hash: "".to_owned(),
-                                    sender: walletdetails
-                                        .wallet
-                                        .as_ref()
-                                        .unwrap()
-                                        .public_key
-                                        .to_owned(),
-                                    reciver: reciver.trim_end().to_owned(),
-                                    amount: to_atomc(input).to_owned(),
-                                    nonce: 0,
-                                    type_flag: 0,
-                                    payload: "".to_owned(), // Hex encoded payload
-                                    pow: "".to_owned(), // Spam protection PoW
-                                    signature: "".to_owned(),
-                                };                    //99999999999999999999
-                                let pow = txn1.find_pow();
-                                let sign = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone());
-
-                                info!("hash for txn:{}", txn1.hash);
-                                txn1.signature = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone()).unwrap();
-
-                                println!("{:#?}", txn1);
-
-                                tokio::runtime::Builder::new_multi_thread()
-                                    .enable_all()
-                                    .build()
-                                    .unwrap()
-                                    .block_on(async {
-                                        
-                                        send_transaction(txn1).await;
-                                    });
-                            } else {
-                                info!(
-                                    "You are tring to send more then you have!!! Balance: {}",
-                                    walletdetails.balance
-                                );
-                            }
-                            drop(walletdetails);
-                        }
-                    }
-                    // send custom transaction where user will input everything in transaction
-                    // format
-
-                    3 => {
-                        info!("Enter recivers pub key: ");
-                        let mut reciver = String::new();
-                        io::stdin()
-                            .read_line(&mut reciver)
-                            .expect("Failed to read input.");
-                        let mut input = String::new();
-                        info!("Enter a amout:");
-                        io::stdin()
-                            .read_line(&mut input)
-                            .expect("Failed to read input.");
-                        let input: u64 = input.trim().parse().unwrap();
-
-                        let mut py = String::new();
-                        info!("Enter payload:");
-                        io::stdin()
-                            .read_line(&mut py)
-                            .expect("Failed to read input.");
-
-                        let mut type_flag = String::new();
-                        info!("Enter type_flag:");
-                        io::stdin()
-                            .read_line(&mut type_flag)
-                            .expect("Failed to read input.");
-                        let type_flag: u8 = type_flag.trim().parse().unwrap();
-
-                        if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
-                            if input < 1000 {
-                                let mut txn1 = Transaction {
-                                    hash: "".to_owned(),
-                                    sender: walletdetails
-                                        .wallet
-                                        .as_ref()
-                                        .unwrap()
-                                        .public_key
-                                        .to_owned(),
-                                    reciver: reciver.trim_end().to_owned(),
-                                    amount: input,
-                                    nonce: 0,
-                                    type_flag: type_flag,
-                                    payload: py.to_owned(), // Hex encoded payload
-                                    pow: "".to_owned(), // Spam protection PoW
-                                    signature: "".to_owned(),
-                                };                    //99999999999999999999
-                                let pow = txn1.find_pow();
-               
-                                let sign = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone());
-
-                                info!("hash for txn:{}", txn1.hash);
-                                txn1.signature = walletdetails.wallet.as_ref().unwrap().sign(txn1.hash.clone()).unwrap();
-
-                                println!("{:#?}", txn1);
-
-                                tokio::runtime::Builder::new_multi_thread()
-                                    .enable_all()
-                                    .build()
-                                    .unwrap()
-                                    .block_on(async {
-                                        send_transaction(txn1).await;
-                                    });
-                            } else {
-                                info!(
-                                    "You are tring to send more then you have!!! Balance: {}",
-                                    walletdetails.balance
-                                );
-                            }
-                            drop(walletdetails);
-                        }
-                    }
-                    4 => {
-                        info!("Bye....");
-                        break;
-                    }
-
-                    8 => {
-                        info!("relog");
-                        // TODO: relog
-                        break;
-                    }
-                    _ => {
-                        info!("Unknown command");
-                        //dont exit loop back in here
+                1 => {
+                    if let Ok(walletdetails) = WALLET_DETAILS.lock() {
+                        info!("Our balance: {}", to_dec(walletdetails.balance));
+                        drop(walletdetails);
                     }
                 }
+                2 => {
+                    info!("Enter recivers pub key: ");
+                    let mut reciver = String::new();
+                    io::stdin()
+                        .read_line(&mut reciver)
+                        .expect("Failed to read input.");
+                    let mut input = String::new();
+                    info!("Enter a value:");
+                    io::stdin()
+                        .read_line(&mut input)
+                        .expect("Failed to read input.");
+                    let input: f64 = input.trim().parse().unwrap();
+
+                    if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
+                        if input < 1000.0 {
+                            let mut txn1 = Transaction {
+                                hash: "".to_owned(),
+                                sender: walletdetails
+                                    .wallet
+                                    .as_ref()
+                                    .unwrap()
+                                    .public_key
+                                    .to_owned(),
+                                reciver: reciver.trim_end().to_owned(),
+                                amount: to_atomc(input).to_owned(),
+                                nonce: 0,
+                                type_flag: 0,
+                                payload: "".to_owned(), // Hex encoded payload
+                                pow: "".to_owned(),     // Spam protection PoW
+                                signature: "".to_owned(),
+                            }; //99999999999999999999
+                            let pow = txn1.find_pow();
+                            let sign = walletdetails
+                                .wallet
+                                .as_ref()
+                                .unwrap()
+                                .sign(txn1.hash.clone());
+
+                            info!("hash for txn:{}", txn1.hash);
+                            txn1.signature = walletdetails
+                                .wallet
+                                .as_ref()
+                                .unwrap()
+                                .sign(txn1.hash.clone())
+                                .unwrap();
+
+                            println!("{:#?}", txn1);
+
+                            tokio::runtime::Builder::new_multi_thread()
+                                .enable_all()
+                                .build()
+                                .unwrap()
+                                .block_on(async {
+                                    send_transaction(txn1).await;
+                                });
+                        } else {
+                            info!(
+                                "You are tring to send more then you have!!! Balance: {}",
+                                walletdetails.balance
+                            );
+                        }
+                        drop(walletdetails);
+                    }
+                }
+                // send custom transaction where user will input everything in transaction
+                // format
+                3 => {
+                    info!("Enter recivers pub key: ");
+                    let mut reciver = String::new();
+                    io::stdin()
+                        .read_line(&mut reciver)
+                        .expect("Failed to read input.");
+                    let mut input = String::new();
+                    info!("Enter a amout:");
+                    io::stdin()
+                        .read_line(&mut input)
+                        .expect("Failed to read input.");
+                    let input: u64 = input.trim().parse().unwrap();
+
+                    let mut py = String::new();
+                    info!("Enter payload:");
+                    io::stdin()
+                        .read_line(&mut py)
+                        .expect("Failed to read input.");
+
+                    let mut type_flag = String::new();
+                    info!("Enter type_flag:");
+                    io::stdin()
+                        .read_line(&mut type_flag)
+                        .expect("Failed to read input.");
+                    let type_flag: u8 = type_flag.trim().parse().unwrap();
+
+                    if let Ok(mut walletdetails) = WALLET_DETAILS.lock() {
+                        if input < 1000 {
+                            let mut txn1 = Transaction {
+                                hash: "".to_owned(),
+                                sender: walletdetails
+                                    .wallet
+                                    .as_ref()
+                                    .unwrap()
+                                    .public_key
+                                    .to_owned(),
+                                reciver: reciver.trim_end().to_owned(),
+                                amount: input,
+                                nonce: 0,
+                                type_flag: type_flag,
+                                payload: py.to_owned(), // Hex encoded payload
+                                pow: "".to_owned(),     // Spam protection PoW
+                                signature: "".to_owned(),
+                            }; //99999999999999999999
+                            let pow = txn1.find_pow();
+
+                            let sign = walletdetails
+                                .wallet
+                                .as_ref()
+                                .unwrap()
+                                .sign(txn1.hash.clone());
+
+                            info!("hash for txn:{}", txn1.hash);
+                            txn1.signature = walletdetails
+                                .wallet
+                                .as_ref()
+                                .unwrap()
+                                .sign(txn1.hash.clone())
+                                .unwrap();
+
+                            println!("{:#?}", txn1);
+
+                            tokio::runtime::Builder::new_multi_thread()
+                                .enable_all()
+                                .build()
+                                .unwrap()
+                                .block_on(async {
+                                    send_transaction(txn1).await;
+                                });
+                        } else {
+                            info!(
+                                "You are tring to send more then you have!!! Balance: {}",
+                                walletdetails.balance
+                            );
+                        }
+                        drop(walletdetails);
+                    }
+                }
+                4 => {
+                    info!("Bye....");
+                    break;
+                }
+
+                8 => {
+                    info!("relog");
+                    // TODO: relog
+                    break;
+                }
+                _ => {
+                    info!("Unknown command");
+                    //dont exit loop back in here
+                }
+            }
         }
     }
 }
@@ -957,7 +971,6 @@ fn main_not_logged() {
 }
 
 fn main() {
-
     // get argument from command line
     let args: Vec<String> = env::args().collect();
     // if there is gui arg
@@ -985,13 +998,23 @@ fn main() {
             let mut pass2 = pass.clone();
             let mut pik1 = pik.clone();
             but3.set_callback(move |_| {
-                let wallet = redstone_rs::keypair::Keypair::from_private_key(pik1.value().parse().unwrap());
+                let wallet =
+                    redstone_rs::keypair::Keypair::from_private_key(pik1.value().parse().unwrap());
                 save_wallet(wallet.private_key, pass2.value(), file2.value());
             });
-            but.set_callback(move |_| gen_keypair_gui(pass.value().parse().clone().unwrap(),file.value().parse().clone().unwrap()));
-            but2.set_callback(move |_| open_wallet_gui(pass1.value().parse().unwrap(),file1.value().parse().unwrap()));
+            but.set_callback(move |_| {
+                gen_keypair_gui(
+                    pass.value().parse().clone().unwrap(),
+                    file.value().parse().clone().unwrap(),
+                )
+            });
+            but2.set_callback(move |_| {
+                open_wallet_gui(
+                    pass1.value().parse().unwrap(),
+                    file1.value().parse().unwrap(),
+                )
+            });
             app.run().unwrap();
-        
         }
         if args[1] == "cli" {
             setup_logging(3).unwrap();
@@ -1005,15 +1028,10 @@ fn main() {
             ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝     ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝   
             ";
             println!("{}", art);
-        
+
             main_not_logged()
         }
     }
-
 }
 
-
-
-
-
-// Whoa 1000 line of code =) 
+// Whoa 1000 line of code =)

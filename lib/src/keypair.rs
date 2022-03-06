@@ -3,7 +3,7 @@ use secp256k1::bitcoin_hashes::sha256;
 use secp256k1::{Message, PublicKey, Secp256k1, SecretKey, Signature};
 extern crate bs58;
 
-#[derive(Debug,Clone)]
+#[derive(Debug, Clone)]
 pub struct Keypair {
     pub public_key: String,
     pub private_key: String,
@@ -26,7 +26,7 @@ impl Keypair {
             public_key: public_key.to_string(),
         }
     }
-// self.private_key.as_bytes();
+    // self.private_key.as_bytes();
     pub fn sign(&self, message: String) -> Result<String, Box<dyn std::error::Error>> {
         let secp = Secp256k1::new();
         let a = hex::decode(&self.private_key).unwrap();
@@ -49,22 +49,16 @@ impl Keypair {
         let msg = Message::from_hashed_data::<sha256::Hash>(message.as_bytes());
         return Ok(secp.verify(&msg, &signature, &publickey).is_ok());
     }
-   
 
- 
     pub fn from_private_key(pk: String) -> Keypair {
         let pk11 = pk.clone();
         let a = hex::decode(&pk).unwrap();
         let secretkey = secp256k1::key::SecretKey::from_slice(&a);
         let secp = &Secp256k1::new();
-        let pki = secp256k1::key::PublicKey::from_secret_key(secp,&secretkey.unwrap());
+        let pki = secp256k1::key::PublicKey::from_secret_key(secp, &secretkey.unwrap());
         Keypair {
             private_key: pk11.to_string(),
             public_key: pki.to_string(),
         }
-  
     }
-
-
-    
 }

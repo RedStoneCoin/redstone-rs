@@ -232,10 +232,14 @@ impl Executable for Transaction {
                 return Err("Transaction already in block").unwrap();
             }
         } else {
-              warn!("Failed to read traansactions contained in block {} from db (key not found)", self.hash);
-              return Err("Failed to read any transactions for block from DB (key not found)".into());
+            warn!(
+                "Failed to read traansactions contained in block {} from db (key not found)",
+                self.hash
+            );
+            return Err("Failed to read any transactions for block from DB (key not found)".into());
         }
-        if !pow_txn.starts_with("0000") { // TODO: Use difficulty factor and then remove PoW
+        if !pow_txn.starts_with("0000") {
+            // TODO: Use difficulty factor and then remove PoW
             // Proof of work is invalid
             return Err("ErrInvalidPow").unwrap();
         }
@@ -252,7 +256,8 @@ impl Executable for Transaction {
         if self.nonce < 0 {
             return Err("ErrInvalidNonce").unwrap();
         }
-        if ![1, 2, 3, 4, 5, 6, 7].contains(&self.type_flag) { // TODO: use a constant rather than this array for supported txn flags
+        if ![1, 2, 3, 4, 5, 6, 7].contains(&self.type_flag) {
+            // TODO: use a constant rather than this array for supported txn flags
             println!(
                 "Transaction {} has unsupported type={}",
                 self.hash, self.type_flag,

@@ -4,20 +4,20 @@ use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
 mod api;
-use std::collections::HashMap;
-use redstone_rs::block::{Header,Block};
-use redstone_rs::transaction::Transaction;
 use redstone_rs::account::Account;
+use redstone_rs::block::{Block, Header};
 use redstone_rs::crypto::hash;
+use redstone_rs::transaction::Transaction;
+use std::collections::HashMap;
 extern crate clap;
-use clap::{Arg, App, SubCommand};
-use redstone_rs::rpc::{block_announce, Announcement, Caller};
-use std::{thread, time};
-use std::path::Path;
-use std::fs;
-use redstone_rs::blockchain::Blockchain;
+use clap::{App, Arg, SubCommand};
 use fs::File;
+use redstone_rs::blockchain::Blockchain;
+use redstone_rs::rpc::{block_announce, Announcement, Caller};
+use std::fs;
 use std::io::Write;
+use std::path::Path;
+use std::{thread, time};
 extern crate rand;
 
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
@@ -107,49 +107,62 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     Ok(())
 }
 fn main() {
-    let matches =  App::new("Redstone Node")
-                        .version("0.1.0")
-                        .author("Redstone Developers. <redstonecrypto@gmail.com>")
-                        .about("Redstone Deamon Software")
-                          .arg(Arg::with_name("validator")
-                          .long("validator") // allow --name
-                          .takes_value(true)
-                          .help("validator")
-                          .required(false))
-                          .arg(Arg::with_name("mode")
-                          .long("mode") // allow --name
-                          .takes_value(true)
-                          .help("mode")
-                          .required(false))
-                          .arg(Arg::with_name("logging")
-                          .long("logging") // allow --name
-                          .takes_value(true)
-                          .help("logging level")
-                          .required(false))
-                          .arg(Arg::with_name("api_port")
-                            .long("api_port") // allow --name
-                            .takes_value(true)
-                            .help("api port")
-                            .required(false))
-                        .arg(Arg::with_name("rpc_port")
-                            .long("rpc") // allow --name
-                            .takes_value(true)
-                            .help("rpc port")
-                            .required(false))
-                        // testnet
-                        .arg(Arg::with_name("testnet")
-                            .long("testnet") // allow --name
-                            .takes_value(false)
-                            .help("testnet")
-                            .required(false))
-                        .arg(Arg::with_name("private_key")
-                            .long("private_key") // allow --name
-                            .takes_value(true)
-                            .help("private_key")
-                            .required(false))
-                
-                          .get_matches();
-    
+    let matches = App::new("Redstone Node")
+        .version("0.1.0")
+        .author("Redstone Developers. <redstonecrypto@gmail.com>")
+        .about("Redstone Deamon Software")
+        .arg(
+            Arg::with_name("validator")
+                .long("validator") // allow --name
+                .takes_value(true)
+                .help("validator")
+                .required(false),
+        )
+        .arg(
+            Arg::with_name("mode")
+                .long("mode") // allow --name
+                .takes_value(true)
+                .help("mode")
+                .required(false),
+        )
+        .arg(
+            Arg::with_name("logging")
+                .long("logging") // allow --name
+                .takes_value(true)
+                .help("logging level")
+                .required(false),
+        )
+        .arg(
+            Arg::with_name("api_port")
+                .long("api_port") // allow --name
+                .takes_value(true)
+                .help("api port")
+                .required(false),
+        )
+        .arg(
+            Arg::with_name("rpc_port")
+                .long("rpc") // allow --name
+                .takes_value(true)
+                .help("rpc port")
+                .required(false),
+        )
+        // testnet
+        .arg(
+            Arg::with_name("testnet")
+                .long("testnet") // allow --name
+                .takes_value(false)
+                .help("testnet")
+                .required(false),
+        )
+        .arg(
+            Arg::with_name("private_key")
+                .long("private_key") // allow --name
+                .takes_value(true)
+                .help("private_key")
+                .required(false),
+        )
+        .get_matches();
+
     // return vec of args
 
     let mut rpc_port = matches.value_of("rpc_port").unwrap_or("").to_string();
@@ -161,7 +174,7 @@ fn main() {
     let mut api = matches.is_present("no_api");
     let private_key = matches.value_of("private_key").unwrap_or("").to_string();
     // if rpc_port is empty set it to 44405
-    
+
     if rpc_port.is_empty() {
         rpc_port = "44405".to_string();
     }
@@ -169,19 +182,23 @@ fn main() {
         testnet = true;
     }
 
-
     // if validator is not emtpy but there is no private key
     if !validator.is_empty() && private_key.is_empty() {
         println!("Private key is required for validator");
         return;
     }
-    println!("{}",validator);
-    main_run(rpc_port.parse::<u16>().unwrap().into(),testnet,true,private_key,validator)
+    println!("{}", validator);
+    main_run(
+        rpc_port.parse::<u16>().unwrap().into(),
+        testnet,
+        true,
+        private_key,
+        validator,
+    )
 
     // setup logging
-
 }
-fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: String) {
+fn main_run(rpc_port: u64, test: bool, api: bool, private_key: String, validator: String) {
     // TODO move to config file
     let ver = "0.0.1";
     setup_logging(3).unwrap();
@@ -194,22 +211,22 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
     ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
     ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
 ";
-    info!("{}",assci_art);
+    info!("{}", assci_art);
 
-    info!("Starting redstone node {}" , ver);
+    info!("Starting redstone node {}", ver);
     warn!("Warning, this software is not stable");
     warn!("Run at your own risk!");
     if validator != "" {
         let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key);
         info!("Starting VALIDATOR NODE");
-        info!("Validator: {}",wallet.address());
+        info!("Validator: {}", wallet.address());
     }
     mempool::Mempool::init(HashMap::new()).unwrap();
     if api {
-    info!("Launching API server at 0.0.0.0:8000");
-    let _ = std::thread::spawn(move || {
-        api::start_api();
-    });
+        info!("Launching API server at 0.0.0.0:8000");
+        let _ = std::thread::spawn(move || {
+            api::start_api();
+        });
     } else {
         info!("API DISABLED!!!");
     }
@@ -233,7 +250,8 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
         let _ = std::thread::spawn(move || {
             let mut txn = Transaction {
                 hash: "321".to_owned(),
-                sender: "0302db1c230c9e215a2cb251a2b08af301c8046661298de92b3a250fcf682d36".to_owned(),
+                sender: "0302db1c230c9e215a2cb251a2b08af301c8046661298de92b3a250fcf682d36"
+                    .to_owned(),
                 reciver: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
                 amount: 69,
                 nonce: 1,
@@ -244,7 +262,8 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
             };
             let mut txn1 = Transaction {
                 hash: "123".to_owned(),
-                sender: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f".to_owned(),
+                sender: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f"
+                    .to_owned(),
                 reciver: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
                 amount: 29,
                 nonce: 1,
@@ -257,11 +276,11 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
                 address: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
                 balance: 0,
                 smart_contract: false,
-
             };
             account::Account::save(&acc);
             let mut blk = Block {
-                hash: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f".to_owned(),
+                hash: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f"
+                    .to_owned(),
                 header: Header {
                     height: 66,
                     timestamp: 1,
@@ -272,14 +291,14 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
                     proposer: "".to_owned(), // the publickey of the proposer
                     transactions_merkle_root: "".to_owned(),
                     header_payload: 0,
-                    proof: "".to_owned(),              // The vrf proof of the proposer as hex
+                    proof: "".to_owned(), // The vrf proof of the proposer as hex
                     proposer_signature: "".to_owned(), // proposers signature
-                    validator_signatures: vec!("".to_owned()),
+                    validator_signatures: vec!["".to_owned()],
                     vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
                 },
                 transactions: vec![txn.clone(), txn1.clone()],
             };
-            
+
             // get blocks form db and send them to the wallet to sync it
             //  let block = vec![blk,blk1,blk2];
             info!("wait 5 sec");
@@ -295,7 +314,4 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
         // sleep for a while
         thread::sleep(time::Duration::from_secs(1));
     }
-    
-
-
 }

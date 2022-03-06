@@ -32,7 +32,8 @@ impl Blockchain {
             return Err("Failed to open DB".into());
         }
     }
-    pub fn to_string(&self) -> String { // TODO: is this really needed?
+    pub fn to_string(&self) -> String {
+        // TODO: is this really needed?
         format!("blockchain-{}", self.index())
     }
     pub fn from_string(as_string: String) -> Option<Self> {
@@ -61,11 +62,14 @@ impl Blockchain {
             &format!("{}{}", DATABASE_PATH_PREFIX, index),
             &String::from("save"),
         )? {
-        let bc = Blockchain::from_string(encoded).unwrap();
-         return Ok(bc);
-        } else  {
-            error!("Faied to load blockchain {} from disk, not found in DB", index);
-            return Err("Key not found in DB".into())
+            let bc = Blockchain::from_string(encoded).unwrap();
+            return Ok(bc);
+        } else {
+            error!(
+                "Faied to load blockchain {} from disk, not found in DB",
+                index
+            );
+            return Err("Key not found in DB".into());
         }
     }
     pub fn list() -> Result<Vec<Self>, Box<dyn std::error::Error>> {

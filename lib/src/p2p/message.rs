@@ -8,10 +8,8 @@ pub(crate) const CHECKSUM_BYTES: usize = 4;
 
 #[derive(FromStr, Debug)]
 pub enum TYPES {
-    AddTxn = 0
+    AddTxn = 0,
 }
-
-
 
 pub struct P2pMessage {
     pub message: String,
