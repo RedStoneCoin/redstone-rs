@@ -12,7 +12,7 @@ This is the offical implemention of the redstone protocol. It is written in rust
   - [Linux](#linux)
     - [Prerequisites](#prerequisites)
       - [Generic Linux](#generic-linux)
-- [Todo](#To-Do)
+- [Todo](https://pacific-philosophy-3dd.notion.site/38585e4797344b968e7cd9280ca714c7?v=5f039c4709b244c3a139572315a77ddf)
 - [Security Policy](#Security-Policy)
 
 ## How to compile
