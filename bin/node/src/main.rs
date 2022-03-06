@@ -221,17 +221,6 @@ fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: St
     if !Path::new(datadir).exists() {
         info!("Creating datadir");
         fs::create_dir(datadir).unwrap();
-        info!("Creating api token");
-        // token = ./datadir/token.api
-        let path = "./datadir/token.api";
-        let token: i32 = rand::random();
-        let mut file = File::create(path).unwrap();
-        let token_write = format!("{}",token);
-        // remove - 
-        let token_write = token_write.replace("-","");
-        file.write_all(&token_write.as_bytes()).unwrap();
-        info!("API Token: {}",token);
-
     }
     // crete test chain
     if test == true {

@@ -20,6 +20,8 @@ use rocket::http::hyper::header::AccessControlAllowOrigin;
 use rocket::fairing::AdHoc;
 use std::fs;
 use rocket::config::{Config, Environment, LoggingLevel};
+use crate::Path;
+use crate::File;
 lazy_static! {
     static ref WALLET_DETAILS: Mutex<Vec<String>> = Mutex::new(Vec::new());
 }
@@ -303,18 +305,36 @@ pub fn get_token() {
     let token = fs::read_to_string("./datadir/token.api").unwrap();
     token.to_string();
 }
-
+pub fn create_token() {
+    info!("Creating api token");
+    // token = ./datadir/token.api
+    let path = "./datadir/token.api";
+    let token: i32 = rand::random();
+    let mut file = File::create(path).unwrap();
+    let token_write = format!("{}",token);
+    // remove - 
+    let token_write = token_write.replace("-","");
+    file.write_all(&token_write.as_bytes()).unwrap();
+    info!("API Token: {}",token_write);
+}
 pub fn start_api() {
     // Add api token
+    // chcek for token
+    // if token is not present
+    // generate token
+
+    if !Path::new("./datadir/token.api").exists() {
+        create_token();
+    }
     let token = fs::read_to_string("./datadir/token.api").unwrap();
-    
+        
     let config = Config::build(Environment::Staging)
         .log_level(LoggingLevel::Critical) // disables logging
         .finalize()
         .unwrap();
     // Header apikey
     let url = format!("/json_api/{}/", token.to_string());
-    info!("API mounted on {}", url);
+    info!("API mounted on {} and key {}", url, token);
     rocket::custom(config)
         .mount(&url, get_middleware())
         .launch();

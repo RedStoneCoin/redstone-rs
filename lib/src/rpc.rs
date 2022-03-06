@@ -1,4 +1,6 @@
-
+// ORIGINALY CREATED FOR AVRIO.RS BY LEO CORNELIUS
+// MODIFED FOR REDSTONE BY TONI DUMANCIC
+// rpc.rs - RPC module
 use crate::block::{Block};
 use lazy_static::*;
 use log::*;

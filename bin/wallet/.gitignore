@@ -2,7 +2,8 @@
 
 # dependencies
 1
-redstone-wallet.log
+./redstone-wallet.log
 .
 /1
 /2
+/test.wallet
