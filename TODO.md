@@ -1,21 +1,5 @@
 # To-Do
-Please find a (most likley out of date) non exhastive todo list. Please check the Projects tab of this repo for a better idea of what we are working on. 
-### core
-
-- [ ] Finish p2p code.
-- [ ] Handler functions for the p2p code
-- [ ] Block logic
-- [ ] Transaction Logic
-- [ ] Validator logic code (regarding the DpoS)
-- [ ] Smart Contracts & RVM (Redstone Virutal Machine)
-
-### Node
-
-- [ ] Json Api
-- [ ] CLI 
-- [ ] Working node/daemon implementation
-- [ ] Validator extensions
-
+Moved to here https://pacific-philosophy-3dd.notion.site/38585e4797344b968e7cd9280ca714c7?v=5f039c4709b244c3a139572315a77ddf
 ### Misc
 - [ ] Finish todo list (will it ever end :D )
 - [ ] Setup CI/build integrations
