@@ -56,7 +56,7 @@ pango-devel
 Ensure you have the dependencies listed above.
 
 ```bash
-git clone -b master --single-branch https://github.com/avrio-project/avrio-rs/
+git clone -b master --single-branch https://github.com/RedStoneCoin/redstone-rs/
 cd redstone-rs/src/node # for node
 cd redstone-rs/src/wallet # for Wallet
 
