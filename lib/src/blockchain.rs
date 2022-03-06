@@ -1,4 +1,5 @@
 use crate::database::Database;
+use log::error;
 use sled;
 pub const DATABASE_PATH_PREFIX: &str = "./datadir/blockchain_db_"; // TODO: move to config
 #[derive(Debug, Clone)]
@@ -14,18 +15,25 @@ impl Blockchain {
     pub fn index(&self) -> u64 {
         self.index
     }
-    pub fn tip(&self) -> String {
-        let mut db_handle = Database::new();
+    pub fn tip(&self) -> Result<String, Box<dyn std::error::Error>> {
+        let mut db_handle = Database::new(); // TODO: this is inefficent, have a global database handle pool OR make it a varible of the struct
         if let Ok(_) = db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.index)) {
-            return db_handle.get(
+            if let Some(tip) = db_handle.get(
                 &format!("{}{}", DATABASE_PATH_PREFIX, self.index),
                 &"tip".to_string(),
-            );
+            )? {
+                return Ok(tip);
+            } else {
+                error!("Tip for blockchain {} not found in database", self.index);
+                return Err("Cannot find tip in database".into());
+            }
+        } else {
+            error!("Failed to open blockchain db for chain {}", self.index);
+            return Err("Failed to open DB".into());
         }
-        String::default()
     }
-    pub fn to_string(&self) -> String {
-        format!("{}:", self.index())
+    pub fn to_string(&self) -> String { // TODO: is this really needed?
+        format!("blockchain-{}", self.index())
     }
     pub fn from_string(as_string: String) -> Option<Self> {
         let split = as_string.split(':').collect::<Vec<&str>>();
@@ -49,12 +57,16 @@ impl Blockchain {
     pub fn load(index: u64) -> Result<Self, Box<dyn std::error::Error>> {
         let mut db_handle = Database::new();
         db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, index))?;
-        let encoded = db_handle.get(
+        if let Some(encoded) = db_handle.get(
             &format!("{}{}", DATABASE_PATH_PREFIX, index),
             &String::from("save"),
-        );
+        )? {
         let bc = Blockchain::from_string(encoded).unwrap();
-        Ok(bc)
+         return Ok(bc);
+        } else  {
+            error!("Faied to load blockchain {} from disk, not found in DB", index);
+            return Err("Key not found in DB".into())
+        }
     }
     pub fn list() -> Result<Vec<Self>, Box<dyn std::error::Error>> {
         let mut db_handle = Database::new();

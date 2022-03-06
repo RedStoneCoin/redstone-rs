@@ -12,12 +12,15 @@ impl Account {
     pub fn get(address: String) -> Result<Account, Box<dyn std::error::Error>> {
         let mut database_handle = Database::new();
         database_handle.open(&"./datadir/accounts".into())?;
-        let encoded = database_handle.get(&"./datadir/accounts".into(), &address);
-        if encoded.len() == 0 {
-            println!("{:?}",encoded);
-            return Err("Poor formating or address not found".into());
+        if let Some(encoded) = database_handle.get(&"./datadir/accounts".into(), &address)? {
+            if encoded.len() == 0 {
+                log::trace!("{:?}",encoded);
+                return Err("Poor formating or address not found".into());
+            } else {
+                return Account::from_string(String::from_utf8(hex::decode(encoded)?)?);
+            }
         } else {
-            return Account::from_string(String::from_utf8(hex::decode(encoded)?)?);
+            return Err("Account not found in DB".into());
         }
     }
     pub fn save(&self) -> Result<(), Box<dyn std::error::Error>> {

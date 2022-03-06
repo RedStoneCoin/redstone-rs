@@ -1,3 +1,5 @@
+use log::warn;
+
 use crate::{account::Account, block::Block, crypto::hash, crypto::Vrf, database::Database};
 
 #[derive(Debug, Clone)]
@@ -169,8 +171,12 @@ impl Validator {
     pub fn get(address: &String) -> Result<Validator, Box<dyn std::error::Error>> {
         let mut db = Database::new();
         db.open(&String::from("validators"))?;
-        let encoded = db.get(&String::from("validators"), address);
-        Validator::from_string(encoded)
+        if let Some(encoded) = db.get(&String::from("validators"), address)? {
+            return Validator::from_string(encoded);
+        } else {
+            warn!("Validator {} does not exist in DB (key not found)", address);
+            return Err("Validator not found in DB (key not found)".into());
+        }
     }
     pub fn set(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut db = Database::new();

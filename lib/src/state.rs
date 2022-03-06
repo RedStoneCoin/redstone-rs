@@ -1,3 +1,5 @@
+use log::warn;
+
 use crate::{
     account::Account,
     block::Block,
@@ -72,8 +74,16 @@ impl Round {
     pub fn get(round: u64, chain: u64) -> Result<Round, Box<dyn std::error::Error>> {
         let mut db = Database::new();
         db.open(&format!("rounds-{}", chain))?;
-        let encoded = db.get(&format!("rounds-{}", chain), &round.to_string());
-        Round::from_string(encoded)
+        if let Some(encoded) = db.get(&format!("rounds-{}", chain), &round.to_string())? {
+            return Round::from_string(encoded);
+        } else {
+            // Round not found
+            warn!(
+                "Could not find key rounds-{} in db while loading round {} for chain {} from disk",
+                round, round, chain
+            );
+            return Err("Could not find key in DB".into());
+        }
     }
     pub fn set(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut db = Database::new();
@@ -118,7 +128,11 @@ impl GlobalState {
     pub fn current() -> Result<String, Box<dyn std::error::Error>> {
         let mut db = Database::new();
         db.open(&"globalstate".to_string())?;
-        Ok(db.get(&"globalstate".to_string(), &"hash".to_string()))
+        if let Some(curr) = db.get(&"globalstate".to_string(), &"hash".to_string())? {
+            return Ok(curr)
+        } else {
+            return Err("Key not found in DB".into());
+        }
     }
 
     pub fn set_current(&self) -> Result<(), Box<dyn std::error::Error>> {

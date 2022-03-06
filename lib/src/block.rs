@@ -151,7 +151,7 @@ impl Executable for Block {
                 }
             } else {
                 // check if the height and parent hash is correct on the specified chain
-                let chain_tip = bc.tip();
+                let chain_tip = bc.tip()?;
                 if self.header.parent_hash != chain_tip {
                     return Err("Invalid parent hash".into());
                 } else {
