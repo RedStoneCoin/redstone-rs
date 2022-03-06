@@ -426,7 +426,19 @@ fn priv_key_gui(pik: String) {
     wind.show();
     app.run().unwrap();
 }
-
+fn transaction_hash(hash: String) {
+    let app = app::App::default();
+    let mut wind = Window::new(100, 100, 400, 300, "Transaction sent, Redstone Wallet v0.1");
+    let mut but4 = Button::new(0, 0, 400, 300, "Copy Transaction hash");
+    but4.set_callback(move |_| {
+        let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
+        println!("{:?}", ctx.get_contents());
+        ctx.set_contents(hash.to_owned()).unwrap();
+    });
+    wind.end();
+    wind.show();
+    app.run().unwrap();
+}
 fn main_login_gui(pik: String, pbk: String, addr11: String) {
     let app = app::App::default();
     let mut wind = Window::new(100, 100, 800, 600, "Redstone GUI Wallet Logged v0.1");
@@ -573,7 +585,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
 
             println!("{:?}",txn1);
             gui_tx_sent_notfy.set_label(&format!("Transaction sent! Hash 8:1: {}", txn1.hash[1..8].to_string()));
-
+            transaction_hash(txn1.hash.to_string());
             tokio::runtime::Builder::new_multi_thread()
                 .enable_all()
                 .build()
@@ -582,10 +594,7 @@ fn main_login_gui(pik: String, pbk: String, addr11: String) {
                     send_transaction(txn1).await;
                 });
         }
-
     });
-
-
     app.run().unwrap();
 }
 
