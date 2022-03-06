@@ -14,24 +14,24 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Clone, Default, Debug)]
 pub struct Header {
-    pub height: u64,
-    pub timestamp: u64,
-    pub chain: u64,
-    pub parent_hash: String,
-    pub state_hash: String,
-    pub uncle_root: String,
-    pub proposer: String, // the publickey of the proposer
-    pub transactions_merkle_root: String,
-    pub header_payload: u8,
-    pub proof: String,              // The vrf proof of the proposer as hex
-    pub proposer_signature: String, // proposers signature
-    pub validator_signatures: Vec<String>,
+    pub height: u64,    // The height of this block in the chain (aka the block number)
+    pub timestamp: u64, // The timestamp this block was formed (presignature)
+    pub chain: u64,     // The index of the chain which this block belongs tpo
+    pub parent_hash: String, // The hash of the previous block in this chain
+    pub state_hash: String, // The hash of our state; TODO: is this needed
+    pub uncle_root: String, // The root of a merkle tree composed of the top blocks (tips) of every chain
+    pub proposer: String,   // the publickey of the proposer
+    pub transactions_merkle_root: String, // The root of a merkle tree composed of the hashes of all transactions contained within this block
+    pub header_payload: u8,               // TODO: what is this
+    pub proof: String,                    // The vrf proof of the proposer encoded in hex
+    pub proposer_signature: String, // The ECDSA signature (on the block hash) of the proposer of this block
+    pub validator_signatures: Vec<String>, // A vector of ECDSA signatures (on the block hash + vote) of each validator
     pub vrf: String, // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
 }
 
 #[derive(Serialize, Clone, Default, Debug, Deserialize)]
 pub struct Block {
-    pub hash: String,
+    pub hash: String, // The block hash, this must be computed & updated using block.hash_mut() (or can be returned with block.hash())
     pub header: Header,
     pub transactions: Vec<Transaction>,
 }
@@ -55,16 +55,30 @@ impl Block {
     pub fn hash(&self) -> String {
         self.hash_item()
     }
+
+    /// # Hash Mut
+    /// Computes the hash of this block and assigns it to the hash parameter
+    /// Returns void
     pub fn hash_mut(&mut self) {
         self.hash = self.hash_item()
     }
+    /// # Add txn
+    /// Adds a transaction to this block
+    /// Returns void
     pub fn add_txn(&mut self, txn: Transaction) {
         self.transactions.push(txn);
     }
-    // TODO: read from database
+    /// # Get
+    /// Finds a block, start with the mempool and try disk if not present
+    /// Returns a result, either Ok(Block) or an Error
     pub fn get(hash: String) -> Result<Block, Box<dyn std::error::Error>> {
-        Ok(Block::default())
+        Ok(Block::default()) // TODO: Implement block.get()
     }
+
+    /// # Form vrf tag
+    /// Forms the VRF tag for a block given the proposers ECDSA keypar, and assigns it to the block.header.vrf parameter
+    /// Please note, the block.hash parameter must be set before calling this function
+    /// Returns a result, either Ok(void) or any errors encountered
     pub fn form_vrf_tag(&mut self, keypair: &Keypair) -> Result<(), Box<dyn std::error::Error>> {
         if self.hash.len() == 0 {
             return Err("Hash must be set".into());
@@ -76,6 +90,9 @@ impl Block {
         Ok(())
     }
 
+    /// # Validate Vrf
+    /// Validates the set VRF tag of a block, given the proposers (partial - privatekey is not expected/required to be set) ECDSA keypar
+    /// Please note, both the block.header.vrf and block.hash must be set before calling this function
     pub fn validate_vrf(&self, proposer: Keypair) -> Result<bool, Box<dyn std::error::Error>> {
         if self.header.vrf.len() == 0 {
             return Err("Vrf must be set".into());
