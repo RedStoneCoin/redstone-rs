@@ -1,5 +1,7 @@
 # Redstone-rs
-
+![Github All Releases](https://img.shields.io/github/downloads/RedStoneCoin/redstone-rs/total.svg)
+[![Join the chat at https://discordapp.com/invite/8ezwRUK](https://img.shields.io/discord/539606376339734558.svg?label=discord&logo=discord&logoColor=white)](https://discord.gg/JjThnVdASR)
+[![GitHub contributors](https://img.shields.io/github/contributors-anon/Redstonecoin/redstone-rs?label=Contributors)](https://github.com/Redstonecoin/redstone-rs/graphs/contributors) [![GitHub issues](https://img.shields.io/github/issues/Redstonecoin/redstone-rs?label=Issues)](https://github.com/RedStoneCoin/redstone-rs/issues) ![GitHub stars](https://img.shields.io/github/stars/Redstonecoin/redstone-rs?label=Github%20Stars)
 ## Implementation of Redstone protocol
 Redstone Project is a p2p custom blockchain implementation, comprised of a network of interconnected subchains providing improved speed and scalability over conventional cryptocurrenys.
 This is the offical implemention of the redstone protocol. It is written in rust. Protocol is subject to frequent change and as such no complete documention exists (however it is in the works) It is currently not ready for usage.
