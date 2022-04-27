@@ -27,3 +27,6 @@ enum_from_str_derive = "0.1.0"
 enum_from_str = "0.1.0"
 bs58 = "0.3.0"
 openssl = { version = "0.10", features = ["vendored"] }
+libp2p = "0.43.0"
+futures = "0.3.21"
+async-std = { version = "1.10.0", features = ["attributes"] }
