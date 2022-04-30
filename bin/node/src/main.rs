@@ -9,7 +9,7 @@ use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
 use redstone_rs::account::Account;
 use redstone_rs::crypto::hash;
-use redstone_rs::p2p::server;
+use redstone_rs::rs_p2p::server;
 extern crate clap;
 use clap::{Arg, App, SubCommand};
 use redstone_rs::rpc::{block_announce, Announcement, Caller};
@@ -216,7 +216,7 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
     }
     info!("Launching P2P server");
     let _ = std::thread::spawn(move || {
-        redstone_rs::p2p::server::launch();
+        redstone_rs::rs_p2p::server::launch();
     });
 
 

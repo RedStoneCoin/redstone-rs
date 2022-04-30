@@ -1,27 +1,27 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
-use redstone_rs::*;
-use log::*;
-use rocket::{routes, Route};
-use std::io::prelude::*;
+use crate::File;
+use crate::Path;
 use lazy_static::*;
-use serde::Deserialize;
-use std::sync::Mutex;
-use reqwest::Client;
-use std::time::{UNIX_EPOCH, SystemTime};
-use std::error::Error;
-use rocket::get;
-use rocket::post;
-use redstone_rs::transaction::Transaction;
+use log::*;
 use redstone_rs::account::Account;
 use redstone_rs::keypair::Keypair;
-use rocket::http::hyper::header::Headers;
-use rocket::http::hyper::header::AccessControlAllowOrigin;
-use rocket::fairing::AdHoc;
-use std::fs;
+use redstone_rs::transaction::Transaction;
+use redstone_rs::*;
+use reqwest::Client;
 use rocket::config::{Config, Environment, LoggingLevel};
-use crate::Path;
-use crate::File;
+use rocket::fairing::AdHoc;
+use rocket::get;
+use rocket::http::hyper::header::AccessControlAllowOrigin;
+use rocket::http::hyper::header::Headers;
+use rocket::post;
+use rocket::{routes, Route};
+use serde::Deserialize;
+use std::error::Error;
+use std::fs;
+use std::io::prelude::*;
+use std::sync::Mutex;
+use std::time::{SystemTime, UNIX_EPOCH};
 lazy_static! {
     static ref WALLET_DETAILS: Mutex<Vec<String>> = Mutex::new(Vec::new());
 }
@@ -117,20 +117,17 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
             } else {
                 return "{ \"result\" : \"FAILURE PLEASE TRY LATER\" }".to_owned();
             }
-        }
-        else {
+        } else {
             debug!(
-              "Failed to turn utf8 bytes to txn (submit txn api, error={})",
-              "no"
+                "Failed to turn utf8 bytes to txn (submit txn api, error={})",
+                "no"
             );
-        return format!(" {{ \"error\" : \" utf8 to json failed \" }}");
+            return format!(" {{ \"error\" : \" utf8 to json failed \" }}");
         }
-  }else {
+    } else {
         return "{ \"result\" : \"failure\" }".to_owned();
-  }
+    }
 }
-
-
 
 #[post("/submit_txn_np", format = "application/json", data = "<txn_data>")]
 pub fn submit_txn_v1_np(txn_data: rocket::Data) -> String {
@@ -176,23 +173,22 @@ pub fn submit_txn_v1_np(txn_data: rocket::Data) -> String {
             } else {
                 return "{ \"result\" : \"FAILURE PLEASE TRY LATER\" }".to_owned();
             }
-        }
-        else {
+        } else {
             debug!(
-              "Failed to turn utf8 bytes to txn (submit txn api, error={})",
-              "no"
+                "Failed to turn utf8 bytes to txn (submit txn api, error={})",
+                "no"
             );
-        return format!(" {{ \"error\" : \" utf8 to json failed \" }}");
+            return format!(" {{ \"error\" : \" utf8 to json failed \" }}");
         }
-  }else {
+    } else {
         return "{ \"result\" : \"failure\" }".to_owned();
-  }
+    }
 }
 #[get("/get_mem_tx/<hash>")]
 fn gettx(hash: String) -> String {
-    if let Err(get1) = mempool::get_transaction(hash.clone())  {
-        return "{ \"result\" : \"failure\" }".to_owned();    } 
-    else {
+    if let Err(get1) = mempool::get_transaction(hash.clone()) {
+        return "{ \"result\" : \"failure\" }".to_owned();
+    } else {
         let get = serde_json::to_string(&mempool::get_transaction(hash.clone()).unwrap());
         let return_string = format!("{{ \"result\" : \"{}\" }}", get.unwrap());
         return return_string;
@@ -201,18 +197,16 @@ fn gettx(hash: String) -> String {
 
 #[get("/get_block/<hash>")]
 fn get_blk(hash: String) -> String {
-    
     // TODO
     let mut result = "{ \"result\" : \"failure\" }".to_owned();
     return result.to_string();
 }
 
-
 #[get("/get_acc/<public_key>")]
 fn getacc(public_key: String) -> String {
-    if let Err(get1) = Account::get(public_key.clone())  {
-        return "{ \"result\" : \"failure\" }".to_owned();    } 
-    else {
+    if let Err(get1) = Account::get(public_key.clone()) {
+        return "{ \"result\" : \"failure\" }".to_owned();
+    } else {
         let get = serde_json::to_string(&Account::get(public_key).unwrap());
         let return_string = format!("{{ \"result\" : \"{}\" }}", get.unwrap());
         return return_string;
@@ -225,7 +219,7 @@ fn sign(pik: String,hash: String) -> String {
 }
 
 #[get("/send_easy_transaction/<pik>/<from>/<amount>/<to>")]
-fn es_tx(pik: String,from: String,amount: f64,to: String) -> String {
+fn es_tx(pik: String, from: String, amount: f64, to: String) -> String {
     let keypair = Keypair {
         private_key: pik.clone(),
         public_key: from.clone(),
@@ -238,9 +232,9 @@ fn es_tx(pik: String,from: String,amount: f64,to: String) -> String {
         nonce: 0,
         type_flag: 0,
         payload: "".to_owned(), // Hex encoded payload
-        pow: "".to_owned(), // Spam protection PoW
+        pow: "".to_owned(),     // Spam protection PoW
         signature: "".to_owned(),
-    };                    //99999999999999999999
+    }; //99999999999999999999
     let pow = txn1.find_pow();
     let sig = keypair.sign(txn1.hash.clone());
     txn1.signature = sig.unwrap();
@@ -251,14 +245,15 @@ fn es_tx(pik: String,from: String,amount: f64,to: String) -> String {
 #[get("/create_wallet")]
 fn create_wallet() -> String {
     let mut headers = Headers::new();
-    headers.set(
-        AccessControlAllowOrigin::Any
-    );
+    headers.set(AccessControlAllowOrigin::Any);
     let wallet = redstone_rs::keypair::Keypair::generate();
     let public_key = wallet.public_key.to_string();
     let private_key = wallet.private_key.to_string();
     let address = wallet.address().to_string();
-    return format!("{{ \"public_key\": \"{}\", \"private_key\": \"{}\", \"address\": \"{}\" }}", public_key, private_key, address);
+    return format!(
+        "{{ \"public_key\": \"{}\", \"private_key\": \"{}\", \"address\": \"{}\" }}",
+        public_key, private_key, address
+    );
 }
 #[get("/from_private_key/<pik>")]
 fn from_private_key(pik: String) -> String {
@@ -266,7 +261,10 @@ fn from_private_key(pik: String) -> String {
     let public_key = keypair.public_key.to_string();
     let private_key = keypair.private_key.to_string();
     let address = keypair.address().to_string();
-    return format!("{{ \"public_key\": \"{}\", \"private_key\": \"{}\", \"address\": \"{}\" }}", public_key, private_key, address);
+    return format!(
+        "{{ \"public_key\": \"{}\", \"private_key\": \"{}\", \"address\": \"{}\" }}",
+        public_key, private_key, address
+    );
 }
 
 #[get("/pk_to_acc/<pik>")]
@@ -280,19 +278,19 @@ fn pkacc(pik: String) -> String {
     return format!("{{ \"address\": \"{}\" }}", addr);
 }
 pub fn get_middleware() -> Vec<Route> {
-    routes![must_provide_method,
-            ping,
-            submit_txn_v1,
-            gettx,
-            getacc,
-            create_wallet,
-            submit_txn_v1_np,
-            es_tx,
-            from_private_key,
-            pkacc
+    routes![
+        must_provide_method,
+        ping,
+        submit_txn_v1,
+        gettx,
+        getacc,
+        create_wallet,
+        submit_txn_v1_np,
+        es_tx,
+        from_private_key,
+        pkacc
     ]
 }
-
 
 // header token must be provided
 // token = ./datadir/token.api
@@ -307,11 +305,11 @@ pub fn create_token() {
     let path = "./datadir/token.api";
     let token: i32 = rand::random();
     let mut file = File::create(path).unwrap();
-    let token_write = format!("{}",token);
-    // remove - 
-    let token_write = token_write.replace("-","");
+    let token_write = format!("{}", token);
+    // remove -
+    let token_write = token_write.replace("-", "");
     file.write_all(&token_write.as_bytes()).unwrap();
-    info!("API Token: {}",token_write);
+    info!("API Token: {}", token_write);
 }
 pub fn start_api() {
     // Add api token
@@ -323,7 +321,7 @@ pub fn start_api() {
         create_token();
     }
     let token = fs::read_to_string("./datadir/token.api").unwrap();
-        
+
     let config = Config::build(Environment::Staging)
         .log_level(LoggingLevel::Critical) // disables logging
         .finalize()
@@ -334,5 +332,4 @@ pub fn start_api() {
     rocket::custom(config)
         .mount(&url, get_middleware())
         .launch();
-
 }
