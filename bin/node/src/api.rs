@@ -194,8 +194,8 @@ fn gettx(hash: String) -> String {
         return "{ \"result\" : \"failure\" }".to_owned();    } 
     else {
         let get = serde_json::to_string(&mempool::get_transaction(hash.clone()).unwrap());
-        return "{ \"success\": true, \"Result\":".to_string() + &get.unwrap() + "}";
-
+        let return_string = format!("{{ \"result\" : \"{}\" }}", get.unwrap());
+        return return_string;
     }
 }
 
@@ -214,18 +214,14 @@ fn getacc(public_key: String) -> String {
         return "{ \"result\" : \"failure\" }".to_owned();    } 
     else {
         let get = serde_json::to_string(&Account::get(public_key).unwrap());
-        return "{ \"success\": true, \"Result\":".to_string() + &get.unwrap() + "}";
+        let return_string = format!("{{ \"result\" : \"{}\" }}", get.unwrap());
+        return return_string;
     }
 }
 #[get("/sign/<pik>/<hash>")]
 fn sign(pik: String,hash: String) -> String {
-    let keypair = Keypair {
-        private_key: pik.clone(),
-        public_key: hash.clone(),
-    };
-    let sig = keypair.sign(hash.clone());
-    return "{ \"success\": true, \"Result\":".to_string() + &sig.unwrap() + "}";
-
+    let return_string = "Unisecure, delited from api";
+    return return_string.to_string();
 }
 
 #[get("/send_easy_transaction/<pik>/<from>/<amount>/<to>")]

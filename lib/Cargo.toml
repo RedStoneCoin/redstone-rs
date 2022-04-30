@@ -13,7 +13,7 @@ blake2 = "0.9.1"
 secp256k1 = { version = "0.20.2", features = ["bitcoin_hashes", "rand"] }
 vrf = "0.2.2"
 rand = "0.5.0"
-log = "0.4.14"
+log = "0.4.15"
 lazy_static = "1.4.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_derive = "1.0.104"
@@ -27,6 +27,6 @@ enum_from_str_derive = "0.1.0"
 enum_from_str = "0.1.0"
 bs58 = "0.3.0"
 openssl = { version = "0.10", features = ["vendored"] }
-libp2p = "0.43.0"
-futures = "0.3.21"
-async-std = { version = "1.10.0", features = ["attributes"] }
+tokio = "0.2"
+tentacle = { version = "0.3", features = ["molc"] }
+futures = "0.3"

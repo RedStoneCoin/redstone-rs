@@ -9,6 +9,7 @@ use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
 use redstone_rs::account::Account;
 use redstone_rs::crypto::hash;
+use redstone_rs::p2p::server;
 extern crate clap;
 use clap::{Arg, App, SubCommand};
 use redstone_rs::rpc::{block_announce, Announcement, Caller};
@@ -106,6 +107,127 @@ fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
     }));
     Ok(())
 }
+
+fn test_all() {
+        // crete test chain
+        if true {
+            // loop so program does not end
+            let _ = std::thread::spawn(move || {
+                let mut txn = Transaction {
+                    hash: "321".to_owned(),
+                    sender: "0302db1c230c9e215a2cb251a2b08af301c8046661298de92b3a250fcf682d36".to_owned(),
+                    reciver: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
+                    amount: 69,
+                    nonce: 1,
+                    type_flag: 0,
+                    payload: "".to_owned(), // Hex encoded payload
+                    pow: "".to_owned(),     // Spam protection PoW
+                    signature: "".to_owned(),
+                };
+                let mut txn1 = Transaction {
+                    hash: "123".to_owned(),
+                    sender: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f".to_owned(),
+                    reciver: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
+                    amount: 29,
+                    nonce: 1,
+                    type_flag: 0,
+                    payload: "".to_owned(), // Hex encoded payload
+                    pow: "".to_owned(),     // Spam protection PoW
+                    signature: "".to_owned(),
+                };
+                let acc = Account {
+                    address: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
+                    balance: 0,
+                    smart_contract: false,
+    
+                };
+                account::Account::save(&acc);
+                let mut blk = Block {
+                    hash: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f".to_owned(),
+                    header: Header {
+                        height: 66,
+                        timestamp: 1,
+                        chain: 2,
+                        parent_hash: "".to_owned(),
+                        state_hash: "".to_owned(),
+                        uncle_root: "".to_owned(),
+                        proposer: "".to_owned(), // the publickey of the proposer
+                        transactions_merkle_root: "".to_owned(),
+                        header_payload: 0,
+                        proof: "".to_owned(),              // The vrf proof of the proposer as hex
+                        proposer_signature: "".to_owned(), // proposers signature
+                        validator_signatures: vec!("".to_owned()),
+                        vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
+                    },
+                    transactions: vec![txn.clone(), txn1.clone()],
+                };
+                
+                // get blocks form db and send them to the wallet to sync it
+                //  let block = vec![blk,blk1,blk2];
+                info!("wait 5 sec");
+                thread::sleep(time::Duration::from_secs(5));
+                info!("announe block test1 ");
+                block_announce(blk).unwrap();
+                thread::sleep(time::Duration::from_secs(1));
+            });
+        }
+    
+}
+fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: String) {
+    // TODO move to config file
+    let ver = "0.0.1";
+    setup_logging(3).unwrap();
+
+    let assci_art = "
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
+";
+    info!("{}",assci_art);
+
+    info!("Starting redstone node {}" , ver);
+    warn!("Warning, this software is not stable");
+    warn!("Run at your own risk!");
+    if validator != "" {
+        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key);
+        info!("Starting VALIDATOR NODE");
+        info!("Validator: {}",wallet.address());
+    }
+    mempool::Mempool::init(HashMap::new()).unwrap();
+    if api {
+    info!("Launching API server at 0.0.0.0:8000");
+    let _ = std::thread::spawn(move || {
+        api::start_api();
+    });
+    } else {
+        info!("API DISABLED!!!");
+    }
+    let _ = std::thread::spawn(move || {
+        redstone_rs::rpc::launch(rpc_port);
+    });
+    // check if datadir exists
+    let datadir = "./datadir";
+    if !Path::new(datadir).exists() {
+        info!("Creating datadir");
+        fs::create_dir(datadir).unwrap();
+    }
+    info!("Launching P2P server");
+    let _ = std::thread::spawn(move || {
+        redstone_rs::p2p::server::launch();
+    });
+
+
+
+    loop {         
+        // dont exit loop, if removed node wont work
+        // -- Founder - Nov 26 '21 at 10:37
+        // sleep for a while
+        thread::sleep(time::Duration::from_secs(1));
+    }
+}
 fn main() {
     let matches =  App::new("Redstone Node")
                         .version("0.1.0")
@@ -176,126 +298,5 @@ fn main() {
         return;
     }
     println!("{}",validator);
-    main_run(rpc_port.parse::<u16>().unwrap().into(),testnet,true,private_key,validator)
-
-    // setup logging
-
-}
-fn main_run(rpc_port: u64,test: bool,api: bool,private_key: String,validator: String) {
-    // TODO move to config file
-    let ver = "0.0.1";
-    setup_logging(3).unwrap();
-
-    let assci_art = "
-    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ███╗   ██╗ ██████╗ ██████╗ ███████╗
-    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ████╗  ██║██╔═══██╗██╔══██╗██╔════╝
-    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██╔██╗ ██║██║   ██║██║  ██║█████╗  
-    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║╚██╗██║██║   ██║██║  ██║██╔══╝  
-    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ██║ ╚████║╚██████╔╝██████╔╝███████╗
-    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
-";
-    info!("{}",assci_art);
-
-    info!("Starting redstone node {}" , ver);
-    warn!("Warning, this software is not stable");
-    warn!("Run at your own risk!");
-    if validator != "" {
-        let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key);
-        info!("Starting VALIDATOR NODE");
-        info!("Validator: {}",wallet.address());
-    }
-    mempool::Mempool::init(HashMap::new()).unwrap();
-    if api {
-    info!("Launching API server at 0.0.0.0:8000");
-    let _ = std::thread::spawn(move || {
-        api::start_api();
-    });
-    } else {
-        info!("API DISABLED!!!");
-    }
-    let _ = std::thread::spawn(move || {
-        redstone_rs::rpc::launch(rpc_port);
-    });
-    // check if datadir exists
-    let datadir = "./datadir";
-    if !Path::new(datadir).exists() {
-        info!("Creating datadir");
-        fs::create_dir(datadir).unwrap();
-    }
-    // crete test chain
-    if test == true {
-        // loop so program does not end
-        if !Path::new(datadir).exists() {
-            info!("Creating datadir");
-            fs::create_dir(datadir).unwrap();
-            Blockchain::test_chains();
-        }
-        let _ = std::thread::spawn(move || {
-            let mut txn = Transaction {
-                hash: "321".to_owned(),
-                sender: "0302db1c230c9e215a2cb251a2b08af301c8046661298de92b3a250fcf682d36".to_owned(),
-                reciver: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
-                amount: 69,
-                nonce: 1,
-                type_flag: 0,
-                payload: "".to_owned(), // Hex encoded payload
-                pow: "".to_owned(),     // Spam protection PoW
-                signature: "".to_owned(),
-            };
-            let mut txn1 = Transaction {
-                hash: "123".to_owned(),
-                sender: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f".to_owned(),
-                reciver: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
-                amount: 29,
-                nonce: 1,
-                type_flag: 0,
-                payload: "".to_owned(), // Hex encoded payload
-                pow: "".to_owned(),     // Spam protection PoW
-                signature: "".to_owned(),
-            };
-            let acc = Account {
-                address: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
-                balance: 0,
-                smart_contract: false,
-
-            };
-            account::Account::save(&acc);
-            let mut blk = Block {
-                hash: "02638a3e97620e1e9fc7127e2644815bc33ab03ad7e47c525f86a92ef7eac3b09f".to_owned(),
-                header: Header {
-                    height: 66,
-                    timestamp: 1,
-                    chain: 2,
-                    parent_hash: "".to_owned(),
-                    state_hash: "".to_owned(),
-                    uncle_root: "".to_owned(),
-                    proposer: "".to_owned(), // the publickey of the proposer
-                    transactions_merkle_root: "".to_owned(),
-                    header_payload: 0,
-                    proof: "".to_owned(),              // The vrf proof of the proposer as hex
-                    proposer_signature: "".to_owned(), // proposers signature
-                    validator_signatures: vec!("".to_owned()),
-                    vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
-                },
-                transactions: vec![txn.clone(), txn1.clone()],
-            };
-            
-            // get blocks form db and send them to the wallet to sync it
-            //  let block = vec![blk,blk1,blk2];
-            info!("wait 5 sec");
-            thread::sleep(time::Duration::from_secs(5));
-            info!("announe block test1 ");
-            block_announce(blk).unwrap();
-            thread::sleep(time::Duration::from_secs(1));
-        });
-    }
-    loop {
-        // dont exit loop, if removed node wont work
-        // -- Founder - Nov 26 '21 at 10:37
-        // sleep for a while
-        thread::sleep(time::Duration::from_secs(1));
-    }
-    
-
-
+    start_node(rpc_port.parse::<u16>().unwrap().into(),testnet,true,private_key,validator)
 }
