@@ -1,26 +1,23 @@
 // ORIGINALY CREATED FOR AVRIO.RS BY LEO CORNELIUS
 // MODIFED FOR REDSTONE BY TONI DUMANCIC
 // rpc.rs - RPC module
-use crate::block::{Block};
+use crate::block::Block;
+use crate::blockchain::Blockchain;
 use lazy_static::*;
 use log::*;
+use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::io::{Read, Write};
 use std::net::TcpStream;
 use std::sync::Mutex;
-use serde::{Deserialize, Serialize};
-use crate::{
-    blockchain::Blockchain,
-};
 use std::{thread, time};
 
 lazy_static! {
     static ref CONNECTIONS: Mutex<Vec<(TcpStream, Vec<String>)>> = Mutex::new(vec![]);
     pub static ref LOCAL_CALLBACKS: Mutex<Vec<Caller<'static>>> = Mutex::new(vec![]);
-
 }
 
-#[derive(Debug, Default, Clone,Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 
 pub struct Announcement {
     pub m_type: String,
@@ -37,15 +34,9 @@ impl Caller<'_> {
     }
 }
 
-
 pub fn block_announce(blk: Block) -> Result<(), Box<dyn std::error::Error>> {
-        debug!(
-            "New block! Hash={}, chain={},",
-            blk.hash,
-            blk.header.chain,
-       
-        );
-    
+    debug!("New block! Hash={}, chain={},", blk.hash, blk.header.chain,);
+
     let connections = &mut CONNECTIONS.lock().unwrap();
     for (stream, subscriptions) in connections.iter_mut() {
         if subscriptions.contains(&"block".to_string()) {
@@ -103,7 +94,6 @@ pub fn launch_client(
     server_port: u64,
     services: Vec<String>,
     mut caller: Caller<'static>,
-
 ) -> Result<(), Box<dyn Error>> {
     info!(
         "Launching RPC server client, connecting to server on port={}",
@@ -114,7 +104,6 @@ pub fn launch_client(
         //    info!("Sent sync message to server");
         //}
         if let Ok(_) = stream.write(b"init") {
-
             info!("Sent init message to server");
             let mut buf = [0u8; 1024];
 
@@ -239,7 +228,7 @@ pub fn launch(port: u64) {
             match stream {
                 Ok(mut stream) => {
                     log::trace!("New incoming stream");
-                    info!("New incoming stream: {:?}",&stream);
+                    info!("New incoming stream: {:?}", &stream);
 
                     let mut hi_buffer = [0u8; 128];
                     if let Ok(read_bytes) = stream.read(&mut hi_buffer) {

@@ -30,18 +30,14 @@ fn get_message_types() -> HashMap<u16, &'static str> {
     message_types.insert(23, "Get Block (response)");
     message_types.insert(24, "Shutdown");
     message_types
-    
 }
 
-
-    
 pub fn get_message_type_name(message_type: u16) -> &'static str {
     match MSG_TYPES.get(&message_type) {
         Some(name) => name,
-        None => "Unknown"
+        None => "Unknown",
     }
 }
 
-    
 // Language: rust
 // Test: lib/src/p2p/message_types.rs

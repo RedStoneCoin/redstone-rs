@@ -20,7 +20,7 @@ struct AppServiceHandle;
 impl ServiceHandle for AppServiceHandle {
     fn handle_event(&mut self, _control: &mut ServiceContext, event: ServiceEvent) {
         if let ServiceEvent::ListenStarted { address: _ } = event {
-            log::info!("recived_message: {:?}", event);
+            // println!("Listen started");Wil
         }
         log::info!("handle_event: {:?}", event);
     }
@@ -158,10 +158,8 @@ impl ServiceProtocol for State {
     fn connected(&mut self, context: ProtocolContextMutRef, _version: &str) {
         let session = context.session;
         log::info!("p2p-message connected to {}", session.address);
-
         let remote_peer_id = session.remote_pubkey.as_ref().expect("secio").peer_id();
         self.connected_peers.insert(remote_peer_id);
-
         // Send `peers`.
         let ids: Vec<_> = self
             .reachable_peers
@@ -257,7 +255,7 @@ fn parse_args() -> AppArgs {
     let mut parsed_args = AppArgs::default();
     parsed_args.port = 1234;
     parsed_args.bootnode = Some("/ip4/127.0.0.1/tcp/1234".to_string());
-    parsed_args.target_peer_id = Some("QmWLfh8NrQHmsKZW8mCQbDyHnfSSQAncRLaJQn9TnbXGQY".to_string());
+    parsed_args.target_peer_id = Some("QmQG5eQDnsHPh7x1RjwF63ZVvooNtgbjh2GUEmv6Z86zqM".to_string());
     parsed_args.message = Some(1.to_string());
     parsed_args
 }
@@ -274,6 +272,8 @@ pub fn launch() {
             args.port,
             key_pair.peer_id().to_base58()
         );
+        // info! out peer id and key pair
+        log::info!("peer_id: {}", key_pair.peer_id().to_base58());
 
         let pending_message = args.message.as_ref().and_then(|message| {
             args.target_peer_id.as_ref().map(|recipient| Message {

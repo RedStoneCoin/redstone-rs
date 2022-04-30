@@ -5,6 +5,7 @@ use crate::{
     mempool::Mempool,
 };
 use crate::{crypto::Hashable, executable::Executable, state::GlobalState};
+use log::warn;
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 
@@ -121,12 +122,25 @@ impl Executable for Transaction {
                 let mut db_handle = Database::new();
 
                 db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, "txs"))?;
-                let mut tx_count_brun = db_handle.get(&"transactions".to_owned(), &"transactions_count_burn".to_owned());
-                let mut tx_count_burn_1 = tx_count_brun.parse::<u64>().unwrap();
-                tx_count_burn_1 += 1;
-                db_handle.set(&"transactions".to_owned(),&"transactions_count".to_owned(),&tx_count_burn_1.to_string());
+                if let Some(mut tx_count_burn) = db_handle.get(
+                    &"transactions".to_owned(),
+                    &"transactions_count_burn".to_owned(),
+                )? {
+                    let mut tx_count_numerical = tx_count_burn.parse::<u64>().unwrap();
+                    tx_count_numerical += 1;
+                    db_handle.set(
+                        &"transactions".to_owned(),
+                        &"transactions_count".to_owned(),
+                        &tx_count_numerical.to_string(),
+                    );
+                } else {
+                    db_handle.set(
+                        &"transactions".to_owned(),
+                        &"transactions_count".to_owned(),
+                        &"1".to_string(),
+                    );
+                }
                 drop(db_handle);
-
             }
             1 => {
                 // send
@@ -147,7 +161,6 @@ impl Executable for Transaction {
                             smart_contract: false,
                         };
                         account.save()?;
-
                     }
                 };
             }
@@ -158,26 +171,40 @@ impl Executable for Transaction {
                     "Invalid transaction type",
                 )));
             }
-        
         }
 
         let mut db_handle = Database::new();
         // END OF TRANSACTION execution
         db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, "txs"))?;
-        let mut tx_count = db_handle.get(&"transactions".to_owned(), &"transactions_count".to_owned());
-        let mut tx_count1 = tx_count.parse::<u64>().unwrap();
-        tx_count1 += 1;
-        db_handle.set(&"transactions".to_owned(),&"transactions_count".to_owned(),&tx_count1.to_string());
+        if let Some(tx_count) =
+            db_handle.get(&"transactions".to_owned(), &"transactions_count".to_owned())?
+        {
+            let mut tx_count_numerical = tx_count.parse::<u64>().unwrap();
+            tx_count_numerical += 1;
+            db_handle.set(
+                &"transactions".to_owned(),
+                &"transactions_count".to_owned(),
+                &tx_count_numerical.to_string(),
+            );
+        } else {
+            db_handle.set(
+                &"transactions".to_owned(),
+                &"transactions_count".to_owned(),
+                &"1".to_string(),
+            );
+        }
         // TODO SAVE TX
-        db_handle.set(&"transactions".to_owned(),&self.hash.clone(),&self.hash.clone());
+        db_handle.set(
+            &"transactions".to_owned(),
+            &self.hash.clone(),
+            &self.hash.clone(),
+        );
         drop(db_handle);
-
-
 
         todo!()
     }
 
-    /// # Evalulate 
+    /// # Evalulate
     /// Checks if a txn is valid
     fn evalute(&self) -> Result<(), Box<dyn std::error::Error>> {
         println!("Evaluating transaction hash: {}", self.hash.clone());
@@ -200,12 +227,19 @@ impl Executable for Transaction {
         // add check in db txs if there was transaction executed wit hsame hash
         let mut db_handle = Database::new();
         db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, "txs"))?;
-        let block_txn_is_in = db_handle.get(&"transactions".to_owned(), &self.hash);
-        if block_txn_is_in.len() == 0 {
-            return Err("Transaction already in block").unwrap();
-        } 
-        if pow_txn.starts_with("0000") {
+        if let Some(block_txn_is_in) = db_handle.get(&"transactions".to_owned(), &self.hash)? {
+            if block_txn_is_in.len() == 0 {
+                return Err("Transaction already in block").unwrap();
+            }
         } else {
+            warn!(
+                "Failed to read traansactions contained in block {} from db (key not found)",
+                self.hash
+            );
+            return Err("Failed to read any transactions for block from DB (key not found)".into());
+        }
+        if !pow_txn.starts_with("0000") {
+            // TODO: Use difficulty factor and then remove PoW
             // Proof of work is invalid
             return Err("ErrInvalidPow").unwrap();
         }
@@ -223,10 +257,10 @@ impl Executable for Transaction {
             return Err("ErrInvalidNonce").unwrap();
         }
         if ![1, 2, 3, 4, 5, 6, 7].contains(&self.type_flag) {
+            // TODO: use a constant rather than this array for supported txn flags
             println!(
                 "Transaction {} has unsupported type={}",
-                self.hash,
-                self.type_flag,
+                self.hash, self.type_flag,
             );
             return Err("ErrInvalidType").unwrap();
         }
@@ -240,20 +274,20 @@ impl Executable for Transaction {
                     return Err("ErrInvalidReciver").unwrap();
                 }
                 let sender = Account::get(self.sender.clone())?;
-                let reciver = Account::get(self.reciver.clone())?; 
+                let reciver = Account::get(self.reciver.clone())?;
                 match Account::get(self.sender.clone()) {
                     Ok(_) => {
                         if sender.balance < self.amount {
                             return Err("ErrInsufficientFunds").unwrap();
                         }
-                    },
+                    }
                     Err(e) => {
                         return Err("ErrAccountNotFound").unwrap();
                     }
                 }
                 // finish THIS but for now return ok(())
                 return Ok(());
-            },
+            }
             1 => {
                 // send
                 if self.amount > u64::MAX {
@@ -263,20 +297,20 @@ impl Executable for Transaction {
                     return Err("ErrInvalidReciver").unwrap();
                 }
                 let sender = Account::get(self.sender.clone())?;
-                let reciver = Account::get(self.reciver.clone())?; 
+                let reciver = Account::get(self.reciver.clone())?;
                 match Account::get(self.sender.clone()) {
                     Ok(_) => {
                         if sender.balance < self.amount {
                             return Err("ErrInsufficientFunds").unwrap();
                         }
-                    },
+                    }
                     Err(e) => {
                         return Err("ErrAccountNotFound").unwrap();
                     }
                 }
                 // finish THIS but for now return ok(())
                 return Ok(());
-            },
+            }
             2 => {
                 // ToggleOnline
                 if self.amount > u64::MAX {
@@ -292,7 +326,7 @@ impl Executable for Transaction {
                         if sender.balance < self.amount {
                             return Err("ErrInsufficientFunds").unwrap();
                         }
-                    },
+                    }
                     Err(e) => {
                         return Err("ErrAccountNotFound").unwrap();
                     }

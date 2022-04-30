@@ -1,3 +1,5 @@
+use log::warn;
+
 use crate::{account::Account, block::Block, crypto::hash, crypto::Vrf, database::Database};
 
 #[derive(Debug, Clone)]
@@ -54,9 +56,7 @@ pub fn choose_next_proposer(block: Block) -> Result<Validator, Box<dyn std::erro
             // we have tried too many times, return the first validator
             log::error!("Unexpected error: failed to find proposer after 5 trys, total_stake: {}, target_coin: {}, coin_culmulative: {}, online_count {}", total_stake, target_coin, coin_culmulative, online.len());
             return Ok(online[0].clone());
-            
         }
-        
     }
 }
 
@@ -169,8 +169,12 @@ impl Validator {
     pub fn get(address: &String) -> Result<Validator, Box<dyn std::error::Error>> {
         let mut db = Database::new();
         db.open(&String::from("validators"))?;
-        let encoded = db.get(&String::from("validators"), address);
-        Validator::from_string(encoded)
+        if let Some(encoded) = db.get(&String::from("validators"), address)? {
+            return Validator::from_string(encoded);
+        } else {
+            warn!("Validator {} does not exist in DB (key not found)", address);
+            return Err("Validator not found in DB (key not found)".into());
+        }
     }
     pub fn set(&self) -> Result<(), Box<dyn std::error::Error>> {
         let mut db = Database::new();
