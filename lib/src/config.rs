@@ -1,9 +1,25 @@
 pub struct Config {
-    network_id: Vec<u8>,
-    coin_name: String,
-    decimal_places: u8,
-    starting_chains: u64,
     p2p_port: u16,
     rpc_port: u16,
-    seed_nodes: Vec<String>,
+    bootnode: String,
 }
+impl Config {
+    pub fn new(p2p_port: u16, rpc_port: u16, bootnode: String) -> Self {
+        Config {
+            p2p_port,
+            rpc_port,
+            bootnode,
+        }
+    }
+    pub fn p2p_port(&self) -> u16 {
+        self.p2p_port
+    }
+    pub fn rpc_port(&self) -> u16 {
+        self.rpc_port
+    }
+    pub fn bootnode(&self) -> String {
+        self.bootnode.to_string()
+    }
+}
+
+// test config

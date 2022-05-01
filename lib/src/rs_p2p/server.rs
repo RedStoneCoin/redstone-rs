@@ -16,6 +16,7 @@ use tentacle::{
 use log::*;
 use serde::{Deserialize, Serialize};
 struct AppServiceHandle;
+use crate::config::Config;
 
 impl ServiceHandle for AppServiceHandle {
     fn handle_event(&mut self, _control: &mut ServiceContext, event: ServiceEvent) {
@@ -251,17 +252,18 @@ impl Default for AppArgs {
 /// * `p2p-message port bootnode`: start a node listening on the specified port and connect to
 /// another node as the bootnode.
 /// * `p2p-message port bootnode target_peer_id message`: start a node, connect to the bootnode, then send a message to `target_peer_id`.
-fn parse_args() -> AppArgs {
+fn parse_args(config: Config) -> AppArgs {
     let mut parsed_args = AppArgs::default();
-    parsed_args.port = 1234;
-    parsed_args.bootnode = Some("/ip4/127.0.0.1/tcp/1234".to_string());
+
+    parsed_args.port = config.p2p_port();
+    parsed_args.bootnode = Some(config.bootnode());
     parsed_args.target_peer_id = Some("QmQG5eQDnsHPh7x1RjwF63ZVvooNtgbjh2GUEmv6Z86zqM".to_string());
     parsed_args.message = Some(1.to_string());
     parsed_args
 }
 
-pub fn launch() {
-    let args = parse_args();
+pub fn launch(config: Config) {
+    let args = parse_args(config);
 
     let mut rt = tokio::runtime::Runtime::new().expect("create tokio runtime");
 

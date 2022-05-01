@@ -19,6 +19,7 @@ use std::fs;
 use redstone_rs::blockchain::Blockchain;
 use fs::File;
 use std::io::Write;
+use redstone_rs::config::Config;
 extern crate rand;
 
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
@@ -173,7 +174,7 @@ fn test_all() {
         }
     
 }
-fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: String) {
+fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: String,config: Config) {
     // TODO move to config file
     let ver = "0.0.1";
     setup_logging(3).unwrap();
@@ -216,7 +217,7 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
     }
     info!("Launching P2P server");
     let _ = std::thread::spawn(move || {
-        redstone_rs::rs_p2p::server::launch();
+        redstone_rs::rs_p2p::server::launch(config);
     });
 
 
@@ -258,6 +259,12 @@ fn main() {
                             .takes_value(true)
                             .help("rpc port")
                             .required(false))
+                        // p2p port
+                        .arg(Arg::with_name("p2p_port")
+                            .long("p2p") // allow --name
+                            .takes_value(true)
+                            .help("p2p port")
+                            .required(false))
                         // testnet
                         .arg(Arg::with_name("testnet")
                             .long("testnet") // allow --name
@@ -282,21 +289,33 @@ fn main() {
     let mut testnet = matches.is_present("testnet");
     let mut api = matches.is_present("no_api");
     let private_key = matches.value_of("private_key").unwrap_or("").to_string();
+    let mut p2p_port = matches.value_of("p2p_port").unwrap_or("").to_string();
     // if rpc_port is empty set it to 44405
+
     
     if rpc_port.is_empty() {
         rpc_port = "44405".to_string();
     }
+    if p2p_port.is_empty() {
+        p2p_port = "44404".to_string();
+    }
+
     if testnet == true {
         testnet = true;
     }
-
+    // pub struct Config {
+    //     p2p_port: u16,
+    //     rpc_port: u16,
+    //     bootnode: String,
+    // }
+    let bootnode = format!("/ip4/{}/tcp/{}", "127.0.0.1", "44404").to_string();
+    let config = Config::new(p2p_port.parse::<u16>().unwrap(),rpc_port.parse::<u16>().unwrap(),bootnode);
 
     // if validator is not emtpy but there is no private key
     if !validator.is_empty() && private_key.is_empty() {
         println!("Private key is required for validator");
         return;
     }
-    println!("{}",validator);
-    start_node(rpc_port.parse::<u16>().unwrap().into(),testnet,true,private_key,validator)
+
+    start_node(rpc_port.parse::<u16>().unwrap().into(),testnet,true,private_key,validator,config)
 }
