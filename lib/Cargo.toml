@@ -27,6 +27,7 @@ enum_from_str_derive = "0.1.0"
 enum_from_str = "0.1.0"
 bs58 = "0.3.0"
 openssl = { version = "0.10", features = ["vendored"] }
-tokio = "0.2"
-tentacle = { version = "0.3", features = ["molc"] }
-futures = "0.3"
+libp2p = "0.44.0"
+tokio = { version = "1.16.1", features = ["full"] }
+futures = { version = "0.3", default-features = false }
+async-std = "1.11.0"

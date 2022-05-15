@@ -20,6 +20,7 @@ use redstone_rs::blockchain::Blockchain;
 use fs::File;
 use std::io::Write;
 use redstone_rs::config::Config;
+extern crate tokio;
 extern crate rand;
 
 fn setup_logging(verbosity: u64) -> Result<(), fern::InitError> {
@@ -216,8 +217,13 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
         fs::create_dir(datadir).unwrap();
     }
     info!("Launching P2P server");
+    // launch async redstone_rs::rs_p2p::server::start_server()
+    // with tokio runtime
     let _ = std::thread::spawn(move || {
-        redstone_rs::rs_p2p::server::launch(config);
+        let mut rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            redstone_rs::rs_p2p::server::start_server(config).await;
+        });
     });
 
 
