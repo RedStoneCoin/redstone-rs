@@ -1,102 +1,67 @@
-use async_std::io;
-use std::error::Error;
-use libp2p::gossipsub::{
-    GossipsubEvent, 
-    IdentTopic as Topic, 
-    MessageAuthenticity,
+use bytes::Bytes;
+use qp2p::{Config, Endpoint};
+use std::{
+    env,
+    net::{Ipv4Addr, SocketAddr},
+    time::Duration,
 };
-use libp2p::{
-    gossipsub, 
-    identity, 
-    swarm::SwarmEvent, 
-    Multiaddr, 
-    PeerId
-};
+#[derive(Default, Ord, PartialEq, PartialOrd, Eq, Clone, Copy)]
+struct XId(pub [u8; 32]);
 
-use futures::{
-    prelude::*, 
-    select
-};
-use crate::config::Config;
-use log::info;
-pub async fn start_server(config: Config) -> Result<(), Box<dyn Error>> {
-    let local_key = identity::Keypair::generate_ed25519();
-    let local_peer_id = PeerId::from(local_key.public());
-    info!("Local peer id: {:?}", local_peer_id);
-    let p2p_port = config.p2p_port();
-    let bootnode = config.bootnode();
-    let local_ip = format!("/ip4/{}/tcp/{}", "0.0.0.0", p2p_port);
-    let transport = libp2p::development_transport(local_key.clone()).await?;
+// example marco polo p2p
+pub async fn start() -> Result<(),Box<dyn std::error::Error>> {
+    const MSG_MARCO: &str = "marco";
+    const MSG_POLO: &str = "polo";
 
-    let topic = Topic::new("local-test-network");
+    // collect cli args
+    let args: Vec<String> = env::args().collect();
 
-    let mut swarm = {
-        let gossipsub_config = gossipsub::GossipsubConfigBuilder::default()
-            .build()
-            .expect("Failed building the GOSSIPSUB config");
-        
-        let mut gossipsub: gossipsub::Gossipsub =
-            gossipsub::Gossipsub::new(
-                MessageAuthenticity::Signed(local_key), gossipsub_config)
-                    .expect("Failed creating an instance of the GOSSIPSUB");
+    // create an endpoint for us to listen on and send from.
+    let (node, mut incoming_conns, _contact) = Endpoint::new_peer(
+        SocketAddr::from((Ipv4Addr::LOCALHOST, 3031)),
+        &[],
+        Config {
+            idle_timeout: Duration::from_secs(60 * 60).into(), // 1 hour idle timeout.
+            ..Default::default()
+        },
+    )
+    .await?;
 
-        gossipsub.subscribe(&topic).unwrap();
+    // if we received args then we parse them as SocketAddr and send a "marco" msg to each peer.
+    if true {
+            let peer: SocketAddr = "127.0.0.1:3030"
+                .parse()
+                .expect("Invalid SocketAddr.  Use the form 127.0.0.1:1234");
+            let msg = Bytes::from(MSG_MARCO);
+            println!("Sending to {:?} --> {:?}\n", peer, msg);
+            let (conn, mut incoming) = node.connect_to(&peer).await?;
+            conn.send(msg.clone()).await?;
+            // `Endpoint` no longer having `connection_pool` to hold established connection.
+            // Which means the connection get closed immediately when it reaches end of life span.
+            // And causes the receiver side a sending error when reply via the in-coming connection.
+            // Hence here have to listen for the reply to avoid such error
+            let reply = incoming.next().await?.unwrap();
+            println!("Received from {:?} --> {:?}", peer, reply);
+        println!("Done sending");
+    }
 
-        // Connects to a Peer
-        if let Some(explicit) = std::env::args().nth(2) {
-            let explicit = explicit.clone();
-            match explicit.parse() {
-                Ok(id) => gossipsub.add_explicit_peer(&id),
-                Err(err) => info!("Invalid peer id: {:?}", err),
+    println!("\n---");
+    println!("Listening on: {:?}", node.public_addr());
+    println!("---\n");
+
+    // loop over incoming connections
+    while let Some((connection, mut incoming_messages)) = incoming_conns.next().await {
+        let src = connection.remote_address();
+        // loop over incoming messages
+        while let Some(bytes) = incoming_messages.next().await? {
+            println!("Received from {:?} --> {:?}", src, bytes);
+            if bytes == *MSG_MARCO {
+                let reply = Bytes::from(MSG_POLO);
+                connection.send(reply.clone()).await?;
+                println!("Replied to {:?} --> {:?}", src, reply);
             }
-        }
-
-        libp2p::Swarm::new(transport, gossipsub, local_peer_id)
-    };
-
-    // Listens across all OS assinged interfaces
-    swarm.listen_on(local_ip.parse().unwrap()).unwrap();
-
-    // Connects to another peer (if one was specified)
-    let address: Multiaddr = bootnode.parse().unwrap();
-    match swarm.dial(address.clone()) {
-        Ok(_) => info!("CONNECTED TO {:?}", address),
-        Err(e) => info!("Dial {:?} failed: {:?}", address, e),
-    };
-
-    // Read full lines from stdin
-    let mut stdin = io::BufReader::new(io::stdin()).lines().fuse();
-
-    // Kick it off
-    loop {
-        select! {
-            line = stdin.select_next_some() => {
-                if let Err(e) = swarm
-                    .behaviour_mut()
-                    .publish(
-                        topic.clone(), 
-                        line.unwrap()
-                        .as_bytes())
-                {
-                    info!("Publish error: {:?}", e);
-                }
-            },
-            event = swarm.select_next_some() => match event {
-                SwarmEvent::Behaviour(GossipsubEvent::Message {
-                    propagation_source: peer_id,
-                    message_id: id,
-                    message,
-                }) => info!(
-                    "MESSAGE RECEIVED FROM {:?} [ID: {}]: {}",
-                    peer_id,
-                    id,
-                    String::from_utf8_lossy(&message.data)
-                ),
-                SwarmEvent::NewListenAddr { address, .. } => {
-                    info!("Listening on {:?}", address);
-                }
-                _ => {}
-            }
+            println!();
         }
     }
+    Ok(())
 }

@@ -218,21 +218,16 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
     }
     info!("Launching P2P server");
     // launch async redstone_rs::rs_p2p::server::start_server()
-    // with tokio runtime
-    let _ = std::thread::spawn(move || {
-        let mut rt = tokio::runtime::Runtime::new().unwrap();
-        rt.block_on(async {
-            redstone_rs::rs_p2p::server::start_server(config).await;
-        });
+    let mut rt = tokio::runtime::Runtime::new().unwrap();
+    rt.block_on(async {
+             redstone_rs::rs_p2p::server::start().await;
     });
-
-
-
+  
     loop {         
-        // dont exit loop, if removed node wont work
-        // -- Founder - Nov 26 '21 at 10:37
-        // sleep for a while
-        thread::sleep(time::Duration::from_secs(1));
+         // dont exit loop, if removed node wont work
+         // -- Founder - Nov 26 '21 at 10:37
+         // sleep for a while
+         thread::sleep(time::Duration::from_secs(1));
     }
 }
 fn main() {
