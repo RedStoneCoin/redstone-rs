@@ -3,7 +3,7 @@
 name = "redstone_rs"
 version = "0.1.0"
 authors = ["LeoCornelius <leocornelius019@gmail.com>, Redstone Developers"]
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
@@ -30,5 +30,5 @@ openssl = { version = "0.10", features = ["vendored"] }
 tokio = { version = "1.16.1", features = ["full"] }
 futures = { version = "0.3", default-features = false }
 async-std = "1.11.0"
-qp2p = "0.28.6"
+quinn = "0.8.2"
 bytes = "1.1.0"
