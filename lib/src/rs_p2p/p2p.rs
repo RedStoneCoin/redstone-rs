@@ -1,33 +1,41 @@
+// Redstone-p2p is a Rust library for redstone p2p network.
+use libp2p::{
+    futures::StreamExt,
+    identity,
+    mdns::{Mdns, MdnsConfig, MdnsEvent},
+    swarm::{Swarm, SwarmEvent},
+    PeerId,
+};
+use std::error::Error;
 
-use std::{error::Error, net::SocketAddr};
-use quinn::Endpoint;
-use quinn::RecvStream;
-use quinn::SendStream;
-// import file common.rs
-// to use make_client_endpoint and make_server_endpoint
-use crate::rs_p2p::common::{make_client_endpoint, make_server_endpoint};
+pub async fn start() -> Result<(), Box<dyn Error>> {
+    let id_keys = identity::Keypair::generate_ed25519();
+    let peer_id = PeerId::from(id_keys.public());
+    println!("Local peer id: {:?}", peer_id);
 
-/// Runs a QUIC server bound to given address and returns server certificate.
-fn run_server(addr: SocketAddr) -> Result<Vec<u8>, Box<dyn Error>> {
-    let (mut incoming, server_cert) = make_server_endpoint(addr)?;
-    // accept a single connection
-    tokio::spawn(async move {
-        let quinn::NewConnection { connection, .. } = incoming.next().await.unwrap().await.unwrap();
-        println!(
-            "[server] incoming connection: addr={}",
-            connection.remote_address()
-        );
-    });
+    let transport = libp2p::development_transport(id_keys).await?;
 
-    Ok(server_cert)
-}
+    let behaviour = Mdns::new(MdnsConfig::default()).await?;
 
-/// Attempt QUIC connection with the given server address.
-async fn run_client(endpoint: &Endpoint, server_addr: SocketAddr) {
-    let connect = endpoint.connect(server_addr, "localhost").unwrap();
-    let quinn::NewConnection { connection, .. } = connect.await.unwrap();
-    println!("[client] connected: addr={}", connection.remote_address());
-}
-// simple test
-async fn test() {
+    let mut swarm = Swarm::new(transport, behaviour, peer_id);
+    swarm.listen_on("/ip4/0.0.0.0/tcp/0".parse()?)?;
+
+    loop {
+        match swarm.select_next_some().await {
+            SwarmEvent::NewListenAddr { address, .. } => {
+                println!("Listening on local address {:?}", address)
+            }
+            SwarmEvent::Behaviour(MdnsEvent::Discovered(peers)) => {
+                for (peer, addr) in peers {
+                    println!("discovered {} {}", peer, addr);
+                }
+            }
+            SwarmEvent::Behaviour(MdnsEvent::Expired(expired)) => {
+                for (peer, addr) in expired {
+                    println!("expired {} {}", peer, addr);
+                }
+            }
+            _ => {}
+        }
+    }
 }

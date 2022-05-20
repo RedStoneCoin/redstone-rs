@@ -9,7 +9,7 @@ use redstone_rs::block::{Header,Block};
 use redstone_rs::transaction::Transaction;
 use redstone_rs::account::Account;
 use redstone_rs::crypto::hash;
-use redstone_rs::rs_p2p::server;
+use redstone_rs::rs_p2p::p2p;
 extern crate clap;
 use clap::{Arg, App, SubCommand};
 use redstone_rs::rpc::{block_announce, Announcement, Caller};
@@ -217,11 +217,11 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
         fs::create_dir(datadir).unwrap();
     }
     info!("Launching P2P server");
-    // launch async redstone_rs::rs_p2p::server::start_server()
-    // let mut rt = tokio::runtime::Runtime::new().unwrap();
-    // rt.block_on(async {
-    //          redstone_rs::rs_p2p::server::start().await;
-    // });
+    //launch async redstone_rs::rs_p2p::server::start_server()
+    let mut rt = tokio::runtime::Runtime::new().unwrap();
+    rt.block_on(async {
+              redstone_rs::rs_p2p::p2p::start().await;
+    });
   
     loop {         
          // dont exit loop, if removed node wont work
