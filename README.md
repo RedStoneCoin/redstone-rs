@@ -2,10 +2,10 @@
 ![Github All Releases](https://img.shields.io/github/downloads/RedStoneCoin/redstone-rs/total.svg)
 [![Join the chat at https://discordapp.com/invite/8ezwRUK](https://img.shields.io/discord/539606376339734558.svg?label=discord&logo=discord&logoColor=white)](https://discord.gg/JjThnVdASR)
 [![GitHub contributors](https://img.shields.io/github/contributors-anon/Redstonecoin/redstone-rs?label=Contributors)](https://github.com/Redstonecoin/redstone-rs/graphs/contributors) [![GitHub issues](https://img.shields.io/github/issues/Redstonecoin/redstone-rs?label=Issues)](https://github.com/RedStoneCoin/redstone-rs/issues) ![GitHub stars](https://img.shields.io/github/stars/Redstonecoin/redstone-rs?label=Github%20Stars)
+
 ## Implementation of Redstone protocol
 Redstone Project is a p2p custom blockchain implementation, comprised of a network of interconnected subchains providing improved speed and scalability over conventional cryptocurrenys.
 This is the offical implemention of the redstone protocol. It is written in rust. Protocol is subject to frequent change and as such no complete documention exists (however it is in the works) It is currently not ready for usage.
-
 [DOCS](https://github.com/RedStoneCoin/redstone-rs/blob/main/DOCS.MD)
 
 ## Table of Contents
@@ -15,7 +15,6 @@ This is the offical implemention of the redstone protocol. It is written in rust
     - [Prerequisites](#prerequisites)
       - [Generic Linux](#generic-linux)
 - [Todo](https://pacific-philosophy-3dd.notion.site/38585e4797344b968e7cd9280ca714c7?v=5f039c4709b244c3a139572315a77ddf)
-- [Security Policy](#Security-Policy)
 
 ## How to compile
 
@@ -33,21 +32,15 @@ rustup default nightly
 To build redstone you also need installed dependencies listed bellow:
 
 ```
-openssl
-```
-**To build GUI wallet on debian**:
-```
-sudo apt-get install xorg-dev
-sudo apt-get install libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev
-sudo apt-get install libavutil-dev
-sudo apt-get install libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libspeechd-dev libxkbcommon-dev libssl-dev libxcb-xfixes0-dev
-```
-
-```
+OpenSLL
 GCC
 Cmake
 ```
-** Fedora **
+**To build GUI wallet on debian**:
+```
+sudo apt-get install xorg-dev libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev libavutil-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libspeechd-dev libxkbcommon-dev libssl-dev libxcb-xfixes0-dev
+```
+**Fedora**
 ``
 sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel libX11-devel libXinerama-devel-1.1.4-9.fc35
 pango-devel
@@ -61,29 +54,10 @@ Ensure you have the dependencies listed above.
 git clone -b master --single-branch https://github.com/RedStoneCoin/redstone-rs/
 cd redstone-rs/src/node # for node
 cd redstone-rs/src/wallet # for Wallet
-
 cargo build --release
 ```
-
 After the completion, the binaries will be in the `target/release` folder.
 
-```bash
-cd target/debug
-./redstone-node
-# or wallet
-./redstone-wallet
-```
-
-
-# Security Policy
-
-## Supported Versions
-
-**NOTE**: There is currently NO supported version of redstone client. It should be considered unstable software untill an offical notice. Pleae feel free to break it (and ideally tell us! we love PRs).
-
-| Version | Supported |
-| ------- | --------- |
-| 0.0.1   | ❌        |
 
 ## Reporting a Vulnerability
 
@@ -91,8 +65,8 @@ If you the vulnerability is already publicy known or not explotable then please 
 If it is a critical vulnerability that must be not known please contact us on redstonecrypto@gmail.com
 
 # Contributors
-(Toni Dev) [https://github.com/Toni-d-e-v] - Founder and primary developer of redstone
-(Leo Cornelius) [https://github.com/leocornelius] - Core contributor to Redstone and secuirty advisary to the redstone team
+(Toni Dev)[https://github.com/Toni-d-e-v] - Founder and primary developer of redstone
+(Leo Cornelius)[https://github.com/leocornelius] - Core contributor to Redstone and secuirty advisary to the redstone team
 
 If you feel we have missed you out from this section please open an Issue or PR! Rest assured it is not intentional.
 We welcome new contributors and team members. Please join our discord to get up to date, and feel free to open PRs and issues. Please be civil, developers are only human :)

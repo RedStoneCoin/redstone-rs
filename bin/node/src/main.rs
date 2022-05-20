@@ -1,5 +1,6 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 
+
 use fern::colors::{Color, ColoredLevelConfig};
 use log::*;
 use redstone_rs::*;
