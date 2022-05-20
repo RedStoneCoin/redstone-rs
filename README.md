@@ -37,9 +37,9 @@ GCC
 Cmake
 ```
 **To build GUI wallet on debian**:
-```
+``
 sudo apt-get install xorg-dev libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev libavutil-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libspeechd-dev libxkbcommon-dev libssl-dev libxcb-xfixes0-dev
-```
+``
 **Fedora**
 ``
 sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel libX11-devel libXinerama-devel-1.1.4-9.fc35
@@ -65,8 +65,9 @@ If you the vulnerability is already publicy known or not explotable then please 
 If it is a critical vulnerability that must be not known please contact us on redstonecrypto@gmail.com
 
 # Contributors
-(Toni Dev)[https://github.com/Toni-d-e-v] - Founder and primary developer of redstone
-(Leo Cornelius)[https://github.com/leocornelius] - Core contributor to Redstone and secuirty advisary to the redstone team
+- [Toni Dev](https://github.com/Toni-d-e-v) - Founder and primary developer of redstone
+- [Leo Cornelius](https://github.com/leocornelius) - Core contributor to Redstone and secuirty advisary to the redstone team
+- This could be you!
 
 If you feel we have missed you out from this section please open an Issue or PR! Rest assured it is not intentional.
 We welcome new contributors and team members. Please join our discord to get up to date, and feel free to open PRs and issues. Please be civil, developers are only human :)
