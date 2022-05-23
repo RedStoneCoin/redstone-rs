@@ -221,7 +221,9 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
     //launch async redstone_rs::rs_p2p::server::start_server()
     let mut rt = tokio::runtime::Runtime::new().unwrap();
     rt.block_on(async {
-              redstone_rs::rs_p2p::p2p::start().await;
+        let mut p2p_port = config.p2p_port();
+        let mut bootnode = config.bootnode();
+              redstone_rs::rs_p2p::p2p::start(p2p_port,bootnode).await;
     });
   
     loop {         
