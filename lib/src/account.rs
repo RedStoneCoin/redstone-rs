@@ -7,6 +7,7 @@ pub struct Account {
     pub address: String,
     pub balance: u64,
     pub smart_contract: bool,
+    pub nonce: u64,
 }
 impl Account {
     pub fn get(address: String) -> Result<Account, Box<dyn std::error::Error>> {
@@ -38,11 +39,12 @@ impl Account {
                 address: split_string[0].to_string(),
                 balance: split_string[1].parse()?,
                 smart_contract: split_string[2].parse()?,
+                nonce: split_string[3].parse()?,
             })
         }
     }
     pub fn acc_string(&self) -> String {
-        let raw = format!("{}.{}.{}", self.address, self.balance, self.smart_contract);
+        let raw = format!("{}.{}.{}.{}", self.address, self.balance, self.smart_contract, self.nonce);
         hex::encode(raw)
     }
 }

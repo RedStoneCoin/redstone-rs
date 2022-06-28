@@ -25,16 +25,11 @@ pub struct Transaction {
     pub sender: String,
     pub reciver: String,
     pub amount: u64,
-    pub nonce: u64,
     pub type_flag: u8,
-    pub payload: String, // Hex encoded payload
-    pub pow: String,     // Spam protection PoW
+    pub payload: String, 
     pub signature: String,
 }
-pub struct pow {
-    pub hash: String,
-    pub nonce: u64,
-}
+
 
 impl Hashable for Transaction {
     fn bytes(&self) -> Vec<u8> {
@@ -42,7 +37,6 @@ impl Hashable for Transaction {
         out.extend(self.sender.bytes());
         out.extend(self.reciver.bytes());
         out.extend(self.amount.to_string().bytes());
-        out.extend(self.nonce.to_string().bytes());
         out.push(self.type_flag);
         out.extend(self.payload.bytes());
 
@@ -50,48 +44,7 @@ impl Hashable for Transaction {
     }
 }
 
-impl Transaction {
-    pub fn new(
-        sender: String,
-        reciver: String,
-        amount: u64,
-        type_flag: u8,
-        payload: String,
-    ) -> Self {
-        let mut txn = Transaction {
-            sender,
-            reciver,
-            amount,
-            type_flag,
-            payload,
-            nonce: 0,
-            pow: String::default(),
-            signature: String::default(),
-            hash: String::default(),
-        };
-        txn.hash = txn.hash_item();
-        txn
-    }
-    pub fn find_pow(&mut self) {
-        let mut rng = rand::thread_rng();
-        for nonce_attempt in 0..=u64::MAX {
-            let nonce_attempt = rng.gen::<u64>();
-            self.nonce = nonce_attempt;
-            let pow = self.hash_item();
-            //println!("pow test: {}",pow);
-            if pow.starts_with("0000") {
-                self.pow = self.hash_item();
-                self.hash = self.hash_item();
-                self.nonce = nonce_attempt;
-                println!(
-                    "Found solution for , nonce {}, hash {}, hash value {}",
-                    self.nonce, self.hash, pow
-                );
-                break;
-            }
-        }
-    }
-}
+
 
 impl Executable for Transaction {
     /// # Execute
@@ -159,6 +112,7 @@ impl Executable for Transaction {
                             address: self.reciver.clone(),
                             balance: self.amount,
                             smart_contract: false,
+                            nonce: 1,
                         };
                         account.save()?;
                     }
@@ -249,12 +203,6 @@ impl Executable for Transaction {
         }
         if self.sender.len() != 64 {
             return Err("ErrInvalidSender").unwrap();
-        }
-        if self.nonce > u64::MAX {
-            return Err("ErrInvalidNonce").unwrap();
-        }
-        if self.nonce < 0 {
-            return Err("ErrInvalidNonce").unwrap();
         }
         if ![1, 2, 3, 4, 5, 6, 7].contains(&self.type_flag) {
             // TODO: use a constant rather than this array for supported txn flags

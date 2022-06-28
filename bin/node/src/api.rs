@@ -129,61 +129,7 @@ pub fn submit_txn_v1(txn_data: rocket::Data) -> String {
     }
 }
 
-#[post("/submit_txn_np", format = "application/json", data = "<txn_data>")]
-pub fn submit_txn_v1_np(txn_data: rocket::Data) -> String {
-    debug!("Transaction recived by api!");
-    let mut holder_vec: Vec<u8> = vec![];
-    let mut txn_data1 = txn_data.open();
 
-    loop {
-        let mut buffer = [0u8; 512];
-        let try_read_from_stream = txn_data1.read(&mut buffer);
-        if let Ok(size) = try_read_from_stream {
-            trace!("Read {} bytes into buffer", size);
-            if size == 0 {
-                break;
-            } else {
-                holder_vec.append(&mut buffer.to_vec());
-            }
-        } else {
-            debug!(
-                "Failed to read into buf, error={}",
-                try_read_from_stream.unwrap_err()
-            );
-            return format!(" {{ \"error\" : \" failed to read from datastream \" }}");
-        }
-    }
-    let try_utf8_to_json = String::from_utf8(holder_vec);
-    if let Ok(txn_pretrim) = try_utf8_to_json {
-        if txn_pretrim != "" {
-            let mut txn = txn_pretrim[1..].replace("\\", "").to_string(); // this very verbose bit of code removes everything outside the { } and removes the \
-            loop {
-                if &txn[txn.len() - 1..] != "}" {
-                    txn = txn[0..txn.len() - 1].to_string();
-                } else {
-                    break;
-                }
-            }
-            trace!("Txn submited by API json={}", txn);
-            let try_string_to_txn = serde_json::from_str::<Transaction>(&txn);
-            if let Ok(mut txn1) = try_string_to_txn {
-                let pow = txn1.find_pow();
-                mempool::add_transaction(txn1);
-                return "{ \"result\" : \"sent txn\" }".to_owned();
-            } else {
-                return "{ \"result\" : \"FAILURE PLEASE TRY LATER\" }".to_owned();
-            }
-        } else {
-            debug!(
-                "Failed to turn utf8 bytes to txn (submit txn api, error={})",
-                "no"
-            );
-            return format!(" {{ \"error\" : \" utf8 to json failed \" }}");
-        }
-    } else {
-        return "{ \"result\" : \"failure\" }".to_owned();
-    }
-}
 #[get("/get_mem_tx/<hash>")]
 fn gettx(hash: String) -> String {
     if let Err(get1) = mempool::get_transaction(hash.clone()) {
@@ -218,29 +164,6 @@ fn sign(pik: String,hash: String) -> String {
     return return_string.to_string();
 }
 
-#[get("/send_easy_transaction/<pik>/<from>/<amount>/<to>")]
-fn es_tx(pik: String, from: String, amount: f64, to: String) -> String {
-    let keypair = Keypair {
-        private_key: pik.clone(),
-        public_key: from.clone(),
-    };
-    let mut txn1 = Transaction {
-        hash: "".to_owned(),
-        sender: from.clone().to_owned(),
-        reciver: to.clone().to_owned(),
-        amount: to_atomc(amount).to_owned(),
-        nonce: 0,
-        type_flag: 0,
-        payload: "".to_owned(), // Hex encoded payload
-        pow: "".to_owned(),     // Spam protection PoW
-        signature: "".to_owned(),
-    }; //99999999999999999999
-    let pow = txn1.find_pow();
-    let sig = keypair.sign(txn1.hash.clone());
-    txn1.signature = sig.unwrap();
-    mempool::add_transaction(txn1);
-    return "{ \"success\": true, \"Result\":".to_string() + "Not failure" + "}";
-}
 
 #[get("/create_wallet")]
 fn create_wallet() -> String {
@@ -285,8 +208,6 @@ pub fn get_middleware() -> Vec<Route> {
         gettx,
         getacc,
         create_wallet,
-        submit_txn_v1_np,
-        es_tx,
         from_private_key,
         pkacc
     ]

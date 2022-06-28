@@ -22,3 +22,5 @@ openssl = { version = "0.10", features = ["vendored"] }
 clap = "2.33.0"
 rand = "0.7.3"
 tokio = { version = "1.16.1", features = ["full"] }
+devise_core = "0.3.0"
+pear_codegen = "0.2.3"

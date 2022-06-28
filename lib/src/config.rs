@@ -1,3 +1,5 @@
+
+#[derive(Debug, Clone)]
 pub struct Config {
     p2p_port: u16,
     rpc_port: u16,

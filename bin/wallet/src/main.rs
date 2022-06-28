@@ -1,7 +1,5 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 use fern::colors::{Color, ColoredLevelConfig};
-use fltk::input::Input;
-use fltk::{app, button::Button, frame::Frame, prelude::*, window::Window};
 use lazy_static::*;
 use log::*;
 use redstone_rs::block::Block;
@@ -14,6 +12,7 @@ use secrecy::Secret;
 use serde::Deserialize;
 use serde_json::Value;
 use std::env;
+
 use std::fs;
 use std::io;
 use std::io::prelude::*;
@@ -24,30 +23,18 @@ use std::thread;
 use std::time;
 use std::{default::Default, sync::Mutex};
 use tokio;
-extern crate clipboard;
 use clipboard::ClipboardContext;
 use clipboard::ClipboardProvider;
-use fltk::enums::ColorDepth;
-use fltk::enums::Mode;
-use fltk::output::Output;
-use fltk::valuator::ValueInput;
-use fltk_theme::{widget_themes, ThemeType, WidgetTheme};
-use fltk_theme::{SchemeType, WidgetScheme};
 use std::sync::RwLock;
 
-extern crate qrcode_generator;
 
-use qrcode_generator::QrCodeEcc;
 
-use fltk::image::Image;
 #[derive(Default)]
 struct WalletDetails {
     wallet: Option<Keypair>,
     balance: u64,
     locked: u64,
-    uncle_root: String,
 }
-use fltk::input::SecretInput;
 lazy_static! {
     static ref WALLET_DETAILS: Mutex<WalletDetails> = Mutex::new(WalletDetails::default());
     static ref SERVER_ADDR: Mutex<String> = Mutex::new(String::from("http://127.0.0.1:8000"));
@@ -256,32 +243,7 @@ fn open_wallet(pass: String, filename: String) {
         false,
     );
 }
-fn open_wallet_gui(pass: String, filename: String) {
-    let private_key =
-        std::fs::read(filename.trim_end()).expect("Something went wrong reading the file");
-    println!("{:#?}", pass);
-    let decrypted = {
-        let decryptor = match age::Decryptor::new(&private_key[..]).unwrap() {
-            age::Decryptor::Passphrase(d) => d,
-            _ => unreachable!(),
-        };
-        let mut decrypted = vec![];
-        let mut reader = decryptor
-            .decrypt(&Secret::new(pass.trim_end().to_owned()), None)
-            .unwrap();
-        reader.read_to_end(&mut decrypted).unwrap();
-        decrypted
-    };
-    let decrypted1 = String::from_utf8(decrypted);
-    let wallet = redstone_rs::keypair::Keypair::from_private_key(decrypted1.unwrap());
-    print!("Wallet imported successfully!\n");
-    let walelt1 = wallet.clone();
-    main_login_gui(
-        wallet.private_key.to_string(),
-        wallet.public_key,
-        walelt1.address(),
-    );
-}
+
 fn gen_keypair() {
     let wallet = redstone_rs::keypair::Keypair::generate();
     info!("Your wallet address:{}", wallet.address());
@@ -298,17 +260,6 @@ fn gen_keypair() {
         .expect("Failed to read input.");
     save_wallet(wallet.private_key, pass, filename.trim_end().to_string());
     info!("Wallet saved at: {}", filename);
-}
-fn gen_keypair_gui(pass: String, filename: String) {
-    let wallet = redstone_rs::keypair::Keypair::generate();
-    save_wallet(
-        wallet.clone().private_key,
-        (&pass.clone().to_string().trim_end()).to_string(),
-        filename.to_string(),
-    );
-    println!("Wallet address:{}", wallet.clone().address());
-
-    println!("Wallet saved at: {:?}", filename);
 }
 
 fn commands() {
@@ -396,7 +347,6 @@ pub fn new_ann(ann: Announcement) {
                     }
                     if balance_before != locked.balance {
                         // Put it to the chain tx it on eg chain 1 top uncle roots push 1
-                        locked.uncle_root = blk.header.uncle_root.clone();
                         info!(
                             "New block {}, old balance: {}, new balance: {}",
                             blk.hash, balance_before, locked.balance
@@ -419,195 +369,6 @@ pub fn new_ann(ann: Announcement) {
     }
 }
 
-fn priv_key_gui(pik: String) {
-    let app = app::App::default();
-    let mut wind = Window::new(
-        100,
-        100,
-        400,
-        300,
-        "Close this windows, Redstone Wallet v0.1",
-    );
-    let mut but4 = Button::new(0, 0, 400, 300, "Copy Private Key");
-    but4.set_callback(move |_| {
-        let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
-        println!("{:?}", ctx.get_contents());
-        ctx.set_contents(pik.to_owned()).unwrap();
-    });
-    wind.end();
-    wind.show();
-    app.run().unwrap();
-}
-fn transaction_hash(hash: String) {
-    let app = app::App::default();
-    let mut wind = Window::new(100, 100, 400, 300, "Transaction sent, Redstone Wallet v0.1");
-    let mut but4 = Button::new(0, 0, 400, 300, "Copy Transaction hash");
-    but4.set_callback(move |_| {
-        let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
-        println!("{:?}", ctx.get_contents());
-        ctx.set_contents(hash.to_owned()).unwrap();
-    });
-    wind.end();
-    wind.show();
-    app.run().unwrap();
-}
-fn main_login_gui(pik: String, pbk: String, addr11: String) {
-    let app = app::App::default();
-    let mut wind = Window::new(100, 100, 800, 600, "Redstone GUI Wallet Logged v0.1");
-    let mut gui_addr = Output::new(400, 50, 370, 40, "Address:");
-    let mut frame = Frame::default().size_of(&wind);
-    let mut gui_bal4 = Output::new(400, 110, 60, 40, "Balance:");
-    let addr_copy = addr11.clone();
-    let mut gui_notification = Frame::new(0, 100, 800, 40, "");
-    let mut gui_notification1 = Frame::new(0, 100, 800, 40, "");
-    gui_addr.set_value(&addr11.clone());
-    let mut addr_send = Input::new(70, 50, 200, 40, "Send to");
-    let mut amount = Input::new(70, 110, 50, 40, "Amount");
-    let mut but = Button::new(70, 160, 100, 40, "Send");
-    let mut gui_tx_sent_notfy = Frame::new(0, 10, 800, 40, "");
-    let mut but2 = Button::new(460, 110, 40, 40, "↺");
-    let mut but4 = Button::new(10, 540, 100, 40, "Private Key");
-    let mut pik1 = pik.clone();
-    let mut pbk1 = pbk.clone();
-    // Encode some data into bits.
-    let mut result = qrcode_generator::to_image(addr11.clone(), QrCodeEcc::Low, 512).unwrap();
-    frame.draw(move |f| {
-        let mut image = fltk::image::RgbImage::new(&mut result, 512, 512, ColorDepth::L8).unwrap();
-        image.scale(256, 256, true, true);
-
-        image.draw(450, 200, 256, 256);
-    });
-    but4.set_callback(move |_| {
-        priv_key_gui(pik1.clone());
-    });
-
-    but2.set_callback(move |_| {
-        if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-            gui_bal4.set_value(&format!("{}", walletdetails.balance));
-        }
-    });
-
-    wind.end();
-    wind.show();
-    let wall = Keypair {
-        private_key: pik.to_string(),
-        public_key: pbk.to_string(),
-    };
-    let caller = Caller {
-        callback: Box::new(new_ann),
-    };
-
-    tokio::runtime::Builder::new_multi_thread()
-        .enable_all()
-        .build()
-        .unwrap()
-        .block_on(async {
-            if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-                *locked_ls = WalletDetails {
-                    wallet: Some(wall.clone()),
-                    balance: 0,
-                    locked: 0,
-                    uncle_root: "".to_string(),
-                };
-                drop(locked_ls)
-            }
-            let gacc = get_account(addr11.clone()).await;
-            debug!("{}", gacc);
-            if gacc.clone() == "" {
-                if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-                    *locked_ls = WalletDetails {
-                        wallet: Some(wall.clone()),
-                        balance: 0,
-                        locked: 0,
-                        uncle_root: "".to_string(),
-                    };
-                    drop(locked_ls)
-                }
-            } else {
-                let v: Value = serde_json::from_str(&gacc).unwrap();
-                let val = &v["Result"]["balance"];
-                if &v["result"] != "failure" {
-                    if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-                        *locked_ls = WalletDetails {
-                            wallet: Some(wall.clone()),
-                            balance: val.as_u64().expect("not a valid u64"),
-                            locked: 0,
-                            uncle_root: "".to_string(),
-                        };
-                        drop(locked_ls)
-                    }
-                }
-            }
-        });
-    if let Ok(mut locked_ls) = WALLET_DETAILS.lock() {
-        *locked_ls = WalletDetails {
-            wallet: Some(wall.clone()),
-            balance: 0,
-            locked: 0,
-            uncle_root: "".to_string(),
-        };
-        drop(locked_ls);
-    }
-
-    if let Ok(mut locked) = WALLET_DETAILS.lock() {
-        let caller = Caller {
-            callback: Box::new(new_ann),
-        };
-        thread::spawn(|| {
-            launch_client("127.0.0.1".to_string(), 44405, vec![], caller);
-        });
-        drop(locked);
-    }
-    but.set_callback(move |_| {
-        println!("Send");
-        if let Ok(walletdetails) = WALLET_DETAILS.lock() {
-            println!("Send1");
-            gui_tx_sent_notfy.set_label(&format!("Please wait!!!"));
-
-            let mut txn1 = Transaction {
-                hash: "".to_owned(),
-                sender: walletdetails.wallet.as_ref().unwrap().public_key.to_owned(),
-                reciver: addr_send.value().to_owned(),
-                amount: to_atomc(amount.value().parse::<f64>().unwrap()).to_owned(),
-                nonce: 0,
-                type_flag: 0,
-                payload: "".to_owned(), // Hex encoded payload
-                pow: "".to_owned(),     // Spam protection PoW
-                signature: "".to_owned(),
-            }; //99999999999999999999
-            let pow = txn1.find_pow();
-
-            let sign = walletdetails
-                .wallet
-                .as_ref()
-                .unwrap()
-                .sign(txn1.hash.clone());
-
-            txn1.signature = walletdetails
-                .wallet
-                .as_ref()
-                .unwrap()
-                .sign(txn1.hash.clone())
-                .unwrap();
-
-            println!("{:?}", txn1);
-            gui_tx_sent_notfy.set_label(&format!(
-                "Transaction sent! Hash 8:1: {}",
-                txn1.hash[1..8].to_string()
-            ));
-            transaction_hash(txn1.hash.to_string());
-            tokio::runtime::Builder::new_multi_thread()
-                .enable_all()
-                .build()
-                .unwrap()
-                .block_on(async {
-                    send_transaction(txn1).await;
-                });
-        }
-    });
-    app.run().unwrap();
-}
-
 fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
     let wall = Keypair {
         private_key: pik.to_string(),
@@ -624,7 +385,6 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                     wallet: Some(wall.clone()),
                     balance: 0,
                     locked: 0,
-                    uncle_root: "".to_string(),
                 };
                 drop(locked_ls)
             }
@@ -636,7 +396,6 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                         wallet: Some(wall.clone()),
                         balance: 0,
                         locked: 0,
-                        uncle_root: "".to_string(),
                     };
                     drop(locked_ls)
                 }
@@ -649,7 +408,6 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                             wallet: Some(wall.clone()),
                             balance: val.as_u64().expect("not a valid u64"),
                             locked: 0,
-                            uncle_root: "".to_string(),
                         };
                         drop(locked_ls)
                     }
@@ -661,7 +419,6 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
             wallet: Some(wall.clone()),
             balance: 0,
             locked: 0,
-            uncle_root: "".to_string(),
         };
     }
     if let Ok(mut locked) = WALLET_DETAILS.lock() {
@@ -722,13 +479,10 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                                     .to_owned(),
                                 reciver: reciver.trim_end().to_owned(),
                                 amount: to_atomc(input).to_owned(),
-                                nonce: 0,
                                 type_flag: 0,
                                 payload: "".to_owned(), // Hex encoded payload
-                                pow: "".to_owned(),     // Spam protection PoW
                                 signature: "".to_owned(),
                             }; //99999999999999999999
-                            let pow = txn1.find_pow();
                             let sign = walletdetails
                                 .wallet
                                 .as_ref()
@@ -801,13 +555,10 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                                     .to_owned(),
                                 reciver: reciver.trim_end().to_owned(),
                                 amount: input,
-                                nonce: 0,
                                 type_flag: type_flag,
                                 payload: py.to_owned(), // Hex encoded payload
-                                pow: "".to_owned(),     // Spam protection PoW
                                 signature: "".to_owned(),
                             }; //99999999999999999999
-                            let pow = txn1.find_pow();
 
                             let sign = walletdetails
                                 .wallet
@@ -971,67 +722,18 @@ fn main_not_logged() {
 }
 
 fn main() {
-    // get argument from command line
-    let args: Vec<String> = env::args().collect();
-    // if there is gui arg
-    if args.len() > 1 {
-        if args[1] == "gui" {
-            setup_logging(3).unwrap();
-
-            let app = app::App::default();
-            let mut wind = Window::new(100, 100, 400, 300, "Redstone GUI Wallet v0.1");
-
-            let widget_theme = WidgetTheme::new(ThemeType::Dark);
-            widget_theme.apply();
-            let mut frame = Frame::new(0, 0, 400, 300, "");
-            let mut pass = SecretInput::new(150, 60, 100, 40, "Password");
-            let mut pik = SecretInput::new(150, 10, 100, 40, "Private Key");
-            let mut file = Input::new(150, 110, 110, 40, "Filename");
-            let mut but = Button::new(30, 210, 100, 40, "Create Wallet");
-            let mut but3 = Button::new(150, 210, 100, 40, "Import key");
-            let mut but2 = Button::new(270, 210, 100, 40, "Import Wallet");
-            wind.end();
-            wind.show();
-            let mut file1 = file.clone();
-            let mut file2 = file.clone();
-            let mut pass1 = pass.clone();
-            let mut pass2 = pass.clone();
-            let mut pik1 = pik.clone();
-            but3.set_callback(move |_| {
-                let wallet =
-                    redstone_rs::keypair::Keypair::from_private_key(pik1.value().parse().unwrap());
-                save_wallet(wallet.private_key, pass2.value(), file2.value());
-            });
-            but.set_callback(move |_| {
-                gen_keypair_gui(
-                    pass.value().parse().clone().unwrap(),
-                    file.value().parse().clone().unwrap(),
-                )
-            });
-            but2.set_callback(move |_| {
-                open_wallet_gui(
-                    pass1.value().parse().unwrap(),
-                    file1.value().parse().unwrap(),
-                )
-            });
-            app.run().unwrap();
-        }
-        if args[1] == "cli" {
-            setup_logging(3).unwrap();
-            //start logging
-            let art = " 
-            ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ██╗    ██╗ █████╗ ██╗     ██╗     ███████╗████████╗
-            ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ██║    ██║██╔══██╗██║     ██║     ██╔════╝╚══██╔══╝
-            ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██║ █╗ ██║███████║██║     ██║     █████╗     ██║   
-            ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║███╗██║██╔══██║██║     ██║     ██╔══╝     ██║   
-            ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ╚███╔███╔╝██║  ██║███████╗███████╗███████╗   ██║   
-            ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝     ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝   
-            ";
-            println!("{}", art);
-
-            main_not_logged()
-        }
-    }
+    let art = " 
+    ██████╗ ███████╗██████╗ ███████╗████████╗ ██████╗ ███╗   ██╗███████╗    ██╗    ██╗ █████╗ ██╗     ██╗     ███████╗████████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝██╔═══██╗████╗  ██║██╔════╝    ██║    ██║██╔══██╗██║     ██║     ██╔════╝╚══██╔══╝
+    ██████╔╝█████╗  ██║  ██║███████╗   ██║   ██║   ██║██╔██╗ ██║█████╗      ██║ █╗ ██║███████║██║     ██║     █████╗     ██║   
+    ██╔══██╗██╔══╝  ██║  ██║╚════██║   ██║   ██║   ██║██║╚██╗██║██╔══╝      ██║███╗██║██╔══██║██║     ██║     ██╔══╝     ██║   
+    ██║  ██║███████╗██████╔╝███████║   ██║   ╚██████╔╝██║ ╚████║███████╗    ╚███╔███╔╝██║  ██║███████╗███████╗███████╗   ██║   
+    ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝     ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝   ╚═╝   
+    ";
+    println!("{}", art);
+    // logging::init_logger();
+    setup_logging(3).unwrap();
+    main_not_logged()
 }
 
 // Whoa 1000 line of code =)

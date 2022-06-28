@@ -115,6 +115,7 @@ fn test_all() {
         // crete test chain
         if true {
             // loop so program does not end
+            /*
             let _ = std::thread::spawn(move || {
                 let mut txn = Transaction {
                     hash: "321".to_owned(),
@@ -142,6 +143,7 @@ fn test_all() {
                     address: "0x1530fc2f2364e35f1408087119b497e3ea324d5c".to_owned(),
                     balance: 0,
                     smart_contract: false,
+                    nonce: 0,
     
                 };
                 account::Account::save(&acc);
@@ -172,7 +174,9 @@ fn test_all() {
                 info!("announe block test1 ");
                 block_announce(blk).unwrap();
                 thread::sleep(time::Duration::from_secs(1));
+                
             });
+            */
         }
     
 }
@@ -190,10 +194,11 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
     ╚═╝  ╚═╝╚══════╝╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝                                                                                                       
 ";
     info!("{}",assci_art);
-
+    warn!("Please enter 'exit' to shut down");
     info!("Starting redstone node {}" , ver);
     warn!("Warning, this software is not stable");
     warn!("Run at your own risk!");
+    // sleep for a while to let the user read the warning
     if validator != "" {
         let wallet = redstone_rs::keypair::Keypair::from_private_key(private_key);
         info!("Starting VALIDATOR NODE");
@@ -219,18 +224,39 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
     }
     info!("Launching P2P server");
     //launch async redstone_rs::rs_p2p::server::start_server()
-    let mut rt = tokio::runtime::Runtime::new().unwrap();
-    rt.block_on(async {
-        let mut p2p_port = config.p2p_port();
-        let mut bootnode = config.bootnode();
-              redstone_rs::rs_p2p::p2p::start(p2p_port,bootnode).await;
+    let config1 = config.clone();
+    let config2 = config.clone();
+    let _ = std::thread::spawn(move || {
+        let mut port = config1.p2p_port().clone();
+        let mut bootnode = config1.bootnode().clone();
+        let mut rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            redstone_rs::rs_p2p::p2p::start(port.into(),bootnode.clone()).await;
+        });
     });
-  
+    let _ = std::thread::spawn(move || {
+        let mut port = config2.p2p_port().clone();
+        let mut bootnode = config2.bootnode().clone();
+        let mut rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            redstone_rs::rs_p2p::p2p::start_other(port.into(),bootnode.clone()).await;
+        });
+    });
     loop {         
          // dont exit loop, if removed node wont work
          // -- Founder - Nov 26 '21 at 10:37
-         // sleep for a while
-         thread::sleep(time::Duration::from_secs(1));
+        // new loop, if ctrl+c is pressed, it will exit the loop
+        // -- Founder - Nov 26 '21 at 10:37
+        let mut input = String::new();
+        std::io::stdin().read_line(&mut input).unwrap();
+        if input.trim() == "exit" {
+            // shut down all threads
+            info!("Shutting down");
+            std::process::exit(0);
+        } else {
+            warn!("Please enter 'exit' to shut down");
+        }
+
     }
 }
 fn main() {
@@ -312,14 +338,11 @@ fn main() {
     //     rpc_port: u16,
     //     bootnode: String,
     // }
-    let bootnode = format!("/ip4/{}/tcp/{}", "127.0.0.1", "44404").to_string();
+    let bootnode = format!("{}:{}", "127.0.0.1", "44404").to_string();
     let config = Config::new(p2p_port.parse::<u16>().unwrap(),rpc_port.parse::<u16>().unwrap(),bootnode);
-
-    // if validator is not emtpy but there is no private key
     if !validator.is_empty() && private_key.is_empty() {
         println!("Private key is required for validator");
         return;
     }
-
     start_node(rpc_port.parse::<u16>().unwrap().into(),testnet,true,private_key,validator,config)
 }
