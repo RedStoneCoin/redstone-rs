@@ -182,6 +182,7 @@ impl Executable for Block {
                             }
                             // TODO: Check uncle root (the merkle root of all the tips of the other chains)
                             // get the proposer by his address
+                            
                             let last_round = Round::get(self.header.height - 1, self.header.chain)?;
                             if self.header.proposer != last_round.proposer {
                                 return Err(format!(

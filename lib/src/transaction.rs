@@ -27,6 +27,7 @@ pub struct Transaction {
     pub amount: u64,
     pub type_flag: u8,
     pub payload: String, 
+    pub nonce: u64,
     pub signature: String,
 }
 
@@ -104,6 +105,8 @@ impl Executable for Transaction {
                     Ok(account) => {
                         let mut account = account.clone();
                         account.balance += self.amount;
+                        // nonce +1
+                        account.nonce += 1;
                         account.save()?;
                     }
                     Err(_) => {
@@ -178,6 +181,11 @@ impl Executable for Transaction {
             println!("{:?}", check);
             return Err("Signature is not valid").unwrap();
         }
+        let sender = Account::get(self.sender.clone())?;
+        // check nonce
+        if sender.nonce != self.nonce {
+            return Err("Nonce is not valid").unwrap();
+        }
         // add check in db txs if there was transaction executed wit hsame hash
         let mut db_handle = Database::new();
         db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, "txs"))?;
@@ -245,6 +253,7 @@ impl Executable for Transaction {
                     return Err("ErrInvalidReciver").unwrap();
                 }
                 let sender = Account::get(self.sender.clone())?;
+                // if account nonce <= self.nonce
                 let reciver = Account::get(self.reciver.clone())?;
                 match Account::get(self.sender.clone()) {
                     Ok(_) => {

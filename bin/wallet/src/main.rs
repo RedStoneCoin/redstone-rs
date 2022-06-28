@@ -34,6 +34,7 @@ struct WalletDetails {
     wallet: Option<Keypair>,
     balance: u64,
     locked: u64,
+    nonce: u64,
 }
 lazy_static! {
     static ref WALLET_DETAILS: Mutex<WalletDetails> = Mutex::new(WalletDetails::default());
@@ -385,6 +386,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                     wallet: Some(wall.clone()),
                     balance: 0,
                     locked: 0,
+                    nonce: 0,
                 };
                 drop(locked_ls)
             }
@@ -396,6 +398,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                         wallet: Some(wall.clone()),
                         balance: 0,
                         locked: 0,
+                        nonce: 0,
                     };
                     drop(locked_ls)
                 }
@@ -407,6 +410,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                         *locked_ls = WalletDetails {
                             wallet: Some(wall.clone()),
                             balance: val.as_u64().expect("not a valid u64"),
+                            nonce: 0,
                             locked: 0,
                         };
                         drop(locked_ls)
@@ -419,6 +423,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
             wallet: Some(wall.clone()),
             balance: 0,
             locked: 0,
+            nonce: 0,
         };
     }
     if let Ok(mut locked) = WALLET_DETAILS.lock() {
@@ -477,6 +482,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                                     .unwrap()
                                     .public_key
                                     .to_owned(),
+                                nonce: walletdetails.nonce.to_owned() + 1,
                                 reciver: reciver.trim_end().to_owned(),
                                 amount: to_atomc(input).to_owned(),
                                 type_flag: 0,
@@ -553,6 +559,7 @@ fn main_login(pik: String, pbk: String, addr: String, launched: bool) {
                                     .unwrap()
                                     .public_key
                                     .to_owned(),
+                                nonce: walletdetails.nonce.to_owned() + 1,
                                 reciver: reciver.trim_end().to_owned(),
                                 amount: input,
                                 type_flag: type_flag,
