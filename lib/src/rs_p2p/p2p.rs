@@ -11,6 +11,7 @@ use std::collections::HashMap;
 use log::{error, info};
 use lazy_static::lazy_static;
 use std::collections::HashSet;
+use reqwest::header::CONTENT_TYPE;
 use reqwest::{Client, StatusCode};
 // struct
 #[derive(Clone)]
@@ -52,7 +53,7 @@ impl Message {
 
 
 lazy_static! {
-    static ref P2P_ID: String = "".to_string();
+    static ref P2P_ID: String = "1".to_string();
     static ref P2P_UP_VER: String = "".to_string();
     static ref PEERLIST: HashMap<String, Peer> = HashMap::new();
     static ref MESSAGEIDS: HashSet<String> = HashSet::new();
@@ -89,8 +90,22 @@ fn if_message_id_exist(message_id: &String) -> bool {
 fn message_handle(message_id: String, message_payload: String, message_type: u64, message_ip: String) -> String
 {
     // payload types
-    // 1 = connect, payload is peer_id
-    return "".to_string();
+    match message_type {
+
+        // add too peer if 1
+        1 => {
+            let mut peerlist = PEERLIST.clone();
+            let peer = Peer {
+                id: message_payload,
+                ip: message_ip,
+            };
+            peerlist.insert(message_id, peer);
+            
+        }
+        _ => {
+            "".to_string()
+        }
+    }
 }
 
 
@@ -103,12 +118,21 @@ async fn post_message(
     req: HttpRequest
 ) -> impl Responder {
     let ip = req.connection_info().remote_addr().unwrap().to_string();
-    let message = Message::from_string(data.clone());
-    let message_id = message.id.clone();
-    let message_type = message.msg_type;
-    let message_payload = message.payload.clone();
-    info!("message_id: {}, message_type: {}, message_payload: {}", message_id, message_type, message_payload);
-    HttpResponse::Ok().body(format!("{}", message_handle(message_id, message_payload, message_type, ip)))
+    // if format is not correct, return error
+    match Message::from_string(data.clone()) {
+        // if message is correct, handle it
+        Message {
+            id: message_id,
+            msg_type: message_type,
+            payload: message_payload,
+        } => {
+            info!("message_id: {}, message_type: {}, message_payload: {}", message_id, message_type, message_payload);
+            HttpResponse::Ok().body(format!("{}", message_handle(message_id, message_payload, message_type, ip)))
+        }
+        _ => {
+            return HttpResponse::BadRequest().body("Bad Request");
+        }
+    }
 }
 async fn index(
     req: HttpRequest
@@ -130,14 +154,57 @@ async fn index(
     .await;
 */
 
-// function connect that uses reqwest to connect to a peer
 pub async fn connect(ip: String, id: String) -> Result<(), reqwest::Error> {
     let client = Client::new();
-    // header content type is application/json
-    // body is a string
+    let body =  format!("\"{}.{}.{}\"", id, 0, "connect");
+    let client = reqwest::Client::new();
+    let mut headers = reqwest::header::HeaderMap::new();
+    headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
+    headers.insert("Content-Encoding", "br, gzip".parse().unwrap());
+    let mut request = client.post(&format!("http://{}/message_p2p", ip))
+        .body(body)
+        .headers(headers);
+    let response = request.send().await?;
+    println!("{:?}", response);
     Ok(())
 }
 
+// fn send message args, peer_id message_type, message_payload, message_id
+
+pub async fn send_message(peer_id: String, message_type: u64, message_payload: String, message_id: String) -> Result<(), reqwest::Error> {
+    // peer_ip is gotten from peerlist
+    let peer_ip = PEERLIST.get(&peer_id).unwrap().ip.clone();
+
+    let client = Client::new();
+    let body =  format!("\"{}.{}.{}\"", message_id, message_type, message_payload);
+    let client = reqwest::Client::new();
+    let mut headers = reqwest::header::HeaderMap::new();
+    headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
+    headers.insert("Content-Encoding", "br, gzip".parse().unwrap());
+    let mut request = client.post(&format!("http://{}/message_p2p", peer_ip))
+        .body(body)
+        .headers(headers);
+    let response = request.send().await?;
+    println!("{:?}", response);
+    Ok(())
+}
+
+pub async fn send_message_to_all(message_type: u64, message_payload: String, message_id: String) -> Result<(), reqwest::Error> {
+    let client = Client::new();
+    let body =  format!("\"{}.{}.{}\"", message_id, message_type, message_payload);
+    let client = reqwest::Client::new();
+    let mut headers = reqwest::header::HeaderMap::new();
+    headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
+    headers.insert("Content-Encoding", "br, gzip".parse().unwrap());
+    let mut request = client.post(&format!("http://{}/message_p2p", "localhost:8080"))
+        .body(body)
+        .headers(headers);
+    let response = request.send().await?;
+    println!("{:?}", response);
+    Ok(())
+}
+
+pub async fn send_message_to_all_except(message_type: u64, message_payload: String, message_id: String, except_id: String) -> Result
 
 pub async fn start_http(port: u64, bootnode: String) -> std::io::Result<()> {
     let ip = format!("{}:{}", "127.0.0.1", port);
@@ -159,6 +226,7 @@ pub async fn start_other(port: u64, bootnode: String) -> std::io::Result<()> {
     // connect to bootnode
     if bootnode != ip.clone() {
         connect(bootnode.clone(), P2P_ID.to_string()).await.unwrap();
+        info!("Connected to bootnode {}", bootnode);
     } else {
         info!("Bootnode is the same as this node");
     }
