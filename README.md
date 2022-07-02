@@ -36,15 +36,6 @@ OpenSLL
 GCC
 Cmake
 ```
-**To build GUI wallet on debian**:
-``
-sudo apt-get install xorg-dev libx11-dev libxext-dev libxft-dev libxinerama-dev libxcursor-dev libxrender-dev libxfixes-dev libpango1.0-dev libgl1-mesa-dev libglu1-mesa-dev libavutil-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libspeechd-dev libxkbcommon-dev libssl-dev libxcb-xfixes0-dev
-``
-**Fedora**
-``
-sudo yum groupinstall "X Software Development" && yum install pango-devel libXinerama-devel libX11-devel libXinerama-devel-1.1.4-9.fc35
-pango-devel
-``
 
 ##### Generic Linux
 
