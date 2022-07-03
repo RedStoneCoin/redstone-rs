@@ -13,12 +13,8 @@ use lazy_static::lazy_static;
 use std::collections::HashSet;
 use reqwest::header::CONTENT_TYPE;
 use reqwest::{Client, StatusCode};
+use std::sync::Mutex;
 // struct
-#[derive(Clone)]
-struct Peer {
-    id: String,
-    ip: String,
-}
 struct Message {
     id: String,
     msg_type: u64,
@@ -55,54 +51,48 @@ impl Message {
 lazy_static! {
     static ref P2P_ID: String = "1".to_string();
     static ref P2P_UP_VER: String = "".to_string();
-    static ref PEERLIST: HashMap<String, Peer> = HashMap::new();
+    static ref PEERLIST: Mutex<HashMap<String, String>> = Mutex::new(HashMap::new());
     static ref MESSAGEIDS: HashSet<String> = HashSet::new();
 }
 
-
-
-fn peerlist_to_string(peerlist: &HashMap<String, Peer>) -> String {
-    let mut s = String::new();
-    for (id, peer) in peerlist.iter() {
-        s.push_str(&format!("{}.{}.{}", id, peer.ip, peer.id));
-    }
-    s
+fn get_peerlist() -> HashMap<String, String> {
+    let mut peerlist = PEERLIST.lock().unwrap();
+    peerlist.clone()
 }
 
-fn peerlist_from_string(s: String) -> HashMap<String, Peer> {
-    let mut peerlist = HashMap::new();
-    let mut split = s.split(".");
-    while let Some(id) = split.next() {
-        let ip = split.next().unwrap();
-        let id = split.next().unwrap();
-        peerlist.insert(id.to_string(), Peer {
-            id: id.to_string(),
-            ip: ip.to_string(),
-        });
-    }
-    peerlist
+fn add_peer(id: String, ip: String) {
+    let mut peerlist = PEERLIST.lock().unwrap();
+    peerlist.insert(id, ip);
+    // get count of peers
+    let count = peerlist.len();
+    info!("Peerlist count: {}", count);
 }
+
+fn remove_peer(id: String) {
+    let mut peerlist = PEERLIST.lock().unwrap();
+    peerlist.remove(&id);
+    // get count of peers
+    let count = peerlist.len();
+    info!("Peerlist count: {}", count);
+}
+
+
+
 
 fn if_message_id_exist(message_id: &String) -> bool {
     MESSAGEIDS.contains(message_id)
 }
 
+
 fn message_handle(message_id: String, message_payload: String, message_type: u64, message_ip: String) -> String
 {
-    // payload types
     match message_type {
-
-        // add too peer if 1
-        1 => {
-            let mut peerlist = PEERLIST.clone();
-            let peer = Peer {
-                id: message_payload,
-                ip: message_ip,
-            };
-            peerlist.insert(message_id, peer);
-            
+        0 => {
+            add_peer(message_payload, message_ip);
+            P2P_ID.to_string()
         }
         _ => {
+            error!("Invalid message type {}", message_type);
             "".to_string()
         }
     }
@@ -165,15 +155,22 @@ pub async fn connect(ip: String, id: String) -> Result<(), reqwest::Error> {
         .body(body)
         .headers(headers);
     let response = request.send().await?;
-    println!("{:?}", response);
+    //println!("{:?}", response);
+    if response.status() == StatusCode::OK {
+        let body = response.text().await?;
+        info!("connected to peer {}:{}", body, ip);
+        add_peer(body, ip);
+    } 
+
     Ok(())
+
 }
 
 // fn send message args, peer_id message_type, message_payload, message_id
 
 pub async fn send_message(peer_id: String, message_type: u64, message_payload: String, message_id: String) -> Result<(), reqwest::Error> {
     // peer_ip is gotten from peerlist
-    let peer_ip = PEERLIST.get(&peer_id).unwrap().ip.clone();
+    let peer_ip = "todo";//PEERLIST.get(&peer_id).unwrap().ip.clone();
 
     let client = Client::new();
     let body =  format!("\"{}.{}.{}\"", message_id, message_type, message_payload);
@@ -204,7 +201,6 @@ pub async fn send_message_to_all(message_type: u64, message_payload: String, mes
     Ok(())
 }
 
-pub async fn send_message_to_all_except(message_type: u64, message_payload: String, message_id: String, except_id: String) -> Result
 
 pub async fn start_http(port: u64, bootnode: String) -> std::io::Result<()> {
     let ip = format!("{}:{}", "127.0.0.1", port);
