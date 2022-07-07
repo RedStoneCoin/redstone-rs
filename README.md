@@ -43,8 +43,8 @@ Ensure you have the dependencies listed above.
 
 ```bash
 git clone -b master --single-branch https://github.com/RedStoneCoin/redstone-rs/
-cd redstone-rs/src/node # for node
-cd redstone-rs/src/wallet # for Wallet
+cd redstone-rs/bin/node # for node
+cd redstone-rs/bin/wallet # for wallet
 cargo build --release
 ```
 After the completion, the binaries will be in the `target/release` folder.
@@ -65,4 +65,4 @@ We welcome new contributors and team members. Please join our discord to get up 
 
 # Thanks
 A massive thanks to the amazing team at rust, for their groundbreaking contributions to the programing-scape!
-We would also like to thank all of the projects, resorces and indiviguals who aided us in learning about cryptocurrencys and hope our contributions are worth of your praise! Kudos to all OSS developers.
+We would also like to thank all of the projects, resources and individuals who aided us in learning about cryptocurrencies and hope our contributions are worth of your praise! Kudos to all OSS developers.
