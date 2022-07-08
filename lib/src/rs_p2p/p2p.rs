@@ -74,8 +74,46 @@ fn get_peerlist() -> HashMap<String, String> {
     peerlist.clone()
 }
 
+async fn check_online_nodes() -> Result<(), reqwest::Error> {
+    let mut peerlist = get_peerlist();
+    if peerlist.len() == 0 {
+        info!("No peers to check");
+        return Ok(());
+    }
+
+    for (id, ip) in peerlist.iter() {
+        let client = Client::new();
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
+        headers.insert("Content-Encoding", "br, gzip".parse().unwrap());
+        match client.get(&format!("http://{}/ping", ip)).headers(headers).send().await {
+            Ok(_) => {
+                info!("{} is online", ip);
+            },
+            Err(_) => {
+                info!("{} is offline", ip);
+                remove_peer(id.to_string());
+            }
+        }
+    }
+    Ok(())
+}
+
+fn check_peer(id: String,ip: String) -> bool {
+    let mut peerlist = PEERLIST.lock().unwrap();
+    // check if peer with the same ip and port is already in the list
+    if peerlist.contains_key(&id) {
+        if peerlist[&id] == ip {
+            return true;
+        }
+    }
+    false
+}
+
+
 fn add_peer(id: String, ip: String) {
     let mut peerlist = PEERLIST.lock().unwrap();
+    
     peerlist.insert(id, ip);
     // get count of peers
     let count = peerlist.len();
@@ -120,10 +158,18 @@ fn get_p2p_port() -> u64 {
 }
 
 
-fn message_handle(message_id: String, message_payload: String, message_type: u64, message_ip: String,port: u64) -> String {
+async fn message_handle(message_id: String, message_payload: String, message_type: u64, message_ip: String,port: u64) -> String {
+    check_online_nodes().await.unwrap();
     match message_type {
         0 => {
-            add_peer(message_payload, format!("{}.{}",message_ip,port));
+            let peer_ip = format!("{}:{}",message_ip,port);
+            for (id, ip) in get_peerlist().iter() {
+                if ip == &peer_ip {
+                    info!("{} is already in the list", peer_ip);
+                    return "0x0".to_string();
+                }
+            }
+            add_peer(message_payload, peer_ip);
             P2P_ID.to_string()
         }
         1 => {
@@ -178,7 +224,7 @@ async fn post_message(
 
         } => {
             info!("message_id: {}, message_type: {}, message_payload: {}, port: {}", message_id, message_type, message_payload, message_port);
-            HttpResponse::Ok().body(format!("{}", message_handle(message_id, message_payload, message_type, ip, message_port)))
+            HttpResponse::Ok().body(format!("{}", message_handle(message_id, message_payload, message_type, ip, message_port).await))
         }
         _ => {
             return HttpResponse::BadRequest().body("Bad Request");
@@ -228,7 +274,7 @@ pub async fn connect(ip: String, id: String,port: u64) -> Result<(), reqwest::Er
     Ok(())
 }
 
-pub async fn send_message(peer_id: String,message_type: u64, message_id: u64) -> Result<(), reqwest::Error> {
+pub async fn send_message(peer_id: String,message_type: u64, message_id: u64) -> String {
     let client = Client::new();
     let peer = get_peer(peer_id);
     // we send message to peer
@@ -240,12 +286,29 @@ pub async fn send_message(peer_id: String,message_type: u64, message_id: u64) ->
     let mut request = client.post(&format!("http://{}/message_p2p", peer))
         .body(body)
         .headers(headers);
-    let response = request.send().await?;
+    let response = request.send().await.unwrap();
     if response.status() == StatusCode::OK {
-        let body = response.text().await?;
-        info!("message sent to peer {}:{}", body, peer);
+        let body = response.text().await.unwrap();
+        info!("sent message to peer {}:{}", body, peer);
+        return body;
     }
-    Ok(())
+    return "0".to_string();
+}
+#[get("/test_p2p")]
+async fn test_p2p() -> impl Responder {
+    // sends message to all peers
+    let mut peerlist = get_peerlist();
+    for (id, ip) in peerlist.iter() {
+        return HttpResponse::Ok().body(send_message(id.to_string(), 0, 0).await);
+        break;
+    }
+    return HttpResponse::Ok().body("test p2p");
+}
+
+#[get("/ping")]
+async fn ping() -> impl Responder {
+    // just returns 0
+    return HttpResponse::Ok().body("0");
 }
 
 
@@ -255,6 +318,8 @@ pub async fn start_http(port: u64, bootnode: String) -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(post_message)
+            .service(test_p2p)
+            .service(ping)
             .route("/p2p", web::get().to(index))
     })
     .bind(ip.clone() )?
