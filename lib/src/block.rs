@@ -141,7 +141,7 @@ impl Executable for Block {
         // check the chain exists
         if let Ok(bc) = Blockchain::load(self.header.chain) {
             if self.header.height == 0 {
-                // if this block is the genesis block of this chain, the parent block should contain a create chain TXN
+                // if this block is the genesis block of this chain, the parent block should contain a create chain TXN <- Todo
                 // UNLESS this is the genesis block of the first chain
                 let index_chain = Blockchain::load(0);
                 if let Ok(_) = index_chain {

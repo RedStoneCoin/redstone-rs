@@ -3,6 +3,9 @@
 // To send messages, use the send_message function which is post request to the peer
 // recive messages are just respone from requests
 // Actix is used for the http
+// -- This may be rewritten to use libp2p or tcp/ip
+
+
 
 // HTTP
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
@@ -60,7 +63,7 @@ lazy_static! {
         id
     };
     // p2p port will be set later
-    static ref P2P_PORT: u64 = 0;
+    static ref P2P_PORT: Mutex<u64> = Mutex::new(0);
     static ref P2P_UP_VER: String = "".to_string();
     static ref PEERLIST: Mutex<HashMap<String, String>> = Mutex::new(HashMap::new());
     static ref MESSAGEIDS: Mutex<HashSet<String>> = Mutex::new(HashSet::new());
@@ -104,6 +107,16 @@ fn peer_from_string(s: String) -> (String, String) {
     let id = split.next().unwrap().to_string();
     let ip = split.next().unwrap().to_string();
     (id, ip)
+}
+
+fn set_p2p_port(port: u64) {
+    let mut p2p_port = P2P_PORT.lock().unwrap();
+    *p2p_port = port;
+}
+
+fn get_p2p_port() -> u64 {
+    let p2p_port = P2P_PORT.lock().unwrap();
+    *p2p_port
 }
 
 
@@ -219,7 +232,7 @@ pub async fn send_message(peer_id: String,message_type: u64, message_id: u64) ->
     let client = Client::new();
     let peer = get_peer(peer_id);
     // we send message to peer
-    let body =  format!("\"{}.{}.{}.{}\"", message_type, message_id, P2P_ID.to_string(), P2P_PORT.to_string());
+    let body =  format!("\"{}.{}.{}.{}\"", message_type, message_id, P2P_ID.to_string(), get_p2p_port());
     let client = reqwest::Client::new();
     let mut headers = reqwest::header::HeaderMap::new();
     headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
@@ -265,9 +278,7 @@ pub async fn start_other(port: u64, bootnode: String) -> std::io::Result<()> {
 }
 
 pub async fn start(port: u64, bootnode: String) -> std::io::Result<()> {
-    // start http server and connect to bootnode asynchronously
-    // create 32bit key for id
-    P2P_PORT = port;
+    set_p2p_port(port);
 
     start_http(port, bootnode.clone()).await?;
     Ok(())
