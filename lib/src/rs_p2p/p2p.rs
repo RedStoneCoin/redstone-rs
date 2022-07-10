@@ -111,15 +111,13 @@ fn check_peer(id: String,ip: String) -> bool {
 }
 
 
-fn add_peer(id: String, ip: String) {
+async fn add_peer(id: String, ip: String) {
     let mut peerlist = PEERLIST.lock().unwrap();
-    
-    peerlist.insert(id, ip);
-    // get count of peers
+    peerlist.insert(id.clone(), ip.clone());
     let count = peerlist.len();
     info!("Peerlist count: {}", count);
     for (id, ip) in peerlist.iter() {
-        info!("Peer: {} {}", id, ip);
+        info!("Peer: {} {}", id.clone(), ip.clone());
     }
 }
 
@@ -136,16 +134,7 @@ fn get_peer(id: String) -> String {
     peerlist[&id].clone()
 }
 
-fn peer_to_string(id: String, ip: String) -> String {
-    format!("{}.{}", id, ip)
-}
 
-fn peer_from_string(s: String) -> (String, String) {
-    let mut split = s.split(".");
-    let id = split.next().unwrap().to_string();
-    let ip = split.next().unwrap().to_string();
-    (id, ip)
-}
 
 fn set_p2p_port(port: u64) {
     let mut p2p_port = P2P_PORT.lock().unwrap();
@@ -157,6 +146,18 @@ fn get_p2p_port() -> u64 {
     *p2p_port
 }
 
+// peer list to string
+fn peerlist_to_string() -> String {
+    let mut peerlist = get_peerlist();
+    let mut s = String::new();
+    for (id, ip) in peerlist.iter() {
+        s.push_str(&format!("{}={};", id, ip));
+    }
+    s
+}
+
+
+
 
 async fn message_handle(message_id: String, message_payload: String, message_type: u64, message_ip: String,port: u64) -> String {
     check_online_nodes().await.unwrap();
@@ -164,13 +165,18 @@ async fn message_handle(message_id: String, message_payload: String, message_typ
         0 => {
             let peer_ip = format!("{}:{}",message_ip,port);
             for (id, ip) in get_peerlist().iter() {
-                if ip == &peer_ip {
+                if ip == &peer_ip.clone() {
                     info!("{} is already in the list", peer_ip);
+                    // remove peer from the list
+                    remove_peer(id.clone());
                     return "0x0".to_string();
                 }
             }
-            add_peer(message_payload, peer_ip);
-            P2P_ID.to_string()
+            add_peer(message_payload, peer_ip.clone()).await;
+            // return P2P_ID and peerlist
+            let mut peerlist = get_peerlist();
+            return format!("{}-{}", P2P_ID.clone(), peerlist_to_string());
+
         }
         1 => {
             remove_peer(message_payload);
@@ -178,22 +184,19 @@ async fn message_handle(message_id: String, message_payload: String, message_typ
         }
         // get peer list
         2 => {
-            let mut peerlist = PEERLIST.lock().unwrap();
-            let mut peerlist_string = String::new();
-            for (id, ip) in peerlist.iter() {
-                peerlist_string.push_str(&format!("{}.{}.", id, ip));
+            if get_peerlist().len() == 0 {
+                return "0x0".to_string();
             }
-            peerlist_string
+            return peerlist_to_string();
         }
         // new peer connected here is it
         3 => {
-            let mut id_peer = peer_from_string(message_payload.clone()).clone().0;
-            let mut ip_peer = peer_from_string(message_payload.clone()).clone().1;
-            let mut peerlist = PEERLIST.lock().unwrap();
-            if peerlist.contains_key(&id_peer) {
-            } else {
-                peerlist.insert(id_peer, ip_peer);
+            if check_peer(message_payload.clone(), message_ip.clone()) {
+                return "0x0".to_string();
             }
+            // connect ip, our port
+            connect(message_payload.clone().to_string(),P2P_ID.to_string(), get_p2p_port()).await;
+
             return "0".to_string();
         }
         _ => {
@@ -221,7 +224,6 @@ async fn post_message(
             msg_type: message_type,
             payload: message_payload,
             port: message_port,
-
         } => {
             info!("message_id: {}, message_type: {}, message_payload: {}, port: {}", message_id, message_type, message_payload, message_port);
             HttpResponse::Ok().body(format!("{}", message_handle(message_id, message_payload, message_type, ip, message_port).await))
@@ -252,33 +254,78 @@ async fn index(
     .run()
     .await;
 */
-
-pub async fn connect(ip: String, id: String,port: u64) -> Result<(), reqwest::Error> {
+// connect no peerlist, it connects without the first peer
+pub async fn connect_npl(ip: String, id: String,port: u64) -> Result<(), reqwest::Error> {
     let client = Client::new();
-    // message.id message type payload
-    // messsage payload is our_id
-    let body =  format!("\"{}.{}.{}.{}\"", 0, 0, id, port);
+    let body =  format!("\"{}.{}.{}.{}\"", 0, 0, id.clone(), port.clone());
     let client = reqwest::Client::new();
     let mut headers = reqwest::header::HeaderMap::new();
     headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
     headers.insert("Content-Encoding", "br, gzip".parse().unwrap());
-    let mut request = client.post(&format!("http://{}/message_p2p", ip))
+    let mut request = client.post(&format!("http://{}/message_p2p", ip.clone()))
         .body(body)
-        .headers(headers);
+        .headers(headers.clone());
     let response = request.send().await?;
     if response.status() == StatusCode::OK {
         let body = response.text().await?;
-        info!("connected to peer {}:{}", body, ip);
-        add_peer(body, ip);
+        if  body == "0x0" {
+            info!("We got rejected for connecting to this peer");
+        } 
+        // not seperate peer id and peerlist
+        let mut split = body.split("-");
+        let peer_id = split.next().unwrap().to_string();
+        let peer_list = split.next().unwrap().to_string();
+        info!("connected peer_id: {}, peer_list: {:?}", peer_id, peer_list);
+        add_peer(peer_id, ip.clone()).await;        
     } 
     Ok(())
 }
 
-pub async fn send_message(peer_id: String,message_type: u64, message_id: u64) -> String {
+pub async fn connect(ip: String, id: String,port: u64) -> Result<(), reqwest::Error> {
+    let client = Client::new();
+    let body =  format!("\"{}.{}.{}.{}\"", 0, 0, id.clone(), port.clone());
+    let client = reqwest::Client::new();
+    let mut headers = reqwest::header::HeaderMap::new();
+    headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
+    headers.insert("Content-Encoding", "br, gzip".parse().unwrap());
+    let mut request = client.post(&format!("http://{}/message_p2p", ip.clone()))
+        .body(body)
+        .headers(headers.clone());
+    let response = request.send().await?;
+    if response.status() == StatusCode::OK {
+        let body = response.text().await?;
+        if  body == "0x0" {
+            info!("We got rejected for connecting to this peer");
+        } 
+        // not seperate peer id and peerlist
+        let mut split = body.split("-");
+        let peer_id = split.next().unwrap().to_string();
+        let peer_list = split.next().unwrap().to_string();
+        info!("connected peer_id: {}, peer_list: {:?}", peer_id, peer_list);
+        add_peer(peer_id, ip.clone()).await;        
+        let mut split = peer_list.split(";");
+        for peer in split {
+            if peer == "" {
+                continue;
+            }
+            let mut split = peer.split("=");
+            let peer_id = split.next().unwrap().to_string();
+            let peer_ip = split.next().unwrap().to_string();
+            if peer_id != P2P_ID.clone() {
+                info!("peer_id: {}, peer_ip: {}", peer_id, peer_ip);
+                connect_npl(peer_ip.clone(), P2P_ID.to_string(), get_p2p_port()).await;
+            }
+        }
+
+    } 
+    Ok(())
+}
+
+pub async fn send_message(peer_id: String,message_type: u64, message_id: u64,message_payload: String) -> String {
     let client = Client::new();
     let peer = get_peer(peer_id);
     // we send message to peer
-    let body =  format!("\"{}.{}.{}.{}\"", message_type, message_id, P2P_ID.to_string(), get_p2p_port());
+    let body =  format!("\"{}.{}.{}.{}\"", message_id, message_type, message_payload, get_p2p_port());
     let client = reqwest::Client::new();
     let mut headers = reqwest::header::HeaderMap::new();
     headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
@@ -299,7 +346,7 @@ async fn test_p2p() -> impl Responder {
     // sends message to all peers
     let mut peerlist = get_peerlist();
     for (id, ip) in peerlist.iter() {
-        return HttpResponse::Ok().body(send_message(id.to_string(), 0, 0).await);
+        return HttpResponse::Ok().body(send_message(id.to_string(), 0, 0,"yrd".to_string()).await);
         break;
     }
     return HttpResponse::Ok().body("test p2p");
