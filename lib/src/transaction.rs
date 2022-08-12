@@ -45,7 +45,37 @@ impl Hashable for Transaction {
     }
 }
 
-
+// impl to string
+impl Transaction {
+    /// # To string
+    /// Returns the txn as a string
+    fn to_string(&self) -> String {
+        let string = format!(
+            "{}.{}.{}.{}.{}.{}.{}.{}",
+            self.sender, self.reciver, self.amount, self.type_flag, self.payload, self.nonce, self.signature, self.hash
+        );
+        string
+    }
+    /// # From string
+    /// Creates a txn from a string
+    fn from_string(string: &String) -> Result<Transaction, Box<dyn std::error::Error>> {
+        let split: Vec<&str> = string.split(".").collect();
+        if split.len() != 8 {
+            return Err("Invalid transaction string".into());
+        }
+        let txn = Transaction {
+            sender: split[0].to_string(),
+            reciver: split[1].to_string(),
+            amount: split[2].parse()?,
+            type_flag: split[3].parse()?,
+            payload: split[4].to_string(),
+            nonce: split[5].parse()?,
+            signature: split[6].to_string(),
+            hash: split[7].to_string(),
+        };
+        Ok(txn)
+    }
+}
 
 impl Executable for Transaction {
     /// # Execute
@@ -154,7 +184,8 @@ impl Executable for Transaction {
         db_handle.set(
             &"transactions".to_owned(),
             &self.hash.clone(),
-            &self.hash.clone(),
+            &self.to_string(),
+            
         );
         drop(db_handle);
 
@@ -303,4 +334,5 @@ impl Executable for Transaction {
     fn cost(&self, context: &String) -> u64 {
         todo!()
     }
+
 }
