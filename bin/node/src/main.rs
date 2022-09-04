@@ -11,6 +11,7 @@ use redstone_rs::transaction::Transaction;
 use redstone_rs::account::Account;
 use redstone_rs::crypto::hash;
 use redstone_rs::rs_p2p::p2p;
+use std::path::PathBuf;
 extern crate clap;
 use clap::{Arg, App, SubCommand};
 use redstone_rs::rpc::{block_announce, Announcement, Caller};
@@ -205,6 +206,30 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
         info!("Validator: {}",wallet.address());
     }
     mempool::Mempool::init(HashMap::new()).unwrap();
+    // genesis chains blockchain.rs
+    // create if blockchain_db_0-4 does not exist
+    let mut exist_chains = 0;
+    for i in 0..5 {
+        let mut path = PathBuf::from("./datadir");
+        path.push(format!("blockchain_db_{}", i));
+        // if any of 5 chains does not exist set exist_chains to true or false
+        if path.exists() {
+            exist_chains = 1;
+        }
+    }
+
+    if exist_chains == 0 {
+        info!("CREATING GENESIS CHAINS");
+        blockchain::Blockchain::create_genesis_blockchains().unwrap();
+        info!("CREATED GENESIS CHAINS");
+        for i in 0..5 {
+            let test_block = blockchain::Blockchain::get_block_by_height(&0,&i).unwrap();
+            info!("GENESSIS BLOCK: {:?} CHAIN: {}",test_block,i);
+        }
+    } else {
+        info!("GENESIS CHAINS ALREADY EXIST");
+    }
+
     if api {
     info!("Launching API server at 0.0.0.0:8000");
     let _ = std::thread::spawn(move || {
