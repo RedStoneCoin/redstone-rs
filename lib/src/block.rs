@@ -1,4 +1,5 @@
 use crate::blockchain::{self, DATABASE_PATH_PREFIX};
+
 use crate::{
     blockchain::Blockchain,
     crypto::{Hashable, Vrf},
@@ -11,7 +12,7 @@ use crate::{
 };
 use log::*;
 use serde::{Deserialize, Serialize};
-
+// ./datadir/blocks_blockchain_db_{chain_index}
 #[derive(Deserialize, Serialize, Clone, Default, Debug)]
 pub struct Header {
     pub height: u64,    // The height of this block in the chain (aka the block number)
@@ -73,6 +74,7 @@ impl Block {
     /// Returns a result, either Ok(Block) or an Error
     pub fn get(hash: String) -> Result<Block, Box<dyn std::error::Error>> {
         Ok(Block::default()) // TODO: Implement block.get()
+        // Implemented in blockchain.rs
     }
 
     /// # Form vrf tag
@@ -104,7 +106,29 @@ impl Block {
         let vrf = Vrf::from_proof(&self.header.vrf)?;
         vrf.valid(proposer, &self.hash)
     }
+    /// # To string
+    /// Returns a string representation of this block
+    pub fn to_string(&self) -> String {
+        serde_json::to_string(&self).unwrap()
+    }
+    /// # From string
+    /// Returns a block from a string representation
+    pub fn from_string(string: String) -> Result<Block, Box<dyn std::error::Error>> {
+        Ok(serde_json::from_str(&string)?)
+    }
+    /// # height
+    /// Returns the height of this block
+    pub fn height(&self) -> u64 {
+        self.header.height
+    }
 }
+
+
+
+// Crate genesis block
+
+
+
 
 impl Executable for Block {
     fn execute(

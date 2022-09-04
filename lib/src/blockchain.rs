@@ -1,4 +1,5 @@
 use crate::database::Database;
+use crate::block::Block;
 use log::error;
 use sled;
 pub const DATABASE_PATH_PREFIX: &str = "./datadir/blockchain_db_"; // TODO: move to config
@@ -86,13 +87,64 @@ impl Blockchain {
         }
         Ok(list)
     }
-    pub fn test_chains() -> Vec<Self> {
-        let mut chains = Vec::new();
-        for i in 0..10 {
-            let mut bc = Blockchain::new(i);
-            bc.save().unwrap();
-            chains.push(bc);
-        }
-        chains
+    // save_block
+    pub fn save_block(&self, block: &Block) -> Result<(), Box<dyn std::error::Error>> {
+        let mut db_handle = Database::new();
+        db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.index))?;
+        db_handle.set(
+            &format!("{}{}", DATABASE_PATH_PREFIX, self.index),
+            &block.hash(),
+            &block.to_string(),
+        )?;
+        // now by height
+        db_handle.set(
+            &format!("{}{}", DATABASE_PATH_PREFIX, self.index),
+            &format!("height:{}", block.height()),
+            &block.hash(),
+        )?;
+        Ok(())
     }
+    // get_block_by_hash
+    pub fn get_block_by_hash(
+        &self,
+        hash: &str,
+    ) -> Result<Option<Block>, Box<dyn std::error::Error>> {
+        let mut db_handle = Database::new();
+        db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.index))?;
+        if let Some(encoded) = db_handle.get(
+            &format!("{}{}", DATABASE_PATH_PREFIX, self.index),
+            &hash.to_string(),
+        )? {
+            let block = Block::from_string(encoded).unwrap();
+            return Ok(Some(block));
+        } else {
+            return Ok(None);
+        }
+    }
+    // get_block_by_height
+    pub fn get_block_by_height(
+        &self,
+        height: u64,
+    ) -> Result<Option<Block>, Box<dyn std::error::Error>> {
+        let mut db_handle = Database::new();
+        db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.index))?;
+        if let Some(hash) = db_handle.get(
+            &format!("{}{}", DATABASE_PATH_PREFIX, self.index),
+            &format!("height:{}", height),
+        )? {
+            if let Some(encoded) = db_handle.get(
+                &format!("{}{}", DATABASE_PATH_PREFIX, self.index),
+                &hash.to_string(),
+            )? {
+                let block = Block::from_string(encoded).unwrap();
+                return Ok(Some(block));
+            } else {
+                return Ok(None);
+            }
+        } else {
+            return Ok(None);
+        }
+    }
+
+
 }
