@@ -5,7 +5,19 @@
 // Actix is used for the http
 // -- This may be rewritten to use libp2p or tcp/ip
 
+// Node types:
+// Normal node:
+// - Syncs the blocks and passes them to the other peers, receives and passes on transactions
+// Validator node:
+// -  Does the same as a normal node but goes and has rounds on the p2p for validating blocks
+// NewChain Proposer node:
+// - This node mesures network stability and peformance and proposes new chains when the network is unstable
 
+
+// How to check if node is validator?
+// Ask peer for his type:
+// If validator asks to verify random message with private key
+// verify the message and checks the address in the validator db 
 
 // HTTP
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};

@@ -170,8 +170,18 @@ impl Blockchain {
                 validator_signatures: vec!("".to_owned()),
                 vrf: "".to_owned(), // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
             },
-            // premine
-            transactions: vec![],
+            // trannsaction type craete chain.
+            transactions: vec![
+                Transaction {
+                    hash: "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff".to_owned(),
+                    sender: "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff".to_owned(),
+                    reciver: "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff".to_owned(),
+                    amount: 0,
+                    type_flag: 0,
+                    payload: "".to_owned(), // Hex encoded payload
+                    signature: "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff".to_owned(),
+                }
+            ],
         };
         // create 5 blockchains and add genesis block
         for i in 0..5 {
