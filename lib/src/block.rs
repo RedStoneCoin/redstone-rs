@@ -121,6 +121,7 @@ impl Block {
     pub fn height(&self) -> u64 {
         self.header.height
     }
+    
 }
 
 
@@ -154,6 +155,11 @@ impl Executable for Block {
         // If we encountered no errors, we can apply the state
         *global_state = pre_applicate_state;
         // TODO: what else needs to be done? (i dont think anything else - check)
+
+        // Adds tip to the blockchain db used for validation of the block
+        Blockchain::load(self.header.chain.clone())?.set_tip(&self.hash.clone());
+
+        // End of execution
         Ok(String::default())
     }
 
@@ -167,6 +173,7 @@ impl Executable for Block {
             if self.header.height == 0 {
                 // if this block is the genesis block of this chain, the parent block should contain a create chain TXN <- Todo
                 // UNLESS this is the genesis block of the first chain
+                // TODO; Have the genesis block hash for this check
                 let index_chain = Blockchain::load(0);
                 if let Ok(_) = index_chain {
                     // Get parent block and look for this txn
