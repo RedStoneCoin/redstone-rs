@@ -100,7 +100,7 @@ fn gettx(hash: String) -> String {
 
 #[get("/get_block/<hash>")]
 fn get_blk(hash: String) -> String {
-    // TODO
+    // TODO: Added in blockchain.rs
     let mut result = "{ \"result\" : \"failure\" }".to_owned();
     return result.to_string();
 }

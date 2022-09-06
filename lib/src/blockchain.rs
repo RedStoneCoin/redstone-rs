@@ -34,6 +34,7 @@ impl Blockchain {
             return Err("Failed to open DB".into());
         }
     }
+
     pub fn to_string(&self) -> String {
         // TODO: is this really needed?
         format!("blockchain-{}", self.index())
@@ -184,6 +185,17 @@ impl Blockchain {
         }
         // drop the db handle
         drop(db_handle);
+        Ok(())
+    }
+    // set tip
+    pub fn set_tip(&mut self, hash: &str) -> Result<(), Box<dyn std::error::Error>> {
+        let mut db_handle = Database::new();
+        db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.index))?;
+        db_handle.set(
+            &format!("{}{}", DATABASE_PATH_PREFIX, self.index),
+            &String::from("tip"),
+            &hash.to_string(),
+        )?;
         Ok(())
     }
 }
