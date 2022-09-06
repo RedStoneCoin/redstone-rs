@@ -155,7 +155,7 @@ impl Executable for Transaction {
                 // return error
                 return Err(Box::new(std::io::Error::new(
                     std::io::ErrorKind::Other,
-                    "Invalid transaction type",
+                    "Invalid transaction type or not implemented",
                 )));
             }
         }

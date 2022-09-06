@@ -187,6 +187,21 @@ impl Blockchain {
         drop(db_handle);
         Ok(())
     }
+        // Uncle root = The root of a merkle tree composed of the top blocks (tips) of every chain
+    pub fn generate_uncle_root(&self) -> Result<String, Box<dyn std::error::Error>> {
+        let mut db_handle = Database::new();
+        db_handle.open(&format!("{}{}", DATABASE_PATH_PREFIX, self.index))?;
+        let mut uncle_root = MerkleTree::new();
+        for i in 0..5 {
+            if let Some(hash) = db_handle.get(
+                &format!("{}{}", DATABASE_PATH_PREFIX, i),
+                &String::from("tip"),
+            )? {
+                uncle_root.add_leaf(hash.as_bytes());
+            }
+        }
+        Ok(uncle_root.get_root())
+    }
     // set tip
     pub fn set_tip(&mut self, hash: &str) -> Result<(), Box<dyn std::error::Error>> {
         let mut db_handle = Database::new();
@@ -198,4 +213,7 @@ impl Blockchain {
         )?;
         Ok(())
     }
+
+    // How would blocks sync, it will need to sync block 1 blockchain 1 then block 2 blockchain 1 then block 1 blockchain 2 etc
+    // this is a very simple sync method as it will work with generate_uncle_root
 }
