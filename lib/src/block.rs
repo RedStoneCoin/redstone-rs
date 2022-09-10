@@ -28,6 +28,8 @@ pub struct Header {
     pub proposer_signature: String, // The ECDSA signature (on the block hash) of the proposer of this block
     pub validator_signatures: Vec<String>, // A vector of ECDSA signatures (on the block hash + vote) of each validator
     pub vrf: String, // the hex encoded vrf proof used to sellect next rounds validating commitee and proposer
+    pub uncle_root_height: Vec<u64>,    // uncle_root_height: // array of the hights that make the uncle root
+
 }
 
 #[derive(Serialize, Clone, Default, Debug, Deserialize)]
@@ -157,7 +159,7 @@ impl Executable for Block {
         // TODO: what else needs to be done? (i dont think anything else - check)
 
         // Adds tip to the blockchain db used for validation of the block
-        Blockchain::load(self.header.chain.clone())?.set_tip(&self.hash.clone());
+        Blockchain::load(self.header.chain.clone())?.set_tip(&self.hash.clone(), &self.height())?;
 
         // End of execution
         Ok(String::default())
