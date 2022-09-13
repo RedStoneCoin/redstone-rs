@@ -223,7 +223,8 @@ fn start_node(rpc_port: u64,test: bool,api: bool,private_key: String,validator: 
         blockchain::Blockchain::create_genesis_blockchains().unwrap();
         info!("CREATED GENESIS CHAINS");
         for i in 0..5 {
-            let test_block = blockchain::Blockchain::get_block_by_height(&0,&i).unwrap();
+            let bc = blockchain::Blockchain::new(i);
+            let test_block = bc.get_block_by_height(&0);
             info!("GENESSIS BLOCK: {:?} CHAIN: {}",test_block,i);
         }
     } else {
