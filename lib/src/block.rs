@@ -123,6 +123,36 @@ impl Block {
     pub fn height(&self) -> u64 {
         self.header.height
     }
+
+    /// # New
+    /// Creates a new block from a vector of transactions, it only needs chain and vector of transactions
+    /// Returns a result, either Ok(Block) or an Error
+    pub fn new(
+        chain: u64,
+        transactions: Vec<Transaction>,
+    ) -> Result<Block, Box<dyn std::error::Error>> {
+        let mut block = Block {
+            hash: "".to_string(),
+            header: Header {
+                height: 0,
+                chain,
+                transactions_merkle_root: "".to_string(),
+                header_payload: 0,
+                proof: "".to_string(),
+                proposer_signature: "".to_string(),
+                validator_signatures: vec![],
+                vrf: "".to_string(),
+                uncle_root_height: vec![],
+                parent_hash: "".to_string(),
+                state_hash: "".to_string(),
+                proposer: "".to_string(),
+                uncle_root: "".to_string(),
+                timestamp: 0,
+            },
+            transactions,
+        };
+        Ok(block)
+    }
     
 }
 
@@ -329,3 +359,4 @@ impl Executable for Block {
         sum
     }
 }
+

@@ -108,6 +108,8 @@ impl Blockchain {
             &format!("hash:{}", block.hash),
             &block.to_string(),
         )?;
+        // save blockchain
+        self.save()?;
         Ok(())
     }
 
@@ -171,6 +173,8 @@ impl Blockchain {
             &String::from("tip_height"),
             &height.to_string(),
         )?;
+        self.save()?;
+
         Ok(())
     }
     // create genesis chains
