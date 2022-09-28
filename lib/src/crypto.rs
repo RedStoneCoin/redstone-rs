@@ -37,9 +37,9 @@ impl Vrf {
     /// # Numerical
     /// Takes a refrence to this struct and returns the two numerical values (u1282) derived from its hash
     pub fn numerical(&self) -> Result<(u64, u64), Box<dyn std::error::Error>> {
-        // split the hash into two 32 bit chunks
-        let chunk_one = self.hash[..32].to_string();
-        let chunk_two = self.hash[32..].to_string();
+        // split the hash into two chunks OF 32 bit 
+        let chunk_one = &self.hash[0..16];
+        let chunk_two = &self.hash[16..32];
         let chunk_one_numerical = u64::from_str_radix(&chunk_one, 16)?;
         let chunk_two_numerical = u64::from_str_radix(&chunk_two, 16)?;
         Ok((chunk_one_numerical, chunk_two_numerical))
@@ -80,6 +80,28 @@ impl Vrf {
         }
         Ok(false)
     }
+
+    /// # Get Winner
+    /// Takes in a vector of VRFs and returns the validator that will validate the next block
+    pub fn get_winner(vrfs: Vec<Vrf>) -> Result<Vrf, Box<dyn std::error::Error>> {  
+        // if all vrfs are valid, get the winner
+        // calulate the score of each vrf
+        let mut scores = vec![];
+        // score is same index as in vrfs
+        for i in 0..vrfs.len() {
+            let (chunk_one, chunk_two) = vrfs[i].numerical()?;
+            // avoid PosOverflow
+            //scores.push(chunk_one);
+            scores.push(1);
+        }
+        // get the index of the highest score, vrf with highest score is the winner
+        for i in 0..scores.len() {
+            if scores[i] == *scores.iter().max().unwrap() {
+                return Ok(vrfs[i].clone());
+            }
+        } 
+        Err("No winner".into())
+    }
 }
 
 pub mod tests {
@@ -97,5 +119,17 @@ pub mod tests {
             hash: String::from("ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"),
         };
         println!("{:?}", vrf.numerical())
+    }
+    #[test]
+    // test get winner
+    pub fn test_get_winner() {
+        let mut vrfs = vec![];
+        for _ in 0..10 {
+            let keypair = Keypair::generate();
+            let vrf = Vrf::generate(&keypair, "TEST_STRING".to_string()).unwrap();
+            vrfs.push(vrf);
+        }
+        let winner = Vrf::get_winner(vrfs).unwrap();
+        println!("{:#?}", winner);
     }
 }
